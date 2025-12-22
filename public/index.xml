@@ -6,7 +6,35 @@
     <description>Recent content on UtterOn</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
+    <lastBuildDate>Mon, 23 Dec 2024 04:00:00 +1100</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h2 id=&#34;about-utteron&#34;&gt;About UtterOn&lt;/h2&gt;
+&lt;p&gt;UtterOn is a platform designed to help you master new languages through immersive practice and structured learning.&lt;/p&gt;
+&lt;h3 id=&#34;our-mission&#34;&gt;Our Mission&lt;/h3&gt;
+&lt;p&gt;To make language learning accessible, engaging, and effective for everyone.&lt;/p&gt;
+&lt;h3 id=&#34;contact-us&#34;&gt;Contact Us&lt;/h3&gt;
+&lt;p&gt;If you have any questions or feedback, please reach out to us.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Support</title>
+      <link>http://localhost:1313/support/</link>
+      <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
+      <guid>http://localhost:1313/support/</guid>
+      <description>&lt;h2 id=&#34;support&#34;&gt;Support&lt;/h2&gt;
+&lt;p&gt;Need help? We&amp;rsquo;re here for you.&lt;/p&gt;
+&lt;h3 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Q: How do I reset my progress?&lt;/strong&gt;
+A: You can reset your progress in the settings menu.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Q: Is UtterOn free?&lt;/strong&gt;
+A: Yes, UtterOn is free to use.&lt;/p&gt;
+&lt;h3 id=&#34;contact-support&#34;&gt;Contact Support&lt;/h3&gt;
+&lt;p&gt;If you can&amp;rsquo;t find the answer you&amp;rsquo;re looking for, please contact our support team at &lt;a href=&#34;mailto:support@utteron.com&#34;&gt;support@utteron.com&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Basics</title>
       <link>http://localhost:1313/languages/czech/groups/basics/</link>
