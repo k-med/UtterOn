@@ -127,6 +127,15 @@
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
 
+        // One-time fix: Clear old inflated stats data
+        const migrationKey = 'utteron_stats_fix_v2';
+        if (!localStorage.getItem(migrationKey)) {
+            console.log('Clearing old stats data with inflated counts...');
+            localStorage.removeItem('utteron_completions');
+            localStorage.setItem(migrationKey, 'true');
+            console.log('Migration complete! Please re-complete groups to see accurate stats.');
+        }
+
         // One-time migration: Update old "Yesterday" dates to "Today" if score is 100%
         // This fixes the bug where perfect scores from yesterday still show "Yesterday"
         const completions = getCompletions();

@@ -297,6 +297,15 @@
         const lang = document.getElementById('group-list').dataset.language;
 
         
+        const migrationKey = 'utteron_stats_fix_v2';
+        if (!localStorage.getItem(migrationKey)) {
+            console.log('Clearing old stats data with inflated counts...');
+            localStorage.removeItem('utteron_completions');
+            localStorage.setItem(migrationKey, 'true');
+            console.log('Migration complete! Please re-complete groups to see accurate stats.');
+        }
+
+        
         
         const completions = getCompletions();
         const today = getTodayDate();

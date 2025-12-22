@@ -55,8 +55,8 @@ function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
         completions[lang][groupId] = {
             date: today,
             sentences: {},
-            completionDates: [], // Array of dates (for streak)
-            completionHistory: {} // { "2025-12-23": 3 } (date -> count)
+            completionDates: [],
+            completionHistory: {}
         };
     }
 
@@ -71,30 +71,33 @@ function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
     // Mark complete
     completions[lang][groupId].sentences[sentenceId][exerciseType] = true;
 
-    // Check if group is now 100% complete
-    const sentences = Object.values(completions[lang][groupId].sentences);
-    const is100Percent = sentences.length > 0 && sentences.every(s => s.listen && s.read);
+    saveCompletions(completions);
+}
 
-    // If 100%, increment count
-    if (is100Percent) {
-        // Initialize completionHistory if needed
-        if (!completions[lang][groupId].completionHistory) {
-            completions[lang][groupId].completionHistory = {};
-        }
+// Call this when a training session completes with 100%
+function recordGroupCompletion(lang, groupId) {
+    const completions = getCompletions();
+    const today = getTodayDate();
 
-        // Increment count for today
-        if (!completions[lang][groupId].completionHistory[today]) {
-            completions[lang][groupId].completionHistory[today] = 0;
-        }
-        completions[lang][groupId].completionHistory[today]++;
+    if (!completions[lang] || !completions[lang][groupId]) return;
 
-        // Also maintain completionDates (add only once per day for streak)
-        if (!completions[lang][groupId].completionDates) {
-            completions[lang][groupId].completionDates = [];
-        }
-        if (!completions[lang][groupId].completionDates.includes(today)) {
-            completions[lang][groupId].completionDates.push(today);
-        }
+    // Initialize completionHistory if needed
+    if (!completions[lang][groupId].completionHistory) {
+        completions[lang][groupId].completionHistory = {};
+    }
+
+    // ALWAYS increment count for today (allows multiple completions per day)
+    if (!completions[lang][groupId].completionHistory[today]) {
+        completions[lang][groupId].completionHistory[today] = 0;
+    }
+    completions[lang][groupId].completionHistory[today]++;
+
+    // Also maintain completionDates (add only once per day for streak)
+    if (!completions[lang][groupId].completionDates) {
+        completions[lang][groupId].completionDates = [];
+    }
+    if (!completions[lang][groupId].completionDates.includes(today)) {
+        completions[lang][groupId].completionDates.push(today);
     }
 
     saveCompletions(completions);
@@ -168,20 +171,44 @@ function formatRelativeDate(dateStr) {
 }
 
 function updateGroupCards(lang) {
-    const cards = document.querySelectorAll('.group-card');
+    const cardsArray = Array.from(document.querySelectorAll('.group-card'));
     const completions = getCompletions();
     const today = getTodayDate();
 
-    cards.forEach(card => {
+    // Build array of cards with their practice dates for sorting
+    const cardsWithDates = cardsArray.map(card => {
         const groupId = card.dataset.groupId;
-        const sentencesData = card.dataset.sentences;
-        let sentences = [];
+        const groupData = completions[lang]?.[groupId];
+        const practiceDate = groupData?.date || null;
 
-        try {
-            sentences = JSON.parse(sentencesData);
-        } catch (e) { }
+        return {
+            card: card,
+            groupId: groupId,
+            practiceDate: practiceDate,
+            // Convert date to sortable format (null dates go to end)
+            sortKey: practiceDate || '0000-00-00'
+        };
+    });
 
-        const totalExercises = sentences.length * 2; // listen + read for each
+    // Sort by practice date (most recent first)
+    cardsWithDates.sort((a, b) => {
+        // Most recent first
+        return b.sortKey.localeCompare(a.sortKey);
+    });
+
+    // Reorder cards in DOM
+    const container = document.querySelector('.group-list');
+    if (container) {
+        cardsWithDates.forEach(item => {
+            container.appendChild(item.card);
+        });
+    }
+
+    // Now update each card's display
+    cardsArray.forEach(card => {
+        const groupId = card.dataset.groupId;
+        const sentenceCount = parseInt(card.dataset.sentenceCount) || 0;
+        const totalExercises = sentenceCount * 2;
 
         // Get completion data for this group
         const groupData = completions[lang]?.[groupId];
@@ -559,6 +586,19 @@ function recordAndAdvance(gotIt) {
     trainState.currentIndex++;
 
     if (trainState.currentIndex >= trainState.exercises.length) {
+        // Check if session ended with 100% and record it
+        const completions = getCompletions();
+        const groupData = completions[trainState.lang]?.[trainState.groupId];
+        if (groupData && groupData.sentences) {
+            const uniqueSentenceIds = [...new Set(trainState.exercises.map(e => e.sentence.id))];
+            const allComplete = uniqueSentenceIds.every(id => {
+                const s = groupData.sentences[id];
+                return s && s.listen && s.read;
+            });
+            if (allComplete) {
+                recordGroupCompletion(trainState.lang, trainState.groupId);
+            }
+        }
         showCompletion();
     } else {
         showCurrentExercise();
