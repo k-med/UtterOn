@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="utteron-container">
+    <h1>Choose a Language</h1>
+
+    <div class="language-grid">
+        {{ range .Sections }}
+        <a href="{{ .Permalink }}" class="language-card">
+            <h2>{{ .Title }}</h2>
+            {{ with .Params.native_name }}
+            <span class="native-name">{{ . }}</span>
+            {{ end }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

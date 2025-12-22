@@ -1,0 +1,76 @@
+{{ define "main" }}
+{{ $lang := .Params.language }}
+{{ $groupsPage := .Parent.GetPage "groups" }}
+{{ $groupsData := slice }}
+{{ if $groupsPage }}
+{{ range $groupsPage.Pages }}
+{{ $data := dict "group_id" .Params.group_id "group_title" .Params.group_title "sentences" .Params.sentences }}
+{{ $groupsData = $groupsData | append $data }}
+{{ end }}
+{{ end }}
+
+<div class="utteron-container train-container" id="train-app" data-language="{{ $lang }}"
+    data-groups='{{ $groupsData | jsonify }}'>
+
+    <div class="train-header">
+        <a href="{{ .Parent.Permalink }}" class="back-link">← Back</a>
+        <h1 id="group-title">Select a Group</h1>
+    </div>
+
+    <!-- Exercise Card -->
+    <div class="exercise-card" id="exercise-card" style="display: none;">
+
+        <!-- Exercise Type Indicator -->
+        <div class="exercise-type" id="exercise-type"></div>
+
+        <!-- Prompt Area (what user sees first) -->
+        <div class="prompt-area" id="prompt-area"></div>
+
+        <!-- Audio Player (shared) -->
+        <div class="audio-container" id="audio-container">
+            <audio id="audio-player" controls></audio>
+        </div>
+
+        <!-- Reveal Area (shown after reveal) -->
+        <div class="reveal-area" id="reveal-area" style="display: none;"></div>
+
+        <!-- Action Button (always in same position) -->
+        <div class="action-area">
+            <button class="action-btn primary" id="action-btn">Reveal</button>
+        </div>
+
+        <!-- Self Report Buttons (shown after reveal) -->
+        <div class="report-buttons" id="report-buttons" style="display: none;">
+            <button class="report-btn missed" id="missed-btn">Missed it</button>
+            <button class="report-btn got-it" id="got-it-btn">Got it</button>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <span id="current-index">1</span> / <span id="total-count">1</span>
+        </div>
+    </div>
+
+    <!-- Completion Message -->
+    <div class="completion-message" id="completion-message" style="display: none;">
+        <h2>🎉 Session Complete!</h2>
+        <p>You've completed all exercises in <strong id="group-name"></strong>.</p>
+        <div class="completion-actions">
+            <a href="{{ .Parent.Permalink }}" class="action-btn">← Back to Groups</a>
+        </div>
+    </div>
+
+    <!-- No Group Selected -->
+    <div class="no-group" id="no-group">
+        <p>No group selected. Please go back and choose a sentence group.</p>
+        <a href="{{ .Parent.Permalink }}" class="action-btn">← Choose Group</a>
+    </div>
+</div>
+
+<script src="/js/utteron.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        initTrainingInterface();
+    });
+</script>
+{{ end }}

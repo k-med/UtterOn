@@ -1,0 +1,71 @@
+{{ define "main" }}
+<div class="utteron-container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.native_name }}<p class="native-name">{{ . }}</p>{{ end }}
+
+    <h2>Sentence Groups</h2>
+
+    <div class="group-list" id="group-list" data-language="{{ .Params.language_code | default .File.ContentBaseName }}">
+        {{ $lang := .Params.language_code | default .File.ContentBaseName }}
+        {{ $groups := .GetPage "groups" }}
+        {{ if $groups }}
+        {{ range $groups.Pages }}
+        {{ $sentenceCount := len .Params.sentences }}
+        {{ $estMinutes := div (mul $sentenceCount 50) 60 }}
+        <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
+            data-sentences='{{ .Params.sentences | jsonify }}'>
+
+            <div class="group-header">
+                <h3>{{ .Params.group_title }}</h3>
+                {{ with .Params.level }}
+                <span class="level-badge">{{ . }}</span>
+                {{ end }}
+            </div>
+
+            <div class="group-meta">
+                <div class="meta-row">
+                    <span class="meta-item">
+                        <span class="meta-label">Sentences:</span>
+                        <span class="meta-value">{{ $sentenceCount }}</span>
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-label">Time:</span>
+                        <span class="meta-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }}
+                            min</span>
+                    </span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-item">
+                        <span class="meta-label">Today:</span>
+                        <span class="meta-value today-status" data-group="{{ .Params.group_id }}">—</span>
+                    </span>
+                    <span class="meta-item">
+                        <span class="meta-label">Score:</span>
+                        <span class="meta-value last-score" data-group="{{ .Params.group_id }}">—</span>
+                    </span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-item full-width">
+                        <span class="meta-label">Last practiced:</span>
+                        <span class="meta-value last-practiced" data-group="{{ .Params.group_id }}">Never</span>
+                    </span>
+                </div>
+            </div>
+
+            <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn">Start</a>
+        </div>
+        {{ end }}
+        {{ else }}
+        <p>No sentence groups available yet.</p>
+        {{ end }}
+    </div>
+</div>
+
+<script src="/js/utteron.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lang = document.getElementById('group-list').dataset.language;
+        updateGroupCards(lang);
+    });
+</script>
+{{ end }}

@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Categories | UtterOn</title>
+<title>Train | UtterOn</title>
 <meta name="keywords" content="">
-<meta name="description" content="">
+<meta name="description" content="Train - UtterOn">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/categories/">
+<link rel="canonical" href="http://localhost:1313/languages/czech/train/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -18,8 +18,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/categories/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/languages/czech/train/">
 <noscript>
     <style>
         #theme-toggle,
@@ -73,7 +72,7 @@
 
 </script><link rel="stylesheet" href="/css/utteron.css">
 </head>
-<body class="list" id="top">
+<body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
@@ -111,12 +110,84 @@
     </nav>
 </header>
 <main class="main">
-<header class="page-header">
-    <h1>Categories</h1>
-</header>
 
-<ul class="terms-tags">
-</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="utteron-container train-container" id="train-app" data-language="czech"
+    data-groups='[{&#34;group_id&#34;:&#34;basics&#34;,&#34;group_title&#34;:&#34;Basics&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0010.mp3&#34;,&#34;english&#34;:&#34;Yes.&#34;,&#34;id&#34;:&#34;cz_0010&#34;,&#34;native&#34;:&#34;Ano.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0011.mp3&#34;,&#34;english&#34;:&#34;No.&#34;,&#34;id&#34;:&#34;cz_0011&#34;,&#34;native&#34;:&#34;Ne.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0012.mp3&#34;,&#34;english&#34;:&#34;Please.&#34;,&#34;id&#34;:&#34;cz_0012&#34;,&#34;native&#34;:&#34;Prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0013.mp3&#34;,&#34;english&#34;:&#34;Excuse me.&#34;,&#34;id&#34;:&#34;cz_0013&#34;,&#34;native&#34;:&#34;Promiňte.&#34;}]},{&#34;group_id&#34;:&#34;greetings&#34;,&#34;group_title&#34;:&#34;Greetings&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0001.mp3&#34;,&#34;english&#34;:&#34;Good day.&#34;,&#34;id&#34;:&#34;cz_0001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0002.mp3&#34;,&#34;english&#34;:&#34;Hi.&#34;,&#34;id&#34;:&#34;cz_0002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0003.mp3&#34;,&#34;english&#34;:&#34;Goodbye.&#34;,&#34;id&#34;:&#34;cz_0003&#34;,&#34;native&#34;:&#34;Nashledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0004.mp3&#34;,&#34;english&#34;:&#34;Thank you.&#34;,&#34;id&#34;:&#34;cz_0004&#34;,&#34;native&#34;:&#34;Děkuji.&#34;}]}]'>
+
+    <div class="train-header">
+        <a href="http://localhost:1313/languages/czech/" class="back-link">← Back</a>
+        <h1 id="group-title">Select a Group</h1>
+    </div>
+
+    
+    <div class="exercise-card" id="exercise-card" style="display: none;">
+
+        
+        <div class="exercise-type" id="exercise-type"></div>
+
+        
+        <div class="prompt-area" id="prompt-area"></div>
+
+        
+        <div class="audio-container" id="audio-container">
+            <audio id="audio-player" controls></audio>
+        </div>
+
+        
+        <div class="reveal-area" id="reveal-area" style="display: none;"></div>
+
+        
+        <div class="action-area">
+            <button class="action-btn primary" id="action-btn">Reveal</button>
+        </div>
+
+        
+        <div class="report-buttons" id="report-buttons" style="display: none;">
+            <button class="report-btn missed" id="missed-btn">Missed it</button>
+            <button class="report-btn got-it" id="got-it-btn">Got it</button>
+        </div>
+
+        
+        <div class="progress-indicator">
+            <span id="current-index">1</span> / <span id="total-count">1</span>
+        </div>
+    </div>
+
+    
+    <div class="completion-message" id="completion-message" style="display: none;">
+        <h2>🎉 Session Complete!</h2>
+        <p>You've completed all exercises in <strong id="group-name"></strong>.</p>
+        <div class="completion-actions">
+            <a href="http://localhost:1313/languages/czech/" class="action-btn">← Back to Groups</a>
+        </div>
+    </div>
+
+    
+    <div class="no-group" id="no-group">
+        <p>No group selected. Please go back and choose a sentence group.</p>
+        <a href="http://localhost:1313/languages/czech/" class="action-btn">← Choose Group</a>
+    </div>
+</div>
+
+<script src="/js/utteron.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        initTrainingInterface();
+    });
+</script>
+
     </main>
     
 <footer class="footer">
