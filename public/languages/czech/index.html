@@ -78,44 +78,88 @@
     <nav class="nav">
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="UtterOn (Alt + H)">UtterOn</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
+                    <div class="logo-switches">
+                        <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                            <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                            <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </button>
+                    </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/languages/" title="Languages">
+                <a href="http://localhost:1313/languages/" title="Languages" class="btn-header" >
                     <span>Languages</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About" class="btn-header" >
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/support/" title="Support" class="btn-header" >
+                    <span>Support</span>
                 </a>
             </li>
         </ul>
     </nav>
-</header>
-<main class="main">
+</header><main class="main">
 <div class="utteron-container">
-    <h1>Czech</h1>
-    <p class="native-name">Čeština</p>
+    <div class="language-header-card">
+        <div class="lang-title-section">
+            <h1>Czech</h1>
+            <div class="native-name-row">
+                <span class="native-name-large">Čeština</span>
+                <button class="audio-btn" onclick="playNativeName('Čeština')"
+                    aria-label="Play pronunciation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-    <h2>Sentence Groups</h2>
+        <div class="lang-stats-grid">
+            <div class="stat-col">
+                <span class="stat-label-sm">Streak</span>
+                <span class="stat-value-sm" id="stat-streak">0 Days</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Today</span>
+                <span class="stat-value-sm" id="stat-today">0/0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Week</span>
+                <span class="stat-value-sm" id="stat-week">0/0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Groups</span>
+                <span class="stat-value-sm" id="stat-completed">0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">All</span>
+                <span class="stat-value-sm" id="stat-all">0</span>
+            </div>
+        </div>
+    </div>
 
     <div class="group-list" id="group-list" data-language="czech">
         
@@ -127,44 +171,59 @@
         <div class="group-card" data-group-id="basics" data-sentence-count="4"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0010.mp3&#34;,&#34;english&#34;:&#34;Yes.&#34;,&#34;id&#34;:&#34;cz_0010&#34;,&#34;native&#34;:&#34;Ano.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0011.mp3&#34;,&#34;english&#34;:&#34;No.&#34;,&#34;id&#34;:&#34;cz_0011&#34;,&#34;native&#34;:&#34;Ne.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0012.mp3&#34;,&#34;english&#34;:&#34;Please.&#34;,&#34;id&#34;:&#34;cz_0012&#34;,&#34;native&#34;:&#34;Prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0013.mp3&#34;,&#34;english&#34;:&#34;Excuse me.&#34;,&#34;id&#34;:&#34;cz_0013&#34;,&#34;native&#34;:&#34;Promiňte.&#34;}]'>
 
-            <div class="group-header">
-                <h3>Basics</h3>
-                
-                <span class="level-badge">A1</span>
-                
-            </div>
+            <div class="group-content-wrapper">
+                <div class="group-info-col">
+                    
+                    <span class="level-badge">Beginner</span>
+                    
 
-            <div class="group-meta">
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Sentences:</span>
-                        <span class="meta-value">4</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Time:</span>
-                        <span class="meta-value">~3
-                            min</span>
-                    </span>
+                    <div class="group-header">
+                        <h3>Basics</h3>
+                    </div>
+
+                    <div class="group-meta">
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Sentences:</span>
+                                <span class="meta-value">4</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Time:</span>
+                                <span class="meta-value">~3
+                                    min</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Streak:</span>
+                                <span class="meta-value group-streak" data-group="basics">—</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Score:</span>
+                                <span class="meta-value last-score" data-group="basics">—</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Last practiced:</span>
+                                <span class="meta-value last-practiced" data-group="basics">Never</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Total:</span>
+                                <span class="meta-value group-total" data-group="basics">—</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <a href="http://localhost:1313/languages/czech/train/?group=basics" class="start-btn">Start</a>
                 </div>
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Today:</span>
-                        <span class="meta-value today-status" data-group="basics">—</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Score:</span>
-                        <span class="meta-value last-score" data-group="basics">—</span>
-                    </span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-item full-width">
-                        <span class="meta-label">Last practiced:</span>
-                        <span class="meta-value last-practiced" data-group="basics">Never</span>
-                    </span>
+
+                <div class="group-desc-col">
+                    
+                    <p class="group-description">Master the essential words and phrases for everyday interactions. Learn to say yes, no, please, and thank you with confidence.</p>
+                    
                 </div>
             </div>
-
-            <a href="http://localhost:1313/languages/czech/train/?group=basics" class="start-btn">Start</a>
         </div>
         
         
@@ -172,44 +231,59 @@
         <div class="group-card" data-group-id="greetings" data-sentence-count="4"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0001.mp3&#34;,&#34;english&#34;:&#34;Good day.&#34;,&#34;id&#34;:&#34;cz_0001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0002.mp3&#34;,&#34;english&#34;:&#34;Hi.&#34;,&#34;id&#34;:&#34;cz_0002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0003.mp3&#34;,&#34;english&#34;:&#34;Goodbye.&#34;,&#34;id&#34;:&#34;cz_0003&#34;,&#34;native&#34;:&#34;Nashledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0004.mp3&#34;,&#34;english&#34;:&#34;Thank you.&#34;,&#34;id&#34;:&#34;cz_0004&#34;,&#34;native&#34;:&#34;Děkuji.&#34;}]'>
 
-            <div class="group-header">
-                <h3>Greetings</h3>
-                
-                <span class="level-badge">A1</span>
-                
-            </div>
+            <div class="group-content-wrapper">
+                <div class="group-info-col">
+                    
+                    <span class="level-badge">Beginner</span>
+                    
 
-            <div class="group-meta">
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Sentences:</span>
-                        <span class="meta-value">4</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Time:</span>
-                        <span class="meta-value">~3
-                            min</span>
-                    </span>
+                    <div class="group-header">
+                        <h3>Greetings</h3>
+                    </div>
+
+                    <div class="group-meta">
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Sentences:</span>
+                                <span class="meta-value">4</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Time:</span>
+                                <span class="meta-value">~3
+                                    min</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Streak:</span>
+                                <span class="meta-value group-streak" data-group="greetings">—</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Score:</span>
+                                <span class="meta-value last-score" data-group="greetings">—</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Last practiced:</span>
+                                <span class="meta-value last-practiced" data-group="greetings">Never</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Total:</span>
+                                <span class="meta-value group-total" data-group="greetings">—</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <a href="http://localhost:1313/languages/czech/train/?group=greetings" class="start-btn">Start</a>
                 </div>
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Today:</span>
-                        <span class="meta-value today-status" data-group="greetings">—</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Score:</span>
-                        <span class="meta-value last-score" data-group="greetings">—</span>
-                    </span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-item full-width">
-                        <span class="meta-label">Last practiced:</span>
-                        <span class="meta-value last-practiced" data-group="greetings">Never</span>
-                    </span>
+
+                <div class="group-desc-col">
+                    
+                    <p class="group-description placeholder">No description available.</p>
+                    
                 </div>
             </div>
-
-            <a href="http://localhost:1313/languages/czech/train/?group=greetings" class="start-btn">Start</a>
         </div>
         
         
@@ -217,9 +291,39 @@
 </div>
 
 <script src="/js/utteron.js"></script>
+<script src="/js/utteron-stats.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
+
+        
+        
+        const completions = getCompletions();
+        const today = getTodayDate();
+        let needsSave = false;
+
+        if (completions[lang]) {
+            Object.keys(completions[lang]).forEach(groupId => {
+                if (groupId === 'stats') return;
+
+                const group = completions[lang][groupId];
+                if (group && group.sentences) {
+                    const sentences = Object.values(group.sentences);
+                    const is100Percent = sentences.length > 0 && sentences.every(s => s.listen && s.read);
+
+                    
+                    if (is100Percent && group.date && group.date !== today) {
+                        group.date = today;
+                        needsSave = true;
+                    }
+                }
+            });
+
+            if (needsSave) {
+                saveCompletions(completions);
+            }
+        }
+
         updateGroupCards(lang);
     });
 </script>

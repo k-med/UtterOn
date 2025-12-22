@@ -1,9 +1,44 @@
 {{ define "main" }}
 <div class="utteron-container">
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.native_name }}<p class="native-name">{{ . }}</p>{{ end }}
+    <div class="language-header-card">
+        <div class="lang-title-section">
+            <h1>{{ .Title }}</h1>
+            <div class="native-name-row">
+                <span class="native-name-large">{{ .Params.native_name }}</span>
+                <button class="audio-btn" onclick="playNativeName('{{ .Params.native_name }}')"
+                    aria-label="Play pronunciation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-    <h2>Sentence Groups</h2>
+        <div class="lang-stats-grid">
+            <div class="stat-col">
+                <span class="stat-label-sm">Streak</span>
+                <span class="stat-value-sm" id="stat-streak">0 Days</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Today</span>
+                <span class="stat-value-sm" id="stat-today">0/0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Week</span>
+                <span class="stat-value-sm" id="stat-week">0/0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">Groups</span>
+                <span class="stat-value-sm" id="stat-completed">0</span>
+            </div>
+            <div class="stat-col">
+                <span class="stat-label-sm">All</span>
+                <span class="stat-value-sm" id="stat-all">0</span>
+            </div>
+        </div>
+    </div>
 
     <div class="group-list" id="group-list" data-language="{{ .Params.language_code | default .File.ContentBaseName }}">
         {{ $lang := .Params.language_code | default .File.ContentBaseName }}
@@ -15,44 +50,69 @@
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
             data-sentences='{{ .Params.sentences | jsonify }}'>
 
-            <div class="group-header">
-                <h3>{{ .Params.group_title }}</h3>
-                {{ with .Params.level }}
-                <span class="level-badge">{{ . }}</span>
-                {{ end }}
-            </div>
+            <div class="group-content-wrapper">
+                <div class="group-info-col">
+                    {{ with .Params.level }}
+                    <span class="level-badge">
+                        {{- if or (eq . "A1") (eq . "A2") -}}
+                        Beginner
+                        {{- else if or (eq . "B1") (eq . "B2") -}}
+                        Intermediate
+                        {{- else -}}
+                        Advanced
+                        {{- end -}}
+                    </span>
+                    {{ end }}
 
-            <div class="group-meta">
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Sentences:</span>
-                        <span class="meta-value">{{ $sentenceCount }}</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Time:</span>
-                        <span class="meta-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }}
-                            min</span>
-                    </span>
+                    <div class="group-header">
+                        <h3>{{ .Params.group_title }}</h3>
+                    </div>
+
+                    <div class="group-meta">
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Sentences:</span>
+                                <span class="meta-value">{{ $sentenceCount }}</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Time:</span>
+                                <span class="meta-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }}
+                                    min</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Streak:</span>
+                                <span class="meta-value group-streak" data-group="{{ .Params.group_id }}">—</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Score:</span>
+                                <span class="meta-value last-score" data-group="{{ .Params.group_id }}">—</span>
+                            </span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-item">
+                                <span class="meta-label">Last practiced:</span>
+                                <span class="meta-value last-practiced" data-group="{{ .Params.group_id }}">Never</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">Total:</span>
+                                <span class="meta-value group-total" data-group="{{ .Params.group_id }}">—</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn">Start</a>
                 </div>
-                <div class="meta-row">
-                    <span class="meta-item">
-                        <span class="meta-label">Today:</span>
-                        <span class="meta-value today-status" data-group="{{ .Params.group_id }}">—</span>
-                    </span>
-                    <span class="meta-item">
-                        <span class="meta-label">Score:</span>
-                        <span class="meta-value last-score" data-group="{{ .Params.group_id }}">—</span>
-                    </span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-item full-width">
-                        <span class="meta-label">Last practiced:</span>
-                        <span class="meta-value last-practiced" data-group="{{ .Params.group_id }}">Never</span>
-                    </span>
+
+                <div class="group-desc-col">
+                    {{ with .Params.description }}
+                    <p class="group-description">{{ . }}</p>
+                    {{ else }}
+                    <p class="group-description placeholder">No description available.</p>
+                    {{ end }}
                 </div>
             </div>
-
-            <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn">Start</a>
         </div>
         {{ end }}
         {{ else }}
@@ -62,9 +122,39 @@
 </div>
 
 <script src="/js/utteron.js"></script>
+<script src="/js/utteron-stats.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
+
+        // One-time migration: Update old "Yesterday" dates to "Today" if score is 100%
+        // This fixes the bug where perfect scores from yesterday still show "Yesterday"
+        const completions = getCompletions();
+        const today = getTodayDate();
+        let needsSave = false;
+
+        if (completions[lang]) {
+            Object.keys(completions[lang]).forEach(groupId => {
+                if (groupId === 'stats') return;
+
+                const group = completions[lang][groupId];
+                if (group && group.sentences) {
+                    const sentences = Object.values(group.sentences);
+                    const is100Percent = sentences.length > 0 && sentences.every(s => s.listen && s.read);
+
+                    // If score is 100% but date is not today, update it
+                    if (is100Percent && group.date && group.date !== today) {
+                        group.date = today;
+                        needsSave = true;
+                    }
+                }
+            });
+
+            if (needsSave) {
+                saveCompletions(completions);
+            }
+        }
+
         updateGroupCards(lang);
     });
 </script>

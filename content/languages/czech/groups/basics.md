@@ -3,6 +3,7 @@ title: Basics
 language: czech
 group_id: basics
 group_title: Basics
+description: "Master the essential words and phrases for everyday interactions. Learn to say yes, no, please, and thank you with confidence."
 level: A1
 sentences:
   - id: cz_0010

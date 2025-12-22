@@ -22,7 +22,12 @@ function saveCompletions(data) {
 }
 
 function getTodayDate() {
-    return new Date().toISOString().split('T')[0];
+    // Use local date, not UTC, to avoid timezone issues
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function getGroupCompletion(lang, groupId) {
@@ -47,13 +52,16 @@ function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
     // Initialize structure
     if (!completions[lang]) completions[lang] = {};
     if (!completions[lang][groupId]) {
-        completions[lang][groupId] = { date: today, sentences: {} };
+        completions[lang][groupId] = {
+            date: today,
+            sentences: {},
+            completionDates: [], // Array of dates (for streak)
+            completionHistory: {} // { "2025-12-23": 3 } (date -> count)
+        };
     }
 
-    // Reset if date changed
-    if (completions[lang][groupId].date !== today) {
-        completions[lang][groupId] = { date: today, sentences: {} };
-    }
+    // ALWAYS update date to today when practicing
+    completions[lang][groupId].date = today;
 
     // Initialize sentence
     if (!completions[lang][groupId].sentences[sentenceId]) {
@@ -63,7 +71,68 @@ function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
     // Mark complete
     completions[lang][groupId].sentences[sentenceId][exerciseType] = true;
 
+    // Check if group is now 100% complete
+    const sentences = Object.values(completions[lang][groupId].sentences);
+    const is100Percent = sentences.length > 0 && sentences.every(s => s.listen && s.read);
+
+    // If 100%, increment count
+    if (is100Percent) {
+        // Initialize completionHistory if needed
+        if (!completions[lang][groupId].completionHistory) {
+            completions[lang][groupId].completionHistory = {};
+        }
+
+        // Increment count for today
+        if (!completions[lang][groupId].completionHistory[today]) {
+            completions[lang][groupId].completionHistory[today] = 0;
+        }
+        completions[lang][groupId].completionHistory[today]++;
+
+        // Also maintain completionDates (add only once per day for streak)
+        if (!completions[lang][groupId].completionDates) {
+            completions[lang][groupId].completionDates = [];
+        }
+        if (!completions[lang][groupId].completionDates.includes(today)) {
+            completions[lang][groupId].completionDates.push(today);
+        }
+    }
+
     saveCompletions(completions);
+}
+
+function calculateGroupStreak(lang, groupId) {
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    if (!completions[lang] || !completions[lang][groupId]) return 0;
+
+    const groupData = completions[lang][groupId];
+
+    // Get completion history
+    const completionDates = groupData.completionDates || [];
+
+    // Sort dates descending
+    const sortedDates = [...completionDates].sort((a, b) => b.localeCompare(a));
+
+    // Calculate streak from today backwards
+    let streak = 0;
+    let checkDate = new Date();
+
+    for (let i = 0; i < 365; i++) {
+        const year = checkDate.getFullYear();
+        const month = String(checkDate.getMonth() + 1).padStart(2, '0');
+        const day = String(checkDate.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
+
+        if (sortedDates.includes(dateStr)) {
+            streak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+            break;
+        }
+    }
+
+    return streak;
 }
 
 function isGroupComplete(lang, groupId, sentenceIds) {
@@ -118,52 +187,170 @@ function updateGroupCards(lang) {
         const groupData = completions[lang]?.[groupId];
 
         // Calculate score and today status
-        let completedToday = 0;
+        let completedToday = 0;  // Only exercises from today
+        let totalCompleted = 0;  // All time (for score display)
         let lastPracticedDate = null;
 
         if (groupData && groupData.sentences) {
-            // Check if data is from today
-            const isToday = groupData.date === today;
-
-            if (isToday) {
-                // Count completed exercises
-                Object.values(groupData.sentences).forEach(s => {
-                    if (s.listen) completedToday++;
-                    if (s.read) completedToday++;
-                });
-            }
-
-            // Track last practiced date
+            // Track last practiced date from the group data
             if (groupData.date) {
                 lastPracticedDate = groupData.date;
             }
+
+            const isToday = groupData.date === today;
+
+            // Count completed exercises
+            Object.values(groupData.sentences).forEach(s => {
+                // Count all-time completions for score
+                if (s.listen) totalCompleted++;
+                if (s.read) totalCompleted++;
+
+                // Count today's completions separately
+                if (isToday) {
+                    if (s.listen) completedToday++;
+                    if (s.read) completedToday++;
+                }
+            });
         }
 
-        // Update Today Status
-        const todayEl = card.querySelector('.today-status');
-        if (todayEl) {
-            const isDone = completedToday === totalExercises && totalExercises > 0;
-            todayEl.textContent = isDone ? 'Done ✓' : 'Not yet';
-            todayEl.classList.toggle('done', isDone);
-            todayEl.classList.toggle('not-done', !isDone);
+
+        // Update Streak - show consecutive days group was 100% completed
+        const streakEl = card.querySelector('.group-streak');
+        if (streakEl) {
+            const streak = calculateGroupStreak(lang, groupId);
+            if (streak > 0) {
+                streakEl.textContent = `${streak} day${streak !== 1 ? 's' : ''}`;
+                streakEl.classList.add('has-streak');
+            } else {
+                streakEl.textContent = '—';
+                streakEl.classList.remove('has-streak');
+            }
         }
 
-        // Update Score
+        // Update Score - shows all-time progress
         const scoreEl = card.querySelector('.last-score');
         if (scoreEl) {
-            if (completedToday > 0) {
-                scoreEl.textContent = `${completedToday} / ${totalExercises}`;
+            if (totalCompleted > 0) {
+                const is100Percent = totalCompleted === totalExercises && totalExercises > 0;
+                scoreEl.textContent = `${totalCompleted} / ${totalExercises}`;
+                // Highlight green if 100%
+                scoreEl.classList.toggle('perfect-score', is100Percent);
             } else {
                 scoreEl.textContent = '—';
+                scoreEl.classList.remove('perfect-score');
             }
         }
 
         // Update Last Practiced
         const lastEl = card.querySelector('.last-practiced');
         if (lastEl) {
-            lastEl.textContent = formatRelativeDate(lastPracticedDate);
+            const formattedDate = formatRelativeDate(lastPracticedDate);
+            lastEl.textContent = formattedDate;
+            // Highlight green if practiced today
+            lastEl.classList.toggle('practiced-today', formattedDate === 'Today');
+        }
+
+        // Update Total - sum of all 100% completions
+        const totalEl = card.querySelector('.group-total');
+        if (totalEl && groupData && groupData.completionHistory) {
+            const totalCompletions = Object.values(groupData.completionHistory).reduce((sum, count) => sum + count, 0);
+            totalEl.textContent = totalCompletions;
+        } else if (totalEl) {
+            totalEl.textContent = '0';
         }
     });
+
+    // Update main stats dashboard if present
+    updateLanguageStats(lang);
+}
+
+function updateLanguageStats(lang) {
+    const container = document.getElementById('stats-container');
+    if (!container) return;
+
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    // 1. Calculate Streak
+    // Logic: consecutive days with at least one group completed 100%
+    // We need to store streak history. For now, let's infer from available data or add a new storage structure.
+    // Since we only have 'date' in the current structure, we can't look back easily without a history log.
+    // Let's add a 'stats' object to the root of completions[lang].
+
+    let stats = completions[lang]?.stats || { streak: 0, lastStreakDate: null, completedGroups: [] };
+
+    // Check if we need to increment streak for today
+    // This logic needs to run when a group is completed, not just on view.
+    // But for display, we just show what's stored.
+
+    document.getElementById('stat-streak').textContent = `${stats.streak} days`;
+
+    // 2. Completed Groups (Lifetime)
+    const completedCount = stats.completedGroups ? stats.completedGroups.length : 0;
+    document.getElementById('stat-completed').textContent = completedCount;
+
+    // 3. Today's Progress
+    // Count groups completed today
+    let groupsToday = 0;
+    let totalGroups = 0;
+
+    if (completions[lang]) {
+        Object.keys(completions[lang]).forEach(key => {
+            if (key === 'stats') return; // Skip stats object
+
+            const group = completions[lang][key];
+            if (group.date === today) {
+                // Check if fully complete
+                const sentences = Object.values(group.sentences);
+                if (sentences.length > 0) {
+                    const allDone = sentences.every(s => s.listen && s.read);
+                    if (allDone) groupsToday++;
+                }
+            }
+        });
+    }
+
+    // Get total groups from DOM
+    const cards = document.querySelectorAll('.group-card');
+    totalGroups = cards.length;
+
+    document.getElementById('stat-today').textContent = `${groupsToday} / ${totalGroups} groups`;
+}
+
+function checkAndUpdateStats(lang, groupId) {
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    if (!completions[lang]) completions[lang] = {};
+    if (!completions[lang].stats) {
+        completions[lang].stats = { streak: 0, lastStreakDate: null, completedGroups: [] };
+    }
+
+    const stats = completions[lang].stats;
+    const groupData = completions[lang][groupId];
+
+    // Check if group is fully complete
+    let isGroupDone = false;
+    if (groupData && groupData.sentences) {
+        const sentences = Object.values(groupData.sentences);
+        // We need to know total sentences for this group. 
+        // Ideally passed in, but we can assume if all *tracked* sentences are done, it's done?
+        // Better: we only mark complete if we just finished the last one.
+        // Let's rely on the caller or check against dataset if possible.
+        // For now, let's assume if all recorded sentences have both flags, it's done.
+        // NOTE: This might be buggy if not all sentences are touched yet.
+        // Correct fix: We need to know the total sentence count.
+        // Let's pass it or look it up.
+        // Actually, `markExerciseComplete` is called one by one.
+        // We can check if *all* sentences in the group (from DOM or data) are done.
+        // But `markExerciseComplete` doesn't have access to the full group data easily without DOM.
+        // Let's do a best effort: if the group is marked "Done" in the UI, it counts.
+        // But this runs in background.
+
+        // Alternative: Just check if the current sentence made it complete?
+        // Let's keep it simple: Update stats on `updateGroupCards` which runs on load.
+        // But we need to update *storage* when completing an exercise.
+    }
 }
 
 // Legacy support
@@ -364,6 +551,8 @@ function recordAndAdvance(gotIt) {
     // Record completion (only if got it)
     if (gotIt) {
         markExerciseComplete(trainState.lang, trainState.groupId, sentence.id, type);
+        // Check if this completed the group and update stats
+        checkAndUpdateStats(trainState.lang, trainState.groupId, trainState.exercises);
     }
 
     // Advance to next
@@ -373,6 +562,56 @@ function recordAndAdvance(gotIt) {
         showCompletion();
     } else {
         showCurrentExercise();
+    }
+}
+
+function checkAndUpdateStats(lang, groupId, exercises) {
+    if (!exercises || exercises.length === 0) return;
+
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    // Ensure stats object exists
+    if (!completions[lang]) completions[lang] = {};
+    if (!completions[lang].stats) {
+        completions[lang].stats = { streak: 0, lastStreakDate: null, completedGroups: [] };
+    }
+
+    const groupData = completions[lang][groupId];
+    if (!groupData || !groupData.sentences) return;
+
+    // Check if ALL sentences in the group are complete (both listen and read)
+    const uniqueSentenceIds = [...new Set(exercises.map(e => e.sentence.id))];
+    const allComplete = uniqueSentenceIds.every(id => {
+        const s = groupData.sentences[id];
+        return s && s.listen && s.read;
+    });
+
+    if (allComplete) {
+        const stats = completions[lang].stats;
+
+        // 1. Update Completed Groups (Lifetime)
+        if (!stats.completedGroups.includes(groupId)) {
+            stats.completedGroups.push(groupId);
+        }
+
+        // 2. Update Streak
+        if (stats.lastStreakDate !== today) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            if (stats.lastStreakDate === yesterdayStr) {
+                stats.streak++;
+            } else if (stats.lastStreakDate === null) {
+                stats.streak = 1;
+            } else {
+                stats.streak = 1;
+            }
+            stats.lastStreakDate = today;
+        }
+
+        saveCompletions(completions);
     }
 }
 

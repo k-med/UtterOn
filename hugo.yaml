@@ -14,3 +14,11 @@ menu:
       name: Languages
       url: /languages/
       weight: 10
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 20
+    - identifier: support
+      name: Support
+      url: /support/
+      weight: 30
