@@ -295,44 +295,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
-
-        
-        const migrationKey = 'utteron_stats_fix_v2';
-        if (!localStorage.getItem(migrationKey)) {
-            console.log('Clearing old stats data with inflated counts...');
-            localStorage.removeItem('utteron_completions');
-            localStorage.setItem(migrationKey, 'true');
-            console.log('Migration complete! Please re-complete groups to see accurate stats.');
-        }
-
-        
-        
-        const completions = getCompletions();
-        const today = getTodayDate();
-        let needsSave = false;
-
-        if (completions[lang]) {
-            Object.keys(completions[lang]).forEach(groupId => {
-                if (groupId === 'stats') return;
-
-                const group = completions[lang][groupId];
-                if (group && group.sentences) {
-                    const sentences = Object.values(group.sentences);
-                    const is100Percent = sentences.length > 0 && sentences.every(s => s.listen && s.read);
-
-                    
-                    if (is100Percent && group.date && group.date !== today) {
-                        group.date = today;
-                        needsSave = true;
-                    }
-                }
-            });
-
-            if (needsSave) {
-                saveCompletions(completions);
-            }
-        }
-
         updateGroupCards(lang);
     });
 </script>

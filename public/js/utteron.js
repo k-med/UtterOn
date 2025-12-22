@@ -48,20 +48,23 @@ function getGroupCompletion(lang, groupId) {
 function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
     const completions = getCompletions();
     const today = getTodayDate();
+    const timestamp = new Date().toISOString(); // Add timestamp
 
     // Initialize structure
     if (!completions[lang]) completions[lang] = {};
     if (!completions[lang][groupId]) {
         completions[lang][groupId] = {
             date: today,
+            timestamp: timestamp,
             sentences: {},
             completionDates: [],
             completionHistory: {}
         };
     }
 
-    // ALWAYS update date to today when practicing
+    // ALWAYS update date AND timestamp when practicing
     completions[lang][groupId].date = today;
+    completions[lang][groupId].timestamp = timestamp;
 
     // Initialize sentence
     if (!completions[lang][groupId].sentences[sentenceId]) {
@@ -179,14 +182,13 @@ function updateGroupCards(lang) {
     const cardsWithDates = cardsArray.map(card => {
         const groupId = card.dataset.groupId;
         const groupData = completions[lang]?.[groupId];
-        const practiceDate = groupData?.date || null;
+        // Use timestamp for precise ordering, fallback to date
+        const sortKey = groupData?.timestamp || groupData?.date || '0000-00-00T00:00:00';
 
         return {
             card: card,
             groupId: groupId,
-            practiceDate: practiceDate,
-            // Convert date to sortable format (null dates go to end)
-            sortKey: practiceDate || '0000-00-00'
+            sortKey: sortKey
         };
     });
 
@@ -197,8 +199,8 @@ function updateGroupCards(lang) {
     });
 
     // Reorder cards in DOM
-    const container = document.querySelector('.group-list');
-    if (container) {
+    const container = document.getElementById('group-list');
+    if (container && cardsWithDates.length > 0) {
         cardsWithDates.forEach(item => {
             container.appendChild(item.card);
         });
