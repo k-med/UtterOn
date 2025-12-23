@@ -856,3 +856,16 @@
     font-size: 0.6rem;
   }
 }
+
+/* Language Flag Display */
+.lang-flag-display {
+  font-size: 3rem;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.reset-note {
+  font-size: 0.8em;
+  opacity: 0.7;
+  font-weight: 400;
+}

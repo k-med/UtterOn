@@ -2,7 +2,7 @@
 <div class="utteron-container">
     <div class="language-header-card">
         <div class="lang-title-section">
-            <h1>{{ .Title }} {{ .Params.flag }}</h1>
+            <h1>{{ .Title }}</h1>
             <div class="native-name-row">
                 <span class="native-name-large">{{ .Params.native_name }}</span>
                 <button class="audio-btn" onclick="playNativeName('{{ .File.ContentBaseName }}')"
@@ -14,6 +14,7 @@
                     </svg>
                 </button>
             </div>
+            <div class="lang-flag-display">{{ .Params.flag }}</div>
         </div>
 
         <div class="lang-stats-grid">
@@ -53,7 +54,7 @@
 
         <!-- Fundamentals Buttons Row -->
         <div class="fundamentals-section">
-            <span class="fundamentals-caption">Quick vocabulary boosters</span>
+            <span class="fundamentals-caption">Quick vocabulary boosters <span class="reset-note"></span>(Reset daily.)</span></span>
             <div class="fundamentals-row">
                 {{ $lang := .Params.language_code | default .File.ContentBaseName }}
                 {{ $groups := .GetPage "groups" }}
