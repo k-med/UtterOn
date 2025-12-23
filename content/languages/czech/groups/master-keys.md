@@ -17,18 +17,22 @@ sentences:
     audio: /assets/audio/czech/cz_mk001.mp3
     native: "Chtěl bych tohle."
     english: "I would like this."
+    gender: "masculine"
   - id: cz_mk002
     audio: /assets/audio/czech/cz_mk002.mp3
     native: "Chtěl bych tamto."
     english: "I would like that."
+    gender: "masculine"
   - id: cz_mk003
     audio: /assets/audio/czech/cz_mk003.mp3
     native: "Chtěla bych tohle."
-    english: "I would like this. (female)"
+    english: "I would like this."
+    gender: "feminine"
   - id: cz_mk004
     audio: /assets/audio/czech/cz_mk004.mp3
     native: "Chtěla bych tamto."
-    english: "I would like that. (female)"
+    english: "I would like that."
+    gender: "feminine"
   - id: cz_mk005
     audio: /assets/audio/czech/cz_mk005.mp3
     native: "Máte kávu?"

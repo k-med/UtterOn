@@ -547,7 +547,11 @@ function showCurrentExercise() {
         // Listen mode: show audio first, hide text
         exerciseType.textContent = 'Listen & Translate';
         exerciseType.className = 'exercise-type listen';
-        promptArea.innerHTML = '<p class="instruction">Listen to the audio, spell the word, then translate in your head.</p>';
+
+        // Show gender hint if available
+        const genderHint = sentence.gender ? `<span class="gender-hint">${sentence.gender}</span>` : '';
+        promptArea.innerHTML = `${genderHint}<p class="instruction">Listen to the audio, spell the word, then translate in your head.</p>`;
+
         audioContainer.style.display = 'block';
         if (replayBtn) replayBtn.querySelector('span').textContent = 'Play Again';
         revealArea.innerHTML = `
