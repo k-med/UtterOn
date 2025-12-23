@@ -537,7 +537,8 @@
   border-left: 1px solid var(--border);
   padding-left: 1.5rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 0.5rem;
 }
 
 .group-description {

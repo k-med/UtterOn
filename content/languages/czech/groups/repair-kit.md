@@ -3,7 +3,13 @@ title: The Repair Kit
 language: czech
 group_id: repair-kit
 group_title: Repair Kit
-description: "Phrases that keep communication alive when you're new. Lets you slow conversations down, ask for clarification, and recover gracefully from confusion instead of freezing or abandoning the interaction."
+description: |
+  Stay in the conversation!
+  I don't understand
+  Can you repeat that?
+  Can you speak more slowly?
+  What does that mean?
+  Do you speak English?
 level: A1
 sentences:
   - id: cz_rk001
