@@ -142,8 +142,13 @@ function updateFundamentalsButtons(lang) {
 
         scoreEl.textContent = `${completedCount}/${sentenceCount}`;
 
-        // Highlight green if 100% completed today (exists in completionHistory for today)
-        if (group.completionHistory && group.completionHistory[today]) {
+        // Highlight green ONLY if:
+        // 1. All sentences are complete (100%)
+        // 2. The group was completed today
+        const is100Percent = completedCount === sentenceCount && sentenceCount > 0;
+        const completedToday = group.completionHistory && group.completionHistory[today];
+
+        if (is100Percent && completedToday) {
             btn.classList.add('complete-today');
         } else {
             btn.classList.remove('complete-today');

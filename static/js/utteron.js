@@ -547,7 +547,7 @@ function showCurrentExercise() {
         // Listen mode: show audio first, hide text
         exerciseType.textContent = 'Listen & Translate';
         exerciseType.className = 'exercise-type listen';
-        promptArea.innerHTML = '<p class="instruction">Listen to the audio, then translate in your head.</p>';
+        promptArea.innerHTML = '<p class="instruction">Listen to the audio, spell the word, then translate in your head.</p>';
         audioContainer.style.display = 'block';
         if (replayBtn) replayBtn.querySelector('span').textContent = 'Play Again';
         revealArea.innerHTML = `
@@ -563,7 +563,7 @@ function showCurrentExercise() {
         exerciseType.textContent = 'Read & Speak';
         exerciseType.className = 'exercise-type read';
         promptArea.innerHTML = `<p class="native-text large">${sentence.native}</p>
-            <p class="instruction">Read aloud, then check your pronunciation.</p>`;
+            <p class="instruction">Read aloud, then translate in your head.</p>`;
         audioContainer.style.display = 'none';
         revealArea.innerHTML = `
             <div class="audio-reveal">
