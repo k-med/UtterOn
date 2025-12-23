@@ -679,6 +679,43 @@
   white-space: nowrap;
 }
 
+.stat-value-sm.target-met {
+  color: var(--success);
+}
+
+.stat-value-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 70px;
+  justify-content: center;
+}
+
+.stat-arrow {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
+  opacity: 0.4;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.stat-arrow:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.stat-arrow.up::before {
+  content: '◀';
+}
+
+.stat-arrow.down::before {
+  content: '▶';
+}
+
 @media (max-width: 900px) {
   .language-header-card {
     flex-direction: column;

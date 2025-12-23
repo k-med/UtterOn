@@ -7,9 +7,18 @@ function updateLanguageStats(lang) {
     const completions = getCompletions();
     const today = getTodayDate();
 
-    // Global targets
-    const DAILY_TARGET = 5;
-    const WEEKLY_TARGET = 21;
+    // Get multipliers from localStorage or use defaults
+    // today = daily target, week = multiplier for week (days), month = multiplier for month (weeks)
+    const multipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {
+        today: 5,      // Daily target
+        week: 7,       // Days per week
+        month: 4       // Weeks per month
+    };
+
+    // Calculate targets based on cascading multipliers
+    const DAILY_TARGET = multipliers.today;
+    const WEEKLY_TARGET = multipliers.today * multipliers.week;
+    const MONTHLY_TARGET = multipliers.today * multipliers.week * multipliers.month;
 
     // Initialize stats if needed
     if (!completions[lang]) {
@@ -27,20 +36,21 @@ function updateLanguageStats(lang) {
     }
 
     // Initialize counters
-    let groupsCompletedToday = 0;  // For "Today" stat
-    let groupsCompletedThisWeek = 0;  // For "Week" stat
-    let distinctGroupsPracticed = new Set();  // For "Groups" stat
-    let totalPerfectPasses = 0;  // For "All" stat
+    let groupsCompletedToday = 0;
+    let groupsCompletedThisWeek = 0;
+    let groupsCompletedThisMonth = 0;
+    let totalPerfectPasses = 0;
 
-    // Get total groups from DOM
-    const cards = document.querySelectorAll('.group-card');
-    const totalGroups = cards.length;
-
-    // Calculate week start (7 days ago)
+    // Calculate date ranges
     const todayDate = new Date(today);
+
     const weekStart = new Date(todayDate);
     weekStart.setDate(weekStart.getDate() - 7);
     const weekStartStr = weekStart.toISOString().split('T')[0];
+
+    const monthStart = new Date(todayDate);
+    monthStart.setDate(monthStart.getDate() - 30);
+    const monthStartStr = monthStart.toISOString().split('T')[0];
 
     if (completions[lang]) {
         Object.keys(completions[lang]).forEach(key => {
@@ -48,47 +58,47 @@ function updateLanguageStats(lang) {
 
             const group = completions[lang][key];
 
-            // Add to distinct groups if any practice happened
-            if (group.sentences && Object.values(group.sentences).length > 0) {
-                distinctGroupsPracticed.add(key);
-            }
-
             // Use completionHistory for accurate counts
             if (group.completionHistory) {
                 Object.entries(group.completionHistory).forEach(([date, count]) => {
-                    // Today: sum completions from today
+                    // Today
                     if (date === today) {
                         groupsCompletedToday += count;
                     }
-
-                    // Week: sum completions from last 7 days
+                    // Week (last 7 days)
                     if (date >= weekStartStr) {
                         groupsCompletedThisWeek += count;
                     }
-
-                    // All: sum all completions
+                    // Month (last 30 days)
+                    if (date >= monthStartStr) {
+                        groupsCompletedThisMonth += count;
+                    }
+                    // All time
                     totalPerfectPasses += count;
                 });
             }
         });
     }
 
-    // 2. Today - x/5 (daily target)
+    // 2. Today - x/target
     const todayEl = document.getElementById('stat-today');
     if (todayEl) {
         todayEl.textContent = `${groupsCompletedToday}/${DAILY_TARGET}`;
+        todayEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
     }
 
-    // 3. Week - x/21 (weekly target)
+    // 3. Week - x/target
     const weekEl = document.getElementById('stat-week');
     if (weekEl) {
         weekEl.textContent = `${groupsCompletedThisWeek}/${WEEKLY_TARGET}`;
+        weekEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
     }
 
-    // 4. Groups - distinct groups practiced / total groups
-    const groupsEl = document.getElementById('stat-completed');
-    if (groupsEl) {
-        groupsEl.textContent = `${distinctGroupsPracticed.size}/${totalGroups}`;
+    // 4. Month - x/target
+    const monthEl = document.getElementById('stat-month');
+    if (monthEl) {
+        monthEl.textContent = `${groupsCompletedThisMonth}/${MONTHLY_TARGET}`;
+        monthEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
     }
 
     // 5. All - total 100% passes (all time)
@@ -96,6 +106,39 @@ function updateLanguageStats(lang) {
     if (allEl) {
         allEl.textContent = totalPerfectPasses;
     }
+}
+
+// Initialize stat arrow controls
+function initStatArrows() {
+    const multipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {
+        today: 5,      // Daily target
+        week: 7,       // Days per week
+        month: 4       // Weeks per month
+    };
+
+    document.querySelectorAll('.stat-adjustable').forEach(col => {
+        const stat = col.dataset.stat;
+        const upBtn = col.querySelector('.stat-arrow.up');     // Left arrow = decrease
+        const downBtn = col.querySelector('.stat-arrow.down'); // Right arrow = increase
+
+        if (upBtn) {
+            upBtn.addEventListener('click', () => {
+                multipliers[stat] = Math.max(1, multipliers[stat] - 1);
+                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+                const lang = document.getElementById('group-list')?.dataset?.language;
+                if (lang) updateLanguageStats(lang);
+            });
+        }
+
+        if (downBtn) {
+            downBtn.addEventListener('click', () => {
+                multipliers[stat] = Math.min(99, multipliers[stat] + 1);
+                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+                const lang = document.getElementById('group-list')?.dataset?.language;
+                if (lang) updateLanguageStats(lang);
+            });
+        }
+    });
 }
 
 // Add playNativeName to main file for easier access
