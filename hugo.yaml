@@ -8,9 +8,9 @@ params:
   disableThemeToggle: false
   defaultTheme: auto
   assets:
-    favicon: "/favicon.png"
+    favicon: "favicon.png"
   label:
-    icon: "/favicon.png"
+    icon: "favicon.png"
 
 menu:
   main:
