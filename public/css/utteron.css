@@ -221,7 +221,7 @@
 
 .card-flag {
   font-size: 4rem;
-  background-image: url('/images/czech-background.png');
+  background-image: url('/images/cesky-krumlov-2-1815874_960_720.jpg');
   background-size: cover;
   background-position: center;
   padding: 2rem;
@@ -239,8 +239,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(67, 97, 238, 0.5) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(67, 97, 238, 0.3) 100%);
   z-index: -1;
+}
+
+:root[data-theme="dark"] .card-flag::before {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(67, 97, 238, 0.5) 100%);
 }
 
 .language-card:hover .card-flag {
@@ -871,8 +875,10 @@
    ============================================ */
 
 .language-header-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
+  background-image: url('/images/cesky-krumlov-2-1815874_960_720.jpg');
+  background-size: cover;
+  background-position: center;
+  border: none;
   border-radius: var(--radius);
   padding: 1.75rem 2rem;
   margin-bottom: 2rem;
@@ -881,6 +887,22 @@
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem 3rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.language-header-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(67, 97, 238, 0.35) 100%);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+
+:root[data-theme="dark"] .language-header-card::before {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(67, 97, 238, 0.7) 100%);
 }
 
 .lang-title-section {
@@ -1030,15 +1052,16 @@
 .fundamentals-section {
   width: 100%;
   flex-basis: 100%;
-  margin-top: 0.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+  padding-top: 0;
+  border-top: none;
   text-align: center;
 }
 
 .fundamentals-caption {
   display: block;
   font-size: 0.95rem;
+  font-weight: 700;
   color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 0.75rem;

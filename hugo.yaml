@@ -6,7 +6,7 @@ title: UtterOn
 params:
   showBreadCrumbs: true
   disableThemeToggle: false
-  defaultTheme: auto
+  defaultTheme: dark
   assets:
     favicon: "favicon.png"
   label:
