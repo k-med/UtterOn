@@ -221,12 +221,26 @@
 
 .card-flag {
   font-size: 4rem;
-  background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0.02) 100%);
+  background-image: url('/images/czech-background.png');
+  background-size: cover;
+  background-position: center;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  position: relative;
+  min-height: 180px;
+  /* Ensure flag emoji appears above overlay */
+  isolation: isolate;
+}
+
+.card-flag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(67, 97, 238, 0.5) 100%);
+  z-index: -1;
 }
 
 .language-card:hover .card-flag {
