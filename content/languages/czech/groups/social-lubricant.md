@@ -3,7 +3,13 @@ title: Social Lubricant
 language: czech
 group_id: social-lubricant
 group_title: Social Lubricant
-description: "The non-negotiable etiquette layer. These phrases open doors, soften interactions, and determine how willing locals are to help you. You cannot function socially without them."
+description: |
+  The Beginning:
+  Hello, Goodbye
+  Please, Thank you
+  Excuse me, Sorry
+  You’re welcome
+  Have a nice day
 level: A1
 sentences:
   - id: cz_sl001
@@ -33,7 +39,7 @@ sentences:
   - id: cz_sl007
     audio: /assets/audio/czech/cz_sl007.mp3
     native: "Moc děkuji."
-    english: "Thanks a lot"
+    english: "Thank you very much"
   - id: cz_sl008
     audio: /assets/audio/czech/cz_sl008.mp3
     native: "Promiňte."
@@ -50,4 +56,8 @@ sentences:
     audio: /assets/audio/czech/cz_sl011.mp3
     native: "Hezký den."
     english: "Have a nice day"
+  - id: cz_sl012
+    audio: /assets/audio/czech/cz_sl012.mp3
+    native: "Není zač."
+    english: "You're welcome (.informal)"
 ---

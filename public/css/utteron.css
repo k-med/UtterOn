@@ -326,11 +326,36 @@
 .audio-container {
   width: 100%;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .audio-container audio {
-  width: 100%;
-  max-width: 100%;
+  display: none;
+}
+
+.replay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.replay-btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.replay-btn svg {
+  flex-shrink: 0;
 }
 
 /* Reveal Area */
@@ -520,6 +545,25 @@
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.5;
+  white-space: pre-line;
+
+  /* THE INDENT TRICK */
+  padding-left: 1.25rem;
+  /* 1. Pushes ALL text to the right (the "tab") */
+  text-indent: -1.25rem;
+  /* 2. Pulls ONLY the first line back to the left */
+}
+
+.group-description::first-line {
+  /* DIALED BACK STYLES */
+  font-weight: 600;
+  /* Semi-bold instead of heavy bold */
+  font-size: 1.0rem;
+  /* Kept same size as body text (or tiny bit larger) */
+  color: var(--text-primary);
+
+  /* Adds space between the header and the indented list */
+  line-height: 2.2;
 }
 
 .group-description.placeholder {
@@ -527,11 +571,19 @@
   opacity: 0.7;
 }
 
-.group-desc-col {
-  border-left: none;
-  border-top: none;
-  padding-left: 0;
-  padding-top: 1rem;
+/* Mobile: Stack layout and hide description on small screens */
+@media (max-width: 600px) {
+  .group-content-wrapper {
+    flex-direction: column;
+  }
+
+  .group-info-col {
+    min-width: auto;
+  }
+
+  .group-desc-col {
+    display: none;
+  }
 }
 
 /* ============================================

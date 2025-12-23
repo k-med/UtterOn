@@ -506,6 +506,16 @@ function setupEventListeners() {
     document.getElementById('missed-btn').addEventListener('click', () => {
         recordAndAdvance(false);
     });
+
+    // Replay audio button
+    const replayBtn = document.getElementById('replay-btn');
+    if (replayBtn) {
+        replayBtn.addEventListener('click', () => {
+            const audio = document.getElementById('audio-player');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Play failed:', e));
+        });
+    }
 }
 
 function showCurrentExercise() {
@@ -529,6 +539,7 @@ function showCurrentExercise() {
     const audio = document.getElementById('audio-player');
     const exerciseType = document.getElementById('exercise-type');
     const actionBtn = document.getElementById('action-btn');
+    const replayBtn = document.getElementById('replay-btn');
 
     audio.src = sentence.audio;
 
@@ -538,11 +549,15 @@ function showCurrentExercise() {
         exerciseType.className = 'exercise-type listen';
         promptArea.innerHTML = '<p class="instruction">Listen to the audio, then translate in your head.</p>';
         audioContainer.style.display = 'block';
+        if (replayBtn) replayBtn.querySelector('span').textContent = 'Play Again';
         revealArea.innerHTML = `
             <p class="native-text">${sentence.native}</p>
             <p class="english-text">${sentence.english}</p>
         `;
         actionBtn.textContent = 'Show Answer';
+
+        // Autoplay the audio
+        audio.play().catch(e => console.log('Autoplay blocked:', e));
     } else {
         // Read mode: show native text, hide audio
         exerciseType.textContent = 'Read & Speak';
