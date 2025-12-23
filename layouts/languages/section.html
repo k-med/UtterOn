@@ -2,7 +2,7 @@
 <div class="utteron-container">
     <div class="language-header-card">
         <div class="lang-title-section">
-            <h1>{{ .Title }}</h1>
+            <h1>{{ .Title }} {{ .Params.flag }}</h1>
             <div class="native-name-row">
                 <span class="native-name-large">{{ .Params.native_name }}</span>
                 <button class="audio-btn" onclick="playNativeName('{{ .File.ContentBaseName }}')"

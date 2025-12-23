@@ -585,7 +585,7 @@
   opacity: 0.7;
 }
 
-/* Mobile: Stack layout and hide description on small screens */
+/* Mobile: Stack layout and show description */
 @media (max-width: 600px) {
   .group-content-wrapper {
     flex-direction: column;
@@ -596,7 +596,10 @@
   }
 
   .group-desc-col {
-    display: none;
+    display: block;
+    border-left: none;
+    padding-left: 0;
+    padding-top: 1rem;
   }
 }
 
@@ -662,10 +665,11 @@
 
 .lang-stats-grid {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
   flex: 1;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .stat-col {
@@ -732,14 +736,14 @@
 @media (max-width: 900px) {
   .language-header-card {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.5rem;
     padding: 1.5rem;
   }
 
   .lang-stats-grid {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1rem;
   }
 

@@ -5,7 +5,7 @@
     <div class="language-grid">
         {{ range .Sections }}
         <a href="{{ .Permalink }}" class="language-card">
-            <h2>{{ .Title }}</h2>
+            <h2>{{ .Title }} {{ .Params.flag }}</h2>
             {{ with .Params.native_name }}
             <span class="native-name">{{ . }}</span>
             {{ end }}
