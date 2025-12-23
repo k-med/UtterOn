@@ -22,17 +22,15 @@
   --spacing: 1.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0f0f1a;
-    --bg-secondary: #1a1a2e;
-    --text-primary: #f0f0f5;
-    --text-secondary: #a0a0c0;
-    --accent: #6366f1;
-    --accent-hover: #818cf8;
-    --border: #2a2a4a;
-    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
+:root[data-theme="dark"] {
+  --bg-primary: #0f0f1a;
+  --bg-secondary: #1a1a2e;
+  --text-primary: #f0f0f5;
+  --text-secondary: #a0a0c0;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --border: #2a2a4a;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
