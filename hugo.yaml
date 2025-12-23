@@ -7,6 +7,10 @@ params:
   showBreadCrumbs: true
   disableThemeToggle: false
   defaultTheme: auto
+  assets:
+    favicon: "/favicon.png"
+  label:
+    icon: "/favicon.png"
 
 menu:
   main:
