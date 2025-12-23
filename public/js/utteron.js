@@ -462,11 +462,17 @@ function initTrainingInterface() {
 
     trainState.groupId = group.group_id;
     trainState.groupTitle = group.group_title;
+    trainState.groupDescription = group.description || '';
     trainState.exercises = buildExercisePool(group.sentences);
     trainState.currentIndex = 0;
 
     // Initialize UI
     document.getElementById('group-title').textContent = trainState.groupTitle;
+    const subtitleEl = document.getElementById('group-subtitle');
+    if (subtitleEl) {
+        subtitleEl.textContent = trainState.groupDescription;
+        subtitleEl.style.display = trainState.groupDescription ? 'block' : 'none';
+    }
     document.getElementById('no-group').style.display = 'none';
     document.getElementById('exercise-card').style.display = 'block';
     document.getElementById('total-count').textContent = trainState.exercises.length;

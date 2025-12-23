@@ -159,9 +159,168 @@
                 <span class="stat-value-sm" id="stat-all">0</span>
             </div>
         </div>
+
+        
+        <div class="fundamentals-row">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=manners" class="fundamental-btn"
+                data-group-id="manners" data-sentence-count="4">
+                <span class="fundamental-label">Manners</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=numbers" class="fundamental-btn"
+                data-group-id="numbers" data-sentence-count="5">
+                <span class="fundamental-label">Numbers</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=weekdays" class="fundamental-btn"
+                data-group-id="weekdays" data-sentence-count="7">
+                <span class="fundamental-label">Weekdays</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=months" class="fundamental-btn"
+                data-group-id="months" data-sentence-count="12">
+                <span class="fundamental-label">Months</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=places" class="fundamental-btn"
+                data-group-id="places" data-sentence-count="5">
+                <span class="fundamental-label">Places</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=time" class="fundamental-btn"
+                data-group-id="time" data-sentence-count="6">
+                <span class="fundamental-label">Time</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            
+            
+            
+            
+            
+        </div>
     </div>
 
     <div class="group-list" id="group-list" data-language="czech">
+        
         
         
         
@@ -228,6 +387,8 @@
         
         
         
+        
+        
         <div class="group-card" data-group-id="greetings" data-sentence-count="4"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0001.mp3&#34;,&#34;english&#34;:&#34;Good day.&#34;,&#34;id&#34;:&#34;cz_0001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0002.mp3&#34;,&#34;english&#34;:&#34;Hi.&#34;,&#34;id&#34;:&#34;cz_0002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0003.mp3&#34;,&#34;english&#34;:&#34;Goodbye.&#34;,&#34;id&#34;:&#34;cz_0003&#34;,&#34;native&#34;:&#34;Nashledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_0004.mp3&#34;,&#34;english&#34;:&#34;Thank you.&#34;,&#34;id&#34;:&#34;cz_0004&#34;,&#34;native&#34;:&#34;Děkuji.&#34;}]'>
 
@@ -287,6 +448,19 @@
         </div>
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </div>
 </div>
 
@@ -296,6 +470,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
         updateGroupCards(lang);
+        updateFundamentalsButtons(lang);
     });
 </script>
 

@@ -38,6 +38,25 @@
                 <span class="stat-value-sm" id="stat-all">0</span>
             </div>
         </div>
+
+        <!-- Fundamentals Buttons Row -->
+        <div class="fundamentals-row">
+            {{ $lang := .Params.language_code | default .File.ContentBaseName }}
+            {{ $groups := .GetPage "groups" }}
+            {{ $fundamentalIds := slice "manners" "numbers" "weekdays" "months" "places" "time" }}
+            {{ range $fundamentalIds }}
+            {{ $groupId := . }}
+            {{ range $groups.Pages }}
+            {{ if eq .Params.group_id $groupId }}
+            <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
+                data-group-id="{{ $groupId }}" data-sentence-count="{{ len .Params.sentences }}">
+                <span class="fundamental-label">{{ .Params.group_title }}</span>
+                <span class="fundamental-score">—</span>
+            </a>
+            {{ end }}
+            {{ end }}
+            {{ end }}
+        </div>
     </div>
 
     <div class="group-list" id="group-list" data-language="{{ .Params.language_code | default .File.ContentBaseName }}">
@@ -45,6 +64,7 @@
         {{ $groups := .GetPage "groups" }}
         {{ if $groups }}
         {{ range $groups.Pages }}
+        {{ if not .Params.fundamental }}
         {{ $sentenceCount := len .Params.sentences }}
         {{ $estMinutes := div (mul $sentenceCount 50) 60 }}
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
@@ -115,6 +135,7 @@
             </div>
         </div>
         {{ end }}
+        {{ end }}
         {{ else }}
         <p>No sentence groups available yet.</p>
         {{ end }}
@@ -127,6 +148,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;
         updateGroupCards(lang);
+        updateFundamentalsButtons(lang);
     });
 </script>
 {{ end }}

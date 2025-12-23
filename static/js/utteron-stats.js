@@ -108,3 +108,45 @@ function playNativeName(text) {
 
     window.speechSynthesis.speak(utterance);
 }
+
+// Update fundamentals buttons with scores and completion status
+function updateFundamentalsButtons(lang) {
+    const fundamentalBtns = document.querySelectorAll('.fundamental-btn');
+    if (!fundamentalBtns.length) return;
+
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    fundamentalBtns.forEach(btn => {
+        const groupId = btn.dataset.groupId;
+        const sentenceCount = parseInt(btn.dataset.sentenceCount) || 0;
+        const scoreEl = btn.querySelector('.fundamental-score');
+
+        if (!completions[lang] || !completions[lang][groupId]) {
+            scoreEl.textContent = `0/${sentenceCount}`;
+            btn.classList.remove('complete-today');
+            return;
+        }
+
+        const group = completions[lang][groupId];
+
+        // Get today's correct count from sentences
+        let todayCorrect = 0;
+        if (group.sentences) {
+            Object.values(group.sentences).forEach(s => {
+                if (s.lastPracticed === today && s.correct) {
+                    todayCorrect++;
+                }
+            });
+        }
+
+        scoreEl.textContent = `${todayCorrect}/${sentenceCount}`;
+
+        // Check if 100% complete today (via completionHistory)
+        if (group.completionHistory && group.completionHistory[today]) {
+            btn.classList.add('complete-today');
+        } else {
+            btn.classList.remove('complete-today');
+        }
+    });
+}

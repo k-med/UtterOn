@@ -242,6 +242,13 @@
   margin-bottom: 1.5rem;
 }
 
+.group-subtitle {
+  margin: 0.25rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
 .back-link {
   color: var(--accent);
   text-decoration: none;
@@ -538,9 +545,10 @@
   padding: 1.75rem 2rem;
   margin-bottom: 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem 3rem;
 }
 
 .lang-title-section {
@@ -644,17 +652,86 @@
     font-size: 1.1rem;
   }
 }
-}
 
-.lang-stats-grid {
-  width: 100%;
-  justify-content: space-between;
-  gap: 1rem;
+/* ============================================
+   Fundamentals Buttons
+   ============================================ */
+
+.fundamentals-row {
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  flex-basis: 100%;
+  justify-content: center;
 }
 
-.stat-col {
-  min-width: auto;
-  flex: 1;
+.fundamental-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 70px;
+  transition: all 0.2s;
 }
+
+.fundamental-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.fundamental-btn:hover .fundamental-label,
+.fundamental-btn:hover .fundamental-score {
+  color: white;
+}
+
+.fundamental-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.fundamental-score {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+/* Green highlight for 100% completion today */
+.fundamental-btn.complete-today {
+  background: rgba(46, 204, 113, 0.15);
+  border-color: var(--success);
+}
+
+.fundamental-btn.complete-today .fundamental-label,
+.fundamental-btn.complete-today .fundamental-score {
+  color: var(--success);
+}
+
+@media (max-width: 480px) {
+  .fundamentals-row {
+    gap: 0.4rem;
+  }
+
+  .fundamental-btn {
+    min-width: 55px;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .fundamental-label {
+    font-size: 0.65rem;
+  }
+
+  .fundamental-score {
+    font-size: 0.6rem;
+  }
 }

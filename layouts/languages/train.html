@@ -4,7 +4,8 @@
 {{ $groupsData := slice }}
 {{ if $groupsPage }}
 {{ range $groupsPage.Pages }}
-{{ $data := dict "group_id" .Params.group_id "group_title" .Params.group_title "sentences" .Params.sentences }}
+{{ $data := dict "group_id" .Params.group_id "group_title" .Params.group_title "description" .Params.description
+"sentences" .Params.sentences }}
 {{ $groupsData = $groupsData | append $data }}
 {{ end }}
 {{ end }}
@@ -15,6 +16,7 @@
     <div class="train-header">
         <a href="{{ .Parent.Permalink }}" class="back-link">← Back</a>
         <h1 id="group-title">Select a Group</h1>
+        <p class="group-subtitle" id="group-subtitle"></p>
     </div>
 
     <!-- Exercise Card -->
