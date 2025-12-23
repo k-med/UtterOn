@@ -40,22 +40,25 @@
         </div>
 
         <!-- Fundamentals Buttons Row -->
-        <div class="fundamentals-row">
-            {{ $lang := .Params.language_code | default .File.ContentBaseName }}
-            {{ $groups := .GetPage "groups" }}
-            {{ $fundamentalIds := slice "manners" "numbers" "weekdays" "months" "places" "time" }}
-            {{ range $fundamentalIds }}
-            {{ $groupId := . }}
-            {{ range $groups.Pages }}
-            {{ if eq .Params.group_id $groupId }}
-            <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
-                data-group-id="{{ $groupId }}" data-sentence-count="{{ len .Params.sentences }}">
-                <span class="fundamental-label">{{ .Params.group_title }}</span>
-                <span class="fundamental-score">—</span>
-            </a>
-            {{ end }}
-            {{ end }}
-            {{ end }}
+        <div class="fundamentals-section">
+            <span class="fundamentals-caption">Essential vocabulary for everyday use.</span>
+            <div class="fundamentals-row">
+                {{ $lang := .Params.language_code | default .File.ContentBaseName }}
+                {{ $groups := .GetPage "groups" }}
+                {{ $fundamentalIds := slice "manners" "numbers" "weekdays" "months" "places" "time" }}
+                {{ range $fundamentalIds }}
+                {{ $groupId := . }}
+                {{ range $groups.Pages }}
+                {{ if eq .Params.group_id $groupId }}
+                <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
+                    data-group-id="{{ $groupId }}" data-sentence-count="{{ len .Params.sentences }}">
+                    <span class="fundamental-label">{{ .Params.group_title }}</span>
+                    <span class="fundamental-score">—</span>
+                </a>
+                {{ end }}
+                {{ end }}
+                {{ end }}
+            </div>
         </div>
     </div>
 

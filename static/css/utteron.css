@@ -657,15 +657,29 @@
    Fundamentals Buttons
    ============================================ */
 
+.fundamentals-section {
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.fundamentals-caption {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
 .fundamentals-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
   width: 100%;
-  flex-basis: 100%;
   justify-content: center;
 }
 

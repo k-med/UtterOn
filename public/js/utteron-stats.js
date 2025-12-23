@@ -130,19 +130,19 @@ function updateFundamentalsButtons(lang) {
 
         const group = completions[lang][groupId];
 
-        // Get today's correct count from sentences
-        let todayCorrect = 0;
+        // Count sentences where BOTH listen AND read are completed
+        let completedCount = 0;
         if (group.sentences) {
             Object.values(group.sentences).forEach(s => {
-                if (s.lastPracticed === today && s.correct) {
-                    todayCorrect++;
+                if (s.listen && s.read) {
+                    completedCount++;
                 }
             });
         }
 
-        scoreEl.textContent = `${todayCorrect}/${sentenceCount}`;
+        scoreEl.textContent = `${completedCount}/${sentenceCount}`;
 
-        // Check if 100% complete today (via completionHistory)
+        // Highlight green if 100% completed today (exists in completionHistory for today)
         if (group.completionHistory && group.completionHistory[today]) {
             btn.classList.add('complete-today');
         } else {
