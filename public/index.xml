@@ -63,11 +63,11 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/groups/social-lubricant/</guid>
       <description>The Beginning:
-Hello, Goodbye
-Please, Thank you
-Excuse me, Sorry
-You’re welcome
-Have a nice day
+Hello, Goodbye,
+Please, Thank you,
+Excuse me, Sorry,
+You’re welcome,
+Have a nice day.
 </description>
     </item>
     <item>
@@ -95,6 +95,14 @@ Where is the hotel?
 Does this go to [Place]?
 Please take me here.
 Ticket to [Place], please.
+</description>
+    </item>
+    <item>
+      <title>The Quantifier</title>
+      <link>http://localhost:1313/languages/czech/groups/the-quantifier/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/czech/groups/the-quantifier/</guid>
+      <description>The logic layer; Reason! What time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That’s enough, It’s not enough, There are three.
 </description>
     </item>
     <item>
