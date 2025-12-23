@@ -85,6 +85,19 @@ Please bring me [x].
 </description>
     </item>
     <item>
+      <title>The Navigator</title>
+      <link>http://localhost:1313/languages/czech/groups/the-navigator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/czech/groups/the-navigator/</guid>
+      <description>Tools to move around! 
+Where is the station?
+Where is the hotel?
+Does this go to [Place]?
+Please take me here.
+Ticket to [Place], please.
+</description>
+    </item>
+    <item>
       <title>The Repair Kit</title>
       <link>http://localhost:1313/languages/czech/groups/repair-kit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -95,6 +108,18 @@ Can you repeat that?
 Can you speak more slowly?
 What does that mean?
 Do you speak English?
+</description>
+    </item>
+    <item>
+      <title>The Transaction</title>
+      <link>http://localhost:1313/languages/czech/groups/the-transaction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/czech/groups/the-transaction/</guid>
+      <description>Essential phrases for buying things, asking for prices, and paying.
+How much is this?
+Can I pay by card?
+The bill, please.
+I&amp;#39;ll take it.
 </description>
     </item>
     <item>
