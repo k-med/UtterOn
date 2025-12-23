@@ -13,21 +13,47 @@
       <link>http://localhost:1313/about/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;UtterOn is a platform designed to help you master new languages through immersive practice and structured learning.&lt;/p&gt;
-&lt;h3 id=&#34;our-mission&#34;&gt;Our Mission&lt;/h3&gt;
-&lt;p&gt;To make language learning accessible, engaging, and effective for everyone.&lt;/p&gt;
-&lt;h3 id=&#34;contact-us&#34;&gt;Contact Us&lt;/h3&gt;
-&lt;p&gt;If you have any questions or feedback, please reach out to us.&lt;/p&gt;</description>
+      <description>&lt;div class=&#34;page-header&#34;&gt;
+&lt;h1&gt;About UtterOn&lt;/h1&gt;
+&lt;p class=&#34;page-subtitle&#34;&gt;Empowering language learners through structured audio immersion.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;content-card&#34;&gt;
+&lt;h2&gt;Our Mission&lt;/h2&gt;
+&lt;p&gt;UtterOn is designed to bridge the gap between textbook learning and real-world fluency. We believe that the key to mastering a language is not just memorizing rules, but training your ear and your tongue to process and produce the language naturally.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;features-grid&#34; style=&#34;margin-top: 2rem;&#34;&gt;
+&lt;div class=&#34;feature-card&#34;&gt;
+&lt;div class=&#34;feature-icon&#34;&gt;🚀&lt;/div&gt;
+&lt;h3&gt;Structured Path&lt;/h3&gt;
+&lt;p&gt;No more guessing what to learn next. Follow our carefully curated curriculum.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;feature-card&#34;&gt;
+&lt;div class=&#34;feature-icon&#34;&gt;🎯&lt;/div&gt;
+&lt;h3&gt;Focus on Fluency&lt;/h3&gt;
+&lt;p&gt;Our exercises prioritize speaking and listening skills from day one.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Support</title>
       <link>http://localhost:1313/support/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
       <guid>http://localhost:1313/support/</guid>
-      <description>&lt;p&gt;Need help? We&amp;rsquo;re here for you.&lt;/p&gt;
-&lt;h3 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h3&gt;
-&lt;h3 id=&#34;contact-support&#34;&gt;Contact Support&lt;/h3&gt;
-&lt;p&gt;If you can&amp;rsquo;t find the answer you&amp;rsquo;re looking for, please contact our support team at &lt;a href=&#34;mailto:support@utteron.com&#34;&gt;support@utteron.com&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;div class=&#34;page-header&#34;&gt;
+&lt;h1&gt;Support Center&lt;/h1&gt;
+&lt;p class=&#34;page-subtitle&#34;&gt;We&#39;re here to help you on your language learning journey.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;content-card&#34;&gt;
+&lt;h2&gt;Frequently Asked Questions&lt;/h2&gt;
+&lt;div class=&#34;faq-item&#34;&gt;
+&lt;h3&gt;How do I start a course?&lt;/h3&gt;
+&lt;p&gt;Simply navigate to the &#34;Languages&#34; page, select your target language, and choose a group to begin practicing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;faq-item&#34;&gt;
+&lt;h3&gt;Is UtterOn free?&lt;/h3&gt;
+&lt;p&gt;Yes, UtterOn is currently free to use for all language learners.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;faq-item&#34;&gt;
+&lt;h3&gt;Can I request a new language?&lt;/h3&gt;
+&lt;p&gt;Absolutely! We are always looking to expand. Please contact us with your request.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Manners</title>

@@ -22,3 +22,8 @@ menu:
       name: Support
       url: /support/
       weight: 30
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
