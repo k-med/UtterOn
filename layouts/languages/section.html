@@ -5,7 +5,7 @@
             <h1>{{ .Title }}</h1>
             <div class="native-name-row">
                 <span class="native-name-large">{{ .Params.native_name }}</span>
-                <button class="audio-btn" onclick="playNativeName('{{ .Params.native_name }}')"
+                <button class="audio-btn" onclick="playNativeName('{{ .File.ContentBaseName }}')"
                     aria-label="Play pronunciation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

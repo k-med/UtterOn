@@ -141,15 +141,28 @@ function initStatArrows() {
     });
 }
 
-// Add playNativeName to main file for easier access
-function playNativeName(text) {
-    if (!text) return;
+// Play native name audio - uses audio file if available, falls back to speech synthesis
+function playNativeName(langCode) {
+    if (!langCode) return;
 
-    // Use Web Speech API
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'cs-CZ'; // Czech language code - will be used for all languages (browser will try to adapt)
+    // Map language codes to audio files
+    const audioFiles = {
+        'czech': '/assets/audio/czech/cz_001.mp3'
+    };
 
-    window.speechSynthesis.speak(utterance);
+    const audioPath = audioFiles[langCode];
+
+    if (audioPath) {
+        // Use audio file
+        const audio = new Audio(audioPath);
+        audio.play().catch(e => console.log('Audio play failed:', e));
+    } else {
+        // Fallback to Web Speech API
+        const langMap = { 'czech': 'cs-CZ' };
+        const utterance = new SpeechSynthesisUtterance(langCode);
+        utterance.lang = langMap[langCode] || 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
 }
 
 // Update fundamentals buttons with scores and completion status
