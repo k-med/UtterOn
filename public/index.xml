@@ -71,6 +71,20 @@ Have a nice day
 </description>
     </item>
     <item>
+      <title>The Master Keys</title>
+      <link>http://localhost:1313/languages/czech/groups/master-keys/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/czech/groups/master-keys/</guid>
+      <description>Get what you need!
+I would like this/that
+Do you have [x]?
+Where is the [x]?
+Is there an [x] here?
+Please give me [x].
+Please bring me [x].
+</description>
+    </item>
+    <item>
       <title>The Repair Kit</title>
       <link>http://localhost:1313/languages/czech/groups/repair-kit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
