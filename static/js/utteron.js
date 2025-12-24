@@ -287,6 +287,19 @@ function updateGroupCards(lang) {
         } else if (totalEl) {
             totalEl.textContent = '0';
         }
+
+        // Update Start/Resume button
+        const startBtn = card.querySelector('.start-btn');
+        if (startBtn) {
+            const stateKey = `utteron_state_${groupId}`;
+            if (localStorage.getItem(stateKey)) {
+                startBtn.textContent = 'Resume';
+                startBtn.classList.add('resume-mode');
+            } else {
+                startBtn.textContent = 'Start';
+                startBtn.classList.remove('resume-mode');
+            }
+        }
     });
 
     // Update main stats dashboard if present
@@ -640,8 +653,31 @@ function initTrainingInterface() {
     trainState.groupId = group.group_id;
     trainState.groupTitle = group.group_title;
     trainState.groupDescription = group.description || '';
-    trainState.exercises = buildExercisePool(group.sentences);
-    trainState.currentIndex = 0;
+
+    // Check for saved state
+    const stateKey = `utteron_state_${trainState.groupId}`;
+    const savedStateRaw = localStorage.getItem(stateKey);
+    let loadedFromSave = false;
+
+    if (savedStateRaw) {
+        try {
+            const savedState = JSON.parse(savedStateRaw);
+            // Basic validation: check if exercises exist
+            if (savedState.exercises && savedState.exercises.length > 0) {
+                trainState.exercises = savedState.exercises;
+                trainState.currentIndex = savedState.currentIndex || 0;
+                loadedFromSave = true;
+                console.log('Resuming session for group:', trainState.groupId);
+            }
+        } catch (e) {
+            console.error('Failed to load saved state:', e);
+        }
+    }
+
+    if (!loadedFromSave) {
+        trainState.exercises = buildExercisePool(group.sentences);
+        trainState.currentIndex = 0;
+    }
 
     // Initialize UI
     document.getElementById('group-title').textContent = trainState.groupTitle;
@@ -789,6 +825,19 @@ function recordAndAdvance(gotIt) {
 
     // Advance to next
     trainState.currentIndex++;
+
+    // Save state
+    const stateKey = `utteron_state_${trainState.groupId}`;
+    if (trainState.currentIndex < trainState.exercises.length) {
+        localStorage.setItem(stateKey, JSON.stringify({
+            exercises: trainState.exercises,
+            currentIndex: trainState.currentIndex,
+            timestamp: new Date().toISOString()
+        }));
+    } else {
+        // Clear state if finished
+        localStorage.removeItem(stateKey);
+    }
 
     if (trainState.currentIndex >= trainState.exercises.length) {
         // Check if session ended with 100% and record it

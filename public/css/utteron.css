@@ -608,6 +608,16 @@
   }
 }
 
+.start-btn.resume-mode {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.start-btn.resume-mode:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
 /* Green highlighting for 100% scores and today practice */
 .perfect-score,
 .practiced-today,
