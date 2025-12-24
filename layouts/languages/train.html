@@ -22,6 +22,16 @@
     <!-- Exercise Card -->
     <div class="exercise-card" id="exercise-card" style="display: none;">
 
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-text">
+                <span id="current-index">1</span> / <span id="total-count">1</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+        </div>
+
         <!-- Exercise Type Indicator -->
         <div class="exercise-type" id="exercise-type"></div>
 
@@ -52,19 +62,52 @@
             <button class="report-btn missed" id="missed-btn">Missed it</button>
             <button class="report-btn got-it" id="got-it-btn">Got it</button>
         </div>
-
-        <!-- Progress Indicator -->
-        <div class="progress-indicator">
-            <span id="current-index">1</span> / <span id="total-count">1</span>
-        </div>
     </div>
 
     <!-- Completion Message -->
     <div class="completion-message" id="completion-message" style="display: none;">
-        <h2>🎉 Session Complete!</h2>
-        <p>You've completed all exercises in <strong id="group-name"></strong>.</p>
+        <div class="completion-header">
+            <div class="completion-icon" id="completion-icon">🎉</div>
+            <h2 id="completion-title">Session Complete!</h2>
+            <p class="completion-subtitle" id="completion-subtitle">Great work!</p>
+        </div>
+
+        <div class="completion-stats-card">
+            <div class="stat-row primary">
+                <div class="stat-circle" id="accuracy-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="circle-fill" cx="50" cy="50" r="45" id="accuracy-progress"></circle>
+                    </svg>
+                    <div class="stat-value" id="accuracy-value">0%</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Total</div>
+                    <div class="stat-value" id="total-questions">0</div>
+                </div>
+                <div class="stat-item success">
+                    <div class="stat-label">Correct</div>
+                    <div class="stat-value" id="correct-count">0</div>
+                </div>
+                <div class="stat-item error">
+                    <div class="stat-label">Missed</div>
+                    <div class="stat-value" id="missed-count">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Accuracy</div>
+                    <div class="stat-value" id="accuracy-text">0%</div>
+                </div>
+            </div>
+
+            <p class="performance-message" id="performance-message">Keep practicing!</p>
+        </div>
+
         <div class="completion-actions">
-            <a href="{{ .Parent.Permalink }}" class="action-btn">← Back to Groups</a>
+            <a href="{{ .Parent.Permalink }}" class="action-btn secondary">← Back to Groups</a>
+            <button class="action-btn primary" id="retry-btn">Try Again</button>
         </div>
     </div>
 

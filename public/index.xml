@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>UtterOn</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:33077/</link>
     <description>Recent content on UtterOn</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Dec 2024 04:00:00 +1100</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:33077/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>http://localhost:33077/about/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>http://localhost:33077/about/</guid>
       <description>&lt;div class=&#34;about-wrapper&#34;&gt;
 &lt;div class=&#34;page-header&#34;&gt;
 &lt;h1&gt;About UtterOn&lt;/h1&gt;
@@ -35,9 +35,9 @@
     </item>
     <item>
       <title>Keep it Free</title>
-      <link>http://localhost:1313/keep-it-free/</link>
+      <link>http://localhost:33077/keep-it-free/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
-      <guid>http://localhost:1313/keep-it-free/</guid>
+      <guid>http://localhost:33077/keep-it-free/</guid>
       <description>&lt;div class=&#34;keep-free-wrapper&#34;&gt;
 &lt;div class=&#34;page-header&#34;&gt;
 &lt;h1&gt;Keep UtterOn Free&lt;/h1&gt;
@@ -50,55 +50,55 @@
     </item>
     <item>
       <title>Manners</title>
-      <link>http://localhost:1313/languages/czech/groups/manners/</link>
+      <link>http://localhost:33077/languages/czech/groups/manners/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/manners/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/manners/</guid>
       <description>Polite words for everyday interaction.</description>
     </item>
     <item>
       <title>Months</title>
-      <link>http://localhost:1313/languages/czech/groups/months/</link>
+      <link>http://localhost:33077/languages/czech/groups/months/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/months/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/months/</guid>
       <description>The calendar year.</description>
     </item>
     <item>
       <title>Numbers</title>
-      <link>http://localhost:1313/languages/czech/groups/numbers/</link>
+      <link>http://localhost:33077/languages/czech/groups/numbers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/numbers/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/numbers/</guid>
       <description>Counting, 1 - 10.</description>
     </item>
     <item>
       <title>Places</title>
-      <link>http://localhost:1313/languages/czech/groups/places/</link>
+      <link>http://localhost:33077/languages/czech/groups/places/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/places/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/places/</guid>
       <description>Country and major cities.</description>
     </item>
     <item>
       <title>Social Lubricant</title>
-      <link>http://localhost:1313/languages/czech/groups/social-lubricant/</link>
+      <link>http://localhost:33077/languages/czech/groups/social-lubricant/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/social-lubricant/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/social-lubricant/</guid>
       <description>The Beginning
 Hello, Goodbye, Please, Thank you, Excuse me, Sorry, You’re welcome, Have a nice day.
 </description>
     </item>
     <item>
       <title>The Lifeline</title>
-      <link>http://localhost:1313/languages/czech/groups/the-lifeline/</link>
+      <link>http://localhost:33077/languages/czech/groups/the-lifeline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/the-lifeline/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/the-lifeline/</guid>
       <description>Emergency help
 Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don’t touch me.
 </description>
     </item>
     <item>
       <title>The Master Keys</title>
-      <link>http://localhost:1313/languages/czech/groups/master-keys/</link>
+      <link>http://localhost:33077/languages/czech/groups/master-keys/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/master-keys/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/master-keys/</guid>
       <description>Get what you need!
 I would like this/that
 Do you have [x]?
@@ -110,66 +110,66 @@ Please bring me [x].
     </item>
     <item>
       <title>The Navigator</title>
-      <link>http://localhost:1313/languages/czech/groups/the-navigator/</link>
+      <link>http://localhost:33077/languages/czech/groups/the-navigator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/the-navigator/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/the-navigator/</guid>
       <description>Tools to move around! Where is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.
 </description>
     </item>
     <item>
       <title>The Quantifier</title>
-      <link>http://localhost:1313/languages/czech/groups/the-quantifier/</link>
+      <link>http://localhost:33077/languages/czech/groups/the-quantifier/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/the-quantifier/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/the-quantifier/</guid>
       <description>The logic layer; Reason! What time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That’s enough, It’s not enough, There are three.
 </description>
     </item>
     <item>
       <title>The Repair Kit</title>
-      <link>http://localhost:1313/languages/czech/groups/repair-kit/</link>
+      <link>http://localhost:33077/languages/czech/groups/repair-kit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/repair-kit/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/repair-kit/</guid>
       <description>Stay in conversation!
 I don&amp;#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?
 </description>
     </item>
     <item>
       <title>The Transaction</title>
-      <link>http://localhost:1313/languages/czech/groups/the-transaction/</link>
+      <link>http://localhost:33077/languages/czech/groups/the-transaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/the-transaction/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/the-transaction/</guid>
       <description>Everyday purchases 
 How much is this? Can I pay by card? The bill, please. I&amp;#39;ll take it. The receipt, please. Do you have change? I’m just looking. I’ll take it.
 </description>
     </item>
     <item>
       <title>The Troubleshooter</title>
-      <link>http://localhost:1313/languages/czech/groups/the-troubleshooter/</link>
+      <link>http://localhost:33077/languages/czech/groups/the-troubleshooter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/the-troubleshooter/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/the-troubleshooter/</guid>
       <description>Reporting problems.
 It is broken. It is cold. It is hot. It is closed. It is open. I didn’t order this. There is no hot water. The key doesn’t work. There is a problem here.
 </description>
     </item>
     <item>
       <title>Time</title>
-      <link>http://localhost:1313/languages/czech/groups/time/</link>
+      <link>http://localhost:33077/languages/czech/groups/time/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/time/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/time/</guid>
       <description>Basic units of time.</description>
     </item>
     <item>
       <title>Train</title>
-      <link>http://localhost:1313/languages/czech/train/</link>
+      <link>http://localhost:33077/languages/czech/train/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/train/</guid>
+      <guid>http://localhost:33077/languages/czech/train/</guid>
       <description></description>
     </item>
     <item>
       <title>Weekdays</title>
-      <link>http://localhost:1313/languages/czech/groups/weekdays/</link>
+      <link>http://localhost:33077/languages/czech/groups/weekdays/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/languages/czech/groups/weekdays/</guid>
+      <guid>http://localhost:33077/languages/czech/groups/weekdays/</guid>
       <description>The days of the week.</description>
     </item>
   </channel>

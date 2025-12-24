@@ -589,6 +589,88 @@ function updateGroupCompletionBadges(lang) {
 // Training Interface
 // ============================================
 
+// Session statistics tracking
+let sessionStats = {
+    total: 0,
+    correct: 0,
+    missed: 0
+};
+
+function resetSessionStats() {
+    sessionStats = { total: 0, correct: 0, missed: 0 };
+}
+
+function updateProgressBar() {
+    const progressFill = document.getElementById('progress-bar');
+
+    if (progressFill && trainState.exercises.length > 0) {
+        const percentage = ((trainState.currentIndex + 1) / trainState.exercises.length) * 100;
+        progressFill.style.width = `${percentage}%`;
+    }
+}
+
+function getPerformanceMessage(accuracy) {
+    if (accuracy === 100) {
+        return "🌟 Perfect score! You've mastered this group!";
+    } else if (accuracy >= 90) {
+        return "🎯 Excellent work! You're almost there!";
+    } else if (accuracy >= 75) {
+        return "👍 Great job! Keep practicing to perfect it!";
+    } else if (accuracy >= 60) {
+        return "💪 Good effort! Review the tricky ones and try again!";
+    } else {
+        return "📚 Keep going! Practice makes perfect!";
+    }
+}
+
+function displayCompletionStats() {
+    const accuracy = sessionStats.total > 0
+        ? Math.round((sessionStats.correct / sessionStats.total) * 100)
+        : 0;
+
+    // Update text values
+    document.getElementById('total-questions').textContent = sessionStats.total;
+    document.getElementById('correct-count').textContent = sessionStats.correct;
+    document.getElementById('missed-count').textContent = sessionStats.missed;
+    document.getElementById('accuracy-text').textContent = `${accuracy}%`;
+    document.getElementById('accuracy-value').textContent = `${accuracy}%`;
+
+    // Animate circular progress
+    const circle = document.getElementById('accuracy-progress');
+    if (circle) {
+        const circumference = 283; // 2 * π * 45
+        const offset = circumference - (accuracy / 100) * circumference;
+        setTimeout(() => {
+            circle.style.strokeDashoffset = offset;
+        }, 300);
+    }
+
+    // Set performance message
+    const messageEl = document.getElementById('performance-message');
+    if (messageEl) {
+        messageEl.textContent = getPerformanceMessage(accuracy);
+    }
+
+    // Update icon and title based on performance
+    const icon = document.getElementById('completion-icon');
+    const title = document.getElementById('completion-title');
+    const subtitle = document.getElementById('completion-subtitle');
+
+    if (accuracy === 100) {
+        icon.textContent = '🏆';
+        title.textContent = 'Perfect Score!';
+        subtitle.textContent = 'You\'ve mastered this group!';
+    } else if (accuracy >= 80) {
+        icon.textContent = '🎉';
+        title.textContent = 'Great Job!';
+        subtitle.textContent = 'Excellent work on this session!';
+    } else {
+        icon.textContent = '✅';
+        title.textContent = 'Session Complete!';
+        subtitle.textContent = 'Keep practicing to improve!';
+    }
+}
+
 let trainState = {
     lang: '',
     groupId: '',
@@ -685,6 +767,7 @@ function initTrainingInterface() {
     if (!loadedFromSave) {
         trainState.exercises = buildExercisePool(group.sentences);
         trainState.currentIndex = 0;
+        resetSessionStats(); // Reset stats for new session
     }
 
     // Initialize UI
@@ -698,10 +781,12 @@ function initTrainingInterface() {
     document.getElementById('no-group').style.display = 'none';
     document.getElementById('exercise-card').style.display = 'block';
     document.getElementById('total-count').textContent = trainState.exercises.length;
-    document.getElementById('group-name').textContent = trainState.groupTitle;
 
     // Set up event listeners
     setupEventListeners();
+
+    // Initialize progress bar
+    updateProgressBar();
 
     // Show first exercise
     showCurrentExercise();
@@ -736,6 +821,35 @@ function setupEventListeners() {
             const audio = document.getElementById('audio-player');
             audio.currentTime = 0;
             audio.play().catch(e => console.log('Play failed:', e));
+        });
+    }
+
+    // Retry button (on completion screen)
+    const retryBtn = document.getElementById('retry-btn');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            // Get unique sentences from exercises
+            const uniqueSentences = [];
+            const seenIds = new Set();
+            trainState.exercises.forEach(ex => {
+                if (!seenIds.has(ex.sentence.id)) {
+                    uniqueSentences.push(ex.sentence);
+                    seenIds.add(ex.sentence.id);
+                }
+            });
+
+            // Reset and restart session
+            resetSessionStats();
+            trainState.exercises = buildExercisePool(uniqueSentences);
+            trainState.currentIndex = 0;
+
+            // Hide completion, show exercise card
+            document.getElementById('completion-message').style.display = 'none';
+            document.getElementById('exercise-card').style.display = 'block';
+
+            // Reset progress bar and show first exercise
+            updateProgressBar();
+            showCurrentExercise();
         });
     }
 }
@@ -824,15 +938,22 @@ function recordAndAdvance(gotIt) {
     const exercise = trainState.exercises[trainState.currentIndex];
     const { sentence, type } = exercise;
 
-    // Record completion (only if got it)
+    // Track session stats
+    sessionStats.total++;
     if (gotIt) {
+        sessionStats.correct++;
         markExerciseComplete(trainState.lang, trainState.groupId, sentence.id, type);
         // Check if this completed the group and update stats
         checkAndUpdateStats(trainState.lang, trainState.groupId, trainState.exercises);
+    } else {
+        sessionStats.missed++;
     }
 
     // Advance to next
     trainState.currentIndex++;
+
+    // Update progress bar
+    updateProgressBar();
 
     // Save state
     const stateKey = `utteron_state_${trainState.groupId}`;
@@ -842,12 +963,11 @@ function recordAndAdvance(gotIt) {
             currentIndex: trainState.currentIndex,
             timestamp: new Date().toISOString()
         }));
+        showCurrentExercise();
     } else {
         // Clear state if finished
         localStorage.removeItem(stateKey);
-    }
 
-    if (trainState.currentIndex >= trainState.exercises.length) {
         // Check if session ended with 100% and record it
         const completions = getCompletions();
         const groupData = completions[trainState.lang]?.[trainState.groupId];
@@ -861,9 +981,10 @@ function recordAndAdvance(gotIt) {
                 recordGroupCompletion(trainState.lang, trainState.groupId);
             }
         }
+
+        // Display completion stats before showing completion screen
+        displayCompletionStats();
         showCompletion();
-    } else {
-        showCurrentExercise();
     }
 }
 

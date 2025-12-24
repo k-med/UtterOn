@@ -678,20 +678,25 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 3rem 2.5rem;
   text-align: center;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Exercise Type Badge */
 .exercise-type {
   display: inline-block;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0.4rem 1rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 20px;
   margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .exercise-type.listen {
@@ -706,8 +711,19 @@
 
 /* Prompt Area */
 .prompt-area {
-  min-height: 80px;
+  min-height: 120px;
   margin-bottom: 1.5rem;
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .prompt-area .instruction {
@@ -786,16 +802,30 @@
 /* Reveal Area */
 .reveal-area {
   background: var(--bg-primary);
-  border: 1px solid var(--border);
+  border: 2px solid var(--accent);
   border-radius: var(--radius);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+  animation: slide-up-fade-in 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slide-up-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Action Area - Fixed position, centered */
 .action-area {
-  min-height: 60px;
-  margin-bottom: 1rem;
+  min-height: 80px;
+  margin: 2rem 0 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -804,20 +834,27 @@
 /* Report Buttons */
 .report-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
+  margin: 1.5rem 0;
 }
 
 .report-btn {
   flex: 1;
-  max-width: 150px;
-  padding: 1rem 1.5rem;
+  min-width: 160px;
+  max-width: 200px;
+  padding: 1.25rem 2rem;
   border: none;
   border-radius: var(--radius);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.report-btn:active {
+  transform: scale(0.95);
 }
 
 .report-btn.got-it {
@@ -844,14 +881,31 @@
   display: inline-block;
   background: var(--accent);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2.5rem;
   border: none;
   border-radius: var(--radius);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s;
   text-decoration: none;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.action-btn:hover::before {
+  opacity: 1;
 }
 
 .action-btn:hover {
@@ -874,25 +928,206 @@
 
 /* Progress Indicator */
 .progress-indicator {
-  margin-top: 1.5rem;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.progress-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #818cf8);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+  width: 0%;
 }
 
 /* Completion Message */
 .completion-message {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 3rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.completion-message h2 {
-  font-size: 2rem;
+.completion-header {
+  margin-bottom: 3rem;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.completion-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  animation: bounce 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.completion-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.completion-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.completion-stats-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  animation: fade-in-up 0.8s ease-out 0.4s backwards;
+}
+
+.stat-circle {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+.stat-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(99, 102, 241, 0.1);
+  stroke-width: 8;
+}
+
+.circle-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-circle .stat-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-item .stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.stat-item .stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-item.success .stat-value {
   color: var(--success);
-  margin-bottom: 1rem;
+}
+
+.stat-item.error .stat-value {
+  color: var(--danger);
+}
+
+.performance-message {
+  padding: 1.5rem;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .completion-actions {
-  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  animation: fade-in-up 0.8s ease-out 0.6s backwards;
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .completion-actions {
+    flex-direction: column;
+  }
+
+  .completion-message {
+    padding: 2rem 1rem;
+  }
+
+  .stat-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .stat-circle .stat-value {
+    font-size: 2rem;
+  }
 }
 
 /* No Group */
@@ -904,6 +1139,151 @@
 
 .no-group p {
   margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   Training Interface - Mobile & Accessibility
+   ============================================ */
+
+/* Accessibility: Focus states */
+.action-btn:focus-visible,
+.report-btn:focus-visible,
+.replay-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .exercise-card {
+    padding: 2.5rem 1.5rem;
+    min-height: 400px;
+  }
+
+  .progress-indicator {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-text {
+    font-size: 1rem;
+  }
+
+  .exercise-type {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .native-text.large {
+    font-size: 1.8rem;
+  }
+
+  .english-text {
+    font-size: 1.1rem;
+  }
+
+  .action-btn {
+    min-width: 180px;
+    padding: 1.1rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .report-buttons {
+    gap: 1rem;
+  }
+
+  .report-btn {
+    min-width: 140px;
+    padding: 1.1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .exercise-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .native-text {
+    font-size: 1.5rem;
+  }
+
+  .native-text.large {
+    font-size: 1.6rem;
+  }
+
+  .english-text {
+    font-size: 1rem;
+  }
+
+  .action-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .report-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .report-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .replay-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Typography enhancements */
+.native-text {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.english-text {
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* Replay button enhancements */
+.replay-btn {
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.replay-btn:hover {
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.replay-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.replay-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* Smooth transitions for all interactive elements */
+.action-btn,
+.report-btn,
+.replay-btn,
+.exercise-type,
+.progress-bar-fill {
+  will-change: transform;
 }
 
 /* ============================================
