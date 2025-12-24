@@ -1042,13 +1042,13 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(67, 97, 238, 0.35) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(67, 97, 238, 0.15) 100%);
   border-radius: var(--radius);
   z-index: -1;
 }
 
 :root[data-theme="dark"] .language-header-card::before {
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(67, 97, 238, 0.7) 100%);
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(67, 97, 238, 0.4) 100%);
 }
 
 .lang-title-section {
@@ -1064,7 +1064,7 @@
   font-size: 2.5rem;
   line-height: 1;
   font-weight: 700;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .native-name-row {
@@ -1076,7 +1076,7 @@
 .native-name-large {
   font-size: 1rem;
   color: var(--text-secondary);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .audio-btn {
@@ -1121,7 +1121,7 @@
   color: var(--text-secondary);
   font-weight: 600;
   white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .stat-value-sm {
@@ -1129,7 +1129,7 @@
   font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .stat-value-sm.target-met {
@@ -1232,7 +1232,7 @@
   line-height: 1.5;
   margin-bottom: 1rem;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .fundamentals-row {
@@ -1259,8 +1259,8 @@
   justify-content: center;
   gap: 0.35rem;
   padding: 0.8rem 0.5rem;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   text-decoration: none;
   min-height: 78px;
@@ -1286,7 +1286,6 @@
 .fundamental-btn:hover .fundamental-time,
 .fundamental-btn:hover .fundamental-count-badge {
   color: white;
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .fundamental-label {
