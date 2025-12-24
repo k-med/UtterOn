@@ -220,21 +220,6 @@ function updateGroupCards(lang) {
         let totalCompleted = 0;  // All time (for score display)
         let lastPracticedDate = null;
 
-        // Parse groups data from container if available
-        const appContainer = document.getElementById('app-container');
-        let currentGroupSentences = null;
-        if (appContainer && appContainer.dataset.groups) {
-            try {
-                const allGroups = JSON.parse(appContainer.dataset.groups);
-                const currentGroup = allGroups.find(g => g.group_id === groupId);
-                if (currentGroup) {
-                    currentGroupSentences = currentGroup.sentences;
-                }
-            } catch (e) {
-                console.error('Failed to parse groups data', e);
-            }
-        }
-
         if (groupData && groupData.sentences) {
             // Track last practiced date from the group data
             if (groupData.date) {
@@ -243,35 +228,18 @@ function updateGroupCards(lang) {
 
             const isToday = groupData.date === today;
 
-            // Count completed exercises based on CURRENT sentences
-            if (currentGroupSentences) {
-                currentGroupSentences.forEach(s => {
-                    const nativeText = s.native;
-                    const savedSentence = groupData.sentences[nativeText];
+            // Count completed exercises - just count what's saved
+            Object.values(groupData.sentences).forEach(s => {
+                // Count all-time completions for score
+                if (s.listen) totalCompleted++;
+                if (s.read) totalCompleted++;
 
-                    if (savedSentence) {
-                        // Count all-time completions for score
-                        if (savedSentence.listen) totalCompleted++;
-                        if (savedSentence.read) totalCompleted++;
-
-                        // Count today's completions separately
-                        if (isToday) {
-                            if (savedSentence.listen) completedToday++;
-                            if (savedSentence.read) completedToday++;
-                        }
-                    }
-                });
-            } else {
-                // Fallback to old behavior if groups data missing (shouldn't happen)
-                Object.values(groupData.sentences).forEach(s => {
-                    if (s.listen) totalCompleted++;
-                    if (s.read) totalCompleted++;
-                    if (isToday) {
-                        if (s.listen) completedToday++;
-                        if (s.read) completedToday++;
-                    }
-                });
-            }
+                // Count today's completions separately
+                if (isToday) {
+                    if (s.listen) completedToday++;
+                    if (s.read) completedToday++;
+                }
+            });
         }
 
 
@@ -291,15 +259,11 @@ function updateGroupCards(lang) {
         // Update Score - shows all-time progress
         const scoreEl = card.querySelector('.last-score');
         if (scoreEl) {
-            if (totalCompleted > 0) {
-                const is100Percent = totalCompleted === totalExercises && totalExercises > 0;
-                scoreEl.textContent = `${totalCompleted} / ${totalExercises}`;
-                // Highlight green if 100%
-                scoreEl.classList.toggle('perfect-score', is100Percent);
-            } else {
-                scoreEl.textContent = '—';
-                scoreEl.classList.remove('perfect-score');
-            }
+            // Always show score, even if 0
+            const is100Percent = totalCompleted === totalExercises && totalExercises > 0;
+            scoreEl.textContent = `${totalCompleted} / ${totalExercises}`;
+            // Highlight green if 100%
+            scoreEl.classList.toggle('perfect-score', is100Percent);
         }
 
         // Update Last Practiced
@@ -552,30 +516,8 @@ function updateFundamentalsButtons(lang) {
         const group = completions[lang][groupId];
         let currentScore = 0;
 
-        // Parse groups data from container if available (re-parse or pass it down)
-        const appContainer = document.getElementById('app-container');
-        let currentGroupSentences = null;
-        if (appContainer && appContainer.dataset.groups) {
-            try {
-                const allGroups = JSON.parse(appContainer.dataset.groups);
-                const currentGroup = allGroups.find(g => g.group_id === groupId);
-                if (currentGroup) {
-                    currentGroupSentences = currentGroup.sentences;
-                }
-            } catch (e) {
-                // Ignore
-            }
-        }
-
-        if (currentGroupSentences) {
-            currentGroupSentences.forEach(s => {
-                const savedSentence = group.sentences && group.sentences[s.native];
-                if (savedSentence) {
-                    if (savedSentence.listen) currentScore++;
-                    if (savedSentence.read) currentScore++;
-                }
-            });
-        } else if (group.sentences) {
+        // Simply count what's saved
+        if (group.sentences) {
             Object.values(group.sentences).forEach(s => {
                 if (s.listen) currentScore++;
                 if (s.read) currentScore++;
