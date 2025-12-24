@@ -4,7 +4,7 @@ language: czech
 group_id: lifeline
 group_title: The Lifeline
 description: |
-  Emergency help phrases.
+  Emergency help
   Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don’t touch me.
 level: A1
 sentences:

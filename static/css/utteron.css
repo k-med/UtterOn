@@ -1097,8 +1097,8 @@
 
 .fundamentals-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
   width: 100%;
   justify-content: center;
 }
@@ -1108,12 +1108,13 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.6rem;
   background: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: 8px;
   text-decoration: none;
-  min-width: 70px;
+  min-width: 65px;
+  flex: 0 1 auto;
   transition: all 0.2s;
 }
 

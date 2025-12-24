@@ -88,12 +88,8 @@
       <link>http://localhost:1313/languages/czech/groups/social-lubricant/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/groups/social-lubricant/</guid>
-      <description>The Beginning:
-Hello, Goodbye,
-Please, Thank you,
-Excuse me, Sorry,
-You’re welcome,
-Have a nice day.
+      <description>The Beginning
+Hello, Goodbye, Please, Thank you, Excuse me, Sorry, You’re welcome, Have a nice day.
 </description>
     </item>
     <item>
@@ -101,7 +97,7 @@ Have a nice day.
       <link>http://localhost:1313/languages/czech/groups/the-lifeline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/groups/the-lifeline/</guid>
-      <description>Emergency help phrases.
+      <description>Emergency help
 Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don’t touch me.
 </description>
     </item>
@@ -124,12 +120,7 @@ Please bring me [x].
       <link>http://localhost:1313/languages/czech/groups/the-navigator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/groups/the-navigator/</guid>
-      <description>Tools to move around! 
-Where is the station?
-Where is the hotel?
-Does this go to [Place]?
-Please take me here.
-Ticket to [Place], please.
+      <description>Tools to move around! Where is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.
 </description>
     </item>
     <item>
@@ -145,12 +136,8 @@ Ticket to [Place], please.
       <link>http://localhost:1313/languages/czech/groups/repair-kit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/groups/repair-kit/</guid>
-      <description>Stay in the conversation!
-I don&amp;#39;t understand
-Can you repeat that?
-Can you speak more slowly?
-What does that mean?
-Do you speak English?
+      <description>Stay in conversation!
+I don&amp;#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?
 </description>
     </item>
     <item>

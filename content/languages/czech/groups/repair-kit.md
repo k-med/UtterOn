@@ -4,12 +4,8 @@ language: czech
 group_id: repair-kit
 group_title: Repair Kit
 description: |
-  Stay in the conversation!
-  I don't understand
-  Can you repeat that?
-  Can you speak more slowly?
-  What does that mean?
-  Do you speak English?
+  Stay in conversation!
+  I don't understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?
 level: A1
 sentences:
   - id: cz_rk001

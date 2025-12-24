@@ -4,12 +4,8 @@ language: czech
 group_id: social-lubricant
 group_title: Social Lubricant
 description: |
-  The Beginning:
-  Hello, Goodbye,
-  Please, Thank you,
-  Excuse me, Sorry,
-  You’re welcome,
-  Have a nice day.
+  The Beginning
+  Hello, Goodbye, Please, Thank you, Excuse me, Sorry, You’re welcome, Have a nice day.
 level: A1
 sentences:
   - id: cz_sl001
