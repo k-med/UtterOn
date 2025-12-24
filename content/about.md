@@ -5,6 +5,7 @@ draft: false
 layout: "custom"
 ---
 
+<div class="about-wrapper">
 <div class="page-header">
 <h1>About UtterOn</h1>
 <p class="page-subtitle">Empowering language learners through structured audio immersion.</p>
@@ -17,7 +18,7 @@ layout: "custom"
 
 <div class="features-grid" style="margin-top: 2rem;">
 <div class="feature-card">
-<div class="feature-icon">🚀</div>
+<div class="feature-icon gradient-text">🚀</div>
 <h3>Structured Path</h3>
 <p>No more guessing what to learn next. Follow our carefully curated curriculum.</p>
 </div>
@@ -51,4 +52,5 @@ layout: "custom"
 <h2>Still need help?</h2>
 <p style="margin-bottom: 1.5rem;">Our support team is just an email away.</p>
 <a href="mailto:support@utteron.com" class="action-btn">Contact Support</a>
+</div>
 </div>

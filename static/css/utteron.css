@@ -1395,7 +1395,7 @@
   box-shadow: 0 10px 30px rgba(255, 94, 98, 0.1);
 }
 
-.keep-free-wrapper .feature-icon {
+.keep-free-wrapper .feature-icon.gradient-text {
   background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1414,4 +1414,49 @@
 .keep-free-wrapper .action-btn:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 8px 25px rgba(255, 94, 98, 0.5);
+}
+
+/* ============================================
+   About Page Styling
+   ============================================ */
+
+.about-wrapper .page-header h1 {
+  background: linear-gradient(135deg, #4361ee 0%, #ff7e5f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-wrapper .page-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+}
+
+.about-wrapper .content-card {
+  border: 1px solid rgba(67, 97, 238, 0.2);
+  background: linear-gradient(to bottom right, var(--bg-secondary), rgba(67, 97, 238, 0.05));
+  box-shadow: 0 10px 30px rgba(67, 97, 238, 0.1);
+}
+
+.about-wrapper .feature-icon.gradient-text {
+  background: linear-gradient(135deg, #4361ee 0%, #ff7e5f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-wrapper .action-btn {
+  background: linear-gradient(135deg, #4361ee 0%, #ff7e5f 100%) !important;
+  border: none;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.about-wrapper .action-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
 }
