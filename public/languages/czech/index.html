@@ -132,6 +132,14 @@
                     <button class="stat-arrow down" aria-label="Increase"></button>
                 </div>
             </div>
+            <div class="stat-col stat-adjustable" data-stat="year">
+                <span class="stat-label-sm">Year</span>
+                <div class="stat-value-wrapper">
+                    <button class="stat-arrow up" aria-label="Decrease"></button>
+                    <span class="stat-value-sm" id="stat-year">0/1680</span>
+                    <button class="stat-arrow down" aria-label="Increase"></button>
+                </div>
+            </div>
             <div class="stat-col">
                 <span class="stat-label-sm">All</span>
                 <span class="stat-value-sm" id="stat-all">0</span>
@@ -962,7 +970,7 @@ It is broken. It is cold. It is hot. It is closed. It is open. I didn’t order 
 </div>
 
 <script src="/js/utteron.js"></script>
-<script src="/js/utteron-stats.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const lang = document.getElementById('group-list').dataset.language;

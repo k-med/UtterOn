@@ -291,59 +291,236 @@ function updateGroupCards(lang) {
 
     // Update main stats dashboard if present
     updateLanguageStats(lang);
+    updateFundamentalsButtons(lang);
 }
 
 function updateLanguageStats(lang) {
-    const container = document.getElementById('stats-container');
-    if (!container) return;
+    // Check if stats elements exist
+    const streakEl = document.getElementById('stat-streak');
+    if (!streakEl) return;
 
     const completions = getCompletions();
     const today = getTodayDate();
 
-    // 1. Calculate Streak
-    // Logic: consecutive days with at least one group completed 100%
-    // We need to store streak history. For now, let's infer from available data or add a new storage structure.
-    // Since we only have 'date' in the current structure, we can't look back easily without a history log.
-    // Let's add a 'stats' object to the root of completions[lang].
+    // Get multipliers from localStorage or use defaults
+    // Get multipliers from localStorage or use defaults
+    const storedMultipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {};
+    const multipliers = {
+        today: storedMultipliers.today || 3,
+        week: storedMultipliers.week || 7,
+        month: storedMultipliers.month || 4,
+        year: storedMultipliers.year || 12
+    };
 
-    let stats = completions[lang]?.stats || { streak: 0, lastStreakDate: null, completedGroups: [] };
+    // Calculate targets based on cascading multipliers
+    const DAILY_TARGET = multipliers.today;
+    const WEEKLY_TARGET = multipliers.today * multipliers.week;
+    const MONTHLY_TARGET = multipliers.today * multipliers.week * multipliers.month;
+    const YEARLY_TARGET = multipliers.today * multipliers.week * multipliers.month * multipliers.year;
 
-    // Check if we need to increment streak for today
-    // This logic needs to run when a group is completed, not just on view.
-    // But for display, we just show what's stored.
+    // Initialize stats if needed
+    if (!completions[lang]) {
+        completions[lang] = {};
+    }
+    if (!completions[lang].stats) {
+        completions[lang].stats = { streak: 0, lastStreakDate: null, completedGroups: [] };
+    }
 
-    document.getElementById('stat-streak').textContent = `${stats.streak} days`;
+    const stats = completions[lang].stats;
 
-    // 2. Completed Groups (Lifetime)
-    const completedCount = stats.completedGroups ? stats.completedGroups.length : 0;
-    document.getElementById('stat-completed').textContent = completedCount;
+    // 1. Streak - consecutive daily quota days met
+    if (streakEl) {
+        streakEl.textContent = stats.streak > 0 ? `${stats.streak} Day${stats.streak !== 1 ? 's' : ''}` : '0 Days';
+    }
 
-    // 3. Today's Progress
-    // Count groups completed today
-    let groupsToday = 0;
-    let totalGroups = 0;
+    // Initialize counters
+    let groupsCompletedToday = 0;
+    let groupsCompletedThisWeek = 0;
+    let groupsCompletedThisMonth = 0;
+    let groupsCompletedThisYear = 0;
+    let totalPerfectPasses = 0;
+
+    // Calculate date ranges
+    const todayDate = new Date(today);
+
+    const weekStart = new Date(todayDate);
+    weekStart.setDate(weekStart.getDate() - 7);
+    const weekStartStr = weekStart.toISOString().split('T')[0];
+
+    const monthStart = new Date(todayDate);
+    monthStart.setDate(monthStart.getDate() - 30);
+    const monthStartStr = monthStart.toISOString().split('T')[0];
+
+    const yearStart = new Date(todayDate);
+    yearStart.setDate(yearStart.getDate() - 365);
+    const yearStartStr = yearStart.toISOString().split('T')[0];
 
     if (completions[lang]) {
         Object.keys(completions[lang]).forEach(key => {
-            if (key === 'stats') return; // Skip stats object
+            if (key === 'stats') return;
 
             const group = completions[lang][key];
-            if (group.date === today) {
-                // Check if fully complete
-                const sentences = Object.values(group.sentences);
-                if (sentences.length > 0) {
-                    const allDone = sentences.every(s => s.listen && s.read);
-                    if (allDone) groupsToday++;
-                }
+
+            // Use completionHistory for accurate counts
+            if (group.completionHistory) {
+                Object.entries(group.completionHistory).forEach(([date, count]) => {
+                    // Today
+                    if (date === today) {
+                        groupsCompletedToday += count;
+                    }
+                    // Week (last 7 days)
+                    if (date >= weekStartStr) {
+                        groupsCompletedThisWeek += count;
+                    }
+                    // Month (last 30 days)
+                    if (date >= monthStartStr) {
+                        groupsCompletedThisMonth += count;
+                    }
+                    // Year (last 365 days)
+                    if (date >= yearStartStr) {
+                        groupsCompletedThisYear += count;
+                    }
+                    // All time
+                    totalPerfectPasses += count;
+                });
             }
         });
     }
 
-    // Get total groups from DOM
-    const cards = document.querySelectorAll('.group-card');
-    totalGroups = cards.length;
+    // 2. Today - x/target
+    const todayEl = document.getElementById('stat-today');
+    if (todayEl) {
+        todayEl.textContent = `${groupsCompletedToday}/${DAILY_TARGET}`;
+        todayEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
+    }
 
-    document.getElementById('stat-today').textContent = `${groupsToday} / ${totalGroups} groups`;
+    // 3. Week - x/target
+    const weekEl = document.getElementById('stat-week');
+    if (weekEl) {
+        weekEl.textContent = `${groupsCompletedThisWeek}/${WEEKLY_TARGET}`;
+        weekEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
+    }
+
+    // 4. Month - x/target
+    const monthEl = document.getElementById('stat-month');
+    if (monthEl) {
+        monthEl.textContent = `${groupsCompletedThisMonth}/${MONTHLY_TARGET}`;
+        monthEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
+    }
+
+    // 5. Year - x/target
+    const yearEl = document.getElementById('stat-year');
+    if (yearEl) {
+        yearEl.textContent = `${groupsCompletedThisYear}/${YEARLY_TARGET}`;
+        yearEl.classList.toggle('target-met', groupsCompletedThisYear >= YEARLY_TARGET);
+    }
+
+    // 5. All - total 100% passes (all time)
+    const allEl = document.getElementById('stat-all');
+    if (allEl) {
+        allEl.textContent = totalPerfectPasses;
+    }
+}
+
+// Initialize stat arrow controls
+function initStatArrows() {
+    const storedMultipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {};
+    const multipliers = {
+        today: storedMultipliers.today || 3,
+        week: storedMultipliers.week || 7,
+        month: storedMultipliers.month || 4,
+        year: storedMultipliers.year || 12
+    };
+
+    document.querySelectorAll('.stat-adjustable').forEach(col => {
+        const stat = col.dataset.stat;
+        const upBtn = col.querySelector('.stat-arrow.up');     // Left arrow = decrease
+        const downBtn = col.querySelector('.stat-arrow.down'); // Right arrow = increase
+
+        if (upBtn) {
+            upBtn.addEventListener('click', () => {
+                multipliers[stat] = Math.max(1, multipliers[stat] - 1);
+                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+                const lang = document.getElementById('group-list')?.dataset?.language;
+                if (lang) updateLanguageStats(lang);
+            });
+        }
+
+        if (downBtn) {
+            downBtn.addEventListener('click', () => {
+                multipliers[stat] = Math.min(99, multipliers[stat] + 1);
+                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+                const lang = document.getElementById('group-list')?.dataset?.language;
+                if (lang) updateLanguageStats(lang);
+            });
+        }
+    });
+}
+
+// Play native name audio
+function playNativeName(langCode) {
+    if (!langCode) return;
+    const audioFiles = { 'czech': '/assets/audio/czech/cz_001.mp3' };
+    const audioPath = audioFiles[langCode];
+
+    if (audioPath) {
+        const audio = new Audio(audioPath);
+        audio.play().catch(e => console.log('Audio play failed:', e));
+    } else {
+        const langMap = { 'czech': 'cs-CZ' };
+        const utterance = new SpeechSynthesisUtterance(langCode);
+        utterance.lang = langMap[langCode] || 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+// Update fundamentals buttons
+function updateFundamentalsButtons(lang) {
+    const fundamentalBtns = document.querySelectorAll('.fundamental-btn');
+    if (!fundamentalBtns.length) return;
+
+    const completions = getCompletions();
+    const today = getTodayDate();
+
+    fundamentalBtns.forEach(btn => {
+        const groupId = btn.dataset.groupId;
+        const sentenceCount = parseInt(btn.dataset.sentenceCount) || 0;
+        const countBadgeEl = btn.querySelector('.fundamental-count-badge');
+
+        if (!countBadgeEl) return;
+
+        if (!completions[lang] || !completions[lang][groupId]) {
+            countBadgeEl.textContent = `0/${sentenceCount}`;
+            btn.classList.remove('complete-today');
+            return;
+        }
+
+        const group = completions[lang][groupId];
+        let completedCount = 0;
+        if (group.sentences) {
+            Object.values(group.sentences).forEach(s => {
+                if (s.listen && s.read) {
+                    completedCount++;
+                }
+            });
+        }
+
+        countBadgeEl.textContent = `${completedCount}/${sentenceCount}`;
+
+        const is100Percent = completedCount === sentenceCount && sentenceCount > 0;
+        // Check if ANY completion happened today, or if the group date is today
+        // group.date is updated on every practice.
+        // group.completionHistory[today] tracks full completions.
+        // We want to highlight if it's "done for today".
+        // If they practiced today and it's 100% complete, that's good enough.
+        const practicedToday = group.date === today;
+
+        if (is100Percent && practicedToday) {
+            btn.classList.add('complete-today');
+        } else {
+            btn.classList.remove('complete-today');
+        }
+    });
 }
 
 function checkAndUpdateStats(lang, groupId) {
@@ -473,6 +650,7 @@ function initTrainingInterface() {
         subtitleEl.textContent = trainState.groupDescription;
         subtitleEl.style.display = trainState.groupDescription ? 'block' : 'none';
     }
+
     document.getElementById('no-group').style.display = 'none';
     document.getElementById('exercise-card').style.display = 'block';
     document.getElementById('total-count').textContent = trainState.exercises.length;
