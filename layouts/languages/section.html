@@ -1,5 +1,10 @@
 {{ define "main" }}
-<div class="utteron-container">
+{{ $groups := .GetPage "groups" }}
+{{ $groupsData := slice }}
+{{ range $groups.Pages }}
+{{ $groupsData = $groupsData | append .Params }}
+{{ end }}
+<div class="utteron-container" id="app-container" data-groups="{{ $groupsData | jsonify }}">
     <div class="language-header-card">
         <div class="lang-title-section">
             <h1>{{ .Title }}</h1>
@@ -84,9 +89,14 @@
                 <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
                     data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
                     data-time-display="{{ $timeDisplay }}">
-                    <span class="fundamental-label">{{ .Params.group_title }}</span>
-                    <span class="fundamental-time">{{ $timeDisplay }}</span>
-                    <span class="fundamental-count-badge">0/{{ $sentenceCount }}</span>
+                    <div class="fundamental-main">
+                        <span class="fundamental-label">{{ .Params.group_title }}</span>
+                        <span class="fundamental-time">{{ $timeDisplay }}</span>
+                    </div>
+                    <div class="fundamental-footer">
+                        <span class="fundamental-item-count">{{ $sentenceCount }}</span>
+                        <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
+                    </div>
                 </a>
                 {{ end }}
                 {{ end }}

@@ -220,6 +220,21 @@ function updateGroupCards(lang) {
         let totalCompleted = 0;  // All time (for score display)
         let lastPracticedDate = null;
 
+        // Parse groups data from container if available
+        const appContainer = document.getElementById('app-container');
+        let currentGroupSentences = null;
+        if (appContainer && appContainer.dataset.groups) {
+            try {
+                const allGroups = JSON.parse(appContainer.dataset.groups);
+                const currentGroup = allGroups.find(g => g.group_id === groupId);
+                if (currentGroup) {
+                    currentGroupSentences = currentGroup.sentences;
+                }
+            } catch (e) {
+                console.error('Failed to parse groups data', e);
+            }
+        }
+
         if (groupData && groupData.sentences) {
             // Track last practiced date from the group data
             if (groupData.date) {
@@ -228,18 +243,35 @@ function updateGroupCards(lang) {
 
             const isToday = groupData.date === today;
 
-            // Count completed exercises
-            Object.values(groupData.sentences).forEach(s => {
-                // Count all-time completions for score
-                if (s.listen) totalCompleted++;
-                if (s.read) totalCompleted++;
+            // Count completed exercises based on CURRENT sentences
+            if (currentGroupSentences) {
+                currentGroupSentences.forEach(s => {
+                    const nativeText = s.native;
+                    const savedSentence = groupData.sentences[nativeText];
 
-                // Count today's completions separately
-                if (isToday) {
-                    if (s.listen) completedToday++;
-                    if (s.read) completedToday++;
-                }
-            });
+                    if (savedSentence) {
+                        // Count all-time completions for score
+                        if (savedSentence.listen) totalCompleted++;
+                        if (savedSentence.read) totalCompleted++;
+
+                        // Count today's completions separately
+                        if (isToday) {
+                            if (savedSentence.listen) completedToday++;
+                            if (savedSentence.read) completedToday++;
+                        }
+                    }
+                });
+            } else {
+                // Fallback to old behavior if groups data missing (shouldn't happen)
+                Object.values(groupData.sentences).forEach(s => {
+                    if (s.listen) totalCompleted++;
+                    if (s.read) totalCompleted++;
+                    if (isToday) {
+                        if (s.listen) completedToday++;
+                        if (s.read) completedToday++;
+                    }
+                });
+            }
         }
 
 
@@ -498,34 +530,68 @@ function updateFundamentalsButtons(lang) {
     fundamentalBtns.forEach(btn => {
         const groupId = btn.dataset.groupId;
         const sentenceCount = parseInt(btn.dataset.sentenceCount) || 0;
-        const countBadgeEl = btn.querySelector('.fundamental-count-badge');
+        const scoreBadgeEl = btn.querySelector('.fundamental-score');
+        const itemCountEl = btn.querySelector('.fundamental-item-count');
 
-        if (!countBadgeEl) return;
+        if (!scoreBadgeEl) return;
+
+        // Update item count badge (static)
+        if (itemCountEl) {
+            itemCountEl.textContent = `${sentenceCount}`;
+        }
+
+        const totalScore = sentenceCount * 2; // 1 for listen, 1 for read/speak
 
         if (!completions[lang] || !completions[lang][groupId]) {
-            countBadgeEl.textContent = `0/${sentenceCount}`;
+            scoreBadgeEl.textContent = `0/${totalScore}`;
+            scoreBadgeEl.classList.remove('partial-complete');
             btn.classList.remove('complete-today');
             return;
         }
 
         const group = completions[lang][groupId];
-        let completedCount = 0;
-        if (group.sentences) {
-            Object.values(group.sentences).forEach(s => {
-                if (s.listen && s.read) {
-                    completedCount++;
+        let currentScore = 0;
+
+        // Parse groups data from container if available (re-parse or pass it down)
+        const appContainer = document.getElementById('app-container');
+        let currentGroupSentences = null;
+        if (appContainer && appContainer.dataset.groups) {
+            try {
+                const allGroups = JSON.parse(appContainer.dataset.groups);
+                const currentGroup = allGroups.find(g => g.group_id === groupId);
+                if (currentGroup) {
+                    currentGroupSentences = currentGroup.sentences;
                 }
+            } catch (e) {
+                // Ignore
+            }
+        }
+
+        if (currentGroupSentences) {
+            currentGroupSentences.forEach(s => {
+                const savedSentence = group.sentences && group.sentences[s.native];
+                if (savedSentence) {
+                    if (savedSentence.listen) currentScore++;
+                    if (savedSentence.read) currentScore++;
+                }
+            });
+        } else if (group.sentences) {
+            Object.values(group.sentences).forEach(s => {
+                if (s.listen) currentScore++;
+                if (s.read) currentScore++;
             });
         }
 
-        countBadgeEl.textContent = `${completedCount}/${sentenceCount}`;
+        scoreBadgeEl.textContent = `${currentScore}/${totalScore}`;
 
-        const is100Percent = completedCount === sentenceCount && sentenceCount > 0;
-        // Check if ANY completion happened today, or if the group date is today
-        // group.date is updated on every practice.
-        // group.completionHistory[today] tracks full completions.
-        // We want to highlight if it's "done for today".
-        // If they practiced today and it's 100% complete, that's good enough.
+        // Highlight orange if partial (started but not finished)
+        if (currentScore > 0 && currentScore < totalScore) {
+            scoreBadgeEl.classList.add('partial-complete');
+        } else {
+            scoreBadgeEl.classList.remove('partial-complete');
+        }
+
+        const is100Percent = currentScore === totalScore && totalScore > 0;
         const practicedToday = group.date === today;
 
         if (is100Percent && practicedToday) {

@@ -1238,7 +1238,7 @@
 .fundamentals-row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 0.6rem;
+  gap: 0.4rem;
   width: 100%;
   max-width: 100%;
   justify-content: center;
@@ -1257,13 +1257,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0.8rem 0.5rem;
+  gap: 0.5rem;
+  padding: 0.4rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   text-decoration: none;
-  min-height: 78px;
+  aspect-ratio: 1 / 1;
+  min-height: auto;
+  min-width: 0;
   width: 100%;
   flex: 0 1 auto;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1284,12 +1286,31 @@
 
 .fundamental-btn:hover .fundamental-label,
 .fundamental-btn:hover .fundamental-time,
-.fundamental-btn:hover .fundamental-count-badge {
+.fundamental-btn:hover .fundamental-score,
+.fundamental-btn:hover .fundamental-item-count {
   color: white;
 }
 
+.fundamental-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.fundamental-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+}
+
 .fundamental-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
   text-align: center;
@@ -1301,7 +1322,7 @@
 }
 
 .fundamental-time {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: rgba(147, 197, 253, 1);
   line-height: 1;
@@ -1309,19 +1330,36 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.fundamental-count-badge {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
+.fundamental-score {
   font-size: 0.5rem;
   color: var(--text-secondary);
   background: rgba(99, 102, 241, 0.08);
-  padding: 0.1rem 0.25rem;
-  border-radius: 3px;
-  font-weight: 500;
+  padding: 0.1rem 0.2rem;
+  border-radius: 4px;
+  font-weight: 600;
   border: none;
-  opacity: 0.6;
+  opacity: 0.7;
   backdrop-filter: blur(2px);
+}
+
+.fundamental-item-count {
+  font-size: 0.5rem;
+  color: var(--text-secondary);
+  background: rgba(99, 102, 241, 0.08);
+  padding: 0.1rem 0.2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  border: none;
+  opacity: 0.7;
+  backdrop-filter: blur(2px);
+}
+
+/* Partial completion (Orange) */
+.fundamental-score.partial-complete {
+  background: rgba(249, 115, 22, 0.15);
+  color: rgba(251, 146, 60, 1);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.2);
+  opacity: 1;
 }
 
 /* Green highlight for 100% completion today */
