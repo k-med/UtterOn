@@ -22,9 +22,9 @@ menu:
       name: About
       url: /about/
       weight: 20
-    - identifier: support
-      name: Support
-      url: /support/
+    - identifier: keep-it-free
+      name: Keep it Free
+      url: /keep-it-free/
       weight: 30
 
 markup:

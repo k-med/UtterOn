@@ -33,27 +33,19 @@
 &lt;p&gt;Our exercises prioritize speaking and listening skills from day one.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Support</title>
-      <link>http://localhost:1313/support/</link>
+      <title>Keep it Free</title>
+      <link>http://localhost:1313/keep-it-free/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>
-      <guid>http://localhost:1313/support/</guid>
-      <description>&lt;div class=&#34;page-header&#34;&gt;
-&lt;h1&gt;Support Center&lt;/h1&gt;
-&lt;p class=&#34;page-subtitle&#34;&gt;We&#39;re here to help you on your language learning journey.&lt;/p&gt;
+      <guid>http://localhost:1313/keep-it-free/</guid>
+      <description>&lt;div class=&#34;keep-free-wrapper&#34;&gt;
+&lt;div class=&#34;page-header&#34;&gt;
+&lt;h1&gt;Keep UtterOn Free&lt;/h1&gt;
+&lt;p class=&#34;page-subtitle&#34;&gt;Help us democratize language learning for everyone.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;content-card&#34;&gt;
-&lt;h2&gt;Frequently Asked Questions&lt;/h2&gt;
-&lt;div class=&#34;faq-item&#34;&gt;
-&lt;h3&gt;How do I start a course?&lt;/h3&gt;
-&lt;p&gt;Simply navigate to the &#34;Languages&#34; page, select your target language, and choose a group to begin practicing.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;faq-item&#34;&gt;
-&lt;h3&gt;Is UtterOn free?&lt;/h3&gt;
-&lt;p&gt;Yes, UtterOn is currently free to use for all language learners.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;faq-item&#34;&gt;
-&lt;h3&gt;Can I request a new language?&lt;/h3&gt;
-&lt;p&gt;Absolutely! We are always looking to expand. Please contact us with your request.&lt;/p&gt;</description>
+&lt;h2&gt;Why Support Us?&lt;/h2&gt;
+&lt;p&gt;UtterOn is built on the belief that high-quality language education should be accessible to everyone, regardless of their financial situation. We don&#39;t charge subscriptions, we don&#39;t sell your data, and we don&#39;t clutter your experience with ads.&lt;/p&gt;
+&lt;p&gt;However, running servers, generating high-quality audio, and developing new features takes time and money. Your support helps us keep the lights on and the updates coming.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Manners</title>

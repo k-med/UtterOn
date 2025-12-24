@@ -88,7 +88,7 @@
                 <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)"
                     | safeHTMLAttr) ("" | safeHTMLAttr ) }}" {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" |
                     safeHTMLAttr ) }} {{- if or (eq .Identifier "languages" ) (eq .Identifier "about" ) (eq
-                    .Identifier "support" ) }} class="btn-header" {{ end }}>
+                    .Identifier "keep-it-free" ) }} class="btn-header" {{ end }}>
                     <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
                         {{- .Pre }}
                         {{- .Name -}}
