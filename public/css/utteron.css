@@ -389,9 +389,18 @@
 }
 
 .group-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.group-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
 }
 
 :root[data-theme="dark"] .group-card {
@@ -435,6 +444,29 @@
   background: rgba(99, 102, 241, 0.15);
   color: var(--accent);
   border: 1px solid rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.level-badge.a1,
+.level-badge.a2 {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.level-badge.b1,
+.level-badge.b2 {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.level-badge.c1,
+.level-badge.c2 {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  border-color: rgba(234, 179, 8, 0.3);
 }
 
 /* Metadata grid */
@@ -479,6 +511,50 @@
   color: var(--text-secondary);
 }
 
+/* Progress Bar */
+.score-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 100px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #818cf8);
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+}
+
+/* Streak Glow */
+.group-streak.has-streak {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+  font-weight: 700;
+}
+
+/* Time-based cues */
+.last-practiced.today {
+  color: #4ade80;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
+}
+
+.last-practiced.yesterday {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
 /* Start button */
 .start-btn {
   display: block;
@@ -503,6 +579,33 @@
 
 .start-btn:hover {
   background: var(--accent-hover);
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.start-btn {
+  background: linear-gradient(135deg, var(--accent), #6366f1);
+  background-size: 200% 200%;
+  transition: all 0.3s ease;
+}
+
+.start-btn.pulse {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
 }
 
 /* Green highlighting for 100% scores and today practice */
@@ -846,11 +949,12 @@
 
 .group-desc-col {
   flex: 1;
-  border-left: 1px solid rgba(99, 102, 241, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   padding-left: 1.75rem;
   display: flex;
   align-items: flex-start;
   padding-top: 2rem;
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .group-description {
