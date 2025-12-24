@@ -176,10 +176,12 @@ function updateFundamentalsButtons(lang) {
     fundamentalBtns.forEach(btn => {
         const groupId = btn.dataset.groupId;
         const sentenceCount = parseInt(btn.dataset.sentenceCount) || 0;
-        const scoreEl = btn.querySelector('.fundamental-score');
+        const countBadgeEl = btn.querySelector('.fundamental-count-badge');
+
+        if (!countBadgeEl) return;
 
         if (!completions[lang] || !completions[lang][groupId]) {
-            scoreEl.textContent = `0/${sentenceCount}`;
+            countBadgeEl.textContent = `0/${sentenceCount}`;
             btn.classList.remove('complete-today');
             return;
         }
@@ -196,7 +198,7 @@ function updateFundamentalsButtons(lang) {
             });
         }
 
-        scoreEl.textContent = `${completedCount}/${sentenceCount}`;
+        countBadgeEl.textContent = `${completedCount}/${sentenceCount}`;
 
         // Highlight green ONLY if:
         // 1. All sentences are complete (100%)

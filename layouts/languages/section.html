@@ -54,7 +54,8 @@
 
         <!-- Fundamentals Buttons Row -->
         <div class="fundamentals-section">
-            <span class="fundamentals-caption">Quick vocabulary boosters <span class="reset-note"></span>(Reset daily.)</span></span>
+            <span class="fundamentals-caption">Quick vocabulary boosters <span class="reset-note"></span>(Reset
+                daily.)</span></span>
             <div class="fundamentals-row">
                 {{ $lang := .Params.language_code | default .File.ContentBaseName }}
                 {{ $groups := .GetPage "groups" }}
@@ -63,10 +64,21 @@
                 {{ $groupId := . }}
                 {{ range $groups.Pages }}
                 {{ if eq .Params.group_id $groupId }}
+                {{ $sentenceCount := len .Params.sentences }}
+                {{ $estSeconds := mul $sentenceCount 10 }}
+                {{ $timeDisplay := "" }}
+                {{ if lt $estSeconds 60 }}
+                {{ $timeDisplay = printf "~%ds" $estSeconds }}
+                {{ else }}
+                {{ $estMinutes := div $estSeconds 60 }}
+                {{ $timeDisplay = printf "~%dm" $estMinutes }}
+                {{ end }}
                 <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
-                    data-group-id="{{ $groupId }}" data-sentence-count="{{ len .Params.sentences }}">
+                    data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
+                    data-time-display="{{ $timeDisplay }}">
                     <span class="fundamental-label">{{ .Params.group_title }}</span>
-                    <span class="fundamental-score">—</span>
+                    <span class="fundamental-time">{{ $timeDisplay }}</span>
+                    <span class="fundamental-count-badge">0/{{ $sentenceCount }}</span>
                 </a>
                 {{ end }}
                 {{ end }}

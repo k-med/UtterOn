@@ -418,6 +418,9 @@
   color: var(--text-primary);
   padding-right: 5rem;
   letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .level-badge {
@@ -450,6 +453,8 @@
   display: flex;
   gap: 0.5rem;
   font-size: 0.9rem;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .meta-item.full-width {
@@ -907,16 +912,16 @@
   background-position: center;
   border: none;
   border-radius: var(--radius);
-  padding: 1.75rem 2rem;
+  padding: 2rem;
   margin-bottom: 2rem;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 1.5rem 3rem;
+  gap: 1.5rem;
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  text-align: center;
 }
 
 .language-header-card::before {
@@ -933,15 +938,16 @@
 }
 
 .lang-title-section {
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .lang-title-section h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
   line-height: 1;
   font-weight: 700;
 }
@@ -976,20 +982,19 @@
 }
 
 .lang-stats-grid {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  flex: 1;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .stat-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  min-width: 65px;
+  gap: 0.4rem;
 }
 
 .stat-label-sm {
@@ -1045,6 +1050,21 @@
   content: '▶';
 }
 
+@media (max-width: 768px) {
+  .lang-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .lang-title-section h1 {
+    font-size: 2rem;
+  }
+
+  .lang-flag-display {
+    font-size: 2.5rem;
+  }
+}
+
 @media (max-width: 900px) {
   .language-header-card {
     flex-direction: column;
@@ -1080,7 +1100,7 @@
   width: 100%;
   flex-basis: 100%;
   margin-top: 1.5rem;
-  padding-top: 0;
+  padding: 0 0.75rem;
   border-top: none;
   text-align: center;
 }
@@ -1096,37 +1116,55 @@
 }
 
 .fundamentals-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.4rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
   width: 100%;
+  max-width: 100%;
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  .fundamentals-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+}
+
 .fundamental-btn {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem 0.6rem;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.8rem 0.5rem;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border: 1.5px solid rgba(99, 102, 241, 0.2);
+  border-radius: 10px;
   text-decoration: none;
-  min-width: 65px;
+  min-height: 78px;
+  width: 100%;
   flex: 0 1 auto;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(99, 102, 241, 0.1);
 }
 
 .fundamental-btn:hover {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(99, 102, 241, 0.9) 100%);
   color: white;
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(99, 102, 241, 0.25),
+    0 2px 4px rgba(99, 102, 241, 0.15);
 }
 
 .fundamental-btn:hover .fundamental-label,
-.fundamental-btn:hover .fundamental-score {
+.fundamental-btn:hover .fundamental-time,
+.fundamental-btn:hover .fundamental-count-badge {
   color: white;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .fundamental-label {
@@ -1134,11 +1172,33 @@
   font-weight: 600;
   color: var(--text-primary);
   text-align: center;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-height: 1.2;
+  max-width: 100%;
 }
 
-.fundamental-score {
-  font-size: 0.65rem;
+.fundamental-time {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.fundamental-count-badge {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  font-size: 0.5rem;
   color: var(--text-secondary);
+  background: rgba(99, 102, 241, 0.08);
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+  font-weight: 500;
+  border: none;
+  opacity: 0.6;
+  backdrop-filter: blur(2px);
 }
 
 /* Green highlight for 100% completion today */
