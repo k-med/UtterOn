@@ -4,6 +4,7 @@ language: czech
 group_id: lifeline
 group_title: The Lifeline
 description: |
+  Emergency Response
   Critical phrases for emergencies: medical help, police, and urgent situations.
   Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don't touch me.
 level: A1

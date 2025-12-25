@@ -4,6 +4,7 @@ language: czech
 group_id: quantifier
 group_title: The Quantifier 
 description: |
+  Size & Time
   Express time, quantity, and size: more, enough, big, small, and numbers.
   What time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That's enough, It's not enough, There are three.
 level: A1

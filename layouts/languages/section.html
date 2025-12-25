@@ -153,37 +153,27 @@
                         <h3>{{ .Params.group_title }}</h3>
                     </div>
 
-                    <div class="group-meta">
-                        <div class="meta-row">
-                            <span class="meta-item">
-                                <span class="meta-label">Sentences:</span>
-                                <span class="meta-value">{{ $sentenceCount }}</span>
-                            </span>
-                            <span class="meta-item">
-                                <span class="meta-label">Time:</span>
-                                <span class="meta-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }}
-                                    min</span>
-                            </span>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Sentences</div>
+                            <div class="stat-value">{{ $sentenceCount }}</div>
                         </div>
-                        <div class="meta-row">
-                            <span class="meta-item">
-                                <span class="meta-label">Streak:</span>
-                                <span class="meta-value group-streak" data-group="{{ .Params.group_id }}">—</span>
-                            </span>
-                            <span class="meta-item">
-                                <span class="meta-label">Score:</span>
-                                <span class="meta-value last-score" data-group="{{ .Params.group_id }}">—</span>
-                            </span>
+                        <div class="stat-card">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }} min
+                            </div>
                         </div>
-                        <div class="meta-row">
-                            <span class="meta-item">
-                                <span class="meta-label">Last practiced:</span>
-                                <span class="meta-value last-practiced" data-group="{{ .Params.group_id }}">Never</span>
-                            </span>
-                            <span class="meta-item">
-                                <span class="meta-label">Total:</span>
-                                <span class="meta-value group-total" data-group="{{ .Params.group_id }}">—</span>
-                            </span>
+                        <div class="stat-card">
+                            <div class="stat-label">Streak</div>
+                            <div class="stat-value group-streak" data-group="{{ .Params.group_id }}">—</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Score</div>
+                            <div class="stat-value last-score" data-group="{{ .Params.group_id }}">—</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Last practiced</div>
+                            <div class="stat-value last-practiced" data-group="{{ .Params.group_id }}">Never</div>
                         </div>
                     </div>
 
@@ -193,17 +183,22 @@
                 <div class="group-desc-col">
                     {{ $description := .Params.description }}
                     {{ $lines := split $description "\n" }}
-                    {{ $summary := index $lines 0 }}
+                    {{ $secondaryTitle := index $lines 0 }}
+                    {{ $descText := index $lines 1 }}
 
                     <div class="description-content">
-                        {{ if $summary }}
-                        <h4 class="description-summary">{{ $summary }}</h4>
+                        {{ if $secondaryTitle }}
+                        <h4 class="secondary-title">{{ $secondaryTitle }}</h4>
+                        {{ end }}
+
+                        {{ if $descText }}
+                        <p class="description-text">{{ $descText }}</p>
                         {{ end }}
 
                         {{ $sentences := .Params.sentences }}
                         {{ if $sentences }}
                         <div class="sentence-previews">
-                            {{ range first 4 (shuffle $sentences) }}
+                            {{ range first 3 (shuffle $sentences) }}
                             <div class="sentence-preview">
                                 <span class="preview-native">{{ .native }}</span>
                                 <span class="preview-english">{{ .english }}</span>
