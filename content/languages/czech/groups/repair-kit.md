@@ -2,7 +2,7 @@
 title: The Repair Kit
 language: czech
 group_id: repair-kit
-group_title: Repair Kit
+group_title: The Repair Kit
 description: |
   Stay in the Conversation
   Keep conversations flowing when you don't understand something.

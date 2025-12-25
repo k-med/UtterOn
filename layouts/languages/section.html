@@ -150,7 +150,8 @@
                     {{ end }}
 
                     <div class="group-header">
-                        <h3>{{ .Params.group_title }}</h3>
+                        <h3>{{ if hasPrefix .Params.group_title "The " }}{{ replace .Params.group_title "The " "The<br>"
+                            1 | safeHTML }}{{ else }}{{ .Params.group_title }}{{ end }}</h3>
                     </div>
 
                     <div class="stats-grid">
