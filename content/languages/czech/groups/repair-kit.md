@@ -4,7 +4,7 @@ language: czech
 group_id: repair-kit
 group_title: Repair Kit
 description: |
-  Stay in conversation!
+  Keep conversations flowing when you don't understand something.
   I don't understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?
 level: A1
 sentences:

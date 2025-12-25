@@ -4,8 +4,8 @@ language: czech
 group_id: troubleshooter
 group_title: The Troubleshooter
 description: |
-  Reporting problems.
-  It is broken. It is cold. It is hot. It is closed. It is open. I didn’t order this. There is no hot water. The key doesn’t work. There is a problem here.
+  Report problems and issues: broken items, temperature, and mistakes.
+  It is broken. It is cold. It is hot. It is closed. It is open. I didn't order this. There is no hot water. The key doesn't work. There is a problem here.
 level: A1
 sentences:
   - id: cz_ts001

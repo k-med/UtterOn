@@ -4,7 +4,8 @@ language: czech
 group_id: navigator
 group_title: The Navigator
 description: |
-  Tools to move around! Where is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.
+  Navigate cities with confidence: directions, transport, and locations.
+  Where is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.
 level: A1
 sentences:
   - id: cz_nav001

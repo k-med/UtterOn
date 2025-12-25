@@ -4,7 +4,7 @@ language: czech
 group_id: master-keys
 group_title: Master Keys
 description: |
-  Get what you need!
+  Universal phrases for requesting things and expressing needs clearly.
   I would like this/that
   Do you have [x]?
   Where is the [x]?

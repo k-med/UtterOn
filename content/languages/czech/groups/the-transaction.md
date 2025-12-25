@@ -4,8 +4,8 @@ language: czech
 group_id: transaction
 group_title: The Transaction
 description: |
-  Everyday purchases 
-  How much is this? Can I pay by card? The bill, please. I'll take it. The receipt, please. Do you have change? I’m just looking. I’ll take it.
+  Essential shopping phrases for purchases, payments, and transactions.
+  How much is this? Can I pay by card? The bill, please. I'll take it. The receipt, please. Do you have change? I'm just looking.
 level: A1
 sentences:
   - id: cz_tr001
