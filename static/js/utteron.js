@@ -1069,3 +1069,92 @@ function initFoundationsState() {
 // Make sure functions are available globally
 window.toggleFoundations = toggleFoundations;
 window.initFoundationsState = initFoundationsState;
+
+// ============================================
+// Group Card Toggle Functions
+// ============================================
+
+// Toggle individual group card
+function toggleGroupCard(groupId) {
+    const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+    if (!card) return;
+
+    card.classList.toggle('minimized');
+
+    // Save state to localStorage
+    const minimizedCards = JSON.parse(localStorage.getItem('utteron_minimized_cards') || '{}');
+    minimizedCards[groupId] = card.classList.contains('minimized');
+    localStorage.setItem('utteron_minimized_cards', JSON.stringify(minimizedCards));
+
+    // Update master toggle state
+    updateMasterToggleState();
+}
+
+// Toggle all cards (master toggle)
+function toggleAllCards() {
+    const header = document.querySelector('.modules-header');
+    const groupList = document.getElementById('group-list');
+    const cards = document.querySelectorAll('.group-card');
+
+    if (!header || !groupList || !cards.length) return;
+
+    const isCollapsed = header.classList.contains('collapsed');
+
+    if (isCollapsed) {
+        // Expand all
+        header.classList.remove('collapsed');
+        groupList.classList.remove('all-collapsed');
+        cards.forEach(card => card.classList.remove('minimized'));
+        localStorage.setItem('utteron_all_cards_collapsed', 'false');
+        localStorage.setItem('utteron_minimized_cards', '{}');
+    } else {
+        // Collapse all
+        header.classList.add('collapsed');
+        groupList.classList.add('all-collapsed');
+        localStorage.setItem('utteron_all_cards_collapsed', 'true');
+    }
+}
+
+// Update master toggle based on individual card states
+function updateMasterToggleState() {
+    const header = document.querySelector('.modules-header');
+    const cards = document.querySelectorAll('.group-card');
+    if (!header || !cards.length) return;
+
+    const allMinimized = Array.from(cards).every(card => card.classList.contains('minimized'));
+    if (allMinimized) {
+        header.classList.add('collapsed');
+    } else {
+        header.classList.remove('collapsed');
+    }
+}
+
+// Initialize group card states on load
+function initGroupCardState() {
+    const header = document.querySelector('.modules-header');
+    const groupList = document.getElementById('group-list');
+
+    // Check if all collapsed
+    const allCollapsed = localStorage.getItem('utteron_all_cards_collapsed') === 'true';
+    if (allCollapsed && header && groupList) {
+        header.classList.add('collapsed');
+        groupList.classList.add('all-collapsed');
+        return;
+    }
+
+    // Restore individual card states
+    const minimizedCards = JSON.parse(localStorage.getItem('utteron_minimized_cards') || '{}');
+    Object.entries(minimizedCards).forEach(([groupId, isMinimized]) => {
+        if (isMinimized) {
+            const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+            if (card) card.classList.add('minimized');
+        }
+    });
+
+    updateMasterToggleState();
+}
+
+// Make functions globally accessible
+window.toggleGroupCard = toggleGroupCard;
+window.toggleAllCards = toggleAllCards;
+window.initGroupCardState = initGroupCardState;

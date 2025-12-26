@@ -2173,3 +2173,119 @@
 .fundamentals-section.minimized {
   padding-bottom: 1.5rem;
 }
+
+/* ============================================
+   Modules Header (Master Toggle)
+   ============================================ */
+
+.modules-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.5);
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.modules-header:hover {
+  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.7);
+}
+
+.modules-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.modules-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modules-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.modules-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modules-toggle-btn:hover {
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.modules-toggle-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.modules-header.collapsed .modules-toggle-btn svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   Group Card Chevron
+   ============================================ */
+
+.group-card {
+  position: relative;
+}
+
+.group-card-chevron {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.group-card-chevron:hover {
+  opacity: 1;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.group-card-chevron svg {
+  transition: transform 0.3s ease;
+}
+
+.group-card.minimized .group-card-chevron svg {
+  transform: rotate(180deg);
+}
+
+/* Minimized card state */
+.group-card.minimized .group-content-wrapper {
+  display: none;
+}
+
+.group-card.minimized {
+  padding: 0.75rem 1rem;
+  min-height: auto;
+}
+
+/* All cards hidden state */
+.group-list.all-collapsed .group-card {
+  display: none;
+}

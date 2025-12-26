@@ -118,6 +118,20 @@
         </div>
     </div>
 
+    <!-- Modules Header with Master Toggle -->
+    <div class="modules-header" onclick="toggleAllCards()">
+        <div class="modules-title-group">
+            <h2 class="modules-title">Modules</h2>
+            <p class="modules-description">Full sentence practice exercises.</p>
+        </div>
+        <button type="button" class="modules-toggle-btn" id="modules-toggle" aria-label="Toggle all modules">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+    </div>
+
     <div class="group-list" id="group-list" data-language="{{ .Params.language_code | default .File.ContentBaseName }}">
         {{ $lang := .Params.language_code | default .File.ContentBaseName }}
         {{ $groups := .GetPage "groups" }}
@@ -140,6 +154,15 @@
         {{ $minHigh := add $estMinutes 2 }}
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
             data-sentences='{{ .Params.sentences | jsonify }}'>
+
+            <!-- Card Chevron Toggle -->
+            <button type="button" class="group-card-chevron"
+                onclick="event.stopPropagation(); toggleGroupCard('{{ .Params.group_id }}')" aria-label="Toggle card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
 
             <div class="group-content-wrapper">
                 <div class="group-info-col">
@@ -254,11 +277,11 @@
         updateFundamentalsButtons(lang);
         initStatArrows();
         initDifficultyControls();
-        initDifficultyControls();
         if (window.initFoundationsState) {
             initFoundationsState();
-        } else {
-            console.error('initFoundationsState not found');
+        }
+        if (window.initGroupCardState) {
+            initGroupCardState();
         }
     });
 </script>
