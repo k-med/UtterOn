@@ -520,6 +520,8 @@ a,
   transition: all 0.2s ease;
   color: var(--text-secondary);
   padding: 0;
+  position: relative;
+  z-index: 15;
 }
 
 .difficulty-arrow:hover {
@@ -536,6 +538,12 @@ a,
 .difficulty-arrow svg {
   width: 14px;
   height: 14px;
+}
+
+.difficulty-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* CEFR Level Colors */

@@ -59,12 +59,25 @@ function setModuleLevel(groupId, level) {
 function switchModuleLevel(groupId, direction) {
     const currentLevel = getModuleLevel(groupId);
     const currentIndex = LEVELS.indexOf(currentLevel);
-    const newIndex = currentIndex + direction;
 
-    // Bounds check
-    if (newIndex < 0 || newIndex >= LEVELS.length) return;
+    // Get available levels for this module
+    const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+    const availableLevels = card ? (card.dataset.availableLevels || 'A1').split(',') : ['A1'];
 
-    const newLevel = LEVELS[newIndex];
+    // Find next available level in the given direction
+    let targetIndex = currentIndex + direction;
+    while (targetIndex >= 0 && targetIndex < LEVELS.length) {
+        if (availableLevels.includes(LEVELS[targetIndex])) {
+            break;
+        }
+        targetIndex += direction;
+    }
+
+    // Bounds check - no available level found in direction
+    if (targetIndex < 0 || targetIndex >= LEVELS.length) return;
+    if (!availableLevels.includes(LEVELS[targetIndex])) return;
+
+    const newLevel = LEVELS[targetIndex];
     setModuleLevel(groupId, newLevel);
 
     // Update UI
@@ -73,27 +86,41 @@ function switchModuleLevel(groupId, direction) {
 
 function updateModuleLevelDisplay(groupId, level) {
     const selector = document.querySelector(`.level-selector[data-group-id="${groupId}"]`);
-    if (!selector) return;
+    const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+    const availableLevels = card ? (card.dataset.availableLevels || 'A1').split(',').sort() : ['A1'];
+    const levelIndex = LEVELS.indexOf(level);
 
-    // Update badge
-    const badge = selector.querySelector('.level-badge');
-    if (badge) {
-        badge.textContent = level;
-        badge.dataset.level = level;
+    // Find if there's a lower/higher available level
+    const hasLowerLevel = LEVELS.slice(0, levelIndex).some(l => availableLevels.includes(l));
+    const hasHigherLevel = LEVELS.slice(levelIndex + 1).some(l => availableLevels.includes(l));
+
+    // Update collapsed view level badge and chevrons
+    if (selector) {
+        const badge = selector.querySelector('.level-badge');
+        if (badge) {
+            badge.textContent = level;
+            badge.dataset.level = level;
+        }
+
+        const downBtn = selector.querySelector('.level-down');
+        const upBtn = selector.querySelector('.level-up');
+        if (downBtn) downBtn.disabled = !hasLowerLevel;
+        if (upBtn) upBtn.disabled = !hasHigherLevel;
     }
 
-    // Update chevron disabled states
-    const levelIndex = LEVELS.indexOf(level);
-    const downBtn = selector.querySelector('.level-down');
-    const upBtn = selector.querySelector('.level-up');
-
-    if (downBtn) downBtn.disabled = levelIndex === 0;
-    if (upBtn) upBtn.disabled = levelIndex === LEVELS.length - 1;
+    // Update expanded view difficulty arrows
+    const badgeContainer = document.querySelector(`.difficulty-badge-container[data-group-id="${groupId}"]`);
+    if (badgeContainer) {
+        const leftArrow = badgeContainer.querySelector('.difficulty-arrow-left');
+        const rightArrow = badgeContainer.querySelector('.difficulty-arrow-right');
+        if (leftArrow) leftArrow.disabled = !hasLowerLevel;
+        if (rightArrow) rightArrow.disabled = !hasHigherLevel;
+    }
 
     // Update time estimate based on level multiplier
     updateTimeEstimate(groupId, level);
 
-    // Update expanded card if visible
+    // Update expanded card content if visible
     updateExpandedCardLevel(groupId, level);
 }
 
@@ -101,7 +128,22 @@ function updateTimeEstimate(groupId, level) {
     const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
     if (!card) return;
 
-    const sentenceCount = parseInt(card.dataset.sentenceCount) || 10;
+    // Get level-specific sentence count from levels data
+    let sentenceCount = parseInt(card.dataset.sentenceCount) || 10;
+    const levelsDataRaw = card.dataset.levelsData;
+    if (levelsDataRaw) {
+        try {
+            const levelsData = JSON.parse(levelsDataRaw);
+            const levelData = levelsData[level];
+            if (levelData?.Params?.sentences) {
+                sentenceCount = levelData.Params.sentences.length;
+                card.dataset.sentenceCount = sentenceCount;
+            }
+        } catch (e) {
+            console.warn('Failed to parse levels data for time estimate:', e);
+        }
+    }
+
     const baseSeconds = sentenceCount * 25;
 
     // CEFR multipliers
@@ -111,16 +153,24 @@ function updateTimeEstimate(groupId, level) {
     const estSeconds = Math.round(baseSeconds * multiplier);
     const minLow = Math.max(1, Math.floor(estSeconds / 60));
     const minHigh = Math.ceil(estSeconds / 60) + 1;
+    const timeText = `~${minLow}-${minHigh} min`;
 
+    // Update collapsed row time
     const timeEl = card.querySelector('.group-card-time');
     if (timeEl) {
-        timeEl.textContent = `~${minLow}-${minHigh} min`;
+        timeEl.textContent = timeText;
+    }
+
+    // Update expanded card stats grid time
+    const statsTimeEl = card.querySelector('.stats-grid .stat-card:nth-child(2) .stat-value');
+    if (statsTimeEl) {
+        statsTimeEl.textContent = timeText;
     }
 }
 
 function updateExpandedCardLevel(groupId, level) {
     const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
-    if (!card || card.classList.contains('minimized')) return;
+    if (!card) return;
 
     // Update difficulty badge in expanded view
     const badge = card.querySelector('.group-content-wrapper .difficulty-badge');
@@ -135,6 +185,108 @@ function updateExpandedCardLevel(groupId, level) {
             else categoryEl.textContent = 'Advanced';
         }
         if (levelEl) levelEl.textContent = level;
+    }
+
+    // Get level-specific data from card
+    const levelsDataRaw = card.dataset.levelsData;
+    if (!levelsDataRaw) return;
+
+    try {
+        const levelsData = JSON.parse(levelsDataRaw);
+        const levelData = levelsData[level];
+
+        if (levelData && levelData.Params) {
+            const params = levelData.Params;
+
+            // Update description - parse first line as secondary title, rest as description
+            if (params.description) {
+                const lines = params.description.split('\n').filter(l => l.trim());
+                const secondaryTitle = lines[0] || '';
+                const descText = lines.slice(1).join(' ').trim() || '';
+
+                const secondaryTitleEl = card.querySelector('.secondary-title');
+                if (secondaryTitleEl) secondaryTitleEl.textContent = secondaryTitle;
+
+                const descTextEl = card.querySelector('.description-text');
+                if (descTextEl) descTextEl.textContent = descText;
+            }
+
+            // Update sentence count in stats grid (first stat card)
+            const sentenceCountEl = card.querySelector('.stats-grid .stat-card:first-child .stat-value');
+            if (sentenceCountEl && params.sentences) {
+                sentenceCountEl.textContent = params.sentences.length;
+                card.dataset.sentenceCount = params.sentences.length;
+            }
+
+            // Update sentences data attribute for training
+            if (params.sentences) {
+                card.dataset.sentences = JSON.stringify(params.sentences);
+            }
+
+            // Update sentence previews (first 3)
+            const previewsContainer = card.querySelector('.sentence-previews');
+            if (previewsContainer && params.sentences) {
+                const sentences = params.sentences.slice(0, 3);
+                previewsContainer.innerHTML = sentences.map(s => `
+                    <div class="sentence-preview">
+                        <span class="preview-native">${s.native}</span>
+                        <span class="preview-english">${s.english}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Update progress display with level-specific progress
+            const lang = document.getElementById('group-list')?.dataset?.language;
+            if (lang) {
+                updateLevelSpecificProgress(card, lang, groupId, level, params.sentences?.length || 0);
+            }
+        }
+    } catch (e) {
+        console.warn('Failed to parse levels data:', e);
+    }
+}
+
+/**
+ * Update progress display using level-specific storage key
+ */
+function updateLevelSpecificProgress(card, lang, groupId, level, sentenceCount) {
+    const completions = getCompletions();
+    const storageKey = `${groupId}_${level}`;
+    const groupData = completions[lang]?.[storageKey];
+    const totalExercises = sentenceCount * 2;
+
+    // Update Progress stat in expanded card
+    const scoreEl = card.querySelector('.last-score');
+    if (scoreEl) {
+        let sessionCompleted = 0;
+
+        // Check saved session state
+        const stateKey = `utteron_state_${groupId}_${level}`;
+        const savedState = localStorage.getItem(stateKey);
+        if (savedState) {
+            try {
+                const state = JSON.parse(savedState);
+                if (state.completedExercises) {
+                    sessionCompleted = state.completedExercises.length;
+                } else if (state.currentIndex) {
+                    sessionCompleted = state.currentIndex;
+                }
+            } catch (e) {
+                // Fallback to completion data
+            }
+        }
+
+        // Fallback: count from completions
+        if (sessionCompleted === 0 && groupData?.sentences) {
+            Object.values(groupData.sentences).forEach(s => {
+                if (s.listen) sessionCompleted++;
+                if (s.read) sessionCompleted++;
+            });
+        }
+
+        const is100Percent = sessionCompleted === totalExercises && totalExercises > 0;
+        scoreEl.textContent = `${sessionCompleted} / ${totalExercises}`;
+        scoreEl.classList.toggle('perfect-score', is100Percent);
     }
 }
 
@@ -343,13 +495,18 @@ function updateGroupCards(lang) {
     // Build array of cards with their practice dates for sorting
     const cardsWithDates = cardsArray.map(card => {
         const groupId = card.dataset.groupId;
-        const groupData = completions[lang]?.[groupId];
+        // Use the active level for this module
+        const activeLevel = getModuleLevel(groupId);
+        const storageKey = `${groupId}_${activeLevel}`;
+        const groupData = completions[lang]?.[storageKey];
         // Use timestamp for precise ordering, fallback to date
         const sortKey = groupData?.timestamp || groupData?.date || '0000-00-00T00:00:00';
 
         return {
             card: card,
             groupId: groupId,
+            storageKey: storageKey,
+            level: activeLevel,
             sortKey: sortKey
         };
     });
@@ -369,13 +526,12 @@ function updateGroupCards(lang) {
     }
 
     // Now update each card's display
-    cardsArray.forEach(card => {
-        const groupId = card.dataset.groupId;
+    cardsWithDates.forEach(({ card, groupId, storageKey, level }) => {
         const sentenceCount = parseInt(card.dataset.sentenceCount) || 0;
         const totalExercises = sentenceCount * 2;
 
-        // Get completion data for this group
-        const groupData = completions[lang]?.[groupId];
+        // Get level-specific completion data
+        const groupData = completions[lang]?.[storageKey];
 
         // Calculate score and today status
         let completedToday = 0;  // Only exercises from today
@@ -405,10 +561,10 @@ function updateGroupCards(lang) {
         }
 
 
-        // Update Streak - show consecutive days group was 100% completed
+        // Update Streak - show consecutive days group was 100% completed (level-specific)
         const streakEl = card.querySelector('.group-streak');
         if (streakEl) {
-            const streak = calculateGroupStreak(lang, groupId);
+            const streak = calculateGroupStreak(lang, storageKey);
             if (streak > 0) {
                 streakEl.textContent = `${streak} day${streak !== 1 ? 's' : ''}`;
                 streakEl.classList.add('has-streak');
@@ -421,8 +577,8 @@ function updateGroupCards(lang) {
         // Update Score - shows session progress (0/total, updates during active session)
         const scoreEl = card.querySelector('.last-score');
         if (scoreEl) {
-            // Check if there's an active session for this group
-            const stateKey = `utteron_state_${groupId}`;
+            // Check if there's an active session for this group/level
+            const stateKey = `utteron_state_${groupId}_${level}`;
             const savedState = localStorage.getItem(stateKey);
 
             let sessionCompleted = 0;
@@ -439,6 +595,14 @@ function updateGroupCards(lang) {
                 } catch (e) {
                     console.warn('Failed to parse saved state:', e);
                 }
+            }
+
+            // Fallback: count from level-specific completions
+            if (sessionCompleted === 0 && groupData?.sentences) {
+                Object.values(groupData.sentences).forEach(s => {
+                    if (s.listen) sessionCompleted++;
+                    if (s.read) sessionCompleted++;
+                });
             }
 
             const is100Percent = sessionCompleted === totalExercises && totalExercises > 0;
@@ -465,10 +629,10 @@ function updateGroupCards(lang) {
             totalEl.textContent = '0';
         }
 
-        // Update Start/Resume button (expanded card)
+        // Update Start/Resume button (expanded card) - use level-specific state key
         const startBtn = card.querySelector('.start-btn');
-        const stateKey = `utteron_state_${groupId}`;
-        const hasResume = localStorage.getItem(stateKey);
+        const resumeStateKey = `utteron_state_${groupId}_${level}`;
+        const hasResume = localStorage.getItem(resumeStateKey);
 
         if (startBtn) {
             if (hasResume) {
@@ -942,8 +1106,18 @@ function initTrainingInterface() {
         return;
     }
 
-    // Find the group
-    const group = allGroups.find(g => g.group_id === groupId);
+    // Get the active level for this module
+    trainState.level = window.getModuleLevel ? getModuleLevel(groupId) : 'A1';
+
+    // Find the group with matching group_id AND level
+    // Groups data includes all levels as separate entries (e.g., social-lubricant A1, social-lubricant A2)
+    let group = allGroups.find(g => g.group_id === groupId && g.level === trainState.level);
+
+    // Fallback to any matching group_id if level-specific not found
+    if (!group) {
+        group = allGroups.find(g => g.group_id === groupId);
+    }
+
     if (!group || !group.sentences || group.sentences.length === 0) {
         showNoGroup();
         return;
@@ -953,11 +1127,8 @@ function initTrainingInterface() {
     trainState.groupTitle = group.group_title;
     trainState.groupDescription = group.description || '';
 
-    // Get the active level for this module
-    trainState.level = window.getModuleLevel ? getModuleLevel(trainState.groupId) : 'A1';
-
-    // Check for saved state
-    const stateKey = `utteron_state_${trainState.groupId}`;
+    // Use level-specific state key for save/resume
+    const stateKey = `utteron_state_${trainState.groupId}_${trainState.level}`;
     const savedStateRaw = localStorage.getItem(stateKey);
     let loadedFromSave = false;
 
@@ -969,7 +1140,7 @@ function initTrainingInterface() {
                 trainState.exercises = savedState.exercises;
                 trainState.currentIndex = savedState.currentIndex || 0;
                 loadedFromSave = true;
-                console.log('Resuming session for group:', trainState.groupId);
+                console.log('Resuming session for group:', trainState.groupId, 'level:', trainState.level);
             }
         } catch (e) {
             console.error('Failed to load saved state:', e);
@@ -1167,12 +1338,13 @@ function recordAndAdvance(gotIt) {
     // Update progress bar
     updateProgressBar();
 
-    // Save state
-    const stateKey = `utteron_state_${trainState.groupId}`;
+    // Use level-specific state key
+    const stateKey = `utteron_state_${trainState.groupId}_${trainState.level}`;
     if (trainState.currentIndex < trainState.exercises.length) {
         localStorage.setItem(stateKey, JSON.stringify({
             exercises: trainState.exercises,
             currentIndex: trainState.currentIndex,
+            level: trainState.level,
             timestamp: new Date().toISOString()
         }));
         showCurrentExercise();
@@ -1180,9 +1352,10 @@ function recordAndAdvance(gotIt) {
         // Clear state if finished
         localStorage.removeItem(stateKey);
 
-        // Check if session ended with 100% and record it
+        // Check if session ended with 100% and record it (using level-specific storage key)
         const completions = getCompletions();
-        const groupData = completions[trainState.lang]?.[trainState.groupId];
+        const storageKey = `${trainState.groupId}_${trainState.level}`;
+        const groupData = completions[trainState.lang]?.[storageKey];
         if (groupData && groupData.sentences) {
             const uniqueSentenceIds = [...new Set(trainState.exercises.map(e => e.sentence.id))];
             const allComplete = uniqueSentenceIds.every(id => {
@@ -1190,7 +1363,7 @@ function recordAndAdvance(gotIt) {
                 return s && s.listen && s.read;
             });
             if (allComplete) {
-                recordGroupCompletion(trainState.lang, trainState.groupId);
+                recordGroupCompletion(trainState.lang, trainState.groupId, trainState.level);
             }
         }
 

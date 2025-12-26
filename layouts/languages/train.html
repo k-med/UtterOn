@@ -5,7 +5,7 @@
 {{ if $groupsPage }}
 {{ range $groupsPage.Pages }}
 {{ $data := dict "group_id" .Params.group_id "group_title" .Params.group_title "description" .Params.description
-"sentences" .Params.sentences }}
+"sentences" .Params.sentences "level" (.Params.level | default "A1") }}
 {{ $groupsData = $groupsData | append $data }}
 {{ end }}
 {{ end }}

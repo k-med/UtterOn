@@ -136,8 +136,34 @@
         {{ $lang := .Params.language_code | default .File.ContentBaseName }}
         {{ $groups := .GetPage "groups" }}
         {{ if $groups }}
+
+        {{/* Build a map of group_id -> list of levels with their params */}}
+        {{ $groupMap := dict }}
         {{ range $groups.Pages }}
         {{ if not .Params.fundamental }}
+        {{ $gid := .Params.group_id }}
+        {{ $lvl := .Params.level | default "A1" }}
+        {{/* Store params explicitly so they JSONify correctly */}}
+        {{ $levelData := dict "Params" .Params }}
+        {{ $existing := index $groupMap $gid }}
+        {{ if $existing }}
+        {{/* Update basePage if this is A1 (prefer A1 as default) */}}
+        {{ if eq $lvl "A1" }}
+        {{ $groupMap = merge $groupMap (dict $gid (merge $existing (dict $lvl $levelData "basePage" .))) }}
+        {{ else }}
+        {{ $groupMap = merge $groupMap (dict $gid (merge $existing (dict $lvl $levelData))) }}
+        {{ end }}
+        {{ else }}
+        {{ $groupMap = merge $groupMap (dict $gid (dict $lvl $levelData "basePage" .)) }}
+        {{ end }}
+        {{ end }}
+        {{ end }}
+
+        {{/* Render one card per unique group_id */}}
+        {{ range $groupId, $levels := $groupMap }}
+        {{/* Get the actual page object from basePage key */}}
+        {{ $basePage := index $levels "basePage" }}
+        {{ with $basePage }}
         {{ $sentenceCount := len .Params.sentences }}
         {{ $baseSeconds := mul $sentenceCount 25 }}
         {{ $level := .Params.level | default "A1" }}
@@ -152,8 +178,14 @@
         {{ $estMinutes := div $estSeconds 60 }}
         {{ $minLow := $estMinutes }}
         {{ $minHigh := add $estMinutes 2 }}
+        {{/* Collect available levels (exclude basePage key) */}}
+        {{ $availLevels := slice }}
+        {{ range $lvl, $pg := $levels }}{{ if and (ne $lvl "basePage") }}{{ $availLevels = $availLevels | append $lvl
+        }}{{ end }}{{ end }}
+        {{ $availLevelsStr := delimit (sort $availLevels) "," }}
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
-            data-sentences='{{ .Params.sentences | jsonify }}'>
+            data-sentences='{{ .Params.sentences | jsonify }}' data-available-levels="{{ $availLevelsStr }}"
+            data-levels-data='{{ $levels | jsonify }}'>
 
             <!-- Card Header (visible only when collapsed) - click to expand -->
             <div class="group-card-header-collapsed"
@@ -206,9 +238,12 @@
             <div class="group-content-wrapper"
                 onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('{{ .Params.group_id }}')">
                 <div class="group-info-col">
+                    {{ $groupId := .Params.group_id }}
                     {{ with .Params.level }}
-                    <div class="difficulty-badge-container" data-group-id="{{ $.Params.group_id }}">
-                        <button class="difficulty-arrow difficulty-arrow-left" aria-label="Decrease difficulty">
+                    <div class="difficulty-badge-container" data-group-id="{{ $groupId }}">
+                        <button class="difficulty-arrow difficulty-arrow-left"
+                            onclick="event.stopPropagation(); switchModuleLevel('{{ $groupId }}', -1)"
+                            aria-label="Decrease difficulty">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -227,7 +262,9 @@
                             </span>
                             <span class="difficulty-level">{{ . }}</span>
                         </div>
-                        <button class="difficulty-arrow difficulty-arrow-right" aria-label="Increase difficulty">
+                        <button class="difficulty-arrow difficulty-arrow-right"
+                            onclick="event.stopPropagation(); switchModuleLevel('{{ $groupId }}', 1)"
+                            aria-label="Increase difficulty">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -310,8 +347,8 @@
                 </svg>
             </button>
         </div>
-        {{ end }}
-        {{ end }}
+        {{ end }}{{/* end with $basePage */}}
+        {{ end }}{{/* end range $groupId, $levels */}}
         {{ else }}
         <p>No sentence groups available yet.</p>
         {{ end }}
@@ -326,7 +363,6 @@
         updateGroupCards(lang);
         updateFundamentalsButtons(lang);
         initStatArrows();
-        initDifficultyControls();
         if (window.initFoundationsState) {
             initFoundationsState();
         }
