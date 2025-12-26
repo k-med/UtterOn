@@ -190,7 +190,8 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper">
+            <div class="group-content-wrapper"
+                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('{{ .Params.group_id }}')">
                 <div class="group-info-col">
                     {{ with .Params.level }}
                     <div class="difficulty-badge-container" data-group-id="{{ $.Params.group_id }}">
@@ -223,7 +224,8 @@
                     </div>
                     {{ end }}
 
-                    <div class="group-header">
+                    <div class="group-header" onclick="toggleGroupCard('{{ .Params.group_id }}')"
+                        style="cursor: pointer;">
                         <h3>{{ if hasPrefix .Params.group_title "The " }}{{ replace .Params.group_title "The " "The<br>"
                             1 | safeHTML }}{{ else }}{{ .Params.group_title }}{{ end }}</h3>
                     </div>

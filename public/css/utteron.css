@@ -416,7 +416,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Header with title and level badge */
+/* Header with title and level badge - clickable to collapse */
 .group-header {
   display: flex;
   align-items: center;
@@ -425,6 +425,12 @@
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 1rem;
+  transition: opacity 0.15s ease;
+  user-select: none;
+}
+
+.group-header:hover {
+  opacity: 0.8;
 }
 
 .group-header h3 {
@@ -1400,6 +1406,8 @@
   display: flex;
   gap: 0;
   width: 100%;
+  cursor: pointer;
+  user-select: none;
 }
 
 .group-info-col {
@@ -1822,6 +1830,7 @@
   width: 100%;
   flex: 0 1 auto;
   transition: border-color 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  user-select: none;
 }
 
 .fundamental-footer {
@@ -2105,6 +2114,7 @@
   position: relative;
   padding: 0.5rem 2rem 0;
   /* More top padding */
+  user-select: none;
 }
 
 .fundamentals-title-group {
@@ -2199,6 +2209,7 @@
   background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.5);
   border-radius: 12px;
   transition: background 0.2s ease;
+  user-select: none;
 }
 
 .modules-header:hover {
