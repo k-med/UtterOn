@@ -1,8 +1,10 @@
 ---
 title: The Lifeline
+weight: 8
 language: czech
 group_id: lifeline
 group_title: The Lifeline
+alt_title: "Emergency Response"
 description: |
   Emergency Response
   Critical phrases for emergencies: medical help, police, and urgent situations.

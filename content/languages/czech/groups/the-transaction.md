@@ -1,8 +1,10 @@
 ---
 title: The Transaction
+weight: 4
 language: czech
 group_id: transaction
 group_title: The Transaction
+alt_title: "Making Purchases"
 description: |
   Making Purchases
   Essential shopping phrases for purchases, payments, and transactions.

@@ -1,5 +1,6 @@
 ---
 title: Social Lubricant
+weight: 1
 language: czech
 group_id: social-lubricant
 group_title: Social Lubricant

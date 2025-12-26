@@ -1,8 +1,10 @@
 ---
 title: The Quantifier
+weight: 6
 language: czech
 group_id: quantifier
 group_title: The Quantifier 
+alt_title: "Size & Time"
 description: |
   Size & Time
   Express time, quantity, and size: more, enough, big, small, and numbers.

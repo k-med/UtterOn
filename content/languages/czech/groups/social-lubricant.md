@@ -1,8 +1,10 @@
 ---
 title: Social Lubricant
+weight: 1
 language: czech
 group_id: social-lubricant
 group_title: Social Lubricant
+alt_title: "The Beginning"
 description: |
   The Beginning
   Essential greetings and polite phrases for everyday social interaction in Czech.

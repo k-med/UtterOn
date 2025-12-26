@@ -1,8 +1,10 @@
 ---
 title: The Troubleshooter
+weight: 7
 language: czech
 group_id: troubleshooter
 group_title: The Troubleshooter
+alt_title: "Reporting Issues"
 description: |
   Reporting Issues
   Report problems and issues: broken items, temperature, and mistakes.

@@ -1593,13 +1593,69 @@ function initGroupCardState() {
 
     // Restore individual card states
     const minimizedCards = JSON.parse(localStorage.getItem('utteron_minimized_cards') || '{}');
-    Object.entries(minimizedCards).forEach(([groupId, isMinimized]) => {
-        if (isMinimized) {
-            const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
-            if (card) card.classList.add('minimized');
+
+    // Check if this is the first load (no saved state exists)
+    const hasExistingState = Object.keys(minimizedCards).length > 0;
+
+    cards.forEach(card => {
+        const groupId = card.dataset.groupId;
+
+        if (hasExistingState) {
+            // Use saved state from localStorage
+            if (minimizedCards[groupId]) {
+                card.classList.add('minimized');
+            }
+        } else {
+            // First load: collapse all except Social Lubricant
+            if (groupId !== 'social-lubricant') {
+                card.classList.add('minimized');
+            }
         }
     });
 
+    updateMasterToggleState();
+}
+
+// Reset modules to default order and state
+function resetModulesOrder() {
+    // Get completions data
+    const completions = getCompletions();
+    const lang = document.getElementById('group-list')?.dataset.language;
+
+    if (lang && completions[lang]) {
+        // Clear timestamps from all groups to reset sorting order
+        Object.keys(completions[lang]).forEach(key => {
+            if (key !== 'stats' && completions[lang][key]) {
+                // Keep completion data but remove timestamp and date
+                delete completions[lang][key].timestamp;
+                delete completions[lang][key].date;
+            }
+        });
+        saveCompletions(completions);
+    }
+
+    // Clear card state localStorage
+    localStorage.removeItem('utteron_minimized_cards');
+    localStorage.removeItem('utteron_all_cards_collapsed');
+
+    // Reset all cards to collapsed
+    const cards = document.querySelectorAll('.group-card');
+    cards.forEach(card => {
+        card.classList.add('minimized');
+    });
+
+    // Expand only Social Lubricant
+    const socialLubricant = document.querySelector('.group-card[data-group-id="social-lubricant"]');
+    if (socialLubricant) {
+        socialLubricant.classList.remove('minimized');
+    }
+
+    // Refresh module cards to restore weight order
+    if (lang) {
+        updateGroupCards(lang);
+    }
+
+    // Update the master toggle state
     updateMasterToggleState();
 }
 
@@ -1607,3 +1663,4 @@ function initGroupCardState() {
 window.toggleGroupCard = toggleGroupCard;
 window.toggleAllCards = toggleAllCards;
 window.initGroupCardState = initGroupCardState;
+window.resetModulesOrder = resetModulesOrder;

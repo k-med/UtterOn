@@ -1,8 +1,10 @@
 ---
 title: The Repair Kit
+weight: 2
 language: czech
 group_id: repair-kit
 group_title: The Repair Kit
+alt_title: "Stay in the Conversation"
 description: |
   Stay in the Conversation
   Keep conversations flowing when you don't understand something.

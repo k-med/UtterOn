@@ -1,8 +1,10 @@
 ---
 title: The Navigator
+weight: 5
 language: czech
 group_id: navigator
 group_title: The Navigator
+alt_title: "Getting Around"
 description: |
   Getting Around
   Navigate cities with confidence: directions, transport, and locations.

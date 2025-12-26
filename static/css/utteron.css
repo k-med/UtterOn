@@ -2228,6 +2228,29 @@ a,
   margin: 0;
 }
 
+.modules-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modules-reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.modules-reset-btn:hover {
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+  opacity: 1;
+}
+
 .modules-toggle-btn {
   background: transparent;
   border: none;

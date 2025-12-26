@@ -1,8 +1,10 @@
 ---
 title: The Master Keys
+weight: 3
 language: czech
 group_id: master-keys
 group_title: Master Keys
+alt_title: "Get What You Need"
 description: |
   Get What You Need
   Universal phrases for requesting things and expressing needs clearly.
