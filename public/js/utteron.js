@@ -1110,7 +1110,6 @@ function initTrainingInterface() {
     trainState.level = window.getModuleLevel ? getModuleLevel(groupId) : 'A1';
 
     // Find the group with matching group_id AND level
-    // Groups data includes all levels as separate entries (e.g., social-lubricant A1, social-lubricant A2)
     let group = allGroups.find(g => g.group_id === groupId && g.level === trainState.level);
 
     // Fallback to any matching group_id if level-specific not found
@@ -1162,7 +1161,7 @@ function initTrainingInterface() {
     }
 
     document.getElementById('no-group').style.display = 'none';
-    document.getElementById('exercise-card').style.display = 'block';
+    document.getElementById('exercise-card').style.display = 'flex'; // Changed to flex for new layout
     document.getElementById('total-count').textContent = trainState.exercises.length;
 
     // Set up event listeners
@@ -1178,11 +1177,10 @@ function initTrainingInterface() {
 function showNoGroup() {
     document.getElementById('no-group').style.display = 'block';
     document.getElementById('exercise-card').style.display = 'none';
-    document.getElementById('completion-message').style.display = 'none';
 }
 
 function setupEventListeners() {
-    // Main action button (Reveal / Play Audio)
+    // Main action button (Reveal)
     document.getElementById('action-btn').addEventListener('click', () => {
         revealAnswer();
     });
@@ -1207,7 +1205,7 @@ function setupEventListeners() {
         });
     }
 
-    // Retry button (on completion screen)
+    // Retry button (on completion overlay)
     const retryBtn = document.getElementById('retry-btn');
     if (retryBtn) {
         retryBtn.addEventListener('click', () => {
@@ -1226,9 +1224,8 @@ function setupEventListeners() {
             trainState.exercises = buildExercisePool(uniqueSentences);
             trainState.currentIndex = 0;
 
-            // Hide completion, show exercise card
+            // Hide completion overlay
             document.getElementById('completion-message').style.display = 'none';
-            document.getElementById('exercise-card').style.display = 'block';
 
             // Reset progress bar and show first exercise
             updateProgressBar();
@@ -1247,53 +1244,69 @@ function showCurrentExercise() {
     // Update progress
     document.getElementById('current-index').textContent = trainState.currentIndex + 1;
 
-    // Reset visibility
-    document.getElementById('reveal-area').style.display = 'none';
-    document.getElementById('report-buttons').style.display = 'none';
-    document.getElementById('action-btn').style.display = 'block';
-
-    const promptArea = document.getElementById('prompt-area');
+    // Reset visibility & Buttons
     const revealArea = document.getElementById('reveal-area');
+    revealArea.classList.remove('visible'); // Hide answer
+
+    document.getElementById('report-buttons').style.display = 'none';
+    const actionBtn = document.getElementById('action-btn');
+    actionBtn.style.display = 'block';
+    actionBtn.textContent = 'Reveal';
+
+    // Get Elements
+    const promptArea = document.getElementById('prompt-area');
     const audioContainer = document.getElementById('audio-container');
     const audio = document.getElementById('audio-player');
     const exerciseType = document.getElementById('exercise-type');
-    const actionBtn = document.getElementById('action-btn');
     const replayBtn = document.getElementById('replay-btn');
 
+    // Set Audio Source
     audio.src = sentence.audio;
 
-    if (type === 'listen') {
-        // Listen mode: show audio first, hide text
-        exerciseType.textContent = 'Listen & Translate';
-        exerciseType.className = 'exercise-type listen';
+    // Animate Content In (Remove exiting class if present)
+    const contentSlots = document.querySelectorAll('.content-slot');
+    contentSlots.forEach(slot => {
+        slot.style.opacity = '0';
+        slot.style.transform = 'translateY(10px)';
+        // Force reflow
+        void slot.offsetWidth;
+        slot.style.opacity = '1';
+        slot.style.transform = 'translateY(0)';
+    });
 
-        // Show gender hint if available
+    if (type === 'listen') {
+        // Listen Mode
+        exerciseType.textContent = 'Listen & Translate';
+        exerciseType.className = 'mode-badge listen';
+
         const genderHint = sentence.gender ? `<span class="gender-hint">${sentence.gender}</span>` : '';
         promptArea.innerHTML = `${genderHint}<p class="instruction">Listen to the audio, spell the word, then translate in your head.</p>`;
 
-        audioContainer.style.display = 'block';
-        if (replayBtn) replayBtn.querySelector('span').textContent = 'Play Again';
+        audioContainer.style.display = 'flex';
+        if (replayBtn) replayBtn.querySelector('span').textContent = 'Play Audio';
+
         revealArea.innerHTML = `
             <p class="native-text">${sentence.native}</p>
             <p class="english-text">${sentence.english}</p>
         `;
-        actionBtn.textContent = 'Show Answer';
 
-        // Autoplay the audio
-        audio.play().catch(e => console.log('Autoplay blocked:', e));
+        // Autoplay
+        setTimeout(() => {
+            audio.play().catch(e => console.log('Autoplay blocked:', e));
+        }, 300); // Slight delay for transition
     } else {
-        // Read mode: show native text, hide audio
+        // Read Mode
         exerciseType.textContent = 'Read & Speak';
-        exerciseType.className = 'exercise-type read';
-        promptArea.innerHTML = `<p class="native-text large">${sentence.native}</p>
+        exerciseType.className = 'mode-badge read';
+
+        promptArea.innerHTML = `<p class="native-text">${sentence.native}</p>
             <p class="instruction">Read aloud, then translate in your head.</p>`;
-        audioContainer.style.display = 'none';
+
+        audioContainer.style.display = 'none'; // Hidden initially
+
         revealArea.innerHTML = `
-            <div class="audio-reveal">
-                <p class="english-text">${sentence.english}</p>
-            </div>
+            <p class="english-text">${sentence.english}</p>
         `;
-        actionBtn.textContent = 'Check';
     }
 }
 
@@ -1303,8 +1316,9 @@ function revealAnswer() {
 
     trainState.revealed = true;
 
-    // Show reveal area
-    document.getElementById('reveal-area').style.display = 'block';
+    // Show reveal area with transition
+    const revealArea = document.getElementById('reveal-area');
+    revealArea.classList.add('visible');
 
     // Hide action button, show report buttons
     document.getElementById('action-btn').style.display = 'none';
@@ -1312,8 +1326,16 @@ function revealAnswer() {
 
     // For read mode, show and play audio
     if (type === 'read') {
-        document.getElementById('audio-container').style.display = 'block';
-        document.getElementById('audio-player').play();
+        const audioContainer = document.getElementById('audio-container');
+        audioContainer.style.display = 'flex';
+        // Animate audio container in
+        audioContainer.style.opacity = '0';
+        audioContainer.style.transform = 'translateY(10px)';
+        void audioContainer.offsetWidth;
+        audioContainer.style.opacity = '1';
+        audioContainer.style.transform = 'translateY(0)';
+
+        document.getElementById('audio-player').play().catch(e => console.log('Play failed:', e));
     }
 }
 
@@ -1326,7 +1348,6 @@ function recordAndAdvance(gotIt) {
     if (gotIt) {
         sessionStats.correct++;
         markExerciseComplete(trainState.lang, trainState.groupId, sentence.id, type, trainState.level);
-        // Check if this completed the group and update stats
         checkAndUpdateStats(trainState.lang, trainState.groupId, trainState.exercises, trainState.level);
     } else {
         sessionStats.missed++;
@@ -1338,7 +1359,7 @@ function recordAndAdvance(gotIt) {
     // Update progress bar
     updateProgressBar();
 
-    // Use level-specific state key
+    // Save state
     const stateKey = `utteron_state_${trainState.groupId}_${trainState.level}`;
     if (trainState.currentIndex < trainState.exercises.length) {
         localStorage.setItem(stateKey, JSON.stringify({
@@ -1347,12 +1368,24 @@ function recordAndAdvance(gotIt) {
             level: trainState.level,
             timestamp: new Date().toISOString()
         }));
-        showCurrentExercise();
+
+        // Animate Out
+        const contentSlots = document.querySelectorAll('.content-slot');
+        contentSlots.forEach(slot => {
+            slot.style.opacity = '0';
+            slot.style.transform = 'translateY(-10px)';
+        });
+
+        // Wait for animation then show next
+        setTimeout(() => {
+            showCurrentExercise();
+        }, 250);
+
     } else {
         // Clear state if finished
         localStorage.removeItem(stateKey);
 
-        // Check if session ended with 100% and record it (using level-specific storage key)
+        // Check completion
         const completions = getCompletions();
         const storageKey = `${trainState.groupId}_${trainState.level}`;
         const groupData = completions[trainState.lang]?.[storageKey];
@@ -1367,9 +1400,18 @@ function recordAndAdvance(gotIt) {
             }
         }
 
-        // Display completion stats before showing completion screen
+        // Display completion stats
         displayCompletionStats();
-        showCompletion();
+
+        // Animate Out before showing completion
+        const contentSlots = document.querySelectorAll('.content-slot');
+        contentSlots.forEach(slot => {
+            slot.style.opacity = '0';
+        });
+
+        setTimeout(() => {
+            showCompletion();
+        }, 250);
     }
 }
 
@@ -1427,8 +1469,14 @@ function checkAndUpdateStats(lang, groupId, exercises, level) {
 }
 
 function showCompletion() {
-    document.getElementById('exercise-card').style.display = 'none';
-    document.getElementById('completion-message').style.display = 'block';
+    // Show overlay
+    const overlay = document.getElementById('completion-message');
+    overlay.style.display = 'flex';
+
+    // Hide header elements to clean up view? 
+    // Actually, keeping the header (progress/mode) visible behind overlay might be distracting.
+    // But the overlay covers everything with background color.
+    // Let's ensure overlay covers the whole card content.
 }
 
 // ============================================

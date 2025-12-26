@@ -22,92 +22,96 @@
     <!-- Exercise Card -->
     <div class="exercise-card" id="exercise-card" style="display: none;">
 
-        <!-- Progress Indicator -->
-        <div class="progress-indicator">
-            <div class="progress-text">
-                <span id="current-index">1</span> / <span id="total-count">1</span>
+        <!-- Header: Progress & Mode -->
+        <div class="exercise-header">
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span id="current-index">1</span> / <span id="total-count">1</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
             </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="progress-bar"></div>
-            </div>
+            <div class="mode-badge" id="exercise-type"></div>
         </div>
 
-        <!-- Exercise Type Indicator -->
-        <div class="exercise-type" id="exercise-type"></div>
+        <!-- Stable Content Area -->
+        <div class="exercise-content">
+            <!-- Slot 1: Prompt (Always visible) -->
+            <div class="content-slot prompt-slot" id="prompt-area"></div>
 
-        <!-- Prompt Area (what user sees first) -->
-        <div class="prompt-area" id="prompt-area"></div>
+            <!-- Slot 2: Interaction (Audio/Input) -->
+            <div class="content-slot interaction-slot" id="interaction-area">
+                <!-- Audio Player -->
+                <div class="audio-controls" id="audio-container" style="display: none;">
+                    <button class="audio-btn" id="replay-btn" aria-label="Play audio">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Play Audio</span>
+                    </button>
+                    <audio id="audio-player"></audio>
+                </div>
+            </div>
 
-        <!-- Audio Player (hidden, controlled via button) -->
-        <div class="audio-container" id="audio-container">
-            <audio id="audio-player"></audio>
-            <button class="replay-btn" id="replay-btn" aria-label="Play audio">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <span>Play Audio</span>
-            </button>
+            <!-- Slot 3: Answer (Revealed) -->
+            <div class="content-slot answer-slot" id="reveal-area"></div>
         </div>
 
-        <!-- Reveal Area (shown after reveal) -->
-        <div class="reveal-area" id="reveal-area" style="display: none;"></div>
-
-        <!-- Action Button (always in same position) -->
-        <div class="action-area">
+        <!-- Fixed Action Area -->
+        <div class="action-footer">
+            <!-- Primary Action (Check/Show Answer/Next) -->
             <button class="action-btn primary" id="action-btn">Reveal</button>
+
+            <!-- Self-Grading Buttons (Hidden initially) -->
+            <div class="grading-buttons" id="report-buttons" style="display: none;">
+                <button class="grade-btn missed" id="missed-btn">
+                    <span class="icon">✕</span>
+                    <span class="label">Missed it</span>
+                </button>
+                <button class="grade-btn got-it" id="got-it-btn">
+                    <span class="icon">✓</span>
+                    <span class="label">Got it</span>
+                </button>
+            </div>
         </div>
 
-        <!-- Self Report Buttons (shown after reveal) -->
-        <div class="report-buttons" id="report-buttons" style="display: none;">
-            <button class="report-btn missed" id="missed-btn">Missed it</button>
-            <button class="report-btn got-it" id="got-it-btn">Got it</button>
-        </div>
-    </div>
+        <!-- Completion Overlay (Inside card for context) -->
+        <div class="completion-overlay" id="completion-message" style="display: none;">
+            <div class="completion-content">
+                <div class="completion-icon" id="completion-icon">🎉</div>
+                <h2 id="completion-title">Session Complete!</h2>
+                <p id="completion-subtitle">Great work!</p>
 
-    <!-- Completion Message -->
-    <div class="completion-message" id="completion-message" style="display: none;">
-        <div class="completion-header">
-            <div class="completion-icon" id="completion-icon">🎉</div>
-            <h2 id="completion-title">Session Complete!</h2>
-            <p class="completion-subtitle" id="completion-subtitle">Great work!</p>
-        </div>
+                <div class="completion-stats">
+                    <div class="stat-circle-large">
+                        <svg viewBox="0 0 36 36">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle-fill" id="accuracy-progress" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="stat-value" id="accuracy-value">0%</div>
+                    </div>
+                    <div class="stat-details">
+                        <div class="stat-row">
+                            <span>Correct</span>
+                            <span class="val success" id="correct-count">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Missed</span>
+                            <span class="val error" id="missed-count">0</span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="completion-stats-card">
-            <div class="stat-row primary">
-                <div class="stat-circle" id="accuracy-circle">
-                    <svg viewBox="0 0 100 100">
-                        <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="circle-fill" cx="50" cy="50" r="45" id="accuracy-progress"></circle>
-                    </svg>
-                    <div class="stat-value" id="accuracy-value">0%</div>
+                <div class="completion-actions">
+                    <button class="action-btn primary" id="retry-btn">Try Again</button>
+                    <a href="{{ .Parent.Permalink }}" class="action-btn secondary" id="back-to-groups-btn">Back to
+                        Groups</a>
                 </div>
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-label">Total</div>
-                    <div class="stat-value" id="total-questions">0</div>
-                </div>
-                <div class="stat-item success">
-                    <div class="stat-label">Correct</div>
-                    <div class="stat-value" id="correct-count">0</div>
-                </div>
-                <div class="stat-item error">
-                    <div class="stat-label">Missed</div>
-                    <div class="stat-value" id="missed-count">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Accuracy</div>
-                    <div class="stat-value" id="accuracy-text">0%</div>
-                </div>
-            </div>
-
-            <p class="performance-message" id="performance-message">Keep practicing!</p>
-        </div>
-
-        <div class="completion-actions">
-            <a href="{{ .Parent.Permalink }}" class="action-btn secondary" id="back-to-groups-btn">← Back to Groups</a>
-            <button class="action-btn primary" id="retry-btn">Try Again</button>
         </div>
     </div>
 
