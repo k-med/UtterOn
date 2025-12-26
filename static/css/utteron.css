@@ -381,17 +381,22 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
-  gap: 1rem;
+  padding: 1.5rem;
+  /* Reduced from 2rem */
+  gap: 0.75rem;
   position: relative;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  opacity: 0.95;
+  /* Slightly softer */
 }
 
 .group-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  /* Reduced lift */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+  opacity: 1;
 }
 
 .group-card::after {
@@ -1399,18 +1404,18 @@
   flex: 1 1 0;
   width: 50%;
   min-width: 0;
-  padding-top: 1.5rem;
-  padding-right: 2rem;
+  padding-top: 1rem;
+  /* Reduced */
+  padding-right: 1.5rem;
 }
 
 .group-desc-col {
   flex: 1 1 0;
   width: 50%;
   min-width: 0;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  padding-left: 2rem;
-  padding-top: 1.5rem;
-  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 1.5rem;
+  padding-top: 1rem;
 }
 
 /* Description content styling */
@@ -2251,7 +2256,12 @@
   display: none;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
+  transition: background 0.15s ease;
+}
+
+.group-card-header-collapsed:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .group-card.minimized .group-card-header-collapsed {
@@ -2273,33 +2283,44 @@
 }
 
 .group-card-subtitle {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .group-card-time {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
-  opacity: 0.7;
+  opacity: 0.45;
+  /* Dimmed further */
   white-space: nowrap;
 }
 
+/* Quieter badge in collapsed rows */
+.group-card-header-collapsed .difficulty-badge {
+  transform: scale(0.85);
+  opacity: 0.6;
+}
+
+/* List Start buttons - secondary/outline style */
 .start-btn-compact {
-  padding: 0.35rem 0.7rem;
-  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  background: var(--accent);
-  color: white;
-  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   white-space: nowrap;
+  opacity: 0.8;
 }
 
 .start-btn-compact:hover {
-  background: var(--accent-hover, #5a67d8);
-  transform: translateY(-1px);
+  background: var(--accent);
+  color: white;
+  opacity: 1;
 }
 
 .group-card-chevron {
