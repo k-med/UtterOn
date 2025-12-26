@@ -2402,3 +2402,15 @@
 .group-card-header-collapsed .start-btn-compact {
   cursor: pointer;
 }
+
+/* Resume mode for compact button */
+.start-btn-compact.resume-mode {
+  background: transparent;
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.start-btn-compact.resume-mode:hover {
+  background: #f59e0b;
+  color: white;
+}

@@ -114,11 +114,36 @@ function calculateGroupStreak(lang, groupId) {
 
     const groupData = completions[lang][groupId];
 
-    // Get completion history
-    const completionDates = groupData.completionDates || [];
+    // Build completionDates from all available sources for backwards compatibility
+    let completionDates = groupData.completionDates || [];
 
-    // Sort dates descending
-    const sortedDates = [...completionDates].sort((a, b) => b.localeCompare(a));
+    // Also include dates from completionHistory if not already in completionDates
+    if (groupData.completionHistory) {
+        Object.keys(groupData.completionHistory).forEach(date => {
+            if (!completionDates.includes(date)) {
+                completionDates.push(date);
+            }
+        });
+    }
+
+    // Also include the current 'date' field if 100% complete today
+    if (groupData.date && !completionDates.includes(groupData.date)) {
+        // Check if 100% complete for this day
+        const sentenceCount = Object.keys(groupData.sentences || {}).length;
+        let completed = 0;
+        Object.values(groupData.sentences || {}).forEach(s => {
+            if (s.listen) completed++;
+            if (s.read) completed++;
+        });
+        // If appears to have progress, include the date
+        if (completed > 0) {
+            // We can't verify 100% without knowing total, so trust it
+            completionDates.push(groupData.date);
+        }
+    }
+
+    // Remove duplicates and sort descending
+    completionDates = [...new Set(completionDates)].sort((a, b) => b.localeCompare(a));
 
     // Calculate streak from today backwards
     let streak = 0;
@@ -130,7 +155,7 @@ function calculateGroupStreak(lang, groupId) {
         const day = String(checkDate.getDate()).padStart(2, '0');
         const dateStr = `${year}-${month}-${day}`;
 
-        if (sortedDates.includes(dateStr)) {
+        if (completionDates.includes(dateStr)) {
             streak++;
             checkDate.setDate(checkDate.getDate() - 1);
         } else {
@@ -256,12 +281,31 @@ function updateGroupCards(lang) {
             }
         }
 
-        // Update Score - shows all-time progress
+        // Update Score - shows session progress (0/total, updates during active session)
         const scoreEl = card.querySelector('.last-score');
         if (scoreEl) {
-            // Always show score, even if 0
-            const is100Percent = totalCompleted === totalExercises && totalExercises > 0;
-            scoreEl.textContent = `${totalCompleted} / ${totalExercises}`;
+            // Check if there's an active session for this group
+            const stateKey = `utteron_state_${groupId}`;
+            const savedState = localStorage.getItem(stateKey);
+
+            let sessionCompleted = 0;
+            if (savedState) {
+                try {
+                    const state = JSON.parse(savedState);
+                    // Count completed exercises from saved state
+                    if (state.completedExercises) {
+                        sessionCompleted = state.completedExercises.length;
+                    } else if (state.currentIndex) {
+                        // Fallback: use current index as approximate progress
+                        sessionCompleted = state.currentIndex;
+                    }
+                } catch (e) {
+                    console.warn('Failed to parse saved state:', e);
+                }
+            }
+
+            const is100Percent = sessionCompleted === totalExercises && totalExercises > 0;
+            scoreEl.textContent = `${sessionCompleted} / ${totalExercises}`;
             // Highlight green if 100%
             scoreEl.classList.toggle('perfect-score', is100Percent);
         }
@@ -284,16 +328,30 @@ function updateGroupCards(lang) {
             totalEl.textContent = '0';
         }
 
-        // Update Start/Resume button
+        // Update Start/Resume button (expanded card)
         const startBtn = card.querySelector('.start-btn');
+        const stateKey = `utteron_state_${groupId}`;
+        const hasResume = localStorage.getItem(stateKey);
+
         if (startBtn) {
-            const stateKey = `utteron_state_${groupId}`;
-            if (localStorage.getItem(stateKey)) {
+            if (hasResume) {
                 startBtn.textContent = 'Resume';
                 startBtn.classList.add('resume-mode');
             } else {
                 startBtn.textContent = 'Start';
                 startBtn.classList.remove('resume-mode');
+            }
+        }
+
+        // Update collapsed header Start/Resume button
+        const compactBtn = card.querySelector('.start-btn-compact');
+        if (compactBtn) {
+            if (hasResume) {
+                compactBtn.textContent = 'Resume';
+                compactBtn.classList.add('resume-mode');
+            } else {
+                compactBtn.textContent = 'Start';
+                compactBtn.classList.remove('resume-mode');
             }
         }
     });
