@@ -1042,3 +1042,37 @@ function showCompletion() {
     document.getElementById('exercise-card').style.display = 'none';
     document.getElementById('completion-message').style.display = 'block';
 }
+
+// ============================================
+// Foundations Section Toggle
+// ============================================
+
+function toggleFoundations() {
+    console.log('toggleFoundations called');
+    const section = document.getElementById('foundations-section');
+    if (!section) {
+        console.error('Foundations section not found');
+        return;
+    }
+
+    section.classList.toggle('minimized');
+    const minimized = section.classList.contains('minimized');
+    console.log('Toggled minimized:', minimized);
+    localStorage.setItem('utteron_foundations_minimized', minimized);
+}
+
+// Initialize state on load
+function initFoundationsState() {
+    console.log('Initializing Foundations state');
+    const section = document.getElementById('foundations-section');
+    if (!section) return;
+
+    const isMinimized = localStorage.getItem('utteron_foundations_minimized') === 'true';
+    if (isMinimized) {
+        section.classList.add('minimized');
+    }
+}
+
+// Make sure functions are available globally
+window.toggleFoundations = toggleFoundations;
+window.initFoundationsState = initFoundationsState;

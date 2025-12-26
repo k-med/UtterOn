@@ -178,9 +178,19 @@
         </div>
 
         
-        <div class="fundamentals-section">
-            <span class="fundamentals-caption">Quick vocabulary boosters <span class="reset-note"></span>(Reset
-                daily.)</span></span>
+        <div class="fundamentals-section" id="foundations-section">
+            <div class="fundamentals-header" onclick="toggleFoundations()">
+                <div class="fundamentals-title-group">
+                    <h2 class="fundamentals-title">Foundations</h2>
+                    <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
+                </div>
+                <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+            </div>
             <div class="fundamentals-row">
                 
                 
@@ -589,18 +599,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Promiňte.</span>
-                                <span class="preview-english">Sorry</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Moc děkuji.</span>
-                                <span class="preview-english">Thank you very much</span>
+                                <span class="preview-native">Na shledanou.</span>
+                                <span class="preview-english">Goodbye</span>
                             </div>
                             
                             <div class="sentence-preview">
                                 <span class="preview-native">S dovolením.</span>
                                 <span class="preview-english">Excuse me</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Ahoj.</span>
+                                <span class="preview-english">Hi</span>
                             </div>
                             
                         </div>
@@ -693,18 +703,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ztratil jsem pas.</span>
-                                <span class="preview-english">I lost my passport.</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
                                 <span class="preview-native">Nedotýkejte se mě.</span>
                                 <span class="preview-english">Don’t touch me.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Pomoc!</span>
-                                <span class="preview-english">Help!</span>
+                                <span class="preview-native">Ztratila jsem se.</span>
+                                <span class="preview-english">I am lost.</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Mám alergii.</span>
+                                <span class="preview-english">I have an allergy.</span>
                             </div>
                             
                         </div>
@@ -797,18 +807,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Chtěla bych tamto.</span>
-                                <span class="preview-english">I would like that.</span>
+                                <span class="preview-native">Chtěla bych tohle.</span>
+                                <span class="preview-english">I would like this.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Vodu, prosím.</span>
-                                <span class="preview-english">Water, please.</span>
+                                <span class="preview-native">Je tu bankomat?</span>
+                                <span class="preview-english">Is there an ATM here?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kde je toaleta?</span>
-                                <span class="preview-english">Where is the bathroom?</span>
+                                <span class="preview-native">Chtěl bych tohle.</span>
+                                <span class="preview-english">I would like this.</span>
                             </div>
                             
                         </div>
@@ -901,18 +911,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jede to do centra?</span>
-                                <span class="preview-english">Does this go to the center?</span>
+                                <span class="preview-native">Kde je letiště?</span>
+                                <span class="preview-english">Where is the airport?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Lístek do Prahy, prosím.</span>
-                                <span class="preview-english">Ticket to Prague, please.</span>
+                                <span class="preview-native">Rovně.</span>
+                                <span class="preview-english">Straight ahead.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Zahněte doleva.</span>
-                                <span class="preview-english">Turn Left.</span>
+                                <span class="preview-native">Zahněte doprava.</span>
+                                <span class="preview-english">Turn Right.</span>
                             </div>
                             
                         </div>
@@ -1005,18 +1015,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je to malé.</span>
-                                <span class="preview-english">It is small.</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">V kolik hodin?</span>
-                                <span class="preview-english">At what time?</span>
+                                <span class="preview-native">Chci víc.</span>
+                                <span class="preview-english">I want more.</span>
                             </div>
                             
                             <div class="sentence-preview">
                                 <span class="preview-native">Kolik je hodin?</span>
                                 <span class="preview-english">What time is it?</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">V kolik hodin?</span>
+                                <span class="preview-english">At what time?</span>
                             </div>
                             
                         </div>
@@ -1109,8 +1119,8 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Můžete mluvit pomaleji?</span>
-                                <span class="preview-english">Can you speak more slowly?</span>
+                                <span class="preview-native">Můžete to zopakovat?</span>
+                                <span class="preview-english">Can you repeat that?</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1213,8 +1223,8 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kolik je to dohromady?</span>
-                                <span class="preview-english">How much is it in total?</span>
+                                <span class="preview-native">Účet, prosím.</span>
+                                <span class="preview-english">The bill, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1223,8 +1233,8 @@
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ne, děkuji.</span>
-                                <span class="preview-english">No, thank you.</span>
+                                <span class="preview-native">Jen se dívám.</span>
+                                <span class="preview-english">I’m just looking.</span>
                             </div>
                             
                         </div>
@@ -1317,13 +1327,13 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Tohle jsem si neobjednal.</span>
-                                <span class="preview-english">I didn’t order this.</span>
+                                <span class="preview-native">Neteče teplá voda.</span>
+                                <span class="preview-english">There is no hot water.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Neteče teplá voda.</span>
-                                <span class="preview-english">There is no hot water.</span>
+                                <span class="preview-native">Je otevřeno.</span>
+                                <span class="preview-english">It is open.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1356,6 +1366,12 @@
         updateFundamentalsButtons(lang);
         initStatArrows();
         initDifficultyControls();
+        initDifficultyControls();
+        if (window.initFoundationsState) {
+            initFoundationsState();
+        } else {
+            console.error('initFoundationsState not found');
+        }
     });
 </script>
 

@@ -1565,13 +1565,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(67, 97, 238, 0.15) 100%);
+  /* Darker at bottom for hierarchy, but lighter at top to show image */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.75) 60%, rgba(67, 97, 238, 0.1) 100%);
   border-radius: var(--radius);
   z-index: -1;
 }
 
 :root[data-theme="dark"] .language-header-card::before {
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(67, 97, 238, 0.4) 100%);
+  /* Darker fade at bottom to ground the Foundations panel */
+  background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7) 0%, rgba(26, 26, 46, 0.85) 70%, rgba(15, 15, 26, 1) 100%);
 }
 
 .lang-title-section {
@@ -1639,21 +1641,25 @@
 }
 
 .stat-label-sm {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  /* Smaller */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-secondary);
-  font-weight: 600;
+  font-weight: 500;
+  /* Lower contrast/weight */
+  opacity: 0.8;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.1rem;
 }
 
 .stat-value-sm {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
+  /* Heavier */
   color: var(--text-primary);
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.02em;
 }
 
 .stat-value-sm.target-met {
@@ -1761,8 +1767,10 @@
 
 .fundamentals-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.4rem;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3x2 grid */
+  gap: 0.6rem;
+  /* Slightly larger gap for 3-col layout */
   width: 100%;
   max-width: 100%;
   justify-content: center;
@@ -1781,22 +1789,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.4rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 0.35rem;
+  padding: 0.6rem 0.8rem;
+  /* Increased horizontal padding */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   text-decoration: none;
-  aspect-ratio: 1 / 1;
-  min-height: auto;
+  /* Removed aspect-ratio to allow natural width */
+  min-height: 80px;
   min-width: 0;
   width: 100%;
   flex: 0 1 auto;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Subtle lift affordance */
+}
+
+.fundamental-btn:active {
+  transform: scale(0.96);
+}
+
+.fundamental-score {
+  opacity: 0.6;
+  /* De-emphasize totals */
+  font-size: 0.75rem;
 }
 
 .fundamental-btn:hover {
@@ -2020,4 +2036,101 @@
 .about-wrapper .action-btn:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+}
+
+/* ============================================
+   Foundations Section
+   ============================================ */
+
+.fundamentals-section {
+  margin-bottom: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  /* For absolute positioning of chevron */
+}
+
+.fundamentals-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  padding: 1rem 2rem 0;
+  /* More top padding */
+}
+
+.fundamentals-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  /* Tighter spacing */
+  align-items: center;
+}
+
+.fundamentals-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.fundamentals-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.minimize-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.minimize-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .minimize-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Minimized State */
+.fundamentals-section.minimized .fundamentals-row {
+  display: none !important;
+}
+
+.fundamentals-section.minimized .fundamentals-header {
+  margin-bottom: 0;
+}
+
+.fundamentals-section.minimized .minimize-btn svg {
+  transform: rotate(180deg);
+}
+
+/* Fix for rotation when absolute */
+.minimize-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.fundamentals-section.minimized {
+  padding-bottom: 1.5rem;
 }

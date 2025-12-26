@@ -66,9 +66,19 @@
         </div>
 
         <!-- Fundamentals Buttons Row -->
-        <div class="fundamentals-section">
-            <span class="fundamentals-caption">Quick vocabulary boosters <span class="reset-note"></span>(Reset
-                daily.)</span></span>
+        <div class="fundamentals-section" id="foundations-section">
+            <div class="fundamentals-header" onclick="toggleFoundations()">
+                <div class="fundamentals-title-group">
+                    <h2 class="fundamentals-title">Foundations</h2>
+                    <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
+                </div>
+                <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+            </div>
             <div class="fundamentals-row">
                 {{ $lang := .Params.language_code | default .File.ContentBaseName }}
                 {{ $groups := .GetPage "groups" }}
@@ -228,6 +238,12 @@
         updateFundamentalsButtons(lang);
         initStatArrows();
         initDifficultyControls();
+        initDifficultyControls();
+        if (window.initFoundationsState) {
+            initFoundationsState();
+        } else {
+            console.error('initFoundationsState not found');
+        }
     });
 </script>
 {{ end }}
