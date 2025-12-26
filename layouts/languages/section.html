@@ -28,7 +28,7 @@
                 <span class="stat-value-sm" id="stat-streak">0 Days</span>
             </div>
             <div class="stat-col stat-adjustable" data-stat="today">
-                <span class="stat-label-sm">Today</span>
+                <span class="stat-label-sm">Modules Today</span>
                 <div class="stat-value-wrapper">
                     <button class="stat-arrow up" aria-label="Decrease"></button>
                     <span class="stat-value-sm" id="stat-today">0/5</span>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="week">
-                <span class="stat-label-sm">Week</span>
+                <span class="stat-label-sm">Modules (7d)</span>
                 <div class="stat-value-wrapper">
                     <button class="stat-arrow up" aria-label="Decrease"></button>
                     <span class="stat-value-sm" id="stat-week">0/35</span>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="month">
-                <span class="stat-label-sm">Month</span>
+                <span class="stat-label-sm">Modules (30d)</span>
                 <div class="stat-value-wrapper">
                     <button class="stat-arrow up" aria-label="Decrease"></button>
                     <span class="stat-value-sm" id="stat-month">0/140</span>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="year">
-                <span class="stat-label-sm">Year</span>
+                <span class="stat-label-sm">Modules (365d)</span>
                 <div class="stat-value-wrapper">
                     <button class="stat-arrow up" aria-label="Decrease"></button>
                     <span class="stat-value-sm" id="stat-year">0/1680</span>
@@ -71,6 +71,7 @@
                 <div class="fundamentals-title-group">
                     <h2 class="fundamentals-title">Foundations</h2>
                     <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
+                    <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
                 </div>
                 <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -88,13 +89,15 @@
                 {{ range $groups.Pages }}
                 {{ if eq .Params.group_id $groupId }}
                 {{ $sentenceCount := len .Params.sentences }}
-                {{ $estSeconds := mul $sentenceCount 10 }}
+                {{ $estSeconds := mul $sentenceCount 8 }}
                 {{ $timeDisplay := "" }}
-                {{ if lt $estSeconds 60 }}
-                {{ $timeDisplay = printf "~%ds" $estSeconds }}
+                {{ if lt $estSeconds 90 }}
+                {{ $timeDisplay = "~1 min" }}
+                {{ else if lt $estSeconds 150 }}
+                {{ $timeDisplay = "~1-2 min" }}
                 {{ else }}
                 {{ $estMinutes := div $estSeconds 60 }}
-                {{ $timeDisplay = printf "~%dm" $estMinutes }}
+                {{ $timeDisplay = printf "~%d min" $estMinutes }}
                 {{ end }}
                 <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
                     data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
@@ -122,7 +125,19 @@
         {{ range $groups.Pages }}
         {{ if not .Params.fundamental }}
         {{ $sentenceCount := len .Params.sentences }}
-        {{ $estMinutes := div (mul $sentenceCount 50) 60 }}
+        {{ $baseSeconds := mul $sentenceCount 25 }}
+        {{ $level := .Params.level | default "A1" }}
+        {{ $multiplier := 100 }}
+        {{ if eq $level "A1" }}{{ $multiplier = 100 }}{{ end }}
+        {{ if eq $level "A2" }}{{ $multiplier = 115 }}{{ end }}
+        {{ if eq $level "B1" }}{{ $multiplier = 135 }}{{ end }}
+        {{ if eq $level "B2" }}{{ $multiplier = 160 }}{{ end }}
+        {{ if eq $level "C1" }}{{ $multiplier = 190 }}{{ end }}
+        {{ if eq $level "C2" }}{{ $multiplier = 220 }}{{ end }}
+        {{ $estSeconds := div (mul $baseSeconds $multiplier) 100 }}
+        {{ $estMinutes := div $estSeconds 60 }}
+        {{ $minLow := $estMinutes }}
+        {{ $minHigh := add $estMinutes 2 }}
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
             data-sentences='{{ .Params.sentences | jsonify }}'>
 
@@ -171,7 +186,8 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Time</div>
-                            <div class="stat-value">~{{ if gt $estMinutes 0 }}{{ $estMinutes }}{{ else }}1{{ end }} min
+                            <div class="stat-value">~{{ if gt $minLow 0 }}{{ $minLow }}-{{ $minHigh }}{{ else }}1-2{{
+                                end }} min
                             </div>
                         </div>
                         <div class="stat-card">
@@ -179,7 +195,7 @@
                             <div class="stat-value group-streak" data-group="{{ .Params.group_id }}">—</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Score</div>
+                            <div class="stat-label">Exercises</div>
                             <div class="stat-value last-score" data-group="{{ .Params.group_id }}">—</div>
                         </div>
                         <div class="stat-card">

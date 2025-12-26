@@ -508,7 +508,6 @@ function updateFundamentalsButtons(lang) {
 
         if (!completions[lang] || !completions[lang][groupId]) {
             scoreBadgeEl.textContent = `0/${totalScore}`;
-            scoreBadgeEl.classList.remove('partial-complete');
             btn.classList.remove('complete-today');
             return;
         }
@@ -526,13 +525,7 @@ function updateFundamentalsButtons(lang) {
 
         scoreBadgeEl.textContent = `${currentScore}/${totalScore}`;
 
-        // Highlight orange if partial (started but not finished)
-        if (currentScore > 0 && currentScore < totalScore) {
-            scoreBadgeEl.classList.add('partial-complete');
-        } else {
-            scoreBadgeEl.classList.remove('partial-complete');
-        }
-
+        // Only highlight green if 100% complete (no orange for partial progress)
         const is100Percent = currentScore === totalScore && totalScore > 0;
         const practicedToday = group.date === today;
 

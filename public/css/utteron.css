@@ -1640,17 +1640,26 @@
   padding: 0.1rem 0.15rem;
 }
 
+/* Demote Year and All stats */
+.stat-col[data-stat="year"],
+.stat-col:last-child {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
 .stat-label-sm {
-  font-size: 0.65rem;
-  /* Smaller */
+  font-size: 0.6rem;
+  /* Smaller & dimmer */
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
+  /* Reduced letter-spacing */
   color: var(--text-secondary);
-  font-weight: 500;
-  /* Lower contrast/weight */
-  opacity: 0.8;
+  font-weight: 400;
+  /* Lighter */
+  opacity: 0.65;
+  /* More dim */
   white-space: nowrap;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.15rem;
 }
 
 .stat-value-sm {
@@ -1678,12 +1687,14 @@
   background: none;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.5rem;
+  font-size: 0.45rem;
+  /* Smaller arrows */
   cursor: pointer;
-  padding: 0.2rem;
+  padding: 0.15rem;
   line-height: 1;
-  opacity: 0.4;
-  transition: opacity 0.2s, color 0.2s;
+  opacity: 0.3;
+  /* Less prominent */
+  transition: opacity 0.12s, color 0.12s;
 }
 
 .stat-arrow:hover {
@@ -1789,20 +1800,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0.6rem 0.8rem;
-  /* Increased horizontal padding */
-  background: rgba(255, 255, 255, 0.03);
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  /* Slightly more visible border */
+  border-radius: 14px;
   text-decoration: none;
-  /* Removed aspect-ratio to allow natural width */
-  min-height: 80px;
+  min-height: 85px;
   min-width: 0;
   width: 100%;
   flex: 0 1 auto;
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Subtle lift affordance */
+  transition: border-color 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+.fundamental-footer {
+  display: none;
+  /* Hide by default */
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin-top: 0.2rem;
+}
+
+.fundamental-btn:hover .fundamental-footer {
+  display: flex;
+  /* Show on hover */
+  gap: 0.5rem;
 }
 
 .fundamental-btn:active {
@@ -1816,12 +1839,10 @@
 }
 
 .fundamental-btn:hover {
-  background: rgba(99, 102, 241, 0.85);
-  color: white;
-  border-color: rgba(99, 102, 241, 0.9);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.35),
-    0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+  /* Border brightening on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 .fundamental-btn:hover .fundamental-label,
@@ -1850,64 +1871,70 @@
 }
 
 .fundamental-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.7rem;
+  /* Slightly larger */
+  font-weight: 500;
+  /* Medium weight */
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
   word-break: keep-all;
   overflow-wrap: normal;
-  line-height: 1.2;
+  line-height: 1.3;
+  /* Increased line-height */
   max-width: 100%;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.01em;
+  /* Tight letter-spacing */
 }
 
 .fundamental-time {
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgba(147, 197, 253, 1);
+  font-size: 0.85rem;
+  /* Smaller, secondary */
+  font-weight: 600;
+  color: rgba(147, 197, 253, 0.85);
+  /* Lighter */
   line-height: 1;
-  margin-bottom: 0.15rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.1rem;
 }
 
 .fundamental-score {
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text-secondary);
-  background: rgba(99, 102, 241, 0.08);
-  padding: 0.1rem 0.2rem;
-  border-radius: 4px;
-  font-weight: 600;
-  border: none;
-  opacity: 0.7;
-  backdrop-filter: blur(2px);
+  font-weight: 400;
+  opacity: 0.35;
+  /* Even quieter */
 }
 
 .fundamental-item-count {
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text-secondary);
-  background: rgba(99, 102, 241, 0.08);
-  padding: 0.1rem 0.2rem;
-  border-radius: 4px;
-  font-weight: 600;
-  border: none;
-  opacity: 0.7;
-  backdrop-filter: blur(2px);
+  font-weight: 400;
+  opacity: 0.35;
 }
 
-/* Partial completion (Orange) */
-.fundamental-score.partial-complete {
-  background: rgba(249, 115, 22, 0.15);
-  color: rgba(251, 146, 60, 1);
-  box-shadow: 0 0 8px rgba(249, 115, 22, 0.2);
-  opacity: 1;
-}
+/* Partial completion styling removed - Foundations should be calm/neutral until 100% complete */
 
-/* Green highlight for 100% completion today */
+/* Green highlight for 100% completion - desaturated, professional */
 .fundamental-btn.complete-today {
-  background: rgba(74, 222, 128, 0.25);
-  border-color: rgba(74, 222, 128, 0.6);
-  box-shadow: 0 2px 8px rgba(74, 222, 128, 0.3),
-    0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(52, 211, 153, 0.15);
+  /* Less saturated green */
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);
+  animation: completePulse 0.6s ease-out;
+  /* Brief pulse on completion */
+}
+
+@keyframes completePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 12px 4px rgba(52, 211, 153, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);
+  }
 }
 
 .fundamental-btn.complete-today .fundamental-label,
@@ -2043,14 +2070,17 @@
    ============================================ */
 
 .fundamentals-section {
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.78);
+  /* Reduced opacity 5% more */
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 1.8rem;
   transition: all 0.3s ease;
   position: relative;
-  /* For absolute positioning of chevron */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  /* Slightly stronger top highlight */
 }
 
 .fundamentals-header {
@@ -2058,11 +2088,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
+  /* More space to cards */
   cursor: pointer;
   text-align: center;
   position: relative;
-  padding: 1rem 2rem 0;
+  padding: 0.5rem 2rem 0;
   /* More top padding */
 }
 
@@ -2085,6 +2116,14 @@
   font-size: 1rem;
   color: var(--text-secondary);
   margin: 0;
+}
+
+.fundamentals-explainer {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin: 0.25rem 0 0;
+  font-style: italic;
 }
 
 .minimize-btn {
