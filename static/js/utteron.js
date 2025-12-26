@@ -1093,24 +1093,22 @@ function toggleGroupCard(groupId) {
 // Toggle all cards (master toggle)
 function toggleAllCards() {
     const header = document.querySelector('.modules-header');
-    const groupList = document.getElementById('group-list');
     const cards = document.querySelectorAll('.group-card');
 
-    if (!header || !groupList || !cards.length) return;
+    if (!header || !cards.length) return;
 
     const isCollapsed = header.classList.contains('collapsed');
 
     if (isCollapsed) {
         // Expand all
         header.classList.remove('collapsed');
-        groupList.classList.remove('all-collapsed');
         cards.forEach(card => card.classList.remove('minimized'));
         localStorage.setItem('utteron_all_cards_collapsed', 'false');
         localStorage.setItem('utteron_minimized_cards', '{}');
     } else {
-        // Collapse all
+        // Collapse all (minimize each card, not hide)
         header.classList.add('collapsed');
-        groupList.classList.add('all-collapsed');
+        cards.forEach(card => card.classList.add('minimized'));
         localStorage.setItem('utteron_all_cards_collapsed', 'true');
     }
 }
@@ -1132,13 +1130,13 @@ function updateMasterToggleState() {
 // Initialize group card states on load
 function initGroupCardState() {
     const header = document.querySelector('.modules-header');
-    const groupList = document.getElementById('group-list');
+    const cards = document.querySelectorAll('.group-card');
 
     // Check if all collapsed
     const allCollapsed = localStorage.getItem('utteron_all_cards_collapsed') === 'true';
-    if (allCollapsed && header && groupList) {
+    if (allCollapsed && header && cards.length) {
         header.classList.add('collapsed');
-        groupList.classList.add('all-collapsed');
+        cards.forEach(card => card.classList.add('minimized'));
         return;
     }
 

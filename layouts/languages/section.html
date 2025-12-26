@@ -155,14 +155,40 @@
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
             data-sentences='{{ .Params.sentences | jsonify }}'>
 
-            <!-- Card Chevron Toggle -->
-            <button type="button" class="group-card-chevron"
-                onclick="event.stopPropagation(); toggleGroupCard('{{ .Params.group_id }}')" aria-label="Toggle card">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
-            </button>
+            <!-- Card Header (visible only when collapsed) - click to expand -->
+            <div class="group-card-header-collapsed"
+                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('{{ .Params.group_id }}')">
+                {{ with .Params.level }}
+                <div class="difficulty-badge" data-level="{{ . }}">
+                    <span class="difficulty-category">
+                        {{- if or (eq . "A1") (eq . "A2") -}}Beginner{{- else if or (eq . "B1") (eq . "B2")
+                        -}}Intermediate{{- else -}}Advanced{{- end -}}
+                    </span>
+                    <span class="difficulty-level">{{ . }}</span>
+                </div>
+                {{ end }}
+
+                <div class="group-card-title-group">
+                    <h3 class="group-card-title">{{ .Params.group_title }}</h3>
+                    {{ with .Params.alt_title }}
+                    <span class="group-card-subtitle">{{ . }}</span>
+                    {{ end }}
+                </div>
+
+                <span class="group-card-time">~{{ if gt $minLow 0 }}{{ $minLow }}-{{ $minHigh }}{{ else }}1-2{{ end }}
+                    min</span>
+
+                <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn-compact">Start</a>
+
+                <button type="button" class="group-card-chevron"
+                    onclick="event.stopPropagation(); toggleGroupCard('{{ .Params.group_id }}')"
+                    aria-label="Toggle card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+            </div>
 
             <div class="group-content-wrapper">
                 <div class="group-info-col">
@@ -259,6 +285,15 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Chevron for expanded view (top-right) -->
+            <button type="button" class="group-card-chevron-expanded"
+                onclick="event.stopPropagation(); toggleGroupCard('{{ .Params.group_id }}')" aria-label="Collapse card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
         </div>
         {{ end }}
         {{ end }}
