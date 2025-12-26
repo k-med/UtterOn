@@ -108,6 +108,25 @@ function updateModuleLevelDisplay(groupId, level) {
         if (upBtn) upBtn.disabled = !hasHigherLevel;
     }
 
+    // Update collapsed view subtitle (alt_title) based on level
+    if (card) {
+        const levelsDataRaw = card.dataset.levelsData;
+        if (levelsDataRaw) {
+            try {
+                const levelsData = JSON.parse(levelsDataRaw);
+                const levelData = levelsData[level];
+                if (levelData?.Params?.alt_title) {
+                    const subtitleEl = card.querySelector('.group-card-subtitle');
+                    if (subtitleEl) {
+                        subtitleEl.textContent = levelData.Params.alt_title;
+                    }
+                }
+            } catch (e) {
+                console.warn('Failed to update subtitle for level:', e);
+            }
+        }
+    }
+
     // Update expanded view difficulty arrows
     const badgeContainer = document.querySelector(`.difficulty-badge-container[data-group-id="${groupId}"]`);
     if (badgeContainer) {

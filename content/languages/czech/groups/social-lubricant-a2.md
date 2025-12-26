@@ -4,7 +4,7 @@ weight: 1
 language: czech
 group_id: social-lubricant
 group_title: Social Lubricant
-alt_title: "The Beginning"
+alt_title: "Politeness beyond the basics"
 description: |
   Politeness beyond the basics.
   Natural greetings, softening, brief social exchanges, and polite closures used in everyday Czech conversation.
