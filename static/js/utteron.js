@@ -1264,7 +1264,15 @@ function showCurrentExercise() {
     audio.src = sentence.audio;
 
     // Animate Content In (Remove exiting class if present)
-    const contentSlots = document.querySelectorAll('.content-slot');
+    // First, clear inline styles for ALL slots to remove 'opacity: 0' from exit animation
+    const allSlots = document.querySelectorAll('.content-slot');
+    allSlots.forEach(slot => {
+        slot.style.opacity = '';
+        slot.style.transform = '';
+    });
+
+    // Then animate in non-answer slots
+    const contentSlots = document.querySelectorAll('.content-slot:not(.answer-slot)');
     contentSlots.forEach(slot => {
         slot.style.opacity = '0';
         slot.style.transform = 'translateY(10px)';
