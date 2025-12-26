@@ -720,6 +720,26 @@ function displayCompletionStats() {
         title.textContent = 'Session Complete!';
         subtitle.textContent = 'Keep practicing to improve!';
     }
+
+    // Update button highlight based on accuracy
+    const backBtn = document.getElementById('back-to-groups-btn');
+    const retryBtn = document.getElementById('retry-btn');
+
+    if (backBtn && retryBtn) {
+        if (accuracy === 100) {
+            // 100% = highlight Back to Groups (primary), dim Try Again (secondary)
+            backBtn.classList.remove('secondary');
+            backBtn.classList.add('primary');
+            retryBtn.classList.remove('primary');
+            retryBtn.classList.add('secondary');
+        } else {
+            // < 100% = highlight Try Again (primary), dim Back to Groups (secondary)
+            backBtn.classList.remove('primary');
+            backBtn.classList.add('secondary');
+            retryBtn.classList.remove('secondary');
+            retryBtn.classList.add('primary');
+        }
+    }
 }
 
 let trainState = {

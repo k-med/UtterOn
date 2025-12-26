@@ -33,6 +33,21 @@
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Global cursor fix - prevent flashing text cursor on interactive elements */
+button,
+a,
+[onclick],
+.clickable,
+.group-card,
+.fundamentals-section,
+.modules-header,
+.completion-header,
+.completion-stats-card,
+.completion-icon {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* ============================================
    Layout
    ============================================ */
