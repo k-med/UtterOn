@@ -548,21 +548,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('social-lubricant')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('social-lubricant')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="social-lubricant"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('social-lubricant', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('social-lubricant', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">Social Lubricant</h3>
                     
                 </div>
 
-                <span class="group-card-time">~5-7
-                    min</span>
+                <span class="group-card-time" data-group-id="social-lubricant">~5-7 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=social-lubricant" class="start-btn-compact">Start</a>
 
@@ -654,18 +669,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Dobrý den.</span>
-                                <span class="preview-english">Hello</span>
+                                <span class="preview-native">Není zač.</span>
+                                <span class="preview-english">You&#39;re welcome (.informal)</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Děkuji.</span>
+                                <span class="preview-english">Thank you</span>
                             </div>
                             
                             <div class="sentence-preview">
                                 <span class="preview-native">Dobrý večer.</span>
                                 <span class="preview-english">Good evening</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Ahoj.</span>
-                                <span class="preview-english">Hi</span>
                             </div>
                             
                         </div>
@@ -705,21 +720,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('lifeline')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('lifeline')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="lifeline"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('lifeline', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('lifeline', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Lifeline</h3>
                     
                 </div>
 
-                <span class="group-card-time">~4-6
-                    min</span>
+                <span class="group-card-time" data-group-id="lifeline">~4-6 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=lifeline" class="start-btn-compact">Start</a>
 
@@ -811,18 +841,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Mám alergii.</span>
-                                <span class="preview-english">I have an allergy.</span>
+                                <span class="preview-native">Ztratila jsem se.</span>
+                                <span class="preview-english">I am lost.</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Ztratil jsem pas.</span>
+                                <span class="preview-english">I lost my passport.</span>
                             </div>
                             
                             <div class="sentence-preview">
                                 <span class="preview-native">Nedotýkejte se mě.</span>
                                 <span class="preview-english">Don’t touch me.</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Potřebuji lékaře.</span>
-                                <span class="preview-english">I need a doctor.</span>
                             </div>
                             
                         </div>
@@ -862,21 +892,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('master-keys')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('master-keys')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="master-keys"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('master-keys', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('master-keys', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">Master Keys</h3>
                     
                 </div>
 
-                <span class="group-card-time">~4-6
-                    min</span>
+                <span class="group-card-time" data-group-id="master-keys">~4-6 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=master-keys" class="start-btn-compact">Start</a>
 
@@ -968,18 +1013,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Chtěl bych tohle.</span>
-                                <span class="preview-english">I would like this.</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Toaletu, prosím.</span>
-                                <span class="preview-english">The bathroom, please.</span>
+                                <span class="preview-native">Jídelní lístek, prosím.</span>
+                                <span class="preview-english">The menu, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
                                 <span class="preview-native">Chtěl bych tamto.</span>
                                 <span class="preview-english">I would like that.</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Máte kávu?</span>
+                                <span class="preview-english">Do you have coffee?</span>
                             </div>
                             
                         </div>
@@ -1019,21 +1064,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('navigator')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('navigator')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="navigator"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('navigator', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('navigator', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Navigator</h3>
                     
                 </div>
 
-                <span class="group-card-time">~4-6
-                    min</span>
+                <span class="group-card-time" data-group-id="navigator">~4-6 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=navigator" class="start-btn-compact">Start</a>
 
@@ -1125,18 +1185,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Lístek do Prahy, prosím.</span>
-                                <span class="preview-english">Ticket to Prague, please.</span>
+                                <span class="preview-native">Zastavte tady, prosím.</span>
+                                <span class="preview-english">Stop here, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jede to do centra?</span>
-                                <span class="preview-english">Does this go to the center?</span>
+                                <span class="preview-native">Kde je hotel?</span>
+                                <span class="preview-english">Where is the hotel?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kde je letiště?</span>
-                                <span class="preview-english">Where is the airport?</span>
+                                <span class="preview-native">Prosím, vezměte mě sem.</span>
+                                <span class="preview-english">Please take me here.</span>
                             </div>
                             
                         </div>
@@ -1176,21 +1236,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('quantifier')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('quantifier')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="quantifier"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('quantifier', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('quantifier', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Quantifier</h3>
                     
                 </div>
 
-                <span class="group-card-time">~5-7
-                    min</span>
+                <span class="group-card-time" data-group-id="quantifier">~5-7 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=quantifier" class="start-btn-compact">Start</a>
 
@@ -1282,18 +1357,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Zítra.</span>
-                                <span class="preview-english">Tomorrow.</span>
+                                <span class="preview-native">Je to málo.</span>
+                                <span class="preview-english">It’s not enough.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je to malé.</span>
-                                <span class="preview-english">It is small.</span>
+                                <span class="preview-native">Chci víc.</span>
+                                <span class="preview-english">I want more.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je to velké.</span>
-                                <span class="preview-english">It is big.</span>
+                                <span class="preview-native">Dnes.</span>
+                                <span class="preview-english">Today.</span>
                             </div>
                             
                         </div>
@@ -1333,21 +1408,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('repair-kit')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('repair-kit')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="repair-kit"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('repair-kit', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('repair-kit', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Repair Kit</h3>
                     
                 </div>
 
-                <span class="group-card-time">~2-4
-                    min</span>
+                <span class="group-card-time" data-group-id="repair-kit">~2-4 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=repair-kit" class="start-btn-compact">Start</a>
 
@@ -1439,18 +1529,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ještě jednou, prosím.</span>
-                                <span class="preview-english">One more time, please</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Nerozumím.</span>
-                                <span class="preview-english">I don&#39;t understand</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
                                 <span class="preview-native">Mluvíte anglicky?</span>
                                 <span class="preview-english">Do you speak English?</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Můžete mluvit pomaleji?</span>
+                                <span class="preview-english">Can you speak more slowly?</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Ještě jednou, prosím.</span>
+                                <span class="preview-english">One more time, please</span>
                             </div>
                             
                         </div>
@@ -1490,21 +1580,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('transaction')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('transaction')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="transaction"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('transaction', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('transaction', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Transaction</h3>
                     
                 </div>
 
-                <span class="group-card-time">~4-6
-                    min</span>
+                <span class="group-card-time" data-group-id="transaction">~4-6 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=transaction" class="start-btn-compact">Start</a>
 
@@ -1596,13 +1701,13 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jen hotově?</span>
-                                <span class="preview-english">Cash only?</span>
+                                <span class="preview-native">Kolik je to dohromady?</span>
+                                <span class="preview-english">How much is it in total?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Účet, prosím.</span>
-                                <span class="preview-english">The bill, please.</span>
+                                <span class="preview-native">Vezmu si to.</span>
+                                <span class="preview-english">I’ll take it.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1647,21 +1752,36 @@
 
             
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('troubleshooter')">
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('troubleshooter')">
+
                 
-                <div class="difficulty-badge" data-level="A1">
-                    <span class="difficulty-category">Beginner</span>
-                    <span class="difficulty-level">A1</span>
+                <div class="level-selector" data-group-id="troubleshooter"
+                    data-default-level="A1">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('troubleshooter', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="A1">A1</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('troubleshooter', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">The Troubleshooter</h3>
                     
                 </div>
 
-                <span class="group-card-time">~3-5
-                    min</span>
+                <span class="group-card-time" data-group-id="troubleshooter">~3-5 min</span>
 
                 <a href="http://localhost:1313/languages/czech/train/?group=troubleshooter" class="start-btn-compact">Start</a>
 
@@ -1753,18 +1873,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Klíč nefunguje.</span>
-                                <span class="preview-english">The key doesn’t work.</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
                                 <span class="preview-native">Je to studené.</span>
                                 <span class="preview-english">It is cold.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je zavřeno.</span>
-                                <span class="preview-english">It is closed.</span>
+                                <span class="preview-native">Je to rozbité.</span>
+                                <span class="preview-english">It is broken.</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Klíč nefunguje.</span>
+                                <span class="preview-english">The key doesn’t work.</span>
                             </div>
                             
                         </div>
@@ -1806,6 +1926,9 @@
         }
         if (window.initGroupCardState) {
             initGroupCardState();
+        }
+        if (window.initModuleLevels) {
+            initModuleLevels();
         }
     });
 </script>

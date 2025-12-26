@@ -1440,7 +1440,7 @@ a,
   min-width: 0;
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   padding-left: 1.5rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 /* Description content styling */
@@ -2327,9 +2327,53 @@ a,
   white-space: nowrap;
 }
 
-/* Hide badge in collapsed rows - shown in expanded card only */
-.group-card-header-collapsed .difficulty-badge {
-  display: none;
+/* Level selector in collapsed rows */
+.level-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.level-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.15);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.level-chevron {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 4px;
+  opacity: 0.4;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-chevron:hover {
+  opacity: 1;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.level-chevron:disabled {
+  opacity: 0.15;
+  cursor: default;
+  pointer-events: none;
+}
+
+.level-chevron svg {
+  display: block;
 }
 
 /* List Start buttons - secondary/outline style */

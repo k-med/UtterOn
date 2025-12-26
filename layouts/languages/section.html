@@ -157,16 +157,29 @@
 
             <!-- Card Header (visible only when collapsed) - click to expand -->
             <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact')) return; toggleGroupCard('{{ .Params.group_id }}')">
-                {{ with .Params.level }}
-                <div class="difficulty-badge" data-level="{{ . }}">
-                    <span class="difficulty-category">
-                        {{- if or (eq . "A1") (eq . "A2") -}}Beginner{{- else if or (eq . "B1") (eq . "B2")
-                        -}}Intermediate{{- else -}}Advanced{{- end -}}
-                    </span>
-                    <span class="difficulty-level">{{ . }}</span>
+                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('{{ .Params.group_id }}')">
+
+                <!-- Level selector with chevrons -->
+                <div class="level-selector" data-group-id="{{ .Params.group_id }}"
+                    data-default-level="{{ .Params.level }}">
+                    <button type="button" class="level-chevron level-down"
+                        onclick="event.stopPropagation(); switchModuleLevel('{{ .Params.group_id }}', -1)"
+                        aria-label="Decrease level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="level-badge" data-level="{{ .Params.level }}">{{ .Params.level }}</span>
+                    <button type="button" class="level-chevron level-up"
+                        onclick="event.stopPropagation(); switchModuleLevel('{{ .Params.group_id }}', 1)"
+                        aria-label="Increase level">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
-                {{ end }}
 
                 <div class="group-card-title-group">
                     <h3 class="group-card-title">{{ .Params.group_title }}</h3>
@@ -175,8 +188,8 @@
                     {{ end }}
                 </div>
 
-                <span class="group-card-time">~{{ if gt $minLow 0 }}{{ $minLow }}-{{ $minHigh }}{{ else }}1-2{{ end }}
-                    min</span>
+                <span class="group-card-time" data-group-id="{{ .Params.group_id }}">~{{ if gt $minLow 0 }}{{ $minLow
+                    }}-{{ $minHigh }}{{ else }}1-2{{ end }} min</span>
 
                 <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn-compact">Start</a>
 
@@ -319,6 +332,9 @@
         }
         if (window.initGroupCardState) {
             initGroupCardState();
+        }
+        if (window.initModuleLevels) {
+            initModuleLevels();
         }
     });
 </script>

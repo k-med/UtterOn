@@ -21,6 +21,136 @@ function saveCompletions(data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
+// ============================================
+// Module Level State (per-module CEFR level)
+// ============================================
+
+const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+const LEVEL_STORAGE_KEY = 'utteron_module_levels';
+
+function getModuleLevels() {
+    try {
+        return JSON.parse(localStorage.getItem(LEVEL_STORAGE_KEY)) || {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function saveModuleLevels(data) {
+    localStorage.setItem(LEVEL_STORAGE_KEY, JSON.stringify(data));
+}
+
+function getModuleLevel(groupId) {
+    const levels = getModuleLevels();
+    if (levels[groupId]) {
+        return levels[groupId];
+    }
+    // Fallback: get default from DOM
+    const selector = document.querySelector(`.level-selector[data-group-id="${groupId}"]`);
+    return selector ? selector.dataset.defaultLevel : 'A1';
+}
+
+function setModuleLevel(groupId, level) {
+    const levels = getModuleLevels();
+    levels[groupId] = level;
+    saveModuleLevels(levels);
+}
+
+function switchModuleLevel(groupId, direction) {
+    const currentLevel = getModuleLevel(groupId);
+    const currentIndex = LEVELS.indexOf(currentLevel);
+    const newIndex = currentIndex + direction;
+
+    // Bounds check
+    if (newIndex < 0 || newIndex >= LEVELS.length) return;
+
+    const newLevel = LEVELS[newIndex];
+    setModuleLevel(groupId, newLevel);
+
+    // Update UI
+    updateModuleLevelDisplay(groupId, newLevel);
+}
+
+function updateModuleLevelDisplay(groupId, level) {
+    const selector = document.querySelector(`.level-selector[data-group-id="${groupId}"]`);
+    if (!selector) return;
+
+    // Update badge
+    const badge = selector.querySelector('.level-badge');
+    if (badge) {
+        badge.textContent = level;
+        badge.dataset.level = level;
+    }
+
+    // Update chevron disabled states
+    const levelIndex = LEVELS.indexOf(level);
+    const downBtn = selector.querySelector('.level-down');
+    const upBtn = selector.querySelector('.level-up');
+
+    if (downBtn) downBtn.disabled = levelIndex === 0;
+    if (upBtn) upBtn.disabled = levelIndex === LEVELS.length - 1;
+
+    // Update time estimate based on level multiplier
+    updateTimeEstimate(groupId, level);
+
+    // Update expanded card if visible
+    updateExpandedCardLevel(groupId, level);
+}
+
+function updateTimeEstimate(groupId, level) {
+    const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+    if (!card) return;
+
+    const sentenceCount = parseInt(card.dataset.sentenceCount) || 10;
+    const baseSeconds = sentenceCount * 25;
+
+    // CEFR multipliers
+    const multipliers = { A1: 1.0, A2: 1.15, B1: 1.35, B2: 1.6, C1: 1.9, C2: 2.2 };
+    const multiplier = multipliers[level] || 1.0;
+
+    const estSeconds = Math.round(baseSeconds * multiplier);
+    const minLow = Math.max(1, Math.floor(estSeconds / 60));
+    const minHigh = Math.ceil(estSeconds / 60) + 1;
+
+    const timeEl = card.querySelector('.group-card-time');
+    if (timeEl) {
+        timeEl.textContent = `~${minLow}-${minHigh} min`;
+    }
+}
+
+function updateExpandedCardLevel(groupId, level) {
+    const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+    if (!card || card.classList.contains('minimized')) return;
+
+    // Update difficulty badge in expanded view
+    const badge = card.querySelector('.group-content-wrapper .difficulty-badge');
+    if (badge) {
+        badge.dataset.level = level;
+        const categoryEl = badge.querySelector('.difficulty-category');
+        const levelEl = badge.querySelector('.difficulty-level');
+
+        if (categoryEl) {
+            if (level === 'A1' || level === 'A2') categoryEl.textContent = 'Beginner';
+            else if (level === 'B1' || level === 'B2') categoryEl.textContent = 'Intermediate';
+            else categoryEl.textContent = 'Advanced';
+        }
+        if (levelEl) levelEl.textContent = level;
+    }
+}
+
+function initModuleLevels() {
+    // Initialize all level selectors with saved state
+    document.querySelectorAll('.level-selector').forEach(selector => {
+        const groupId = selector.dataset.groupId;
+        const level = getModuleLevel(groupId);
+        updateModuleLevelDisplay(groupId, level);
+    });
+}
+
+// Make functions globally accessible
+window.switchModuleLevel = switchModuleLevel;
+window.initModuleLevels = initModuleLevels;
+
 function getTodayDate() {
     // Use local date, not UTC, to avoid timezone issues
     const now = new Date();
@@ -45,62 +175,69 @@ function getGroupCompletion(lang, groupId) {
     return null;
 }
 
-function markExerciseComplete(lang, groupId, sentenceId, exerciseType) {
+function markExerciseComplete(lang, groupId, sentenceId, exerciseType, level) {
     const completions = getCompletions();
     const today = getTodayDate();
-    const timestamp = new Date().toISOString(); // Add timestamp
+    const timestamp = new Date().toISOString();
+
+    // Use level-specific key if level provided
+    const storageKey = level ? `${groupId}_${level}` : groupId;
 
     // Initialize structure
     if (!completions[lang]) completions[lang] = {};
-    if (!completions[lang][groupId]) {
-        completions[lang][groupId] = {
+    if (!completions[lang][storageKey]) {
+        completions[lang][storageKey] = {
             date: today,
             timestamp: timestamp,
             sentences: {},
             completionDates: [],
-            completionHistory: {}
+            completionHistory: {},
+            level: level || 'A1'
         };
     }
 
     // ALWAYS update date AND timestamp when practicing
-    completions[lang][groupId].date = today;
-    completions[lang][groupId].timestamp = timestamp;
+    completions[lang][storageKey].date = today;
+    completions[lang][storageKey].timestamp = timestamp;
 
     // Initialize sentence
-    if (!completions[lang][groupId].sentences[sentenceId]) {
-        completions[lang][groupId].sentences[sentenceId] = { listen: false, read: false };
+    if (!completions[lang][storageKey].sentences[sentenceId]) {
+        completions[lang][storageKey].sentences[sentenceId] = { listen: false, read: false };
     }
 
     // Mark complete
-    completions[lang][groupId].sentences[sentenceId][exerciseType] = true;
+    completions[lang][storageKey].sentences[sentenceId][exerciseType] = true;
 
     saveCompletions(completions);
 }
 
 // Call this when a training session completes with 100%
-function recordGroupCompletion(lang, groupId) {
+function recordGroupCompletion(lang, groupId, level) {
     const completions = getCompletions();
     const today = getTodayDate();
 
-    if (!completions[lang] || !completions[lang][groupId]) return;
+    // Use level-specific key if level provided
+    const storageKey = level ? `${groupId}_${level}` : groupId;
+
+    if (!completions[lang] || !completions[lang][storageKey]) return;
 
     // Initialize completionHistory if needed
-    if (!completions[lang][groupId].completionHistory) {
-        completions[lang][groupId].completionHistory = {};
+    if (!completions[lang][storageKey].completionHistory) {
+        completions[lang][storageKey].completionHistory = {};
     }
 
     // ALWAYS increment count for today (allows multiple completions per day)
-    if (!completions[lang][groupId].completionHistory[today]) {
-        completions[lang][groupId].completionHistory[today] = 0;
+    if (!completions[lang][storageKey].completionHistory[today]) {
+        completions[lang][storageKey].completionHistory[today] = 0;
     }
-    completions[lang][groupId].completionHistory[today]++;
+    completions[lang][storageKey].completionHistory[today]++;
 
     // Also maintain completionDates (add only once per day for streak)
-    if (!completions[lang][groupId].completionDates) {
-        completions[lang][groupId].completionDates = [];
+    if (!completions[lang][storageKey].completionDates) {
+        completions[lang][storageKey].completionDates = [];
     }
-    if (!completions[lang][groupId].completionDates.includes(today)) {
-        completions[lang][groupId].completionDates.push(today);
+    if (!completions[lang][storageKey].completionDates.includes(today)) {
+        completions[lang][storageKey].completionDates.push(today);
     }
 
     saveCompletions(completions);
@@ -746,6 +883,7 @@ let trainState = {
     lang: '',
     groupId: '',
     groupTitle: '',
+    level: 'A1',        // Active CEFR level
     exercises: [],      // Shuffled array of {sentence, type: 'listen'|'read'}
     currentIndex: 0,
     revealed: false
@@ -814,6 +952,9 @@ function initTrainingInterface() {
     trainState.groupId = group.group_id;
     trainState.groupTitle = group.group_title;
     trainState.groupDescription = group.description || '';
+
+    // Get the active level for this module
+    trainState.level = window.getModuleLevel ? getModuleLevel(trainState.groupId) : 'A1';
 
     // Check for saved state
     const stateKey = `utteron_state_${trainState.groupId}`;
@@ -1013,9 +1154,9 @@ function recordAndAdvance(gotIt) {
     sessionStats.total++;
     if (gotIt) {
         sessionStats.correct++;
-        markExerciseComplete(trainState.lang, trainState.groupId, sentence.id, type);
+        markExerciseComplete(trainState.lang, trainState.groupId, sentence.id, type, trainState.level);
         // Check if this completed the group and update stats
-        checkAndUpdateStats(trainState.lang, trainState.groupId, trainState.exercises);
+        checkAndUpdateStats(trainState.lang, trainState.groupId, trainState.exercises, trainState.level);
     } else {
         sessionStats.missed++;
     }
@@ -1059,11 +1200,14 @@ function recordAndAdvance(gotIt) {
     }
 }
 
-function checkAndUpdateStats(lang, groupId, exercises) {
+function checkAndUpdateStats(lang, groupId, exercises, level) {
     if (!exercises || exercises.length === 0) return;
 
     const completions = getCompletions();
     const today = getTodayDate();
+
+    // Use level-specific key if level provided
+    const storageKey = level ? `${groupId}_${level}` : groupId;
 
     // Ensure stats object exists
     if (!completions[lang]) completions[lang] = {};
@@ -1071,7 +1215,7 @@ function checkAndUpdateStats(lang, groupId, exercises) {
         completions[lang].stats = { streak: 0, lastStreakDate: null, completedGroups: [] };
     }
 
-    const groupData = completions[lang][groupId];
+    const groupData = completions[lang][storageKey];
     if (!groupData || !groupData.sentences) return;
 
     // Check if ALL sentences in the group are complete (both listen and read)
