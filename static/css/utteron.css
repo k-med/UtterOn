@@ -7,6 +7,20 @@
    Base & Variables
    ============================================ */
 
+/* Disable flashing cursor globally */
+*,
+*::before,
+*::after {
+  caret-color: transparent;
+}
+
+/* Restore for actual inputs */
+input,
+textarea,
+[contenteditable] {
+  caret-color: auto;
+}
+
 :root {
   /* Layout & Spacing Tokens */
   --max-width: 1100px;
