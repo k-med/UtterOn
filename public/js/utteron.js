@@ -976,7 +976,7 @@ function updateFundamentalsButtons(lang) {
         const totalScore = sentenceCount * 2; // 1 for listen, 1 for read/speak
 
         if (!completions[lang] || !completions[lang][groupId]) {
-            scoreBadgeEl.textContent = `0/${totalScore}`;
+            scoreBadgeEl.textContent = `0 of ${totalScore}`;
             btn.classList.remove('complete-today');
             // Ensure progress bar defaults to 0%
             const progressFill = btn.querySelector('.fundamental-progress-fill');
@@ -1043,7 +1043,7 @@ function updateFundamentalsButtons(lang) {
             });
         }
 
-        scoreBadgeEl.textContent = `${currentScore}/${totalScore}`;
+        scoreBadgeEl.textContent = `${currentScore} of ${totalScore}`;
 
         // Only highlight green if 100% complete (no orange for partial progress)
         const is100Percent = currentScore === totalScore && totalScore > 0;

@@ -99,19 +99,14 @@
         <div class="fundamentals-header">
             <div class="fundamentals-title-group">
                 <h2 class="fundamentals-title">Foundations</h2>
-                <!-- Shortened description / tooltip interaction could be added here -->
+                <span class="fundamentals-subtitle">Quick fundamentals (1–2 min each)</span>
             </div>
             <div class="fundamentals-controls">
-                <!-- Reset button for foundations? Or just toggle. User asked for Reset + Toggle -->
-                <!-- Assuming Reset resets foundations progress? Or just the sorting? 
-                      Actually user said "Reset (optional) + Collapse/Expand toggle" 
-                      For now, let's stick to just Toggle unless we have a specific reset function for foundations.
-                      The main visual is key. -->
-                <button type="button" class="btn-header icon-only" id="foundations-toggle"
+                <button type="button" class="btn-header icon-only foundations-chevron" id="foundations-toggle"
                     aria-label="Toggle Foundations">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="18 15 12 9 6 15"></polyline>
+                        <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
             </div>
@@ -140,19 +135,13 @@
                 data-time-display="{{ $timeDisplay }}">
                 <div class="fundamental-top">
                     <span class="fundamental-label">{{ .Params.group_title }}</span>
-                    <!-- Optional: Add a subtle icon or chevron here if needed, but clean is good -->
                 </div>
                 <div class="fundamental-bottom">
-                    <div class="fundamental-meta">
-                        <span class="fundamental-time">{{ $timeDisplay }}</span>
-                        <!-- Progress text placeholder, JS will update -->
-                        <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
-                    </div>
-                    <!-- Progress bar -->
-                    <div class="fundamental-progress-track">
-                        <div class="fundamental-progress-fill" style="width: 0%"></div>
-                    </div>
+                    <span class="fundamental-time">{{ $timeDisplay }}</span>
+                    <span class="fundamental-meta-sep">•</span>
+                    <span class="fundamental-score">0 of {{ mul $sentenceCount 2 }}</span>
                 </div>
+                <!-- Hidden progress bar for structure if needed, but UI calls for clean look -->
             </a>
             {{ end }}
             {{ end }}

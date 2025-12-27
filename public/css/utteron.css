@@ -1964,109 +1964,39 @@ a,
 }
 
 /* Foundations Grid - Refined */
-.fundamentals-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-}
-
-.fundamental-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* ensure footer at bottom */
-  background: rgba(255, 255, 255, 0.03);
-  /* Very subtle fill */
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: var(--space-3);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  position: relative;
-  min-height: 100px;
-  box-shadow: none;
-  /* Cleaner look */
-}
-
-.fundamental-btn:hover {
-  transform: translateY(-2px);
-  background: var(--bg-secondary);
-  box-shadow: var(--card-shadow);
-  border-color: rgba(255, 255, 255, 0.1);
-  /* Subtle highlight */
-}
-
-.fundamental-btn:active {
-  transform: translateY(0);
-}
-
-.fundamental-main {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.fundamental-label {
-  font-weight: 700;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-}
-
-.fundamental-time {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-}
-
-.fundamental-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  padding-top: 8px;
-}
-
-:root[data-theme="dark"] .fundamental-footer {
-  border-top-color: rgba(255, 255, 255, 0.05);
-}
-
+/* Foundations Grid - Refined */
 .fundamentals-section {
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
   border: var(--card-border);
   border-radius: var(--radius-card);
-  padding: var(--space-4);
+  padding: 1.25rem var(--space-4);
+  /* Reduced vertical padding */
   margin-bottom: var(--space-5);
   box-shadow: var(--card-shadow);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
+  /* Remove pointer on container itself to avoid confusion */
 }
 
-.fundamentals-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  border-color: rgba(99, 102, 241, 0.3);
-}
-
-.fundamentals-section.collapsed {
-  padding-bottom: 1.5rem;
-  /* Ensure consistent size */
-}
-
-/* Ensure title group aligns with minimize button */
+/* Header Styling */
 .fundamentals-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  /* Center vertically */
+  margin-bottom: 1rem;
+  /* Reduced gap */
   cursor: pointer;
   width: 100%;
+  user-select: none;
+}
+
+.fundamentals-section.collapsed {
+  padding-bottom: 1.25rem;
+  /* Match top padding */
 }
 
 .fundamentals-section.collapsed .fundamentals-header {
@@ -2074,225 +2004,247 @@ a,
 }
 
 .fundamentals-title-group {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .fundamentals-title {
   margin: 0;
   font-size: 1.5rem;
+  /* Match module header */
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.25rem;
+  line-height: 1.1;
 }
 
-.fundamentals-description {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-/* Hide explainer when collapsed */
-.fundamentals-section.collapsed .fundamentals-explainer {
-  display: none;
-}
-
-.fundamentals-explainer {
-  display: block;
+.fundamentals-subtitle {
   font-size: 0.85rem;
+  color: var(--text-tertiary);
+  /* Muted */
+  font-weight: 500;
+}
+
+.fundamentals-section.collapsed .fundamentals-subtitle {
+  /* Keep visible or hide? User said "Show... sublabel" */
+  display: inline-block;
+}
+
+/* Chevron Button */
+.foundations-chevron {
   color: var(--text-secondary);
-  opacity: 0.8;
-  margin-top: 0.25rem;
-  font-style: italic;
+  background: transparent !important;
+  /* No background circle */
+  border: none;
+  padding: 0.5rem;
+  /* Hit area */
+  transition: transform 0.3s ease, color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.fundamentals-caption {
-  /* Removed as it conflicts with new header style */
-  display: none;
+.foundations-chevron:hover {
+  color: var(--text-primary) !important;
+  /* Brighter on hover */
+  transform: none;
+  /* Reset distinct lift */
 }
 
+.foundations-chevron svg {
+  transition: transform 0.3s ease;
+}
+
+/* Rotation logic: Default (Expanded) = Up, Collapsed = Down ?? 
+   User said: "down when collapsed, up when expanded"
+   SVG used is polyline points="6 9 12 15 18 9" (Down arrow) typically.
+   Wait, if use polyline points="18 15 12 9 6 15" (Up arrow) as in original code?
+   Let's check the SVG I put in HTML.
+   I put: points="6 9 12 15 18 9" (DOWN arrow).
+   So Default (Expanded) should be UP.
+   So I need to rotate it 180deg by default? Or change SVG to UP arrow.
+   Let's assume default state is Expanded -> Arrow should point Up (to collapse).
+   If I stick with the Down Arrow SVG, I must rotate it 180deg to point Up.
+   collapsed -> Point Down (to expand).
+*/
+.foundations-chevron svg {
+  transform: rotate(180deg);
+  /* Points Up (Collapse action) */
+}
+
+.fundamentals-section.collapsed .foundations-chevron svg {
+  transform: rotate(0deg);
+  /* Points Down (Expand action) */
+}
+
+
+/* Grid Layout */
 .fundamentals-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3x2 grid */
-  gap: 0.6rem;
-  /* Slightly larger gap for 3-col layout */
+  /* 3 columns on desktop (standard) */
+  gap: var(--space-3);
+  /* Consistent gap */
   width: 100%;
-  max-width: 100%;
-  justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .fundamentals-row {
+    /* Keep 3 columns or switch to 2? Desktop is wide. Tablet maybe 2? */
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
   }
 }
 
+@media (max-width: 600px) {
+  .fundamentals-row {
+    /* "Switch to a 2-column grid or a horizontal scroll" -> User preferred 2-col */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+
+/* Tile Items (.fundamental-btn) */
 .fundamental-btn {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.7rem 0.9rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  /* Slightly more visible border */
-  border-radius: 14px;
-  text-decoration: none;
-  min-height: 85px;
-  min-width: 0;
-  width: 100%;
-  flex: 0 1 auto;
-  transition: border-color 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
-  user-select: none;
-}
-
-.fundamental-footer {
-  display: none;
-  /* Hide by default */
-  font-size: 0.75rem;
-  opacity: 0.8;
-  margin-top: 0.2rem;
-}
-
-.fundamental-btn:hover .fundamental-footer {
-  display: flex;
-  /* Show on hover */
-  gap: 0.5rem;
-}
-
-.fundamental-btn:active {
-  transform: scale(0.96);
-}
-
-.fundamental-score {
-  opacity: 0.6;
-  /* De-emphasize totals */
-  font-size: 0.75rem;
-}
-
-.fundamental-btn:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  /* Border brightening on hover */
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-.fundamental-btn:hover .fundamental-label,
-.fundamental-btn:hover .fundamental-time,
-.fundamental-btn:hover .fundamental-score,
-.fundamental-btn:hover .fundamental-item-count {
-  color: white;
-}
-
-.fundamental-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  width: 100%;
-}
-
-.fundamental-footer {
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  background: var(--bg-primary);
+  /* Use primary bg to contrast against container? Or transparent */
+  /* User said: "remove empty container feel". If container is bg-secondary, tiles should be bg-primary (card-like) or transparent with border? */
+  /* Let's try transparent with border to start, or subtle fill like Modules. 
+     Modules are bg-secondary inside a list? No, modules are cards.
+     Let's make these look like "mini styled cards" */
+  background: rgba(255, 255, 255, 0.03);
+  /* Subtle fill */
+  border: 1px solid transparent;
+  /* Inert placeholder look fix */
+  border-radius: var(--radius-card);
+  /* Match Modules */
+  padding: 1rem;
+  text-decoration: none;
+  min-height: 90px;
+  /* Sufficient height */
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  /* Affordance */
+  user-select: none;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .fundamental-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Slight border for definition */
+}
+
+/* Hover State */
+.fundamental-btn:hover {
+  background: var(--bg-primary);
+  /* Lift effect */
+  border-color: var(--border);
+  /* Brighter border */
+  transform: translateY(-1px);
+  /* Subtle lift */
+  box-shadow: var(--card-shadow);
+}
+
+/* Active State */
+.fundamental-btn:active {
+  transform: translateY(0);
+  background: rgba(0, 0, 0, 0.02);
+  /* Slight darken */
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .fundamental-btn:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Focus State */
+.fundamental-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Inner Layout */
+.fundamental-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.fundamental-bottom {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* allow wrap if tight */
+  gap: 0.4rem;
   margin-top: auto;
 }
 
+/* Typography */
 .fundamental-label {
-  font-size: 0.7rem;
-  /* Slightly larger */
-  font-weight: 500;
-  /* Medium weight */
-  color: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  line-height: 1.3;
-  /* Increased line-height */
-  max-width: 100%;
-  letter-spacing: -0.01em;
-  /* Tight letter-spacing */
+  font-size: 1rem;
+  /* Match module title size approx */
+  font-weight: 600;
+  /* Match module title weight */
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
 .fundamental-time {
   font-size: 0.85rem;
-  /* Smaller, secondary */
-  font-weight: 600;
-  color: rgba(147, 197, 253, 0.85);
-  /* Lighter */
-  line-height: 1;
-  margin-bottom: 0.1rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.fundamental-meta-sep {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  opacity: 0.5;
 }
 
 .fundamental-score {
-  font-size: 0.45rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  opacity: 0.35;
-  /* Even quieter */
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
 }
 
-.fundamental-item-count {
-  font-size: 0.45rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  opacity: 0.35;
-}
-
-/* Partial completion styling removed - Foundations should be calm/neutral until 100% complete */
-
-/* Green highlight for 100% completion - desaturated, professional */
-.fundamental-btn.complete-today {
-  background: rgba(52, 211, 153, 0.15);
-  /* Less saturated green */
-  border-color: rgba(52, 211, 153, 0.4);
-  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);
-  animation: completePulse 0.6s ease-out;
-  /* Brief pulse on completion */
-}
-
-@keyframes completePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
-  }
-
-  50% {
-    box-shadow: 0 0 12px 4px rgba(52, 211, 153, 0.3);
-  }
-
-  100% {
-    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);
-  }
-}
-
-.fundamental-btn.complete-today .fundamental-label,
+/* Completion State */
 .fundamental-btn.complete-today .fundamental-score {
-  color: rgba(134, 239, 172, 1);
+  color: var(--success);
+  /* Green text */
+  font-weight: 600;
 }
 
-@media (max-width: 480px) {
-  .fundamentals-row {
-    gap: 0.4rem;
-  }
+/* Subtle accent for completed items (border or dot) */
+.fundamental-btn.complete-today::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 6px;
+  height: 6px;
+  background-color: var(--success);
+  border-radius: 50%;
+  opacity: 0.8;
+}
 
+/* Mobile Responsiveness adjustments */
+@media (max-width: 480px) {
   .fundamental-btn {
-    min-width: 55px;
-    padding: 0.4rem 0.5rem;
+    min-height: 80px;
+    /* Compact but touchable */
+    padding: 0.85rem;
   }
 
   .fundamental-label {
-    font-size: 0.65rem;
-  }
-
-  .fundamental-score {
-    font-size: 0.6rem;
+    font-size: 0.95rem;
   }
 }
 
