@@ -781,28 +781,44 @@ function updateLanguageStats(lang) {
         todayEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
     }
 
-    // 3. Week - x/target
-    const weekEl = document.getElementById('stat-week');
-    if (weekEl) {
-        weekEl.textContent = `${groupsCompletedThisWeek}/${WEEKLY_TARGET}`;
-        weekEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
+    // 2. Today - x of target
+    const todayValEl = document.getElementById('stat-today');
+    const todayTargetEl = document.getElementById('target-today');
+    if (todayValEl && todayTargetEl) {
+        todayValEl.textContent = groupsCompletedToday;
+        todayTargetEl.textContent = DAILY_TARGET;
+        todayValEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
     }
 
-    // 4. Month - x/target
-    const monthEl = document.getElementById('stat-month');
-    if (monthEl) {
-        monthEl.textContent = `${groupsCompletedThisMonth}/${MONTHLY_TARGET}`;
-        monthEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
+    // 3. Week - x of target
+    const weekValEl = document.getElementById('stat-week');
+    const weekTargetEl = document.getElementById('target-week');
+    if (weekValEl && weekTargetEl) {
+        weekValEl.textContent = groupsCompletedThisWeek;
+        weekTargetEl.textContent = WEEKLY_TARGET;
+        weekValEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
     }
 
-    // 5. Year - x/target
-    const yearEl = document.getElementById('stat-year');
-    if (yearEl) {
-        yearEl.textContent = `${groupsCompletedThisYear}/${YEARLY_TARGET}`;
-        yearEl.classList.toggle('target-met', groupsCompletedThisYear >= YEARLY_TARGET);
+    // 4. Month - x of target
+    const monthValEl = document.getElementById('stat-month');
+    const monthTargetEl = document.getElementById('target-month');
+    if (monthValEl && monthTargetEl) {
+        monthValEl.textContent = groupsCompletedThisMonth;
+        monthTargetEl.textContent = MONTHLY_TARGET;
+        monthValEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
     }
 
-    // 5. All - total 100% passes (all time)
+    // 5. Year - x of target (Yearly target logic: today * week * month * year is technically massive, 
+    // let's simplify to just tracking total passes broadly or keep using multiplier)
+    const yearValEl = document.getElementById('stat-year');
+    const yearTargetEl = document.getElementById('target-year');
+
+    if (yearValEl && yearTargetEl) {
+        yearValEl.textContent = totalPerfectPasses;
+        yearTargetEl.textContent = YEARLY_TARGET;
+    }
+
+    // 6. All - total 100% passes (all time)
     const allEl = document.getElementById('stat-all');
     if (allEl) {
         allEl.textContent = totalPerfectPasses;
@@ -843,6 +859,31 @@ function initStatArrows() {
         }
     });
 }
+
+// Adjust stat targets
+window.adjustStatTarget = function (statType, delta) {
+    const multipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {
+        today: 5,
+        week: 7,
+        month: 4,
+        year: 12
+    };
+
+    // Bounds checking
+    if (statType === 'today') {
+        multipliers.today = Math.max(1, Math.min(99, multipliers.today + delta));
+    } else if (statType === 'week') {
+        multipliers.week = Math.max(1, Math.min(7, multipliers.week + delta));
+    } else if (statType === 'month') {
+        multipliers.month = Math.max(1, Math.min(12, multipliers.month + delta));
+    } else if (statType === 'year') {
+        multipliers.year = Math.max(1, Math.min(100, multipliers.year + delta));
+    }
+
+    localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+    const lang = document.getElementById('group-list')?.dataset?.language;
+    if (lang) updateLanguageStats(lang);
+};
 
 // Play native name audio
 function playNativeName(langCode) {
@@ -911,6 +952,20 @@ function updateFundamentalsButtons(lang) {
             btn.classList.add('complete-today');
         } else {
             btn.classList.remove('complete-today');
+        }
+
+        // Update progress bar
+        const progressFill = btn.querySelector('.fundamental-progress-fill');
+        if (progressFill) {
+            const percentage = totalScore > 0 ? (currentScore / totalScore) * 100 : 0;
+            progressFill.style.width = `${percentage}%`;
+
+            // Optional: Color change for 100%?
+            if (is100Percent) {
+                progressFill.style.backgroundColor = 'var(--success)';
+            } else {
+                progressFill.style.backgroundColor = ''; // Revert to default
+            }
         }
     });
 }
@@ -995,70 +1050,84 @@ function getPerformanceMessage(accuracy) {
 }
 
 function displayCompletionStats() {
+    // 1. Calculate accuracy
     const accuracy = sessionStats.total > 0
         ? Math.round((sessionStats.correct / sessionStats.total) * 100)
         : 0;
 
-    // Update text values
-    document.getElementById('total-questions').textContent = sessionStats.total;
-    document.getElementById('correct-count').textContent = sessionStats.correct;
-    document.getElementById('missed-count').textContent = sessionStats.missed;
-    document.getElementById('accuracy-text').textContent = `${accuracy}%`;
-    document.getElementById('accuracy-value').textContent = `${accuracy}%`;
+    // 2. Update text values (Stats Block)
+    const correctEl = document.getElementById('correct-count');
+    const missedEl = document.getElementById('missed-count');
+    if (correctEl) correctEl.textContent = sessionStats.correct;
+    if (missedEl) missedEl.textContent = sessionStats.missed;
 
-    // Animate circular progress
-    const circle = document.getElementById('accuracy-progress');
-    if (circle) {
-        const circumference = 283; // 2 * π * 45
+    // 3. Update Ring & Percentage
+    const accuracyEl = document.getElementById('completion-accuracy');
+    const ring = document.getElementById('accuracy-ring');
+
+    if (accuracyEl) accuracyEl.textContent = `${accuracy}%`;
+
+    if (ring) {
+        const radius = ring.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        // e.g. 2 * 3.14159 * 52 = 326.726
+
         const offset = circumference - (accuracy / 100) * circumference;
+
+        // Reset stroke-dasharray just in case
+        ring.style.strokeDasharray = `${circumference} ${circumference}`;
+
+        // Small timeout to allow transition to happen if opening overly
         setTimeout(() => {
-            circle.style.strokeDashoffset = offset;
-        }, 300);
+            ring.style.strokeDashoffset = offset;
+        }, 100);
+
+        // Color logic (Green for 100%, Accent for others or Red for very low?)
+        // User requested subtle semantic color. 
+        if (accuracy === 100) {
+            ring.style.stroke = 'var(--success)';
+        } else if (accuracy < 50) {
+            ring.style.stroke = 'var(--danger)';
+        } else {
+            ring.style.stroke = 'var(--accent)';
+        }
     }
 
-    // Set performance message
-    const messageEl = document.getElementById('performance-message');
-    if (messageEl) {
-        messageEl.textContent = getPerformanceMessage(accuracy);
-    }
-
-    // Update icon and title based on performance
+    // 4. Update Header (Icon & Text)
     const icon = document.getElementById('completion-icon');
     const title = document.getElementById('completion-title');
     const subtitle = document.getElementById('completion-subtitle');
 
-    if (accuracy === 100) {
-        icon.textContent = '🏆';
-        title.textContent = 'Perfect Score!';
-        subtitle.textContent = 'You\'ve mastered this group!';
-    } else if (accuracy >= 80) {
-        icon.textContent = '🎉';
-        title.textContent = 'Great Job!';
-        subtitle.textContent = 'Excellent work on this session!';
-    } else {
-        icon.textContent = '✅';
-        title.textContent = 'Session Complete!';
-        subtitle.textContent = 'Keep practicing to improve!';
+    if (icon && title && subtitle) {
+        if (accuracy === 100) {
+            icon.textContent = '🏆'; // Simple Emoji for now, could be SVG
+            title.textContent = 'Perfect Score!';
+            subtitle.textContent = 'You\'ve mastered this group!';
+        } else if (accuracy >= 80) {
+            icon.textContent = '🎉';
+            title.textContent = 'Great Job!';
+            subtitle.textContent = 'Excellent work on this session!';
+        } else {
+            icon.textContent = '✅';
+            title.textContent = 'Session Complete!';
+            subtitle.textContent = 'Keep practicing to improve!';
+        }
     }
 
-    // Update button highlight based on accuracy
-    const backBtn = document.getElementById('back-to-groups-btn');
+    // 5. Button Logic (Standardized: Try Again = Primary, Back = Secondary)
+    // User Request: "Primary button: Try Again", "Secondary button: Back to Groups"
+    // Keep consistent across ALL states.
     const retryBtn = document.getElementById('retry-btn');
+    const backBtn = document.getElementById('back-to-groups-btn');
 
-    if (backBtn && retryBtn) {
-        if (accuracy === 100) {
-            // 100% = highlight Back to Groups (primary), dim Try Again (secondary)
-            backBtn.classList.remove('secondary');
-            backBtn.classList.add('primary');
-            retryBtn.classList.remove('primary');
-            retryBtn.classList.add('secondary');
-        } else {
-            // < 100% = highlight Try Again (primary), dim Back to Groups (secondary)
-            backBtn.classList.remove('primary');
-            backBtn.classList.add('secondary');
-            retryBtn.classList.remove('secondary');
-            retryBtn.classList.add('primary');
-        }
+    if (retryBtn && backBtn) {
+        // ALWAYS keep this hierarchy per request
+        retryBtn.className = 'btn btn-primary btn-block';
+        backBtn.className = 'btn btn-secondary btn-block';
+
+        // Optional: If specific text needed for Perfect Score (e.g. Next Group), add logic here
+        // But user said: "Keep sizes consistent... For Perfect Score... Next Group (optional)"
+        // Let's stick to standard "Try Again" for now to be safe, or just "Practice Again"
     }
 }
 
@@ -1227,30 +1296,65 @@ function setupEventListeners() {
     // Retry button (on completion overlay)
     const retryBtn = document.getElementById('retry-btn');
     if (retryBtn) {
-        retryBtn.addEventListener('click', () => {
-            // Get unique sentences from exercises
-            const uniqueSentences = [];
-            const seenIds = new Set();
-            trainState.exercises.forEach(ex => {
-                if (!seenIds.has(ex.sentence.id)) {
-                    uniqueSentences.push(ex.sentence);
-                    seenIds.add(ex.sentence.id);
-                }
-            });
-
-            // Reset and restart session
-            resetSessionStats();
-            trainState.exercises = buildExercisePool(uniqueSentences);
-            trainState.currentIndex = 0;
-
-            // Hide completion overlay
-            document.getElementById('completion-message').style.display = 'none';
-
-            // Reset progress bar and show first exercise
-            updateProgressBar();
-            showCurrentExercise();
-        });
+        retryBtn.addEventListener('click', retryGroup);
     }
+}
+
+function closeCompletion() {
+    // Navigate back to group list
+    const overlay = document.getElementById('completion-overlay');
+    if (overlay) overlay.style.display = 'none';
+
+    document.getElementById('exercise-card').classList.remove('completed');
+
+    // Check if we are in the train.html context (has back-link)
+    // or section.html context (modal).
+    const trainApp = document.getElementById('train-app');
+
+    if (trainApp) {
+        // Try to find the back link provided by Hugo
+        const backLink = document.querySelector('.back-link');
+        if (backLink && backLink.href) {
+            window.location.href = backLink.href;
+        } else {
+            // Fallback to parent directory or history
+            const parentUrl = trainApp.dataset.parentUrl || '../';
+            window.location.href = parentUrl;
+        }
+    } else {
+        // Modal context (section.html)
+        const ui = document.getElementById('training-interface');
+        if (ui) ui.style.display = 'none';
+
+        const cards = document.querySelectorAll('.group-card.expanded');
+        cards.forEach(c => toggleGroupCard(c.dataset.groupId)); // Close open card
+    }
+}
+
+function retryGroup() {
+    const overlay = document.getElementById('completion-overlay'); // Updated ID
+    if (overlay) overlay.style.display = 'none';
+
+    // Get unique sentences from exercises
+    const uniqueSentences = [];
+    const seenIds = new Set();
+    trainState.exercises.forEach(ex => {
+        if (!seenIds.has(ex.sentence.id)) {
+            uniqueSentences.push(ex.sentence);
+            seenIds.add(ex.sentence.id);
+        }
+    });
+
+    // Reset and restart session
+    resetSessionStats();
+    trainState.exercises = buildExercisePool(uniqueSentences);
+    trainState.currentIndex = 0;
+
+    document.getElementById('exercise-card').classList.remove('completed');
+
+    // Reset progress bar and show first exercise
+    updateProgressBar();
+    showCurrentExercise();
 }
 
 function showCurrentExercise() {
@@ -1410,35 +1514,48 @@ function recordAndAdvance(gotIt) {
 
     } else {
         // Clear state if finished
-        localStorage.removeItem(stateKey);
+        try {
+            localStorage.removeItem(stateKey);
 
-        // Check completion
-        const completions = getCompletions();
-        const storageKey = `${trainState.groupId}_${trainState.level}`;
-        const groupData = completions[trainState.lang]?.[storageKey];
-        if (groupData && groupData.sentences) {
-            const uniqueSentenceIds = [...new Set(trainState.exercises.map(e => e.sentence.id))];
-            const allComplete = uniqueSentenceIds.every(id => {
-                const s = groupData.sentences[id];
-                return s && s.listen && s.read;
-            });
-            if (allComplete) {
-                recordGroupCompletion(trainState.lang, trainState.groupId, trainState.level);
+            // Check completion
+            const completions = getCompletions();
+            const storageKey = `${trainState.groupId}_${trainState.level}`;
+            const groupData = completions[trainState.lang]?.[storageKey];
+
+            if (groupData && groupData.sentences) {
+                const uniqueSentenceIds = [...new Set(trainState.exercises.map(e => e.sentence.id))];
+                const allComplete = uniqueSentenceIds.every(id => {
+                    const s = groupData.sentences[id];
+                    return s && s.listen && s.read;
+                });
+                if (allComplete) {
+                    recordGroupCompletion(trainState.lang, trainState.groupId, trainState.level);
+                }
             }
+        } catch (e) {
+            console.error('Error during completion check:', e);
         }
 
-        // Display completion stats
-        displayCompletionStats();
+        // Check if we are done
+        if (trainState.currentIndex >= trainState.exercises.length) {
+            // Prepare UI for completion
+            try {
+                document.getElementById('exercise-card').classList.add('completed');
+                const overlay = document.getElementById('completion-overlay'); // Updated ID
+                if (overlay) overlay.style.display = 'flex';
 
-        // Animate Out before showing completion
-        const contentSlots = document.querySelectorAll('.content-slot');
-        contentSlots.forEach(slot => {
-            slot.style.opacity = '0';
-        });
-
-        setTimeout(() => {
-            showCompletion();
-        }, 250);
+                displayCompletionStats();
+            } catch (e) {
+                console.error("Error showing completion:", e);
+                // Fallback
+                const overlay = document.getElementById('completion-overlay'); // Updated ID
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    overlay.innerHTML = '<h2>Session Complete!</h2><button onclick="location.reload()">Reload</button>';
+                }
+            }
+            return;
+        }
     }
 }
 
@@ -1549,11 +1666,43 @@ function toggleGroupCard(groupId) {
     const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
     if (!card) return;
 
+    const wasMinimized = card.classList.contains('minimized');
     card.classList.toggle('minimized');
+    const isNowMinimized = card.classList.contains('minimized');
+
+    // Smooth transition helper
+    const content = card.querySelector('.group-content-wrapper');
+    const header = card.querySelector('.group-card-header-collapsed');
+
+    if (isNowMinimized) {
+        // Collapsing: Measure height before collapsing to animate from
+        content.style.maxHeight = content.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+            content.style.maxHeight = '0px';
+            content.style.opacity = '0';
+
+            header.style.maxHeight = '200px'; // Allow header to expand
+            header.style.opacity = '1';
+        });
+    } else {
+        // Expanding
+        header.style.maxHeight = '0px';
+        header.style.opacity = '0';
+
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+
+        // After transition, clear max-height to allow dynamic content (like switching levels)
+        setTimeout(() => {
+            if (!card.classList.contains('minimized')) {
+                content.style.maxHeight = 'none';
+            }
+        }, 350);
+    }
 
     // Save state to localStorage
     const minimizedCards = JSON.parse(localStorage.getItem('utteron_minimized_cards') || '{}');
-    minimizedCards[groupId] = card.classList.contains('minimized');
+    minimizedCards[groupId] = isNowMinimized;
     localStorage.setItem('utteron_minimized_cards', JSON.stringify(minimizedCards));
 
     // Update master toggle state
@@ -1562,24 +1711,56 @@ function toggleGroupCard(groupId) {
 
 // Toggle all cards (master toggle)
 function toggleAllCards() {
-    const header = document.querySelector('.modules-header');
+    // Use the button or the header itself as trigger
+    const headerBtn = document.getElementById('modules-toggle');
+    const allCardsHeader = document.querySelector('.modules-header');
     const cards = document.querySelectorAll('.group-card');
 
-    if (!header || !cards.length) return;
+    if (!cards.length) return;
 
-    const isCollapsed = header.classList.contains('collapsed');
+    // Determine state from button text or header class
+    const currentText = headerBtn ? headerBtn.innerText : 'Toggle View';
+    const isCurrentlyCollapsed = currentText === 'Expand All' || allCardsHeader.classList.contains('collapsed');
 
-    if (isCollapsed) {
+    if (isCurrentlyCollapsed) {
         // Expand all
-        header.classList.remove('collapsed');
-        cards.forEach(card => card.classList.remove('minimized'));
+        allCardsHeader.classList.remove('collapsed');
+        cards.forEach(card => {
+            card.classList.remove('minimized');
+            // Trigger animation styles for expand
+            const content = card.querySelector('.group-content-wrapper');
+            const header = card.querySelector('.group-card-header-collapsed');
+            if (content) {
+                content.style.maxHeight = 'none'; // Instant expand for batch action? Or animate?
+                content.style.opacity = '1';
+            }
+            if (header) {
+                header.style.maxHeight = '0';
+                header.style.opacity = '0';
+            }
+        });
         localStorage.setItem('utteron_all_cards_collapsed', 'false');
         localStorage.setItem('utteron_minimized_cards', '{}');
+        if (headerBtn) headerBtn.innerText = 'Collapse All';
     } else {
-        // Collapse all (minimize each card, not hide)
-        header.classList.add('collapsed');
-        cards.forEach(card => card.classList.add('minimized'));
+        // Collapse all
+        allCardsHeader.classList.add('collapsed');
+        cards.forEach(card => {
+            card.classList.add('minimized');
+            // Trigger animation styles for collapse
+            const content = card.querySelector('.group-content-wrapper');
+            const header = card.querySelector('.group-card-header-collapsed');
+            if (content) {
+                content.style.maxHeight = '0';
+                content.style.opacity = '0';
+            }
+            if (header) {
+                header.style.maxHeight = '200px';
+                header.style.opacity = '1';
+            }
+        });
         localStorage.setItem('utteron_all_cards_collapsed', 'true');
+        if (headerBtn) headerBtn.innerText = 'Expand All';
     }
 }
 
@@ -1655,10 +1836,23 @@ function resetModulesOrder() {
     localStorage.removeItem('utteron_minimized_cards');
     localStorage.removeItem('utteron_all_cards_collapsed');
 
-    // Reset all cards to collapsed
+    // Reset all cards to collapsed and clear any inline animation styles
     const cards = document.querySelectorAll('.group-card');
     cards.forEach(card => {
         card.classList.add('minimized');
+
+        // Clear inline styles that might prevent visibility
+        const content = card.querySelector('.group-content-wrapper');
+        const header = card.querySelector('.group-card-header-collapsed');
+
+        if (content) {
+            content.style.maxHeight = '';
+            content.style.opacity = '';
+        }
+        if (header) {
+            header.style.maxHeight = '';
+            header.style.opacity = '';
+        }
     });
 
     // All cards remain minimized (strict reset)

@@ -8,29 +8,64 @@
    ============================================ */
 
 :root {
+  /* Layout & Spacing Tokens */
+  --max-width: 1100px;
+  --header-height: 60px;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --radius: var(--radius-card);
+  /* Backward compat */
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --spacing: var(--space-4);
+  /* Backward compat */
+
+  /* Colors - Light Mode Default */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
+
   --text-primary: #1a1a2e;
   --text-secondary: #4a4a6a;
+  --text-tertiary: #8a8a9a;
+  /* New tertiary */
+
   --accent: #4361ee;
   --accent-hover: #3651de;
   --success: #2ecc71;
   --danger: #e74c3c;
-  --border: #e0e0e0;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --radius: 12px;
-  --spacing: 1.5rem;
+
+  --border-color: #e0e0e0;
+  --border: var(--border-color);
+  /* Backward compat */
+
+  --card-border: 1px solid var(--border-color);
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  --card-bg: var(--bg-secondary);
+  /* Defined card background */
 }
 
 :root[data-theme="dark"] {
   --bg-primary: #0f0f1a;
   --bg-secondary: #1a1a2e;
+
   --text-primary: #f0f0f5;
   --text-secondary: #a0a0c0;
+  --text-tertiary: #606080;
+
   --accent: #6366f1;
   --accent-hover: #818cf8;
-  --border: #2a2a4a;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  --border-color: #2a2a4a;
+  --card-border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Subtle stroke */
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  /* Deeper shadow for dark mode */
 }
 
 /* Global cursor fix - prevent flashing text cursor on interactive elements */
@@ -53,15 +88,19 @@ a,
    ============================================ */
 
 .utteron-container {
-  max-width: 600px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--spacing);
+  padding: 0 var(--space-4);
+  /* Consistent horizontal padding */
+  padding-bottom: 4rem;
 }
 
 .utteron-container h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .utteron-container h2 {
@@ -162,10 +201,10 @@ a,
 
 .content-card {
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem;
-  margin-bottom: 2rem;
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
   animation: fade-in-up 0.8s ease-out 0.2s backwards;
 }
 
@@ -218,8 +257,8 @@ a,
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
   padding: 0;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -264,6 +303,12 @@ a,
 
 .language-card:hover .card-flag {
   transform: scale(1.05);
+}
+
+/* Focus Ring Accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .card-content {
@@ -394,14 +439,14 @@ a,
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
   /* Reduced from 2rem */
-  gap: 0.75rem;
+  gap: var(--space-2);
   position: relative;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--card-shadow);
   opacity: 0.95;
   cursor: pointer;
   /* Slightly softer */
@@ -668,6 +713,31 @@ a,
   transition: all 0.2s;
   margin-top: 1rem;
   box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+}
+
+.start-btn-secondary {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.meta-sep {
+  opacity: 0.4;
+}
+
+.start-btn-meta {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+  text-align: center;
+  display: none;
+  /* Hide in compact for now unless user wants it */
 }
 
 .start-btn:hover {
@@ -1034,80 +1104,147 @@ a,
   transform: translateY(-2px);
 }
 
-.grade-btn.missed {
-  background: var(--bg-primary);
+.group-card-chevron {
+  margin-left: auto;
+  background: transparent;
+  border: none;
   color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-.grade-btn.missed:hover {
-  background: var(--border);
-  color: var(--text-primary);
-}
-
-/* 4. Completion Overlay */
-.completion-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--bg-secondary);
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fade-in 0.4s ease-out;
+  padding: 0.4rem;
+  border-radius: 50%;
+  pointer-events: none;
+  /* Icon passes clicks to parent */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(0deg);
+  /* Default: Pointing down for minimized? No, usually chevron-down means "expand me" or "I am collapsed". Wait, user said Collapsed = down. */
 }
 
-.completion-content {
-  text-align: center;
+/* User requirement: Collapsed = chevron pointing down. Expanded = chevron pointing up. */
+/* Assuming standard/* =========================================
+   Completion Overlay (Polished)
+   ========================================= */
+
+/* The container that covers the training card */
+#completion-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--card-bg);
+  /* Match parent bg */
+  z-index: 20;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s ease-out;
+  border-radius: inherit;
+  /* Inherit rounded corners from exercise-card */
+}
+
+/* Ensure hidden state is respected if JS uses a class, 
+   but currently JS sets style.display = 'flex'/'none' */
+#completion-overlay[style*="display: none"] {
+  display: none !important;
+}
+
+/* Completion Card - now fills the overlay */
+.completion-card {
   width: 100%;
-  max-width: 400px;
+  height: 100%;
   padding: 2rem;
-}
-
-.completion-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.completion-stats {
-  margin: 2rem 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  /* Removed inner card styling to avoid "card in card" look */
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 1. Header Block */
+.completion-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.completion-icon-wrapper {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  /* Slight extra space after icon */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+}
+
+#completion-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+#completion-subtitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* 2. Score Block */
+.completion-score-block {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  padding: 1rem 0;
 }
 
-.stat-circle-large {
+/* Progress Ring */
+.progress-ring-container {
+  position: relative;
   width: 120px;
   height: 120px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.stat-circle-large svg {
-  width: 100%;
-  height: 100%;
+.progress-ring {
   transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
 
-.stat-details {
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.5s ease-out;
+  /* Circumference = 2 * pi * 52 ≈ 326.726 */
+  stroke-dasharray: 326.726 326.726;
+  stroke-dashoffset: 326.726;
+  /* Start empty */
+  stroke-linecap: round;
+}
+
+.progress-ring-text {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Compact Stats */
+.completion-stats-compact {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   text-align: left;
+  min-width: 100px;
 }
 
 .stat-row {
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.stat-row .val {
-  font-weight: 700;
 }
 
 .stat-row .val.success {
@@ -1555,13 +1692,16 @@ a,
    ============================================ */
 
 .language-header-card {
+  background: var(--bg-secondary);
+  /* Fallback */
   background-image: url('/images/town-7133891_1920.jpg');
   background-size: cover;
   background-position: center;
   border: none;
-  border-radius: var(--radius);
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1569,17 +1709,41 @@ a,
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  /* Ensure image doesn't bleed */
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Very subtle border to define edge */
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 .language-header-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  /* Darker at bottom for hierarchy, but lighter at top to show image */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.75) 60%, rgba(67, 97, 238, 0.1) 100%);
-  border-radius: var(--radius);
+  /* Strong dark overlay for readability */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 100%);
+  border-radius: var(--radius-card);
   z-index: -1;
+}
+
+/* Force light text in hero for contrast against dark overlay */
+.language-header-card h1,
+.language-header-card .native-name-large,
+.language-header-card .stat-value-sm,
+.language-header-card .stat-label-sm,
+.language-header-card .stat-arrow {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.language-header-card .stat-label-sm {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.language-header-card .audio-btn {
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 :root[data-theme="dark"] .language-header-card::before {
@@ -1636,11 +1800,17 @@ a,
 .lang-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  /* 3 columns */
+  gap: var(--space-4) var(--space-4);
+  /* Horizontal/Vertical gap */
   width: 100%;
-  max-width: 480px;
-  margin: 1.5rem auto 0;
-  padding-bottom: 0.5rem;
+  max-width: 500px;
+  margin: var(--space-4) auto 0;
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
 }
 
 .stat-col {
@@ -1659,27 +1829,18 @@ a,
 }
 
 .stat-label-sm {
-  font-size: 0.6rem;
-  /* Smaller & dimmer */
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  /* Reduced letter-spacing */
-  color: var(--text-secondary);
-  font-weight: 400;
-  /* Lighter */
-  opacity: 0.65;
-  /* More dim */
-  white-space: nowrap;
-  margin-bottom: 0.15rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
 .stat-value-sm {
-  font-size: 1.25rem;
-  font-weight: 800;
-  /* Heavier */
-  color: var(--text-primary);
-  white-space: nowrap;
-  letter-spacing: -0.02em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .stat-value-sm.target-met {
@@ -1689,36 +1850,75 @@ a,
 .stat-value-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  min-width: 70px;
+  gap: 0.4rem;
+  min-width: 90px;
   justify-content: center;
+}
+
+.stat-separator {
+  font-size: 0.5em;
+  /* Small "of" */
+  text-transform: lowercase;
+  opacity: 0.6;
+  margin: 0 0.1rem;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.stat-target-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: relative;
+}
+
+.stat-target-val {
+  min-width: 1.2ch;
+  text-align: center;
 }
 
 .stat-arrow {
   background: none;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.45rem;
-  /* Smaller arrows */
+  font-size: 0.6rem;
+  /* Larger icon */
+  padding: 2px 0;
+  /* Larger hit area */
+  line-height: 0.8;
   cursor: pointer;
-  padding: 0.15rem;
-  line-height: 1;
-  opacity: 0.3;
-  /* Less prominent */
-  transition: opacity 0.12s, color 0.12s;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.2s ease, color 0.15s;
+  display: block;
+  height: 12px;
+  /* Consistent height */
+  width: 100%;
+  /* Full width of container */
 }
 
-.stat-arrow:hover {
+/* Show arrows on hover of the stats column */
+.stat-col:hover .stat-arrow {
+  opacity: 0.4;
+  /* Visible but subtle */
+}
+
+.stat-col:hover .stat-arrow:hover {
   opacity: 1;
+  /* Fully opaque on direct interaction */
   color: var(--accent);
 }
 
 .stat-arrow.up::before {
-  content: '◀';
+  content: '▲';
+  display: block;
 }
 
 .stat-arrow.down::before {
-  content: '▶';
+  content: '▼';
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -1763,19 +1963,85 @@ a,
   }
 }
 
-/* ============================================
-   Fundamentals Buttons
-   ============================================ */
+/* Foundations Grid - Refined */
+.fundamentals-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.fundamental-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* ensure footer at bottom */
+  background: rgba(255, 255, 255, 0.03);
+  /* Very subtle fill */
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: var(--space-3);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 100px;
+  box-shadow: none;
+  /* Cleaner look */
+}
+
+.fundamental-btn:hover {
+  transform: translateY(-2px);
+  background: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+  border-color: rgba(255, 255, 255, 0.1);
+  /* Subtle highlight */
+}
+
+.fundamental-btn:active {
+  transform: translateY(0);
+}
+
+.fundamental-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fundamental-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.fundamental-time {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.fundamental-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  padding-top: 8px;
+}
+
+:root[data-theme="dark"] .fundamental-footer {
+  border-top-color: rgba(255, 255, 255, 0.05);
+}
 
 .fundamentals-section {
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  box-shadow: var(--card-shadow);
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
@@ -2203,7 +2469,8 @@ a,
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease;
+  /* Only animate transform */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2211,15 +2478,13 @@ a,
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  pointer-events: none;
+  /* Let the parent click handle it, or set to auto if nested button */
 }
 
-.minimize-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
+/* Ensure the button itself doesn't block the header click if we want the whole header to toggle */
+.fundamentals-header:hover .minimize-btn {
   color: var(--text-primary);
-}
-
-:root[data-theme="dark"] .minimize-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Minimized State */
@@ -2231,13 +2496,21 @@ a,
   margin-bottom: 0;
 }
 
-.fundamentals-section.minimized .minimize-btn svg {
-  transform: rotate(180deg);
+/* Chevron Rotation Logic */
+.minimize-btn svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Default state (Expanded) -> Chevron Up? Or Down? 
+     Usually: Expanded shows "Chevron Up" (to collapse). 
+     User said: Expanded = Chevron Up. Collapsed = Chevron Down. 
+     The HTML SVG is <polyline points="18 15 12 9 6 15"></polyline> which is a Chevron UP (points like ^).
+     So default (Expanded) is Up (0deg).
+     Collapsed (minimized) should be Down (180deg).
+  */
+  transform: rotate(0deg);
 }
 
-/* Fix for rotation when absolute */
-.minimize-btn svg {
-  transition: transform 0.3s ease;
+.fundamentals-section.minimized .minimize-btn svg {
+  transform: rotate(180deg);
 }
 
 .fundamentals-section.minimized {
@@ -2342,19 +2615,43 @@ a,
 
 /* Collapsed header - hidden by default, shown when minimized */
 .group-card-header-collapsed {
-  display: none;
+  display: flex;
+  /* Always flex layout, we control visibility with height/opacity */
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 1rem;
-  transition: background 0.15s ease;
-}
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-.group-card-header-collapsed:hover {
-  background: rgba(255, 255, 255, 0.03);
+  /* Start hidden (expanded state default) */
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .group-card.minimized .group-card-header-collapsed {
+  /* Show when minimized */
+  max-height: 200px;
+  opacity: 1;
+  pointer-events: auto;
+  overflow: visible;
+  /* Allow tooltips/badges to pop out if needed */
+}
+
+/* .group-card.minimized .group-card-header-collapsed {
   display: flex;
+} */
+/* Replaced by the rule below */
+
+.group-card:not(.minimized) .group-card-header-collapsed {
+  /* Hide when expanded */
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  /* Clear margin to avoid gap */
+  padding: 0;
+  pointer-events: none;
 }
 
 .group-card-title-group {
@@ -2483,6 +2780,25 @@ a,
 }
 
 /* Minimized card state - hide content, show collapsed header */
+/* Hide other content when completed to prevent bleed-through */
+.exercise-card.completed .exercise-header,
+.exercise-card.completed .exercise-content,
+.exercise-card.completed .action-footer,
+.exercise-card.completed .group-header,
+.exercise-card.completed .stats-grid,
+.exercise-card.completed .start-btn,
+.exercise-card.completed .start-btn-secondary,
+.exercise-card.completed .group-desc-col {
+  display: none !important;
+}
+
+/* Ensure overlay is visible when completed */
+.exercise-card.completed #completion-overlay {
+  display: flex !important;
+  background: var(--card-bg);
+  /* Ensure opaque background */
+}
+
 .group-card.minimized .group-content-wrapper {
   display: none;
 }

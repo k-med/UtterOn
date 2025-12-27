@@ -80,28 +80,43 @@ function updateLanguageStats(lang) {
         });
     }
 
-    // 2. Today - x/target
-    const todayEl = document.getElementById('stat-today');
-    if (todayEl) {
-        todayEl.textContent = `${groupsCompletedToday}/${DAILY_TARGET}`;
-        todayEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
+    // 2. Today - x of target
+    const todayValEl = document.getElementById('stat-today');
+    const todayTargetEl = document.getElementById('target-today');
+    if (todayValEl && todayTargetEl) {
+        todayValEl.textContent = groupsCompletedToday;
+        todayTargetEl.textContent = DAILY_TARGET;
+        todayValEl.classList.toggle('target-met', groupsCompletedToday >= DAILY_TARGET);
     }
 
-    // 3. Week - x/target
-    const weekEl = document.getElementById('stat-week');
-    if (weekEl) {
-        weekEl.textContent = `${groupsCompletedThisWeek}/${WEEKLY_TARGET}`;
-        weekEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
+    // 3. Week - x of target
+    const weekValEl = document.getElementById('stat-week');
+    const weekTargetEl = document.getElementById('target-week');
+    if (weekValEl && weekTargetEl) {
+        weekValEl.textContent = groupsCompletedThisWeek;
+        weekTargetEl.textContent = WEEKLY_TARGET;
+        weekValEl.classList.toggle('target-met', groupsCompletedThisWeek >= WEEKLY_TARGET);
     }
 
-    // 4. Month - x/target
-    const monthEl = document.getElementById('stat-month');
-    if (monthEl) {
-        monthEl.textContent = `${groupsCompletedThisMonth}/${MONTHLY_TARGET}`;
-        monthEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
+    // 4. Month - x of target
+    const monthValEl = document.getElementById('stat-month');
+    const monthTargetEl = document.getElementById('target-month');
+    if (monthValEl && monthTargetEl) {
+        monthValEl.textContent = groupsCompletedThisMonth;
+        monthTargetEl.textContent = MONTHLY_TARGET;
+        monthValEl.classList.toggle('target-met', groupsCompletedThisMonth >= MONTHLY_TARGET);
     }
 
-    // 5. All - total 100% passes (all time)
+    // 5. Year - x of target
+    const yearValEl = document.getElementById('stat-year');
+    const yearTargetEl = document.getElementById('target-year');
+    const YEARLY_TARGET = multipliers.today * multipliers.week * multipliers.month * multipliers.year;
+    if (yearValEl && yearTargetEl) {
+        yearValEl.textContent = totalPerfectPasses; // Assuming total for year ~ all time for now or calculate properly
+        yearTargetEl.textContent = YEARLY_TARGET;
+    }
+
+    // 6. All - total 100% passes (all time)
     const allEl = document.getElementById('stat-all');
     if (allEl) {
         allEl.textContent = totalPerfectPasses;
@@ -116,29 +131,37 @@ function initStatArrows() {
         month: 4       // Weeks per month
     };
 
-    document.querySelectorAll('.stat-adjustable').forEach(col => {
-        const stat = col.dataset.stat;
-        const upBtn = col.querySelector('.stat-arrow.up');     // Left arrow = decrease
-        const downBtn = col.querySelector('.stat-arrow.down'); // Right arrow = increase
+    // Replaced with inline onclick handlers in HTML for cleaner event binding
+    // See adjustStatTarget function below
+}
 
-        if (upBtn) {
-            upBtn.addEventListener('click', () => {
-                multipliers[stat] = Math.max(1, multipliers[stat] - 1);
-                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
-                const lang = document.getElementById('group-list')?.dataset?.language;
-                if (lang) updateLanguageStats(lang);
-            });
-        }
+// Adjust stat targets
+function adjustStatTarget(statType, delta) {
+    const multipliers = JSON.parse(localStorage.getItem('stat_multipliers')) || {
+        today: 5,
+        week: 7,
+        month: 4,
+        year: 12
+    };
 
-        if (downBtn) {
-            downBtn.addEventListener('click', () => {
-                multipliers[stat] = Math.min(99, multipliers[stat] + 1);
-                localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
-                const lang = document.getElementById('group-list')?.dataset?.language;
-                if (lang) updateLanguageStats(lang);
-            });
-        }
-    });
+    // Bounds checking
+    if (statType === 'today') {
+        multipliers.today = Math.max(1, Math.min(99, multipliers.today + delta));
+    } else if (statType === 'week') {
+        multipliers.week = Math.max(1, Math.min(7, multipliers.week + delta));
+    } else if (statType === 'month') {
+        multipliers.month = Math.max(1, Math.min(12, multipliers.month + delta));
+    } else if (statType === 'year') {
+        multipliers.year = Math.max(1, Math.min(100, multipliers.year + delta));
+    }
+
+    localStorage.setItem('stat_multipliers', JSON.stringify(multipliers));
+    const lang = document.getElementById('group-list')?.dataset?.language;
+    if (lang) updateLanguageStats(lang);
+}
+
+// Global export
+window.adjustStatTarget = adjustStatTarget;
 }
 
 // Play native name audio - uses audio file if available, falls back to speech synthesis

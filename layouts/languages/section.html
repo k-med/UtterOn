@@ -29,39 +29,64 @@
             </div>
             <div class="stat-col stat-adjustable" data-stat="today">
                 <span class="stat-label-sm">Modules Today</span>
-                <div class="stat-value-wrapper">
-                    <button class="stat-arrow up" aria-label="Decrease"></button>
-                    <span class="stat-value-sm" id="stat-today">0/5</span>
-                    <button class="stat-arrow down" aria-label="Increase"></button>
+                <div class="stat-value-sm stat-value-wrapper">
+                    <span id="stat-today">0</span>
+                    <span class="stat-separator">of</span>
+                    <div class="stat-target-container">
+                        <button class="stat-arrow up" onclick="adjustStatTarget('today', 1)"
+                            aria-label="Increase"></button>
+                        <span id="target-today" class="stat-target-val">5</span>
+                        <button class="stat-arrow down" onclick="adjustStatTarget('today', -1)"
+                            aria-label="Decrease"></button>
+                    </div>
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="week">
                 <span class="stat-label-sm">Modules (7d)</span>
-                <div class="stat-value-wrapper">
-                    <button class="stat-arrow up" aria-label="Decrease"></button>
-                    <span class="stat-value-sm" id="stat-week">0/35</span>
-                    <button class="stat-arrow down" aria-label="Increase"></button>
+                <div class="stat-value-sm stat-value-wrapper">
+                    <span id="stat-week">0</span>
+                    <span class="stat-separator">of</span>
+                    <div class="stat-target-container">
+                        <button class="stat-arrow up" onclick="adjustStatTarget('week', 1)"
+                            aria-label="Increase"></button>
+                        <span id="target-week" class="stat-target-val">35</span>
+                        <button class="stat-arrow down" onclick="adjustStatTarget('week', -1)"
+                            aria-label="Decrease"></button>
+                    </div>
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="month">
                 <span class="stat-label-sm">Modules (30d)</span>
-                <div class="stat-value-wrapper">
-                    <button class="stat-arrow up" aria-label="Decrease"></button>
-                    <span class="stat-value-sm" id="stat-month">0/140</span>
-                    <button class="stat-arrow down" aria-label="Increase"></button>
+                <div class="stat-value-sm stat-value-wrapper">
+                    <span id="stat-month">0</span>
+                    <span class="stat-separator">of</span>
+                    <div class="stat-target-container">
+                        <button class="stat-arrow up" onclick="adjustStatTarget('month', 1)"
+                            aria-label="Increase"></button>
+                        <span id="target-month" class="stat-target-val">140</span>
+                        <button class="stat-arrow down" onclick="adjustStatTarget('month', -1)"
+                            aria-label="Decrease"></button>
+                    </div>
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="year">
                 <span class="stat-label-sm">Modules (365d)</span>
-                <div class="stat-value-wrapper">
-                    <button class="stat-arrow up" aria-label="Decrease"></button>
-                    <span class="stat-value-sm" id="stat-year">0/1680</span>
-                    <button class="stat-arrow down" aria-label="Increase"></button>
+                <div class="stat-value-sm stat-value-wrapper">
+                    <span id="stat-year">0</span>
+                    <span class="stat-separator">of</span>
+                    <div class="stat-target-container">
+                        <button class="stat-arrow up" onclick="adjustStatTarget('year', 1)"
+                            aria-label="Increase"></button>
+                        <span id="target-year" class="stat-target-val">1680</span>
+                        <button class="stat-arrow down" onclick="adjustStatTarget('year', -1)"
+                            aria-label="Decrease"></button>
+                    </div>
                 </div>
             </div>
             <div class="stat-col">
-                <span class="stat-label-sm">All</span>
-                <span class="stat-value-sm" id="stat-all">0</span>
+                <div class="stat-value-sm stat-value-wrapper">
+                    <span id="stat-all">0</span>
+                </div>
             </div>
         </div>
 
@@ -74,15 +99,22 @@
         <div class="fundamentals-header">
             <div class="fundamentals-title-group">
                 <h2 class="fundamentals-title">Foundations</h2>
-                <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
-                <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
+                <!-- Shortened description / tooltip interaction could be added here -->
             </div>
-            <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
-            </button>
+            <div class="fundamentals-controls">
+                <!-- Reset button for foundations? Or just toggle. User asked for Reset + Toggle -->
+                <!-- Assuming Reset resets foundations progress? Or just the sorting? 
+                      Actually user said "Reset (optional) + Collapse/Expand toggle" 
+                      For now, let's stick to just Toggle unless we have a specific reset function for foundations.
+                      The main visual is key. -->
+                <button type="button" class="btn-header icon-only" id="foundations-toggle"
+                    aria-label="Toggle Foundations">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+            </div>
         </div>
         <div class="fundamentals-row">
             {{ $lang := .Params.language_code | default .File.ContentBaseName }}
@@ -106,13 +138,20 @@
             <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
                 data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
                 data-time-display="{{ $timeDisplay }}">
-                <div class="fundamental-main">
+                <div class="fundamental-top">
                     <span class="fundamental-label">{{ .Params.group_title }}</span>
-                    <span class="fundamental-time">{{ $timeDisplay }}</span>
+                    <!-- Optional: Add a subtle icon or chevron here if needed, but clean is good -->
                 </div>
-                <div class="fundamental-footer">
-                    <span class="fundamental-item-count">{{ $sentenceCount }}</span>
-                    <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
+                <div class="fundamental-bottom">
+                    <div class="fundamental-meta">
+                        <span class="fundamental-time">{{ $timeDisplay }}</span>
+                        <!-- Progress text placeholder, JS will update -->
+                        <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="fundamental-progress-track">
+                        <div class="fundamental-progress-fill" style="width: 0%"></div>
+                    </div>
                 </div>
             </a>
             {{ end }}
@@ -128,19 +167,14 @@
             <p class="modules-description">Full sentence practice exercises.</p>
         </div>
         <div class="modules-controls">
-            <button type="button" class="modules-reset-btn" id="modules-reset"
-                onclick="event.stopPropagation(); resetModulesOrder();" aria-label="Reset to default order"
-                title="Reset to default order">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
-                </svg>
+            <!-- Text controls for clarity -->
+            <button type="button" class="btn-header" id="modules-reset"
+                onclick="event.stopPropagation(); resetModulesOrder();">
+                Reset
             </button>
-            <button type="button" class="modules-toggle-btn" id="modules-toggle" aria-label="Toggle all modules">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
+            <span style="color: var(--border); opacity: 0.5;">|</span>
+            <button type="button" class="btn-header" id="modules-toggle" aria-label="Toggle all modules">
+                Toggle View
             </button>
         </div>
     </div>
@@ -211,9 +245,9 @@
         {{ range $lvl, $pg := $levels }}{{ if and (ne $lvl "basePage") }}{{ $availLevels = $availLevels | append $lvl
         }}{{ end }}{{ end }}
         {{ $availLevelsStr := delimit (sort $availLevels) "," }}
-        <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
-            data-sentences='{{ .Params.sentences | jsonify }}' data-available-levels="{{ $availLevelsStr }}"
-            data-levels-data='{{ $levels | jsonify }}'
+        <div class="group-card minimized" data-group-id="{{ .Params.group_id }}"
+            data-sentence-count="{{ $sentenceCount }}" data-sentences='{{ .Params.sentences | jsonify }}'
+            data-available-levels="{{ $availLevelsStr }}" data-levels-data='{{ $levels | jsonify }}'
             onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('{{ .Params.group_id }}')">
 
             <!-- Card Header (visible only when collapsed) - click to expand -->
@@ -331,7 +365,13 @@
                         </div>
                     </div>
 
-                    <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn">Start</a>
+                    <a href="{{ $.Permalink }}train/?group={{ .Params.group_id }}" class="start-btn"
+                        onclick="event.stopPropagation()">Start Practice</a>
+                    <div class="start-btn-secondary">
+                        <span class="meta-icon">⏱</span> ~{{ $minLow }}-{{ $minHigh }} min
+                        <span class="meta-sep">•</span>
+                        <span class="meta-icon">📝</span> {{ $sentenceCount }} sentences
+                    </div>
                 </div>
 
                 <div class="group-desc-col">
@@ -378,6 +418,63 @@
         {{ else }}
         <p>No sentence groups available yet.</p>
         {{ end }}
+    </div>
+</div>
+
+<!-- Completion Overlay -->
+<div id="completion-overlay" class="overlay" style="display: none;">
+    <div class="completion-card">
+        <!-- Icon & Headline -->
+        <div class="completion-header">
+            <div class="completion-icon-wrapper">
+                <span id="completion-icon">🏆</span>
+            </div>
+            <h2 id="completion-title">Perfect Score!</h2>
+            <p id="completion-subtitle">You've mastered this group!</p>
+        </div>
+
+        <!-- Score Block (Ring + Stats) -->
+        <div class="completion-score-block">
+            <!-- Circular Progress -->
+            <div class="progress-ring-container">
+                <svg class="progress-ring" width="120" height="120">
+                    <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent"
+                        r="52" cx="60" cy="60" />
+                    <circle id="accuracy-ring" class="progress-ring-circle" stroke="var(--accent)" stroke-width="8"
+                        fill="transparent" r="52" cx="60" cy="60" />
+                </svg>
+                <div class="progress-ring-text">
+                    <span id="completion-accuracy">100%</span>
+                </div>
+            </div>
+
+            <!-- Compact Stats -->
+            <div class="completion-stats-compact">
+                <div class="stat-row">
+                    <span class="stat-label">Correct</span>
+                    <span id="correct-count" class="stat-val correct">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Missed</span>
+                    <span id="missed-count" class="stat-val missed">0</span>
+                </div>
+                <!-- Hidden total for JS logic, or displayed if desired -->
+                <span id="total-questions" style="display:none">0</span>
+                <!-- Hidden legacy message element to prevent JS errors -->
+                <span id="completion-text" style="display:none"></span>
+                <div id="completion-stats-grid" style="display:none"></div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="completion-actions">
+            <button id="retry-btn" class="btn btn-primary btn-block" onclick="retryGroup()">
+                Try Again
+            </button>
+            <button id="back-to-groups-btn" class="btn btn-secondary btn-block" onclick="closeCompletion()">
+                Back to Groups
+            </button>
+        </div>
     </div>
 </div>
 

@@ -204,38 +204,58 @@
         </div>
 
         
-        <div class="completion-overlay" id="completion-message" style="display: none;">
-            <div class="completion-content">
-                <div class="completion-icon" id="completion-icon">🎉</div>
-                <h2 id="completion-title">Session Complete!</h2>
-                <p id="completion-subtitle">Great work!</p>
-
-                <div class="completion-stats">
-                    <div class="stat-circle-large">
-                        <svg viewBox="0 0 36 36">
-                            <path class="circle-bg"
-                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle-fill" id="accuracy-progress" stroke-dasharray="0, 100"
-                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="stat-value" id="accuracy-value">0%</div>
+        <div id="completion-overlay" class="overlay" style="display: none;">
+            <div class="completion-card">
+                
+                <div class="completion-header">
+                    <div class="completion-icon-wrapper">
+                        <span id="completion-icon">🏆</span>
                     </div>
-                    <div class="stat-details">
+                    <h2 id="completion-title">Perfect Score!</h2>
+                    <p id="completion-subtitle">You've mastered this group!</p>
+                </div>
+
+                
+                <div class="completion-score-block">
+                    
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8"
+                                fill="transparent" r="52" cx="60" cy="60" />
+                            <circle id="accuracy-ring" class="progress-ring-circle" stroke="var(--accent)"
+                                stroke-width="8" fill="transparent" r="52" cx="60" cy="60" />
+                        </svg>
+                        <div class="progress-ring-text">
+                            <span id="completion-accuracy">100%</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="completion-stats-compact">
                         <div class="stat-row">
-                            <span>Correct</span>
-                            <span class="val success" id="correct-count">0</span>
+                            <span class="stat-label">Correct</span>
+                            <span id="correct-count" class="stat-val correct">0</span>
                         </div>
                         <div class="stat-row">
-                            <span>Missed</span>
-                            <span class="val error" id="missed-count">0</span>
+                            <span class="stat-label">Missed</span>
+                            <span id="missed-count" class="stat-val missed">0</span>
                         </div>
+                        
+                        <span id="total-questions" style="display:none">0</span>
+                        
+                        <span id="completion-text" style="display:none"></span>
+                        <div id="completion-stats-grid" style="display:none"></div>
                     </div>
                 </div>
 
+                
                 <div class="completion-actions">
-                    <button class="action-btn primary" id="retry-btn">Try Again</button>
-                    <a href="http://localhost:1313/languages/czech/" class="action-btn secondary" id="back-to-groups-btn">Back to
-                        Groups</a>
+                    <button id="retry-btn" class="btn btn-primary btn-block" onclick="retryGroup()">
+                        Try Again
+                    </button>
+                    <button id="back-to-groups-btn" class="btn btn-secondary btn-block" onclick="closeCompletion()">
+                        Back to Groups
+                    </button>
                 </div>
             </div>
         </div>
