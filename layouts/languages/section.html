@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="year">
-                <span class="stat-label-sm">Modules (365d)</span> and
+                <span class="stat-label-sm">Modules (365d)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-year">0</span>
                     <span class="stat-separator">of</span>
@@ -84,6 +84,7 @@
                 </div>
             </div>
             <div class="stat-col">
+                <span class="stat-label-sm">Modules (All)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-all">0</span>
                 </div>
@@ -120,7 +121,7 @@
             {{ range $groups.Pages }}
             {{ if eq .Params.group_id $groupId }}
             {{ $sentenceCount := len .Params.sentences }}
-            {{ $estSeconds := mul $sentenceCount 8 }}
+            {{ $estSeconds := mul $sentenceCount 16 }}
             {{ $timeDisplay := "" }}
             {{ if lt $estSeconds 90 }}
             {{ $timeDisplay = "~1 min" }}

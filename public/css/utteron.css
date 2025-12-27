@@ -1880,23 +1880,39 @@ a,
 }
 
 .stat-arrow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   background: none;
   border: none;
-  color: var(--text-secondary);
-  font-size: 0.6rem;
-  /* Larger icon */
-  padding: 2px 0;
-  /* Larger hit area */
-  line-height: 0.8;
+  color: var(--text-tertiary);
+  font-size: 2.2rem;
+  /* Twice as big (was 1.2rem approx -> 2.2rem) */
+  padding: 0;
+  line-height: 1;
   cursor: pointer;
   opacity: 0;
   /* Hidden by default */
   transition: opacity 0.2s ease, color 0.15s;
-  display: block;
-  height: 12px;
-  /* Consistent height */
-  width: 100%;
-  /* Full width of container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  /* Large hit area */
+  width: 44px;
+  z-index: 5;
+}
+
+/* Standard Polarity: Up/Increase at Top */
+.stat-arrow.up {
+  top: -38px;
+  bottom: auto;
+}
+
+/* Standard Polarity: Down/Decrease at Bottom */
+.stat-arrow.down {
+  bottom: -38px;
+  top: auto;
 }
 
 /* Show arrows on hover of the stats column */
@@ -1907,18 +1923,15 @@ a,
 
 .stat-col:hover .stat-arrow:hover {
   opacity: 1;
-  /* Fully opaque on direct interaction */
   color: var(--accent);
 }
 
 .stat-arrow.up::before {
   content: '▲';
-  display: block;
 }
 
 .stat-arrow.down::before {
   content: '▼';
-  display: block;
 }
 
 @media (max-width: 768px) {
@@ -2479,10 +2492,12 @@ a,
   justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
+  /* Removed side padding */
   cursor: pointer;
-  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.5);
-  border-radius: 12px;
+  background: transparent !important;
+  /* Force transparency */
+  border-radius: 0;
   transition: background 0.2s ease;
   user-select: none;
 }
