@@ -1221,8 +1221,13 @@ a,
   margin: 0;
   font-size: 1.75rem;
   font-weight: 800;
-  color: white;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
+}
+
+/* Dark mode: white text */
+:root[data-theme="dark"] #completion-title {
+  color: white;
 }
 
 #completion-subtitle {
@@ -1269,6 +1274,11 @@ a,
   position: absolute;
   font-size: 1.5rem;
   font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Dark mode: white text */
+:root[data-theme="dark"] .progress-ring-text {
   color: white;
 }
 
