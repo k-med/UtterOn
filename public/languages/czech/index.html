@@ -179,339 +179,342 @@
             </div>
         </div>
 
-        
-        <div class="fundamentals-section" id="foundations-section">
-            <div class="fundamentals-header" onclick="toggleFoundations()">
-                <div class="fundamentals-title-group">
-                    <h2 class="fundamentals-title">Foundations</h2>
-                    <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
-                    <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
+
+    </div>
+
+    
+    <div class="fundamentals-section" id="foundations-section"
+        onclick="if(event.target.closest('a, button')) return; toggleFoundations()">
+        <div class="fundamentals-header">
+            <div class="fundamentals-title-group">
+                <h2 class="fundamentals-title">Foundations</h2>
+                <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
+                <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
+            </div>
+            <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="fundamentals-row">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=manners" class="fundamental-btn"
+                data-group-id="manners" data-sentence-count="4"
+                data-time-display="~1 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Manners</span>
+                    <span class="fundamental-time">~1 min</span>
                 </div>
-                <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="18 15 12 9 6 15"></polyline>
-                    </svg>
-                </button>
-            </div>
-            <div class="fundamentals-row">
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=manners" class="fundamental-btn"
-                    data-group-id="manners" data-sentence-count="4"
-                    data-time-display="~1 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Manners</span>
-                        <span class="fundamental-time">~1 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">4</span>
-                        <span class="fundamental-score">0/8</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=numbers" class="fundamental-btn"
-                    data-group-id="numbers" data-sentence-count="10"
-                    data-time-display="~1 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Numbers</span>
-                        <span class="fundamental-time">~1 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">10</span>
-                        <span class="fundamental-score">0/20</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=weekdays" class="fundamental-btn"
-                    data-group-id="weekdays" data-sentence-count="7"
-                    data-time-display="~1 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Weekdays</span>
-                        <span class="fundamental-time">~1 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">7</span>
-                        <span class="fundamental-score">0/14</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=months" class="fundamental-btn"
-                    data-group-id="months" data-sentence-count="12"
-                    data-time-display="~1-2 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Months</span>
-                        <span class="fundamental-time">~1-2 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">12</span>
-                        <span class="fundamental-score">0/24</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=places" class="fundamental-btn"
-                    data-group-id="places" data-sentence-count="5"
-                    data-time-display="~1 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Places</span>
-                        <span class="fundamental-time">~1 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">5</span>
-                        <span class="fundamental-score">0/10</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <a href="http://localhost:1313/languages/czech/train/?group=time" class="fundamental-btn"
-                    data-group-id="time" data-sentence-count="6"
-                    data-time-display="~1 min">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">Time</span>
-                        <span class="fundamental-time">~1 min</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">6</span>
-                        <span class="fundamental-score">0/12</span>
-                    </div>
-                </a>
-                
-                
-                
-                
-                
-            </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">4</span>
+                    <span class="fundamental-score">0/8</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=numbers" class="fundamental-btn"
+                data-group-id="numbers" data-sentence-count="10"
+                data-time-display="~1 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Numbers</span>
+                    <span class="fundamental-time">~1 min</span>
+                </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">10</span>
+                    <span class="fundamental-score">0/20</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=weekdays" class="fundamental-btn"
+                data-group-id="weekdays" data-sentence-count="7"
+                data-time-display="~1 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Weekdays</span>
+                    <span class="fundamental-time">~1 min</span>
+                </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">7</span>
+                    <span class="fundamental-score">0/14</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=months" class="fundamental-btn"
+                data-group-id="months" data-sentence-count="12"
+                data-time-display="~1-2 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Months</span>
+                    <span class="fundamental-time">~1-2 min</span>
+                </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">12</span>
+                    <span class="fundamental-score">0/24</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=places" class="fundamental-btn"
+                data-group-id="places" data-sentence-count="5"
+                data-time-display="~1 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Places</span>
+                    <span class="fundamental-time">~1 min</span>
+                </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">5</span>
+                    <span class="fundamental-score">0/10</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a href="http://localhost:1313/languages/czech/train/?group=time" class="fundamental-btn"
+                data-group-id="time" data-sentence-count="6"
+                data-time-display="~1 min">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">Time</span>
+                    <span class="fundamental-time">~1 min</span>
+                </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">6</span>
+                    <span class="fundamental-score">0/12</span>
+                </div>
+            </a>
+            
+            
+            
+            
+            
         </div>
     </div>
 
@@ -783,11 +786,11 @@
         
         <div class="group-card" data-group-id="social-lubricant" data-sentence-count="12"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl001.mp3&#34;,&#34;english&#34;:&#34;Hello&#34;,&#34;id&#34;:&#34;cz_sl001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl002.mp3&#34;,&#34;english&#34;:&#34;Hi&#34;,&#34;id&#34;:&#34;cz_sl002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl003.mp3&#34;,&#34;english&#34;:&#34;Good morning&#34;,&#34;id&#34;:&#34;cz_sl003&#34;,&#34;native&#34;:&#34;Dobré ráno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl004.mp3&#34;,&#34;english&#34;:&#34;Good evening&#34;,&#34;id&#34;:&#34;cz_sl004&#34;,&#34;native&#34;:&#34;Dobrý večer.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl005.mp3&#34;,&#34;english&#34;:&#34;Please&#34;,&#34;id&#34;:&#34;cz_sl005&#34;,&#34;native&#34;:&#34;Prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl006.mp3&#34;,&#34;english&#34;:&#34;Thank you&#34;,&#34;id&#34;:&#34;cz_sl006&#34;,&#34;native&#34;:&#34;Děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl007.mp3&#34;,&#34;english&#34;:&#34;Thank you very much&#34;,&#34;id&#34;:&#34;cz_sl007&#34;,&#34;native&#34;:&#34;Moc děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl008.mp3&#34;,&#34;english&#34;:&#34;Sorry&#34;,&#34;id&#34;:&#34;cz_sl008&#34;,&#34;native&#34;:&#34;Promiňte.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl009.mp3&#34;,&#34;english&#34;:&#34;Excuse me&#34;,&#34;id&#34;:&#34;cz_sl009&#34;,&#34;native&#34;:&#34;S dovolením.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl010.mp3&#34;,&#34;english&#34;:&#34;Goodbye&#34;,&#34;id&#34;:&#34;cz_sl010&#34;,&#34;native&#34;:&#34;Na shledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl011.mp3&#34;,&#34;english&#34;:&#34;Have a nice day&#34;,&#34;id&#34;:&#34;cz_sl011&#34;,&#34;native&#34;:&#34;Hezký den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl012.mp3&#34;,&#34;english&#34;:&#34;You&#39;re welcome (.informal)&#34;,&#34;id&#34;:&#34;cz_sl012&#34;,&#34;native&#34;:&#34;Není zač.&#34;}]' data-available-levels="A1,A2"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;The Beginning&#34;,&#34;description&#34;:&#34;The Beginning\nEssential greetings and polite phrases for everyday social interaction in Czech.\nHello, Goodbye, Please, Thank you, Excuse me, Sorry, You&#39;re welcome, Have a nice day.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;social-lubricant&#34;,&#34;group_title&#34;:&#34;Social Lubricant&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl001.mp3&#34;,&#34;english&#34;:&#34;Hello&#34;,&#34;id&#34;:&#34;cz_sl001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl002.mp3&#34;,&#34;english&#34;:&#34;Hi&#34;,&#34;id&#34;:&#34;cz_sl002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl003.mp3&#34;,&#34;english&#34;:&#34;Good morning&#34;,&#34;id&#34;:&#34;cz_sl003&#34;,&#34;native&#34;:&#34;Dobré ráno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl004.mp3&#34;,&#34;english&#34;:&#34;Good evening&#34;,&#34;id&#34;:&#34;cz_sl004&#34;,&#34;native&#34;:&#34;Dobrý večer.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl005.mp3&#34;,&#34;english&#34;:&#34;Please&#34;,&#34;id&#34;:&#34;cz_sl005&#34;,&#34;native&#34;:&#34;Prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl006.mp3&#34;,&#34;english&#34;:&#34;Thank you&#34;,&#34;id&#34;:&#34;cz_sl006&#34;,&#34;native&#34;:&#34;Děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl007.mp3&#34;,&#34;english&#34;:&#34;Thank you very much&#34;,&#34;id&#34;:&#34;cz_sl007&#34;,&#34;native&#34;:&#34;Moc děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl008.mp3&#34;,&#34;english&#34;:&#34;Sorry&#34;,&#34;id&#34;:&#34;cz_sl008&#34;,&#34;native&#34;:&#34;Promiňte.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl009.mp3&#34;,&#34;english&#34;:&#34;Excuse me&#34;,&#34;id&#34;:&#34;cz_sl009&#34;,&#34;native&#34;:&#34;S dovolením.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl010.mp3&#34;,&#34;english&#34;:&#34;Goodbye&#34;,&#34;id&#34;:&#34;cz_sl010&#34;,&#34;native&#34;:&#34;Na shledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl011.mp3&#34;,&#34;english&#34;:&#34;Have a nice day&#34;,&#34;id&#34;:&#34;cz_sl011&#34;,&#34;native&#34;:&#34;Hezký den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl012.mp3&#34;,&#34;english&#34;:&#34;You&#39;re welcome (.informal)&#34;,&#34;id&#34;:&#34;cz_sl012&#34;,&#34;native&#34;:&#34;Není zač.&#34;}],&#34;title&#34;:&#34;Social Lubricant&#34;,&#34;weight&#34;:1}},&#34;A2&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Politeness beyond the basics&#34;,&#34;description&#34;:&#34;Politeness beyond the basics.\nNatural greetings, softening, brief social exchanges, and polite closures used in everyday Czech conversation.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;social-lubricant&#34;,&#34;group_title&#34;:&#34;Social Lubricant&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A2&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2001.mp3&#34;,&#34;english&#34;:&#34;How are you?&#34;,&#34;id&#34;:&#34;cz_sl_a2001&#34;,&#34;native&#34;:&#34;Jak se máte?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2002.mp3&#34;,&#34;english&#34;:&#34;How are you? (informal)&#34;,&#34;id&#34;:&#34;cz_sl_a2002&#34;,&#34;native&#34;:&#34;Jak se máš?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2003.mp3&#34;,&#34;english&#34;:&#34;I&#39;m doing well, thank you.&#34;,&#34;id&#34;:&#34;cz_sl_a2003&#34;,&#34;native&#34;:&#34;Mám se dobře, děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2004.mp3&#34;,&#34;english&#34;:&#34;And you? (formal)&#34;,&#34;id&#34;:&#34;cz_sl_a2004&#34;,&#34;native&#34;:&#34;A vy?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2005.mp3&#34;,&#34;english&#34;:&#34;And you? (informal)&#34;,&#34;id&#34;:&#34;cz_sl_a2005&#34;,&#34;native&#34;:&#34;A ty?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2006.mp3&#34;,&#34;english&#34;:&#34;You&#39;re welcome. (neutral)&#34;,&#34;id&#34;:&#34;cz_sl_a2006&#34;,&#34;native&#34;:&#34;Rádo se stalo.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2007.mp3&#34;,&#34;english&#34;:&#34;That&#39;s alright / No problem.&#34;,&#34;id&#34;:&#34;cz_sl_a2007&#34;,&#34;native&#34;:&#34;To je v pořádku.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2008.mp3&#34;,&#34;english&#34;:&#34;I apologize.&#34;,&#34;id&#34;:&#34;cz_sl_a2008&#34;,&#34;native&#34;:&#34;Omlouvám se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2009.mp3&#34;,&#34;english&#34;:&#34;Sorry to bother you.&#34;,&#34;id&#34;:&#34;cz_sl_a2009&#34;,&#34;native&#34;:&#34;Promiňte, že vás ruším.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2010.mp3&#34;,&#34;english&#34;:&#34;Thank you for your help.&#34;,&#34;id&#34;:&#34;cz_sl_a2010&#34;,&#34;native&#34;:&#34;Děkuji za pomoc.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2011.mp3&#34;,&#34;english&#34;:&#34;I really appreciate it.&#34;,&#34;id&#34;:&#34;cz_sl_a2011&#34;,&#34;native&#34;:&#34;Moc si toho vážím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2012.mp3&#34;,&#34;english&#34;:&#34;Have a nice evening.&#34;,&#34;id&#34;:&#34;cz_sl_a2012&#34;,&#34;native&#34;:&#34;Hezký večer.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2013.mp3&#34;,&#34;english&#34;:&#34;Take care / All the best.&#34;,&#34;id&#34;:&#34;cz_sl_a2013&#34;,&#34;native&#34;:&#34;Mějte se hezky.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2014.mp3&#34;,&#34;english&#34;:&#34;See you later.&#34;,&#34;id&#34;:&#34;cz_sl_a2014&#34;,&#34;native&#34;:&#34;Uvidíme se později.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2015.mp3&#34;,&#34;english&#34;:&#34;Thank you, that&#39;s all.&#34;,&#34;id&#34;:&#34;cz_sl_a2015&#34;,&#34;native&#34;:&#34;Děkuji, to je vše.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2016.mp3&#34;,&#34;english&#34;:&#34;No problem.&#34;,&#34;id&#34;:&#34;cz_sl_a2016&#34;,&#34;native&#34;:&#34;Není problém.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2017.mp3&#34;,&#34;english&#34;:&#34;It&#39;s nothing / Don&#39;t worry about it.&#34;,&#34;id&#34;:&#34;cz_sl_a2017&#34;,&#34;native&#34;:&#34;To nic.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2018.mp3&#34;,&#34;english&#34;:&#34;Thank you, goodbye.&#34;,&#34;id&#34;:&#34;cz_sl_a2018&#34;,&#34;native&#34;:&#34;Děkuji, nashledanou.&#34;}],&#34;title&#34;:&#34;Social Lubricant&#34;,&#34;upgrade_from&#34;:&#34;A1&#34;,&#34;weight&#34;:1}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;The Beginning\nEssential greetings and polite phrases for everyday social interaction in Czech.\nHello, Goodbye, Please, Thank you, Excuse me, Sorry, You&#39;re welcome, Have a nice day.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;Social Lubricant&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/social-lubricant&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:1}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;The Beginning&#34;,&#34;description&#34;:&#34;The Beginning\nEssential greetings and polite phrases for everyday social interaction in Czech.\nHello, Goodbye, Please, Thank you, Excuse me, Sorry, You&#39;re welcome, Have a nice day.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;social-lubricant&#34;,&#34;group_title&#34;:&#34;Social Lubricant&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl001.mp3&#34;,&#34;english&#34;:&#34;Hello&#34;,&#34;id&#34;:&#34;cz_sl001&#34;,&#34;native&#34;:&#34;Dobrý den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl002.mp3&#34;,&#34;english&#34;:&#34;Hi&#34;,&#34;id&#34;:&#34;cz_sl002&#34;,&#34;native&#34;:&#34;Ahoj.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl003.mp3&#34;,&#34;english&#34;:&#34;Good morning&#34;,&#34;id&#34;:&#34;cz_sl003&#34;,&#34;native&#34;:&#34;Dobré ráno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl004.mp3&#34;,&#34;english&#34;:&#34;Good evening&#34;,&#34;id&#34;:&#34;cz_sl004&#34;,&#34;native&#34;:&#34;Dobrý večer.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl005.mp3&#34;,&#34;english&#34;:&#34;Please&#34;,&#34;id&#34;:&#34;cz_sl005&#34;,&#34;native&#34;:&#34;Prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl006.mp3&#34;,&#34;english&#34;:&#34;Thank you&#34;,&#34;id&#34;:&#34;cz_sl006&#34;,&#34;native&#34;:&#34;Děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl007.mp3&#34;,&#34;english&#34;:&#34;Thank you very much&#34;,&#34;id&#34;:&#34;cz_sl007&#34;,&#34;native&#34;:&#34;Moc děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl008.mp3&#34;,&#34;english&#34;:&#34;Sorry&#34;,&#34;id&#34;:&#34;cz_sl008&#34;,&#34;native&#34;:&#34;Promiňte.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl009.mp3&#34;,&#34;english&#34;:&#34;Excuse me&#34;,&#34;id&#34;:&#34;cz_sl009&#34;,&#34;native&#34;:&#34;S dovolením.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl010.mp3&#34;,&#34;english&#34;:&#34;Goodbye&#34;,&#34;id&#34;:&#34;cz_sl010&#34;,&#34;native&#34;:&#34;Na shledanou.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl011.mp3&#34;,&#34;english&#34;:&#34;Have a nice day&#34;,&#34;id&#34;:&#34;cz_sl011&#34;,&#34;native&#34;:&#34;Hezký den.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl012.mp3&#34;,&#34;english&#34;:&#34;You&#39;re welcome (.informal)&#34;,&#34;id&#34;:&#34;cz_sl012&#34;,&#34;native&#34;:&#34;Není zač.&#34;}],&#34;title&#34;:&#34;Social Lubricant&#34;,&#34;weight&#34;:1}},&#34;A2&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Politeness beyond the basics&#34;,&#34;description&#34;:&#34;Politeness beyond the basics.\nNatural greetings, softening, brief social exchanges, and polite closures used in everyday Czech conversation.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;social-lubricant&#34;,&#34;group_title&#34;:&#34;Social Lubricant&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A2&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2001.mp3&#34;,&#34;english&#34;:&#34;How are you?&#34;,&#34;id&#34;:&#34;cz_sl_a2001&#34;,&#34;native&#34;:&#34;Jak se máte?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2002.mp3&#34;,&#34;english&#34;:&#34;How are you? (informal)&#34;,&#34;id&#34;:&#34;cz_sl_a2002&#34;,&#34;native&#34;:&#34;Jak se máš?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2003.mp3&#34;,&#34;english&#34;:&#34;I&#39;m doing well, thank you.&#34;,&#34;id&#34;:&#34;cz_sl_a2003&#34;,&#34;native&#34;:&#34;Mám se dobře, děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2004.mp3&#34;,&#34;english&#34;:&#34;And you? (formal)&#34;,&#34;id&#34;:&#34;cz_sl_a2004&#34;,&#34;native&#34;:&#34;A vy?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2005.mp3&#34;,&#34;english&#34;:&#34;And you? (informal)&#34;,&#34;id&#34;:&#34;cz_sl_a2005&#34;,&#34;native&#34;:&#34;A ty?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2006.mp3&#34;,&#34;english&#34;:&#34;You&#39;re welcome. (neutral)&#34;,&#34;id&#34;:&#34;cz_sl_a2006&#34;,&#34;native&#34;:&#34;Rádo se stalo.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2007.mp3&#34;,&#34;english&#34;:&#34;That&#39;s alright / No problem.&#34;,&#34;id&#34;:&#34;cz_sl_a2007&#34;,&#34;native&#34;:&#34;To je v pořádku.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2008.mp3&#34;,&#34;english&#34;:&#34;I apologize.&#34;,&#34;id&#34;:&#34;cz_sl_a2008&#34;,&#34;native&#34;:&#34;Omlouvám se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2009.mp3&#34;,&#34;english&#34;:&#34;Sorry to bother you.&#34;,&#34;id&#34;:&#34;cz_sl_a2009&#34;,&#34;native&#34;:&#34;Promiňte, že vás ruším.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2010.mp3&#34;,&#34;english&#34;:&#34;Thank you for your help.&#34;,&#34;id&#34;:&#34;cz_sl_a2010&#34;,&#34;native&#34;:&#34;Děkuji za pomoc.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2011.mp3&#34;,&#34;english&#34;:&#34;I really appreciate it.&#34;,&#34;id&#34;:&#34;cz_sl_a2011&#34;,&#34;native&#34;:&#34;Moc si toho vážím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2012.mp3&#34;,&#34;english&#34;:&#34;Have a nice evening.&#34;,&#34;id&#34;:&#34;cz_sl_a2012&#34;,&#34;native&#34;:&#34;Hezký večer.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2013.mp3&#34;,&#34;english&#34;:&#34;Take care / All the best.&#34;,&#34;id&#34;:&#34;cz_sl_a2013&#34;,&#34;native&#34;:&#34;Mějte se hezky.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2014.mp3&#34;,&#34;english&#34;:&#34;See you later.&#34;,&#34;id&#34;:&#34;cz_sl_a2014&#34;,&#34;native&#34;:&#34;Uvidíme se později.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2015.mp3&#34;,&#34;english&#34;:&#34;Thank you, that&#39;s all.&#34;,&#34;id&#34;:&#34;cz_sl_a2015&#34;,&#34;native&#34;:&#34;Děkuji, to je vše.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2016.mp3&#34;,&#34;english&#34;:&#34;No problem.&#34;,&#34;id&#34;:&#34;cz_sl_a2016&#34;,&#34;native&#34;:&#34;Není problém.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2017.mp3&#34;,&#34;english&#34;:&#34;It&#39;s nothing / Don&#39;t worry about it.&#34;,&#34;id&#34;:&#34;cz_sl_a2017&#34;,&#34;native&#34;:&#34;To nic.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_sl_a2018.mp3&#34;,&#34;english&#34;:&#34;Thank you, goodbye.&#34;,&#34;id&#34;:&#34;cz_sl_a2018&#34;,&#34;native&#34;:&#34;Děkuji, nashledanou.&#34;}],&#34;title&#34;:&#34;Social Lubricant&#34;,&#34;upgrade_from&#34;:&#34;A1&#34;,&#34;weight&#34;:1}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;The Beginning\nEssential greetings and polite phrases for everyday social interaction in Czech.\nHello, Goodbye, Please, Thank you, Excuse me, Sorry, You&#39;re welcome, Have a nice day.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;Social Lubricant&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/social-lubricant&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:1}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('social-lubricant')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('social-lubricant')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="social-lubricant"
@@ -832,8 +835,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('social-lubricant')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -847,7 +849,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('social-lubricant')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -863,8 +865,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('social-lubricant')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>Social Lubricant</h3>
                     </div>
 
@@ -915,18 +916,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ahoj.</span>
-                                <span class="preview-english">Hi</span>
+                                <span class="preview-native">Děkuji.</span>
+                                <span class="preview-english">Thank you</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Prosím.</span>
-                                <span class="preview-english">Please</span>
+                                <span class="preview-native">Dobrý večer.</span>
+                                <span class="preview-english">Good evening</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Promiňte.</span>
-                                <span class="preview-english">Sorry</span>
+                                <span class="preview-native">Moc děkuji.</span>
+                                <span class="preview-english">Thank you very much</span>
                             </div>
                             
                         </div>
@@ -971,11 +972,11 @@
         
         <div class="group-card" data-group-id="repair-kit" data-sentence-count="7"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk001.mp3&#34;,&#34;english&#34;:&#34;I don&#39;t understand&#34;,&#34;id&#34;:&#34;cz_rk001&#34;,&#34;native&#34;:&#34;Nerozumím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk002.mp3&#34;,&#34;english&#34;:&#34;Can you repeat that?&#34;,&#34;id&#34;:&#34;cz_rk002&#34;,&#34;native&#34;:&#34;Můžete to zopakovat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk003.mp3&#34;,&#34;english&#34;:&#34;Can you speak more slowly?&#34;,&#34;id&#34;:&#34;cz_rk003&#34;,&#34;native&#34;:&#34;Můžete mluvit pomaleji?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk004.mp3&#34;,&#34;english&#34;:&#34;What does that mean?&#34;,&#34;id&#34;:&#34;cz_rk004&#34;,&#34;native&#34;:&#34;Co to znamená?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk005.mp3&#34;,&#34;english&#34;:&#34;Do you speak English?&#34;,&#34;id&#34;:&#34;cz_rk005&#34;,&#34;native&#34;:&#34;Mluvíte anglicky?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk006.mp3&#34;,&#34;english&#34;:&#34;Just a moment, please&#34;,&#34;id&#34;:&#34;cz_rk006&#34;,&#34;native&#34;:&#34;Moment, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk007.mp3&#34;,&#34;english&#34;:&#34;One more time, please&#34;,&#34;id&#34;:&#34;cz_rk007&#34;,&#34;native&#34;:&#34;Ještě jednou, prosím.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Stay in the Conversation&#34;,&#34;description&#34;:&#34;Stay in the Conversation\nKeep conversations flowing when you don&#39;t understand something.\nI don&#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;repair-kit&#34;,&#34;group_title&#34;:&#34;The Repair Kit&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk001.mp3&#34;,&#34;english&#34;:&#34;I don&#39;t understand&#34;,&#34;id&#34;:&#34;cz_rk001&#34;,&#34;native&#34;:&#34;Nerozumím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk002.mp3&#34;,&#34;english&#34;:&#34;Can you repeat that?&#34;,&#34;id&#34;:&#34;cz_rk002&#34;,&#34;native&#34;:&#34;Můžete to zopakovat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk003.mp3&#34;,&#34;english&#34;:&#34;Can you speak more slowly?&#34;,&#34;id&#34;:&#34;cz_rk003&#34;,&#34;native&#34;:&#34;Můžete mluvit pomaleji?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk004.mp3&#34;,&#34;english&#34;:&#34;What does that mean?&#34;,&#34;id&#34;:&#34;cz_rk004&#34;,&#34;native&#34;:&#34;Co to znamená?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk005.mp3&#34;,&#34;english&#34;:&#34;Do you speak English?&#34;,&#34;id&#34;:&#34;cz_rk005&#34;,&#34;native&#34;:&#34;Mluvíte anglicky?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk006.mp3&#34;,&#34;english&#34;:&#34;Just a moment, please&#34;,&#34;id&#34;:&#34;cz_rk006&#34;,&#34;native&#34;:&#34;Moment, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk007.mp3&#34;,&#34;english&#34;:&#34;One more time, please&#34;,&#34;id&#34;:&#34;cz_rk007&#34;,&#34;native&#34;:&#34;Ještě jednou, prosím.&#34;}],&#34;title&#34;:&#34;The Repair Kit&#34;,&#34;weight&#34;:2}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Stay in the Conversation\nKeep conversations flowing when you don&#39;t understand something.\nI don&#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Repair Kit&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/repair-kit&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:2}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Stay in the Conversation&#34;,&#34;description&#34;:&#34;Stay in the Conversation\nKeep conversations flowing when you don&#39;t understand something.\nI don&#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;repair-kit&#34;,&#34;group_title&#34;:&#34;The Repair Kit&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk001.mp3&#34;,&#34;english&#34;:&#34;I don&#39;t understand&#34;,&#34;id&#34;:&#34;cz_rk001&#34;,&#34;native&#34;:&#34;Nerozumím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk002.mp3&#34;,&#34;english&#34;:&#34;Can you repeat that?&#34;,&#34;id&#34;:&#34;cz_rk002&#34;,&#34;native&#34;:&#34;Můžete to zopakovat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk003.mp3&#34;,&#34;english&#34;:&#34;Can you speak more slowly?&#34;,&#34;id&#34;:&#34;cz_rk003&#34;,&#34;native&#34;:&#34;Můžete mluvit pomaleji?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk004.mp3&#34;,&#34;english&#34;:&#34;What does that mean?&#34;,&#34;id&#34;:&#34;cz_rk004&#34;,&#34;native&#34;:&#34;Co to znamená?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk005.mp3&#34;,&#34;english&#34;:&#34;Do you speak English?&#34;,&#34;id&#34;:&#34;cz_rk005&#34;,&#34;native&#34;:&#34;Mluvíte anglicky?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk006.mp3&#34;,&#34;english&#34;:&#34;Just a moment, please&#34;,&#34;id&#34;:&#34;cz_rk006&#34;,&#34;native&#34;:&#34;Moment, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_rk007.mp3&#34;,&#34;english&#34;:&#34;One more time, please&#34;,&#34;id&#34;:&#34;cz_rk007&#34;,&#34;native&#34;:&#34;Ještě jednou, prosím.&#34;}],&#34;title&#34;:&#34;The Repair Kit&#34;,&#34;weight&#34;:2}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Stay in the Conversation\nKeep conversations flowing when you don&#39;t understand something.\nI don&#39;t understand, Can you repeat that? Can you speak more slowly? What does that mean? Do you speak English?\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Repair Kit&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/repair-kit&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:2}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('repair-kit')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('repair-kit')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="repair-kit"
@@ -1020,8 +1021,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('repair-kit')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1035,7 +1035,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('repair-kit')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1051,8 +1051,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('repair-kit')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Repair Kit</h3>
                     </div>
 
@@ -1103,6 +1102,11 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
+                                <span class="preview-native">Moment, prosím.</span>
+                                <span class="preview-english">Just a moment, please</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
                                 <span class="preview-native">Nerozumím.</span>
                                 <span class="preview-english">I don&#39;t understand</span>
                             </div>
@@ -1110,11 +1114,6 @@
                             <div class="sentence-preview">
                                 <span class="preview-native">Ještě jednou, prosím.</span>
                                 <span class="preview-english">One more time, please</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Můžete mluvit pomaleji?</span>
-                                <span class="preview-english">Can you speak more slowly?</span>
                             </div>
                             
                         </div>
@@ -1159,11 +1158,11 @@
         
         <div class="group-card" data-group-id="master-keys" data-sentence-count="10"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk001.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk001&#34;,&#34;native&#34;:&#34;Chtěl bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk002.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk002&#34;,&#34;native&#34;:&#34;Chtěl bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk003.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk003&#34;,&#34;native&#34;:&#34;Chtěla bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk004.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk004&#34;,&#34;native&#34;:&#34;Chtěla bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk005.mp3&#34;,&#34;english&#34;:&#34;Do you have coffee?&#34;,&#34;id&#34;:&#34;cz_mk005&#34;,&#34;native&#34;:&#34;Máte kávu?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk006.mp3&#34;,&#34;english&#34;:&#34;Where is the bathroom?&#34;,&#34;id&#34;:&#34;cz_mk006&#34;,&#34;native&#34;:&#34;Kde je toaleta?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk007.mp3&#34;,&#34;english&#34;:&#34;Is there an ATM here?&#34;,&#34;id&#34;:&#34;cz_mk007&#34;,&#34;native&#34;:&#34;Je tu bankomat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk008.mp3&#34;,&#34;english&#34;:&#34;The menu, please.&#34;,&#34;id&#34;:&#34;cz_mk008&#34;,&#34;native&#34;:&#34;Jídelní lístek, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk009.mp3&#34;,&#34;english&#34;:&#34;The bathroom, please.&#34;,&#34;id&#34;:&#34;cz_mk009&#34;,&#34;native&#34;:&#34;Toaletu, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk010.mp3&#34;,&#34;english&#34;:&#34;Water, please.&#34;,&#34;id&#34;:&#34;cz_mk010&#34;,&#34;native&#34;:&#34;Vodu, prosím.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Get What You Need&#34;,&#34;description&#34;:&#34;Get What You Need\nUniversal phrases for requesting things and expressing needs clearly.\nI would like this/that\nDo you have [x]?\nWhere is the [x]?\nCan I have [x]?\nI need [x]. here?\nPlease give me [x].\nPlease bring me [x].\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;master-keys&#34;,&#34;group_title&#34;:&#34;Master Keys&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk001.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk001&#34;,&#34;native&#34;:&#34;Chtěl bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk002.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk002&#34;,&#34;native&#34;:&#34;Chtěl bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk003.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk003&#34;,&#34;native&#34;:&#34;Chtěla bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk004.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk004&#34;,&#34;native&#34;:&#34;Chtěla bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk005.mp3&#34;,&#34;english&#34;:&#34;Do you have coffee?&#34;,&#34;id&#34;:&#34;cz_mk005&#34;,&#34;native&#34;:&#34;Máte kávu?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk006.mp3&#34;,&#34;english&#34;:&#34;Where is the bathroom?&#34;,&#34;id&#34;:&#34;cz_mk006&#34;,&#34;native&#34;:&#34;Kde je toaleta?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk007.mp3&#34;,&#34;english&#34;:&#34;Is there an ATM here?&#34;,&#34;id&#34;:&#34;cz_mk007&#34;,&#34;native&#34;:&#34;Je tu bankomat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk008.mp3&#34;,&#34;english&#34;:&#34;The menu, please.&#34;,&#34;id&#34;:&#34;cz_mk008&#34;,&#34;native&#34;:&#34;Jídelní lístek, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk009.mp3&#34;,&#34;english&#34;:&#34;The bathroom, please.&#34;,&#34;id&#34;:&#34;cz_mk009&#34;,&#34;native&#34;:&#34;Toaletu, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk010.mp3&#34;,&#34;english&#34;:&#34;Water, please.&#34;,&#34;id&#34;:&#34;cz_mk010&#34;,&#34;native&#34;:&#34;Vodu, prosím.&#34;}],&#34;title&#34;:&#34;The Master Keys&#34;,&#34;weight&#34;:3}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Get What You Need\nUniversal phrases for requesting things and expressing needs clearly.\nI would like this/that\nDo you have [x]?\nWhere is the [x]?\nCan I have [x]?\nI need [x]. here?\nPlease give me [x].\nPlease bring me [x].\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Master Keys&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/master-keys&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:3}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Get What You Need&#34;,&#34;description&#34;:&#34;Get What You Need\nUniversal phrases for requesting things and expressing needs clearly.\nI would like this/that\nDo you have [x]?\nWhere is the [x]?\nCan I have [x]?\nI need [x]. here?\nPlease give me [x].\nPlease bring me [x].\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;master-keys&#34;,&#34;group_title&#34;:&#34;Master Keys&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk001.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk001&#34;,&#34;native&#34;:&#34;Chtěl bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk002.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_mk002&#34;,&#34;native&#34;:&#34;Chtěl bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk003.mp3&#34;,&#34;english&#34;:&#34;I would like this.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk003&#34;,&#34;native&#34;:&#34;Chtěla bych tohle.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk004.mp3&#34;,&#34;english&#34;:&#34;I would like that.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_mk004&#34;,&#34;native&#34;:&#34;Chtěla bych tamto.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk005.mp3&#34;,&#34;english&#34;:&#34;Do you have coffee?&#34;,&#34;id&#34;:&#34;cz_mk005&#34;,&#34;native&#34;:&#34;Máte kávu?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk006.mp3&#34;,&#34;english&#34;:&#34;Where is the bathroom?&#34;,&#34;id&#34;:&#34;cz_mk006&#34;,&#34;native&#34;:&#34;Kde je toaleta?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk007.mp3&#34;,&#34;english&#34;:&#34;Is there an ATM here?&#34;,&#34;id&#34;:&#34;cz_mk007&#34;,&#34;native&#34;:&#34;Je tu bankomat?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk008.mp3&#34;,&#34;english&#34;:&#34;The menu, please.&#34;,&#34;id&#34;:&#34;cz_mk008&#34;,&#34;native&#34;:&#34;Jídelní lístek, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk009.mp3&#34;,&#34;english&#34;:&#34;The bathroom, please.&#34;,&#34;id&#34;:&#34;cz_mk009&#34;,&#34;native&#34;:&#34;Toaletu, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_mk010.mp3&#34;,&#34;english&#34;:&#34;Water, please.&#34;,&#34;id&#34;:&#34;cz_mk010&#34;,&#34;native&#34;:&#34;Vodu, prosím.&#34;}],&#34;title&#34;:&#34;The Master Keys&#34;,&#34;weight&#34;:3}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Get What You Need\nUniversal phrases for requesting things and expressing needs clearly.\nI would like this/that\nDo you have [x]?\nWhere is the [x]?\nCan I have [x]?\nI need [x]. here?\nPlease give me [x].\nPlease bring me [x].\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Master Keys&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/master-keys&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:3}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('master-keys')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('master-keys')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="master-keys"
@@ -1208,8 +1207,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('master-keys')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1223,7 +1221,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('master-keys')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1239,8 +1237,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('master-keys')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>Master Keys</h3>
                     </div>
 
@@ -1296,13 +1293,13 @@
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Vodu, prosím.</span>
-                                <span class="preview-english">Water, please.</span>
+                                <span class="preview-native">Toaletu, prosím.</span>
+                                <span class="preview-english">The bathroom, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jídelní lístek, prosím.</span>
-                                <span class="preview-english">The menu, please.</span>
+                                <span class="preview-native">Vodu, prosím.</span>
+                                <span class="preview-english">Water, please.</span>
                             </div>
                             
                         </div>
@@ -1347,11 +1344,11 @@
         
         <div class="group-card" data-group-id="transaction" data-sentence-count="11"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr001.mp3&#34;,&#34;english&#34;:&#34;How much is this?&#34;,&#34;id&#34;:&#34;cz_tr001&#34;,&#34;native&#34;:&#34;Kolik to stojí?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr002.mp3&#34;,&#34;english&#34;:&#34;How much is it in total?&#34;,&#34;id&#34;:&#34;cz_tr002&#34;,&#34;native&#34;:&#34;Kolik je to dohromady?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr003.mp3&#34;,&#34;english&#34;:&#34;Can I pay by card?&#34;,&#34;id&#34;:&#34;cz_tr003&#34;,&#34;native&#34;:&#34;Můžu platit kartou?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr004.mp3&#34;,&#34;english&#34;:&#34;Cash only?&#34;,&#34;id&#34;:&#34;cz_tr004&#34;,&#34;native&#34;:&#34;Jen hotově?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr005.mp3&#34;,&#34;english&#34;:&#34;The bill, please.&#34;,&#34;id&#34;:&#34;cz_tr005&#34;,&#34;native&#34;:&#34;Účet, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr006.mp3&#34;,&#34;english&#34;:&#34;The receipt, please.&#34;,&#34;id&#34;:&#34;cz_tr006&#34;,&#34;native&#34;:&#34;Účtenku, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr007.mp3&#34;,&#34;english&#34;:&#34;It’s a bit expensive.&#34;,&#34;id&#34;:&#34;cz_tr007&#34;,&#34;native&#34;:&#34;Je to trochu drahé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr008.mp3&#34;,&#34;english&#34;:&#34;Do you have change?&#34;,&#34;id&#34;:&#34;cz_tr008&#34;,&#34;native&#34;:&#34;Máte drobné?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr009.mp3&#34;,&#34;english&#34;:&#34;I’m just looking.&#34;,&#34;id&#34;:&#34;cz_tr009&#34;,&#34;native&#34;:&#34;Jen se dívám.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr010.mp3&#34;,&#34;english&#34;:&#34;No, thank you.&#34;,&#34;id&#34;:&#34;cz_tr010&#34;,&#34;native&#34;:&#34;Ne, děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr011.mp3&#34;,&#34;english&#34;:&#34;I’ll take it.&#34;,&#34;id&#34;:&#34;cz_tr011&#34;,&#34;native&#34;:&#34;Vezmu si to.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Making Purchases&#34;,&#34;description&#34;:&#34;Making Purchases\nEssential shopping phrases for purchases, payments, and transactions.\nHow much is this? Can I pay by card? The bill, please. I&#39;ll take it. The receipt, please. Do you have change? I&#39;m just looking.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;transaction&#34;,&#34;group_title&#34;:&#34;The Transaction&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr001.mp3&#34;,&#34;english&#34;:&#34;How much is this?&#34;,&#34;id&#34;:&#34;cz_tr001&#34;,&#34;native&#34;:&#34;Kolik to stojí?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr002.mp3&#34;,&#34;english&#34;:&#34;How much is it in total?&#34;,&#34;id&#34;:&#34;cz_tr002&#34;,&#34;native&#34;:&#34;Kolik je to dohromady?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr003.mp3&#34;,&#34;english&#34;:&#34;Can I pay by card?&#34;,&#34;id&#34;:&#34;cz_tr003&#34;,&#34;native&#34;:&#34;Můžu platit kartou?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr004.mp3&#34;,&#34;english&#34;:&#34;Cash only?&#34;,&#34;id&#34;:&#34;cz_tr004&#34;,&#34;native&#34;:&#34;Jen hotově?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr005.mp3&#34;,&#34;english&#34;:&#34;The bill, please.&#34;,&#34;id&#34;:&#34;cz_tr005&#34;,&#34;native&#34;:&#34;Účet, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr006.mp3&#34;,&#34;english&#34;:&#34;The receipt, please.&#34;,&#34;id&#34;:&#34;cz_tr006&#34;,&#34;native&#34;:&#34;Účtenku, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr007.mp3&#34;,&#34;english&#34;:&#34;It’s a bit expensive.&#34;,&#34;id&#34;:&#34;cz_tr007&#34;,&#34;native&#34;:&#34;Je to trochu drahé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr008.mp3&#34;,&#34;english&#34;:&#34;Do you have change?&#34;,&#34;id&#34;:&#34;cz_tr008&#34;,&#34;native&#34;:&#34;Máte drobné?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr009.mp3&#34;,&#34;english&#34;:&#34;I’m just looking.&#34;,&#34;id&#34;:&#34;cz_tr009&#34;,&#34;native&#34;:&#34;Jen se dívám.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr010.mp3&#34;,&#34;english&#34;:&#34;No, thank you.&#34;,&#34;id&#34;:&#34;cz_tr010&#34;,&#34;native&#34;:&#34;Ne, děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr011.mp3&#34;,&#34;english&#34;:&#34;I’ll take it.&#34;,&#34;id&#34;:&#34;cz_tr011&#34;,&#34;native&#34;:&#34;Vezmu si to.&#34;}],&#34;title&#34;:&#34;The Transaction&#34;,&#34;weight&#34;:4}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Making Purchases\nEssential shopping phrases for purchases, payments, and transactions.\nHow much is this? Can I pay by card? The bill, please. I&#39;ll take it. The receipt, please. Do you have change? I&#39;m just looking.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Transaction&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-transaction&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:4}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Making Purchases&#34;,&#34;description&#34;:&#34;Making Purchases\nEssential shopping phrases for purchases, payments, and transactions.\nHow much is this? Can I pay by card? The bill, please. I&#39;ll take it. The receipt, please. Do you have change? I&#39;m just looking.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;transaction&#34;,&#34;group_title&#34;:&#34;The Transaction&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr001.mp3&#34;,&#34;english&#34;:&#34;How much is this?&#34;,&#34;id&#34;:&#34;cz_tr001&#34;,&#34;native&#34;:&#34;Kolik to stojí?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr002.mp3&#34;,&#34;english&#34;:&#34;How much is it in total?&#34;,&#34;id&#34;:&#34;cz_tr002&#34;,&#34;native&#34;:&#34;Kolik je to dohromady?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr003.mp3&#34;,&#34;english&#34;:&#34;Can I pay by card?&#34;,&#34;id&#34;:&#34;cz_tr003&#34;,&#34;native&#34;:&#34;Můžu platit kartou?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr004.mp3&#34;,&#34;english&#34;:&#34;Cash only?&#34;,&#34;id&#34;:&#34;cz_tr004&#34;,&#34;native&#34;:&#34;Jen hotově?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr005.mp3&#34;,&#34;english&#34;:&#34;The bill, please.&#34;,&#34;id&#34;:&#34;cz_tr005&#34;,&#34;native&#34;:&#34;Účet, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr006.mp3&#34;,&#34;english&#34;:&#34;The receipt, please.&#34;,&#34;id&#34;:&#34;cz_tr006&#34;,&#34;native&#34;:&#34;Účtenku, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr007.mp3&#34;,&#34;english&#34;:&#34;It’s a bit expensive.&#34;,&#34;id&#34;:&#34;cz_tr007&#34;,&#34;native&#34;:&#34;Je to trochu drahé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr008.mp3&#34;,&#34;english&#34;:&#34;Do you have change?&#34;,&#34;id&#34;:&#34;cz_tr008&#34;,&#34;native&#34;:&#34;Máte drobné?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr009.mp3&#34;,&#34;english&#34;:&#34;I’m just looking.&#34;,&#34;id&#34;:&#34;cz_tr009&#34;,&#34;native&#34;:&#34;Jen se dívám.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr010.mp3&#34;,&#34;english&#34;:&#34;No, thank you.&#34;,&#34;id&#34;:&#34;cz_tr010&#34;,&#34;native&#34;:&#34;Ne, děkuji.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_tr011.mp3&#34;,&#34;english&#34;:&#34;I’ll take it.&#34;,&#34;id&#34;:&#34;cz_tr011&#34;,&#34;native&#34;:&#34;Vezmu si to.&#34;}],&#34;title&#34;:&#34;The Transaction&#34;,&#34;weight&#34;:4}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Making Purchases\nEssential shopping phrases for purchases, payments, and transactions.\nHow much is this? Can I pay by card? The bill, please. I&#39;ll take it. The receipt, please. Do you have change? I&#39;m just looking.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Transaction&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-transaction&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:4}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('transaction')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('transaction')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="transaction"
@@ -1396,8 +1393,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('transaction')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1411,7 +1407,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('transaction')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1427,8 +1423,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('transaction')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Transaction</h3>
                     </div>
 
@@ -1479,18 +1474,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Můžu platit kartou?</span>
-                                <span class="preview-english">Can I pay by card?</span>
+                                <span class="preview-native">Jen hotově?</span>
+                                <span class="preview-english">Cash only?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Účet, prosím.</span>
-                                <span class="preview-english">The bill, please.</span>
+                                <span class="preview-native">Účtenku, prosím.</span>
+                                <span class="preview-english">The receipt, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ne, děkuji.</span>
-                                <span class="preview-english">No, thank you.</span>
+                                <span class="preview-native">Máte drobné?</span>
+                                <span class="preview-english">Do you have change?</span>
                             </div>
                             
                         </div>
@@ -1535,11 +1530,11 @@
         
         <div class="group-card" data-group-id="navigator" data-sentence-count="10"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav001.mp3&#34;,&#34;english&#34;:&#34;Where is the station?&#34;,&#34;id&#34;:&#34;cz_nav001&#34;,&#34;native&#34;:&#34;Kde je nádraží?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav002.mp3&#34;,&#34;english&#34;:&#34;Where is the airport?&#34;,&#34;id&#34;:&#34;cz_nav002&#34;,&#34;native&#34;:&#34;Kde je letiště?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav003.mp3&#34;,&#34;english&#34;:&#34;Where is the hotel?&#34;,&#34;id&#34;:&#34;cz_nav003&#34;,&#34;native&#34;:&#34;Kde je hotel?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav004.mp3&#34;,&#34;english&#34;:&#34;Does this go to the center?&#34;,&#34;id&#34;:&#34;cz_nav004&#34;,&#34;native&#34;:&#34;Jede to do centra?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav005.mp3&#34;,&#34;english&#34;:&#34;Please take me here.&#34;,&#34;id&#34;:&#34;cz_nav005&#34;,&#34;native&#34;:&#34;Prosím, vezměte mě sem.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav006.mp3&#34;,&#34;english&#34;:&#34;Stop here, please.&#34;,&#34;id&#34;:&#34;cz_nav006&#34;,&#34;native&#34;:&#34;Zastavte tady, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav007.mp3&#34;,&#34;english&#34;:&#34;Straight ahead.&#34;,&#34;id&#34;:&#34;cz_nav007&#34;,&#34;native&#34;:&#34;Rovně.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav008.mp3&#34;,&#34;english&#34;:&#34;Turn Left.&#34;,&#34;id&#34;:&#34;cz_nav008&#34;,&#34;native&#34;:&#34;Zahněte doleva.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav009.mp3&#34;,&#34;english&#34;:&#34;Turn Right.&#34;,&#34;id&#34;:&#34;cz_nav009&#34;,&#34;native&#34;:&#34;Zahněte doprava.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav010.mp3&#34;,&#34;english&#34;:&#34;Ticket to Prague, please.&#34;,&#34;id&#34;:&#34;cz_nav010&#34;,&#34;native&#34;:&#34;Lístek do Prahy, prosím.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Getting Around&#34;,&#34;description&#34;:&#34;Getting Around\nNavigate cities with confidence: directions, transport, and locations.\nWhere is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;navigator&#34;,&#34;group_title&#34;:&#34;The Navigator&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav001.mp3&#34;,&#34;english&#34;:&#34;Where is the station?&#34;,&#34;id&#34;:&#34;cz_nav001&#34;,&#34;native&#34;:&#34;Kde je nádraží?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav002.mp3&#34;,&#34;english&#34;:&#34;Where is the airport?&#34;,&#34;id&#34;:&#34;cz_nav002&#34;,&#34;native&#34;:&#34;Kde je letiště?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav003.mp3&#34;,&#34;english&#34;:&#34;Where is the hotel?&#34;,&#34;id&#34;:&#34;cz_nav003&#34;,&#34;native&#34;:&#34;Kde je hotel?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav004.mp3&#34;,&#34;english&#34;:&#34;Does this go to the center?&#34;,&#34;id&#34;:&#34;cz_nav004&#34;,&#34;native&#34;:&#34;Jede to do centra?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav005.mp3&#34;,&#34;english&#34;:&#34;Please take me here.&#34;,&#34;id&#34;:&#34;cz_nav005&#34;,&#34;native&#34;:&#34;Prosím, vezměte mě sem.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav006.mp3&#34;,&#34;english&#34;:&#34;Stop here, please.&#34;,&#34;id&#34;:&#34;cz_nav006&#34;,&#34;native&#34;:&#34;Zastavte tady, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav007.mp3&#34;,&#34;english&#34;:&#34;Straight ahead.&#34;,&#34;id&#34;:&#34;cz_nav007&#34;,&#34;native&#34;:&#34;Rovně.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav008.mp3&#34;,&#34;english&#34;:&#34;Turn Left.&#34;,&#34;id&#34;:&#34;cz_nav008&#34;,&#34;native&#34;:&#34;Zahněte doleva.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav009.mp3&#34;,&#34;english&#34;:&#34;Turn Right.&#34;,&#34;id&#34;:&#34;cz_nav009&#34;,&#34;native&#34;:&#34;Zahněte doprava.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav010.mp3&#34;,&#34;english&#34;:&#34;Ticket to Prague, please.&#34;,&#34;id&#34;:&#34;cz_nav010&#34;,&#34;native&#34;:&#34;Lístek do Prahy, prosím.&#34;}],&#34;title&#34;:&#34;The Navigator&#34;,&#34;weight&#34;:5}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Getting Around\nNavigate cities with confidence: directions, transport, and locations.\nWhere is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Navigator&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-navigator&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:5}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Getting Around&#34;,&#34;description&#34;:&#34;Getting Around\nNavigate cities with confidence: directions, transport, and locations.\nWhere is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;navigator&#34;,&#34;group_title&#34;:&#34;The Navigator&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav001.mp3&#34;,&#34;english&#34;:&#34;Where is the station?&#34;,&#34;id&#34;:&#34;cz_nav001&#34;,&#34;native&#34;:&#34;Kde je nádraží?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav002.mp3&#34;,&#34;english&#34;:&#34;Where is the airport?&#34;,&#34;id&#34;:&#34;cz_nav002&#34;,&#34;native&#34;:&#34;Kde je letiště?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav003.mp3&#34;,&#34;english&#34;:&#34;Where is the hotel?&#34;,&#34;id&#34;:&#34;cz_nav003&#34;,&#34;native&#34;:&#34;Kde je hotel?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav004.mp3&#34;,&#34;english&#34;:&#34;Does this go to the center?&#34;,&#34;id&#34;:&#34;cz_nav004&#34;,&#34;native&#34;:&#34;Jede to do centra?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav005.mp3&#34;,&#34;english&#34;:&#34;Please take me here.&#34;,&#34;id&#34;:&#34;cz_nav005&#34;,&#34;native&#34;:&#34;Prosím, vezměte mě sem.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav006.mp3&#34;,&#34;english&#34;:&#34;Stop here, please.&#34;,&#34;id&#34;:&#34;cz_nav006&#34;,&#34;native&#34;:&#34;Zastavte tady, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav007.mp3&#34;,&#34;english&#34;:&#34;Straight ahead.&#34;,&#34;id&#34;:&#34;cz_nav007&#34;,&#34;native&#34;:&#34;Rovně.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav008.mp3&#34;,&#34;english&#34;:&#34;Turn Left.&#34;,&#34;id&#34;:&#34;cz_nav008&#34;,&#34;native&#34;:&#34;Zahněte doleva.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav009.mp3&#34;,&#34;english&#34;:&#34;Turn Right.&#34;,&#34;id&#34;:&#34;cz_nav009&#34;,&#34;native&#34;:&#34;Zahněte doprava.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_nav010.mp3&#34;,&#34;english&#34;:&#34;Ticket to Prague, please.&#34;,&#34;id&#34;:&#34;cz_nav010&#34;,&#34;native&#34;:&#34;Lístek do Prahy, prosím.&#34;}],&#34;title&#34;:&#34;The Navigator&#34;,&#34;weight&#34;:5}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Getting Around\nNavigate cities with confidence: directions, transport, and locations.\nWhere is the station? Where is the hotel? Does this go to [Place]? Please take me here. Ticket to [Place], please.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Navigator&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-navigator&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:5}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('navigator')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('navigator')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="navigator"
@@ -1584,8 +1579,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('navigator')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1599,7 +1593,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('navigator')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1615,8 +1609,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('navigator')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Navigator</h3>
                     </div>
 
@@ -1667,18 +1660,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
+                                <span class="preview-native">Rovně.</span>
+                                <span class="preview-english">Straight ahead.</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
                                 <span class="preview-native">Kde je letiště?</span>
                                 <span class="preview-english">Where is the airport?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jede to do centra?</span>
-                                <span class="preview-english">Does this go to the center?</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Kde je hotel?</span>
-                                <span class="preview-english">Where is the hotel?</span>
+                                <span class="preview-native">Zahněte doprava.</span>
+                                <span class="preview-english">Turn Right.</span>
                             </div>
                             
                         </div>
@@ -1723,11 +1716,11 @@
         
         <div class="group-card" data-group-id="quantifier" data-sentence-count="12"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q001.mp3&#34;,&#34;english&#34;:&#34;What time is it?&#34;,&#34;id&#34;:&#34;cz_q001&#34;,&#34;native&#34;:&#34;Kolik je hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q002.mp3&#34;,&#34;english&#34;:&#34;At what time?&#34;,&#34;id&#34;:&#34;cz_q002&#34;,&#34;native&#34;:&#34;V kolik hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q003.mp3&#34;,&#34;english&#34;:&#34;Now, please.&#34;,&#34;id&#34;:&#34;cz_q003&#34;,&#34;native&#34;:&#34;Teď, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q004.mp3&#34;,&#34;english&#34;:&#34;Later.&#34;,&#34;id&#34;:&#34;cz_q004&#34;,&#34;native&#34;:&#34;Později.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q005.mp3&#34;,&#34;english&#34;:&#34;Today.&#34;,&#34;id&#34;:&#34;cz_q005&#34;,&#34;native&#34;:&#34;Dnes.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q006.mp3&#34;,&#34;english&#34;:&#34;Tomorrow.&#34;,&#34;id&#34;:&#34;cz_q006&#34;,&#34;native&#34;:&#34;Zítra.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q007.mp3&#34;,&#34;english&#34;:&#34;It is big.&#34;,&#34;id&#34;:&#34;cz_q007&#34;,&#34;native&#34;:&#34;Je to velké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q008.mp3&#34;,&#34;english&#34;:&#34;It is small.&#34;,&#34;id&#34;:&#34;cz_q008&#34;,&#34;native&#34;:&#34;Je to malé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q009.mp3&#34;,&#34;english&#34;:&#34;I want more.&#34;,&#34;id&#34;:&#34;cz_q009&#34;,&#34;native&#34;:&#34;Chci víc.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q010.mp3&#34;,&#34;english&#34;:&#34;That’s enough.&#34;,&#34;id&#34;:&#34;cz_q010&#34;,&#34;native&#34;:&#34;Stačí to.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q011.mp3&#34;,&#34;english&#34;:&#34;It’s not enough.&#34;,&#34;id&#34;:&#34;cz_q011&#34;,&#34;native&#34;:&#34;Je to málo.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q012.mp3&#34;,&#34;english&#34;:&#34;There are three.&#34;,&#34;id&#34;:&#34;cz_q012&#34;,&#34;native&#34;:&#34;Jsou tři.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Size \u0026 Time&#34;,&#34;description&#34;:&#34;Size \u0026 Time\nExpress time, quantity, and size: more, enough, big, small, and numbers.\nWhat time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That&#39;s enough, It&#39;s not enough, There are three.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;quantifier&#34;,&#34;group_title&#34;:&#34;The Quantifier&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q001.mp3&#34;,&#34;english&#34;:&#34;What time is it?&#34;,&#34;id&#34;:&#34;cz_q001&#34;,&#34;native&#34;:&#34;Kolik je hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q002.mp3&#34;,&#34;english&#34;:&#34;At what time?&#34;,&#34;id&#34;:&#34;cz_q002&#34;,&#34;native&#34;:&#34;V kolik hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q003.mp3&#34;,&#34;english&#34;:&#34;Now, please.&#34;,&#34;id&#34;:&#34;cz_q003&#34;,&#34;native&#34;:&#34;Teď, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q004.mp3&#34;,&#34;english&#34;:&#34;Later.&#34;,&#34;id&#34;:&#34;cz_q004&#34;,&#34;native&#34;:&#34;Později.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q005.mp3&#34;,&#34;english&#34;:&#34;Today.&#34;,&#34;id&#34;:&#34;cz_q005&#34;,&#34;native&#34;:&#34;Dnes.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q006.mp3&#34;,&#34;english&#34;:&#34;Tomorrow.&#34;,&#34;id&#34;:&#34;cz_q006&#34;,&#34;native&#34;:&#34;Zítra.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q007.mp3&#34;,&#34;english&#34;:&#34;It is big.&#34;,&#34;id&#34;:&#34;cz_q007&#34;,&#34;native&#34;:&#34;Je to velké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q008.mp3&#34;,&#34;english&#34;:&#34;It is small.&#34;,&#34;id&#34;:&#34;cz_q008&#34;,&#34;native&#34;:&#34;Je to malé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q009.mp3&#34;,&#34;english&#34;:&#34;I want more.&#34;,&#34;id&#34;:&#34;cz_q009&#34;,&#34;native&#34;:&#34;Chci víc.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q010.mp3&#34;,&#34;english&#34;:&#34;That’s enough.&#34;,&#34;id&#34;:&#34;cz_q010&#34;,&#34;native&#34;:&#34;Stačí to.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q011.mp3&#34;,&#34;english&#34;:&#34;It’s not enough.&#34;,&#34;id&#34;:&#34;cz_q011&#34;,&#34;native&#34;:&#34;Je to málo.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q012.mp3&#34;,&#34;english&#34;:&#34;There are three.&#34;,&#34;id&#34;:&#34;cz_q012&#34;,&#34;native&#34;:&#34;Jsou tři.&#34;}],&#34;title&#34;:&#34;The Quantifier&#34;,&#34;weight&#34;:6}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Size \u0026 Time\nExpress time, quantity, and size: more, enough, big, small, and numbers.\nWhat time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That&#39;s enough, It&#39;s not enough, There are three.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Quantifier&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-quantifier&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:6}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Size \u0026 Time&#34;,&#34;description&#34;:&#34;Size \u0026 Time\nExpress time, quantity, and size: more, enough, big, small, and numbers.\nWhat time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That&#39;s enough, It&#39;s not enough, There are three.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;quantifier&#34;,&#34;group_title&#34;:&#34;The Quantifier&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q001.mp3&#34;,&#34;english&#34;:&#34;What time is it?&#34;,&#34;id&#34;:&#34;cz_q001&#34;,&#34;native&#34;:&#34;Kolik je hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q002.mp3&#34;,&#34;english&#34;:&#34;At what time?&#34;,&#34;id&#34;:&#34;cz_q002&#34;,&#34;native&#34;:&#34;V kolik hodin?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q003.mp3&#34;,&#34;english&#34;:&#34;Now, please.&#34;,&#34;id&#34;:&#34;cz_q003&#34;,&#34;native&#34;:&#34;Teď, prosím.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q004.mp3&#34;,&#34;english&#34;:&#34;Later.&#34;,&#34;id&#34;:&#34;cz_q004&#34;,&#34;native&#34;:&#34;Později.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q005.mp3&#34;,&#34;english&#34;:&#34;Today.&#34;,&#34;id&#34;:&#34;cz_q005&#34;,&#34;native&#34;:&#34;Dnes.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q006.mp3&#34;,&#34;english&#34;:&#34;Tomorrow.&#34;,&#34;id&#34;:&#34;cz_q006&#34;,&#34;native&#34;:&#34;Zítra.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q007.mp3&#34;,&#34;english&#34;:&#34;It is big.&#34;,&#34;id&#34;:&#34;cz_q007&#34;,&#34;native&#34;:&#34;Je to velké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q008.mp3&#34;,&#34;english&#34;:&#34;It is small.&#34;,&#34;id&#34;:&#34;cz_q008&#34;,&#34;native&#34;:&#34;Je to malé.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q009.mp3&#34;,&#34;english&#34;:&#34;I want more.&#34;,&#34;id&#34;:&#34;cz_q009&#34;,&#34;native&#34;:&#34;Chci víc.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q010.mp3&#34;,&#34;english&#34;:&#34;That’s enough.&#34;,&#34;id&#34;:&#34;cz_q010&#34;,&#34;native&#34;:&#34;Stačí to.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q011.mp3&#34;,&#34;english&#34;:&#34;It’s not enough.&#34;,&#34;id&#34;:&#34;cz_q011&#34;,&#34;native&#34;:&#34;Je to málo.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_q012.mp3&#34;,&#34;english&#34;:&#34;There are three.&#34;,&#34;id&#34;:&#34;cz_q012&#34;,&#34;native&#34;:&#34;Jsou tři.&#34;}],&#34;title&#34;:&#34;The Quantifier&#34;,&#34;weight&#34;:6}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Size \u0026 Time\nExpress time, quantity, and size: more, enough, big, small, and numbers.\nWhat time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That&#39;s enough, It&#39;s not enough, There are three.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Quantifier&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-quantifier&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:6}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('quantifier')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('quantifier')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="quantifier"
@@ -1772,8 +1765,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('quantifier')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1787,7 +1779,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('quantifier')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1803,8 +1795,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('quantifier')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Quantifier</h3>
                     </div>
 
@@ -1855,13 +1846,13 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">V kolik hodin?</span>
-                                <span class="preview-english">At what time?</span>
+                                <span class="preview-native">Je to malé.</span>
+                                <span class="preview-english">It is small.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Později.</span>
-                                <span class="preview-english">Later.</span>
+                                <span class="preview-native">Chci víc.</span>
+                                <span class="preview-english">I want more.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1911,11 +1902,11 @@
         
         <div class="group-card" data-group-id="troubleshooter" data-sentence-count="9"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts001.mp3&#34;,&#34;english&#34;:&#34;It is broken.&#34;,&#34;id&#34;:&#34;cz_ts001&#34;,&#34;native&#34;:&#34;Je to rozbité.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts002.mp3&#34;,&#34;english&#34;:&#34;It is cold.&#34;,&#34;id&#34;:&#34;cz_ts002&#34;,&#34;native&#34;:&#34;Je to studené.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts003.mp3&#34;,&#34;english&#34;:&#34;It is hot.&#34;,&#34;id&#34;:&#34;cz_ts003&#34;,&#34;native&#34;:&#34;Je to horké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts004.mp3&#34;,&#34;english&#34;:&#34;It is closed.&#34;,&#34;id&#34;:&#34;cz_ts004&#34;,&#34;native&#34;:&#34;Je zavřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts005.mp3&#34;,&#34;english&#34;:&#34;It is open.&#34;,&#34;id&#34;:&#34;cz_ts005&#34;,&#34;native&#34;:&#34;Je otevřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts006.mp3&#34;,&#34;english&#34;:&#34;I didn’t order this.&#34;,&#34;id&#34;:&#34;cz_ts006&#34;,&#34;native&#34;:&#34;Tohle jsem si neobjednal.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts007.mp3&#34;,&#34;english&#34;:&#34;There is no hot water.&#34;,&#34;id&#34;:&#34;cz_ts007&#34;,&#34;native&#34;:&#34;Neteče teplá voda.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts008.mp3&#34;,&#34;english&#34;:&#34;The key doesn’t work.&#34;,&#34;id&#34;:&#34;cz_ts008&#34;,&#34;native&#34;:&#34;Klíč nefunguje.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts009.mp3&#34;,&#34;english&#34;:&#34;There is a problem here.&#34;,&#34;id&#34;:&#34;cz_ts009&#34;,&#34;native&#34;:&#34;Je tu problém.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Reporting Issues&#34;,&#34;description&#34;:&#34;Reporting Issues\nReport problems and issues: broken items, temperature, and mistakes.\nIt is broken. It is cold. It is hot. It is closed. It is open. I didn&#39;t order this. There is no hot water. The key doesn&#39;t work. There is a problem here.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;troubleshooter&#34;,&#34;group_title&#34;:&#34;The Troubleshooter&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts001.mp3&#34;,&#34;english&#34;:&#34;It is broken.&#34;,&#34;id&#34;:&#34;cz_ts001&#34;,&#34;native&#34;:&#34;Je to rozbité.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts002.mp3&#34;,&#34;english&#34;:&#34;It is cold.&#34;,&#34;id&#34;:&#34;cz_ts002&#34;,&#34;native&#34;:&#34;Je to studené.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts003.mp3&#34;,&#34;english&#34;:&#34;It is hot.&#34;,&#34;id&#34;:&#34;cz_ts003&#34;,&#34;native&#34;:&#34;Je to horké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts004.mp3&#34;,&#34;english&#34;:&#34;It is closed.&#34;,&#34;id&#34;:&#34;cz_ts004&#34;,&#34;native&#34;:&#34;Je zavřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts005.mp3&#34;,&#34;english&#34;:&#34;It is open.&#34;,&#34;id&#34;:&#34;cz_ts005&#34;,&#34;native&#34;:&#34;Je otevřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts006.mp3&#34;,&#34;english&#34;:&#34;I didn’t order this.&#34;,&#34;id&#34;:&#34;cz_ts006&#34;,&#34;native&#34;:&#34;Tohle jsem si neobjednal.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts007.mp3&#34;,&#34;english&#34;:&#34;There is no hot water.&#34;,&#34;id&#34;:&#34;cz_ts007&#34;,&#34;native&#34;:&#34;Neteče teplá voda.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts008.mp3&#34;,&#34;english&#34;:&#34;The key doesn’t work.&#34;,&#34;id&#34;:&#34;cz_ts008&#34;,&#34;native&#34;:&#34;Klíč nefunguje.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts009.mp3&#34;,&#34;english&#34;:&#34;There is a problem here.&#34;,&#34;id&#34;:&#34;cz_ts009&#34;,&#34;native&#34;:&#34;Je tu problém.&#34;}],&#34;title&#34;:&#34;The Troubleshooter&#34;,&#34;weight&#34;:7}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Reporting Issues\nReport problems and issues: broken items, temperature, and mistakes.\nIt is broken. It is cold. It is hot. It is closed. It is open. I didn&#39;t order this. There is no hot water. The key doesn&#39;t work. There is a problem here.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Troubleshooter&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-troubleshooter&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:7}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Reporting Issues&#34;,&#34;description&#34;:&#34;Reporting Issues\nReport problems and issues: broken items, temperature, and mistakes.\nIt is broken. It is cold. It is hot. It is closed. It is open. I didn&#39;t order this. There is no hot water. The key doesn&#39;t work. There is a problem here.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;troubleshooter&#34;,&#34;group_title&#34;:&#34;The Troubleshooter&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts001.mp3&#34;,&#34;english&#34;:&#34;It is broken.&#34;,&#34;id&#34;:&#34;cz_ts001&#34;,&#34;native&#34;:&#34;Je to rozbité.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts002.mp3&#34;,&#34;english&#34;:&#34;It is cold.&#34;,&#34;id&#34;:&#34;cz_ts002&#34;,&#34;native&#34;:&#34;Je to studené.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts003.mp3&#34;,&#34;english&#34;:&#34;It is hot.&#34;,&#34;id&#34;:&#34;cz_ts003&#34;,&#34;native&#34;:&#34;Je to horké.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts004.mp3&#34;,&#34;english&#34;:&#34;It is closed.&#34;,&#34;id&#34;:&#34;cz_ts004&#34;,&#34;native&#34;:&#34;Je zavřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts005.mp3&#34;,&#34;english&#34;:&#34;It is open.&#34;,&#34;id&#34;:&#34;cz_ts005&#34;,&#34;native&#34;:&#34;Je otevřeno.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts006.mp3&#34;,&#34;english&#34;:&#34;I didn’t order this.&#34;,&#34;id&#34;:&#34;cz_ts006&#34;,&#34;native&#34;:&#34;Tohle jsem si neobjednal.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts007.mp3&#34;,&#34;english&#34;:&#34;There is no hot water.&#34;,&#34;id&#34;:&#34;cz_ts007&#34;,&#34;native&#34;:&#34;Neteče teplá voda.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts008.mp3&#34;,&#34;english&#34;:&#34;The key doesn’t work.&#34;,&#34;id&#34;:&#34;cz_ts008&#34;,&#34;native&#34;:&#34;Klíč nefunguje.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ts009.mp3&#34;,&#34;english&#34;:&#34;There is a problem here.&#34;,&#34;id&#34;:&#34;cz_ts009&#34;,&#34;native&#34;:&#34;Je tu problém.&#34;}],&#34;title&#34;:&#34;The Troubleshooter&#34;,&#34;weight&#34;:7}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Reporting Issues\nReport problems and issues: broken items, temperature, and mistakes.\nIt is broken. It is cold. It is hot. It is closed. It is open. I didn&#39;t order this. There is no hot water. The key doesn&#39;t work. There is a problem here.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Troubleshooter&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-troubleshooter&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:7}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('troubleshooter')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('troubleshooter')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="troubleshooter"
@@ -1960,8 +1951,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('troubleshooter')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -1975,7 +1965,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('troubleshooter')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -1991,8 +1981,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('troubleshooter')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Troubleshooter</h3>
                     </div>
 
@@ -2043,18 +2032,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Neteče teplá voda.</span>
-                                <span class="preview-english">There is no hot water.</span>
+                                <span class="preview-native">Je to horké.</span>
+                                <span class="preview-english">It is hot.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Klíč nefunguje.</span>
-                                <span class="preview-english">The key doesn’t work.</span>
+                                <span class="preview-native">Je otevřeno.</span>
+                                <span class="preview-english">It is open.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je to rozbité.</span>
-                                <span class="preview-english">It is broken.</span>
+                                <span class="preview-native">Je to studené.</span>
+                                <span class="preview-english">It is cold.</span>
                             </div>
                             
                         </div>
@@ -2099,11 +2088,11 @@
         
         <div class="group-card" data-group-id="lifeline" data-sentence-count="10"
             data-sentences='[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll001.mp3&#34;,&#34;english&#34;:&#34;Help!&#34;,&#34;id&#34;:&#34;cz_ll001&#34;,&#34;native&#34;:&#34;Pomoc!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll002.mp3&#34;,&#34;english&#34;:&#34;Call the police!&#34;,&#34;id&#34;:&#34;cz_ll002&#34;,&#34;native&#34;:&#34;Zavolejte policii!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll003.mp3&#34;,&#34;english&#34;:&#34;I need a doctor.&#34;,&#34;id&#34;:&#34;cz_ll003&#34;,&#34;native&#34;:&#34;Potřebuji lékaře.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll004.mp3&#34;,&#34;english&#34;:&#34;Where is the hospital?&#34;,&#34;id&#34;:&#34;cz_ll004&#34;,&#34;native&#34;:&#34;Kde je nemocnice?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll005.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll005&#34;,&#34;native&#34;:&#34;Ztratil jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll006.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll006&#34;,&#34;native&#34;:&#34;Ztratila jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll007.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll007&#34;,&#34;native&#34;:&#34;Ztratil jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll008.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll008&#34;,&#34;native&#34;:&#34;Ztratila jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll009.mp3&#34;,&#34;english&#34;:&#34;I have an allergy.&#34;,&#34;id&#34;:&#34;cz_ll009&#34;,&#34;native&#34;:&#34;Mám alergii.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll010.mp3&#34;,&#34;english&#34;:&#34;Don’t touch me.&#34;,&#34;id&#34;:&#34;cz_ll010&#34;,&#34;native&#34;:&#34;Nedotýkejte se mě.&#34;}]' data-available-levels="A1"
-            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Emergency Response&#34;,&#34;description&#34;:&#34;Emergency Response\nCritical phrases for emergencies: medical help, police, and urgent situations.\nHelp! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don&#39;t touch me.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;lifeline&#34;,&#34;group_title&#34;:&#34;The Lifeline&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll001.mp3&#34;,&#34;english&#34;:&#34;Help!&#34;,&#34;id&#34;:&#34;cz_ll001&#34;,&#34;native&#34;:&#34;Pomoc!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll002.mp3&#34;,&#34;english&#34;:&#34;Call the police!&#34;,&#34;id&#34;:&#34;cz_ll002&#34;,&#34;native&#34;:&#34;Zavolejte policii!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll003.mp3&#34;,&#34;english&#34;:&#34;I need a doctor.&#34;,&#34;id&#34;:&#34;cz_ll003&#34;,&#34;native&#34;:&#34;Potřebuji lékaře.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll004.mp3&#34;,&#34;english&#34;:&#34;Where is the hospital?&#34;,&#34;id&#34;:&#34;cz_ll004&#34;,&#34;native&#34;:&#34;Kde je nemocnice?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll005.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll005&#34;,&#34;native&#34;:&#34;Ztratil jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll006.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll006&#34;,&#34;native&#34;:&#34;Ztratila jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll007.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll007&#34;,&#34;native&#34;:&#34;Ztratil jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll008.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll008&#34;,&#34;native&#34;:&#34;Ztratila jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll009.mp3&#34;,&#34;english&#34;:&#34;I have an allergy.&#34;,&#34;id&#34;:&#34;cz_ll009&#34;,&#34;native&#34;:&#34;Mám alergii.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll010.mp3&#34;,&#34;english&#34;:&#34;Don’t touch me.&#34;,&#34;id&#34;:&#34;cz_ll010&#34;,&#34;native&#34;:&#34;Nedotýkejte se mě.&#34;}],&#34;title&#34;:&#34;The Lifeline&#34;,&#34;weight&#34;:8}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Emergency Response\nCritical phrases for emergencies: medical help, police, and urgent situations.\nHelp! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don&#39;t touch me.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Lifeline&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-lifeline&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:8}}'>
+            data-levels-data='{&#34;A1&#34;:{&#34;Params&#34;:{&#34;alt_title&#34;:&#34;Emergency Response&#34;,&#34;description&#34;:&#34;Emergency Response\nCritical phrases for emergencies: medical help, police, and urgent situations.\nHelp! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don&#39;t touch me.\n&#34;,&#34;draft&#34;:false,&#34;group_id&#34;:&#34;lifeline&#34;,&#34;group_title&#34;:&#34;The Lifeline&#34;,&#34;iscjklanguage&#34;:false,&#34;language&#34;:&#34;czech&#34;,&#34;level&#34;:&#34;A1&#34;,&#34;sentences&#34;:[{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll001.mp3&#34;,&#34;english&#34;:&#34;Help!&#34;,&#34;id&#34;:&#34;cz_ll001&#34;,&#34;native&#34;:&#34;Pomoc!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll002.mp3&#34;,&#34;english&#34;:&#34;Call the police!&#34;,&#34;id&#34;:&#34;cz_ll002&#34;,&#34;native&#34;:&#34;Zavolejte policii!&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll003.mp3&#34;,&#34;english&#34;:&#34;I need a doctor.&#34;,&#34;id&#34;:&#34;cz_ll003&#34;,&#34;native&#34;:&#34;Potřebuji lékaře.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll004.mp3&#34;,&#34;english&#34;:&#34;Where is the hospital?&#34;,&#34;id&#34;:&#34;cz_ll004&#34;,&#34;native&#34;:&#34;Kde je nemocnice?&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll005.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll005&#34;,&#34;native&#34;:&#34;Ztratil jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll006.mp3&#34;,&#34;english&#34;:&#34;I am lost.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll006&#34;,&#34;native&#34;:&#34;Ztratila jsem se.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll007.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;masculine&#34;,&#34;id&#34;:&#34;cz_ll007&#34;,&#34;native&#34;:&#34;Ztratil jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll008.mp3&#34;,&#34;english&#34;:&#34;I lost my passport.&#34;,&#34;gender&#34;:&#34;feminine&#34;,&#34;id&#34;:&#34;cz_ll008&#34;,&#34;native&#34;:&#34;Ztratila jsem pas.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll009.mp3&#34;,&#34;english&#34;:&#34;I have an allergy.&#34;,&#34;id&#34;:&#34;cz_ll009&#34;,&#34;native&#34;:&#34;Mám alergii.&#34;},{&#34;audio&#34;:&#34;/assets/audio/czech/cz_ll010.mp3&#34;,&#34;english&#34;:&#34;Don’t touch me.&#34;,&#34;id&#34;:&#34;cz_ll010&#34;,&#34;native&#34;:&#34;Nedotýkejte se mě.&#34;}],&#34;title&#34;:&#34;The Lifeline&#34;,&#34;weight&#34;:8}},&#34;basePage&#34;:{&#34;Date&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Lastmod&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;PublishDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;ExpiryDate&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;Aliases&#34;:null,&#34;BundleType&#34;:&#34;&#34;,&#34;Description&#34;:&#34;Emergency Response\nCritical phrases for emergencies: medical help, police, and urgent situations.\nHelp! Call the police! I need a doctor. Where is the hospital? I am lost. I lost my passport. I have an allergy. Don&#39;t touch me.\n&#34;,&#34;Draft&#34;:false,&#34;IsHome&#34;:false,&#34;Keywords&#34;:null,&#34;Kind&#34;:&#34;page&#34;,&#34;Layout&#34;:&#34;&#34;,&#34;LinkTitle&#34;:&#34;The Lifeline&#34;,&#34;IsNode&#34;:false,&#34;IsPage&#34;:true,&#34;Path&#34;:&#34;/languages/czech/groups/the-lifeline&#34;,&#34;Slug&#34;:&#34;&#34;,&#34;Lang&#34;:&#34;en&#34;,&#34;IsSection&#34;:false,&#34;Section&#34;:&#34;languages&#34;,&#34;Sitemap&#34;:{&#34;ChangeFreq&#34;:&#34;&#34;,&#34;Priority&#34;:-1,&#34;Filename&#34;:&#34;sitemap.xml&#34;,&#34;Disable&#34;:false},&#34;Type&#34;:&#34;languages&#34;,&#34;Weight&#34;:8}}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('lifeline')">
 
             
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('lifeline')">
+            <div class="group-card-header-collapsed">
 
                 
                 <div class="level-selector" data-group-id="lifeline"
@@ -2148,8 +2137,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('lifeline')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     
                     
@@ -2163,7 +2151,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="A1">
+                        <div class="difficulty-badge" data-level="A1" onclick="toggleGroupCard('lifeline')">
                             <span class="difficulty-category">Beginner</span>
                             <span class="difficulty-level">A1</span>
                         </div>
@@ -2179,8 +2167,7 @@
                     </div>
                     
 
-                    <div class="group-header" onclick="toggleGroupCard('lifeline')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>The<br>Lifeline</h3>
                     </div>
 
@@ -2231,18 +2218,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ztratil jsem se.</span>
-                                <span class="preview-english">I am lost.</span>
+                                <span class="preview-native">Potřebuji lékaře.</span>
+                                <span class="preview-english">I need a doctor.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ztratil jsem pas.</span>
-                                <span class="preview-english">I lost my passport.</span>
+                                <span class="preview-native">Pomoc!</span>
+                                <span class="preview-english">Help!</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Ztratila jsem se.</span>
-                                <span class="preview-english">I am lost.</span>
+                                <span class="preview-native">Zavolejte policii!</span>
+                                <span class="preview-english">Call the police!</span>
                             </div>
                             
                         </div>

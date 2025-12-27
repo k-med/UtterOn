@@ -65,56 +65,59 @@
             </div>
         </div>
 
-        <!-- Fundamentals Buttons Row -->
-        <div class="fundamentals-section" id="foundations-section">
-            <div class="fundamentals-header" onclick="toggleFoundations()">
-                <div class="fundamentals-title-group">
-                    <h2 class="fundamentals-title">Foundations</h2>
-                    <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
-                    <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
+
+    </div>
+
+    <!-- Fundamentals Buttons Row -->
+    <div class="fundamentals-section" id="foundations-section"
+        onclick="if(event.target.closest('a, button')) return; toggleFoundations()">
+        <div class="fundamentals-header">
+            <div class="fundamentals-title-group">
+                <h2 class="fundamentals-title">Foundations</h2>
+                <p class="fundamentals-description">Core vocabulary used throughout the language.</p>
+                <p class="fundamentals-explainer">Each item is practiced twice using two exercise modes.</p>
+            </div>
+            <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="fundamentals-row">
+            {{ $lang := .Params.language_code | default .File.ContentBaseName }}
+            {{ $groups := .GetPage "groups" }}
+            {{ $fundamentalIds := slice "manners" "numbers" "weekdays" "months" "places" "time" }}
+            {{ range $fundamentalIds }}
+            {{ $groupId := . }}
+            {{ range $groups.Pages }}
+            {{ if eq .Params.group_id $groupId }}
+            {{ $sentenceCount := len .Params.sentences }}
+            {{ $estSeconds := mul $sentenceCount 8 }}
+            {{ $timeDisplay := "" }}
+            {{ if lt $estSeconds 90 }}
+            {{ $timeDisplay = "~1 min" }}
+            {{ else if lt $estSeconds 150 }}
+            {{ $timeDisplay = "~1-2 min" }}
+            {{ else }}
+            {{ $estMinutes := div $estSeconds 60 }}
+            {{ $timeDisplay = printf "~%d min" $estMinutes }}
+            {{ end }}
+            <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
+                data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
+                data-time-display="{{ $timeDisplay }}">
+                <div class="fundamental-main">
+                    <span class="fundamental-label">{{ .Params.group_title }}</span>
+                    <span class="fundamental-time">{{ $timeDisplay }}</span>
                 </div>
-                <button type="button" class="minimize-btn" id="minimize-foundations" aria-label="Minimize Foundations">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="18 15 12 9 6 15"></polyline>
-                    </svg>
-                </button>
-            </div>
-            <div class="fundamentals-row">
-                {{ $lang := .Params.language_code | default .File.ContentBaseName }}
-                {{ $groups := .GetPage "groups" }}
-                {{ $fundamentalIds := slice "manners" "numbers" "weekdays" "months" "places" "time" }}
-                {{ range $fundamentalIds }}
-                {{ $groupId := . }}
-                {{ range $groups.Pages }}
-                {{ if eq .Params.group_id $groupId }}
-                {{ $sentenceCount := len .Params.sentences }}
-                {{ $estSeconds := mul $sentenceCount 8 }}
-                {{ $timeDisplay := "" }}
-                {{ if lt $estSeconds 90 }}
-                {{ $timeDisplay = "~1 min" }}
-                {{ else if lt $estSeconds 150 }}
-                {{ $timeDisplay = "~1-2 min" }}
-                {{ else }}
-                {{ $estMinutes := div $estSeconds 60 }}
-                {{ $timeDisplay = printf "~%d min" $estMinutes }}
-                {{ end }}
-                <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn"
-                    data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
-                    data-time-display="{{ $timeDisplay }}">
-                    <div class="fundamental-main">
-                        <span class="fundamental-label">{{ .Params.group_title }}</span>
-                        <span class="fundamental-time">{{ $timeDisplay }}</span>
-                    </div>
-                    <div class="fundamental-footer">
-                        <span class="fundamental-item-count">{{ $sentenceCount }}</span>
-                        <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
-                    </div>
-                </a>
-                {{ end }}
-                {{ end }}
-                {{ end }}
-            </div>
+                <div class="fundamental-footer">
+                    <span class="fundamental-item-count">{{ $sentenceCount }}</span>
+                    <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
+                </div>
+            </a>
+            {{ end }}
+            {{ end }}
+            {{ end }}
         </div>
     </div>
 
@@ -210,11 +213,11 @@
         {{ $availLevelsStr := delimit (sort $availLevels) "," }}
         <div class="group-card" data-group-id="{{ .Params.group_id }}" data-sentence-count="{{ $sentenceCount }}"
             data-sentences='{{ .Params.sentences | jsonify }}' data-available-levels="{{ $availLevelsStr }}"
-            data-levels-data='{{ $levels | jsonify }}'>
+            data-levels-data='{{ $levels | jsonify }}'
+            onclick="if(event.target.closest('a, button, .clickable, .level-selector, .difficulty-badge-container')) return; toggleGroupCard('{{ .Params.group_id }}')">
 
             <!-- Card Header (visible only when collapsed) - click to expand -->
-            <div class="group-card-header-collapsed"
-                onclick="if(event.target.closest('.start-btn-compact, .level-chevron')) return; toggleGroupCard('{{ .Params.group_id }}')">
+            <div class="group-card-header-collapsed">
 
                 <!-- Level selector with chevrons -->
                 <div class="level-selector" data-group-id="{{ .Params.group_id }}"
@@ -260,8 +263,7 @@
                 </button>
             </div>
 
-            <div class="group-content-wrapper"
-                onclick="if(event.target.closest('a, button, .difficulty-arrow')) return; toggleGroupCard('{{ .Params.group_id }}')">
+            <div class="group-content-wrapper">
                 <div class="group-info-col">
                     {{ $groupId := .Params.group_id }}
                     {{ with .Params.level }}
@@ -275,7 +277,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
-                        <div class="difficulty-badge" data-level="{{ . }}">
+                        <div class="difficulty-badge" data-level="{{ . }}" onclick="toggleGroupCard('{{ $groupId }}')">
                             <span class="difficulty-category">
                                 {{- if or (eq . "A1") (eq . "A2") -}}
                                 Beginner
@@ -299,8 +301,7 @@
                     </div>
                     {{ end }}
 
-                    <div class="group-header" onclick="toggleGroupCard('{{ .Params.group_id }}')"
-                        style="cursor: pointer;">
+                    <div class="group-header">
                         <h3>{{ if hasPrefix .Params.group_title "The " }}{{ replace .Params.group_title "The " "The<br>"
                             1 | safeHTML }}{{ else }}{{ .Params.group_title }}{{ end }}</h3>
                     </div>

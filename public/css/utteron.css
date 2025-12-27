@@ -403,6 +403,7 @@ a,
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   opacity: 0.95;
+  cursor: pointer;
   /* Slightly softer */
 }
 
@@ -490,7 +491,7 @@ a,
   transition: all 0.3s ease;
   letter-spacing: 0.05em;
   user-select: none;
-  cursor: default;
+  cursor: pointer;
   white-space: nowrap;
 }
 
@@ -543,7 +544,7 @@ a,
 .difficulty-arrow:disabled {
   opacity: 0.3;
   cursor: default;
-  pointer-events: none;
+  /* Removed pointer-events: none to ensure clicks are captured here as null space */
 }
 
 /* CEFR Level Colors */
@@ -1767,23 +1768,80 @@ a,
    ============================================ */
 
 .fundamentals-section {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.fundamentals-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.fundamentals-section.collapsed {
+  padding-bottom: 1.5rem;
+  /* Ensure consistent size */
+}
+
+/* Ensure title group aligns with minimize button */
+.fundamentals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
   width: 100%;
-  flex-basis: 100%;
-  margin-top: 2.5rem;
-  padding: 1.25rem 0.75rem 0.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  text-align: center;
+}
+
+.fundamentals-section.collapsed .fundamentals-header {
+  margin-bottom: 0;
+}
+
+.fundamentals-title-group {
+  text-align: left;
+}
+
+.fundamentals-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.fundamentals-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Hide explainer when collapsed */
+.fundamentals-section.collapsed .fundamentals-explainer {
+  display: none;
+}
+
+.fundamentals-explainer {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin-top: 0.25rem;
+  font-style: italic;
 }
 
 .fundamentals-caption {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  /* Removed as it conflicts with new header style */
+  display: none;
 }
 
 .fundamentals-row {

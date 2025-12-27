@@ -1625,10 +1625,8 @@ function initGroupCardState() {
                 card.classList.add('minimized');
             }
         } else {
-            // First load: collapse all except Social Lubricant
-            if (groupId !== 'social-lubricant') {
-                card.classList.add('minimized');
-            }
+            // First load: collapse all (strict default)
+            card.classList.add('minimized');
         }
     });
 
@@ -1663,11 +1661,7 @@ function resetModulesOrder() {
         card.classList.add('minimized');
     });
 
-    // Expand only Social Lubricant
-    const socialLubricant = document.querySelector('.group-card[data-group-id="social-lubricant"]');
-    if (socialLubricant) {
-        socialLubricant.classList.remove('minimized');
-    }
+    // All cards remain minimized (strict reset)
 
     // Refresh module cards to restore weight order
     if (lang) {
