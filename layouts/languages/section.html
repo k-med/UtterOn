@@ -158,13 +158,25 @@
         </div>
         <div class="modules-controls">
             <!-- Text controls for clarity -->
-            <button type="button" class="btn-header" id="modules-reset"
-                onclick="event.stopPropagation(); resetModulesOrder();">
-                Reset
+            <!-- Icon-only on mobile -->
+            <button type="button" class="btn-header modules-reset-btn" id="modules-reset"
+                onclick="event.stopPropagation(); resetModulesOrder();" aria-label="Reset Order">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12" />
+                    <path d="M3 3v9h9" />
+                </svg>
+                <span>Reset</span>
             </button>
-            <span style="color: var(--border); opacity: 0.5;">|</span>
-            <button type="button" class="btn-header" id="modules-toggle" aria-label="Toggle all modules">
-                Toggle View
+            <span class="ctrl-sep" style="color: var(--border); opacity: 0.5;">|</span>
+            <button type="button" class="btn-header modules-toggle-btn" id="modules-toggle" onclick="toggleAllCards()"
+                aria-label="Toggle View">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                    <polyline points="16 6 22 12 16 18"></polyline>
+                </svg>
+                <span>Toggle View</span>
             </button>
         </div>
     </div>

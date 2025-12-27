@@ -95,6 +95,13 @@ a,
   padding-bottom: 4rem;
 }
 
+@media (max-width: 600px) {
+  .utteron-container {
+    padding: 0 12px;
+    /* Reclaim width */
+  }
+}
+
 .utteron-container h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -452,6 +459,14 @@ a,
   /* Slightly softer */
 }
 
+@media (max-width: 600px) {
+  .group-card {
+    padding: 16px;
+    /* Compact mobile padding */
+    gap: 12px;
+  }
+}
+
 .group-card:hover {
   transform: translateY(-2px);
   /* Reduced lift */
@@ -501,9 +516,17 @@ a,
   color: var(--text-primary);
   padding-right: 5rem;
   letter-spacing: -0.01em;
-  word-break: keep-all;
+  /* Fix Mobile Wrapping - NO SPLIT WORDS */
+  word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
+  /* Ensure clamping handles overlap */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
 }
 
 /* Difficulty Badge - Embedded in card border */
@@ -516,6 +539,23 @@ a,
   align-items: center;
   gap: 0.5rem;
   z-index: 10;
+}
+
+/* Mobile: Hide difficulty badge in collapsed state to free (horizontal) space */
+@media (max-width: 600px) {
+  .group-card:not(.expanded) .difficulty-badge-container {
+    display: none;
+  }
+
+  /* Give title more room */
+  .group-header h3 {
+    padding-right: 0;
+  }
+
+  /* Hide level chevrons in collapsed state */
+  .group-card:not(.expanded) .level-chevron {
+    display: none;
+  }
 }
 
 .difficulty-badge {
@@ -1984,7 +2024,6 @@ a,
   background: var(--bg-secondary);
   border: var(--card-border);
   border-radius: var(--radius-card);
-  padding: 1.25rem var(--space-4);
   /* Reduced vertical padding */
   margin-bottom: var(--space-5);
   box-shadow: var(--card-shadow);
@@ -1992,6 +2031,17 @@ a,
   position: relative;
   overflow: hidden;
   /* Remove pointer on container itself to avoid confusion */
+}
+
+@media (max-width: 600px) {
+  .fundamentals-section {
+    padding: 16px;
+    /* Compact mobile padding */
+  }
+
+  .fundamentals-header {
+    margin-bottom: 0.75rem;
+  }
 }
 
 /* Header Styling */
@@ -2562,6 +2612,20 @@ a,
 .modules-toggle-btn:hover {
   color: var(--accent);
   background: rgba(99, 102, 241, 0.1);
+}
+
+/* Mobile Modules Header: Icon only buttons */
+@media (max-width: 480px) {
+
+  .modules-reset-btn span,
+  .modules-toggle-btn span {
+    display: none;
+  }
+
+  .modules-reset-btn::after {
+    content: '';
+    /* Or use SVG icon only */
+  }
 }
 
 .modules-toggle-btn svg {
