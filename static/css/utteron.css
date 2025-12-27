@@ -1545,19 +1545,19 @@ a,
    ============================================ */
 
 .btn-header {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   background: transparent;
-  /* Subtle: no background by default */
   color: var(--text-secondary) !important;
-  /* Subtle: secondary text color */
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
   border: 1px solid transparent;
-  /* Subtle: no border by default */
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s;
   margin-left: 0.5rem;
+  white-space: nowrap;
 }
 
 .btn-header:hover {
@@ -2087,8 +2087,22 @@ a,
 
 @media (max-width: 768px) {
   .lang-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .stat-label-sm {
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+
+  .stat-value-sm {
+    font-size: 1rem;
+  }
+
+  .stat-value-wrapper {
+    min-width: 60px;
   }
 
   .lang-title-section h1 {
@@ -2993,4 +3007,88 @@ a,
 .start-btn-compact.resume-mode:hover {
   background: #f59e0b;
   color: white;
+}
+
+/* ============================================
+   Mobile Responsive Fixes
+   ============================================ */
+
+@media (max-width: 480px) {
+
+  /* Stats grid - 2 columns on very small screens */
+  .lang-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .stat-col {
+    padding: 0.2rem;
+  }
+
+  .stat-label-sm {
+    font-size: 0.55rem;
+  }
+
+  .stat-value-sm {
+    font-size: 0.9rem;
+  }
+
+  .stat-value-wrapper {
+    min-width: 50px;
+    gap: 0.2rem;
+  }
+
+  /* Module header controls */
+  .modules-controls {
+    flex-wrap: nowrap;
+  }
+
+  .btn-header {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+  }
+
+  .btn-header span {
+    display: inline;
+  }
+
+  /* Group card collapsed header */
+  .group-card-header-collapsed {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .group-card-title {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  .group-card-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .group-card-time {
+    font-size: 0.6rem;
+  }
+
+  .start-btn-compact {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .level-badge {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.35rem;
+  }
+
+  /* Modules title */
+  .modules-title {
+    font-size: 1.1rem;
+  }
+
+  .modules-description {
+    font-size: 0.75rem;
+  }
 }
