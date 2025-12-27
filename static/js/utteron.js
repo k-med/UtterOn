@@ -321,7 +321,22 @@ function initModuleLevels() {
     });
 }
 
+function toggleStatsEditMode() {
+    const card = document.querySelector('.language-header-card');
+    if (!card) return;
+
+    const isEditing = card.classList.toggle('is-editing');
+    const editIcon = card.querySelector('.edit-stats-btn .edit-icon');
+    const closeIcon = card.querySelector('.edit-stats-btn .close-icon');
+
+    if (editIcon && closeIcon) {
+        editIcon.style.display = isEditing ? 'none' : 'block';
+        closeIcon.style.display = isEditing ? 'block' : 'none';
+    }
+}
+
 // Make functions globally accessible
+window.toggleStatsEditMode = toggleStatsEditMode;
 window.switchModuleLevel = switchModuleLevel;
 window.initModuleLevels = initModuleLevels;
 

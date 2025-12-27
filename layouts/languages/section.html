@@ -23,6 +23,19 @@
         </div>
 
         <div class="lang-stats-grid">
+            <button class="edit-stats-btn" onclick="toggleStatsEditMode()" aria-label="Edit Goals">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="edit-icon">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="close-icon" style="display: none;">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
             <div class="stat-col">
                 <span class="stat-label-sm">Streak</span>
                 <span class="stat-value-sm" id="stat-streak">0 Days</span>
@@ -33,11 +46,13 @@
                     <span id="stat-today">0</span>
                     <span class="stat-separator">of</span>
                     <div class="stat-target-container">
-                        <button class="stat-arrow up" onclick="adjustStatTarget('today', 1)"
-                            aria-label="Increase"></button>
                         <span id="target-today" class="stat-target-val">5</span>
-                        <button class="stat-arrow down" onclick="adjustStatTarget('today', -1)"
-                            aria-label="Decrease"></button>
+                        <div class="stat-arrows-stack">
+                            <button class="stat-arrow down" onclick="adjustStatTarget('today', -1)"
+                                aria-label="Decrease"></button>
+                            <button class="stat-arrow up" onclick="adjustStatTarget('today', 1)"
+                                aria-label="Increase"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,11 +62,13 @@
                     <span id="stat-week">0</span>
                     <span class="stat-separator">of</span>
                     <div class="stat-target-container">
-                        <button class="stat-arrow up" onclick="adjustStatTarget('week', 1)"
-                            aria-label="Increase"></button>
                         <span id="target-week" class="stat-target-val">35</span>
-                        <button class="stat-arrow down" onclick="adjustStatTarget('week', -1)"
-                            aria-label="Decrease"></button>
+                        <div class="stat-arrows-stack">
+                            <button class="stat-arrow down" onclick="adjustStatTarget('week', -1)"
+                                aria-label="Decrease"></button>
+                            <button class="stat-arrow up" onclick="adjustStatTarget('week', 1)"
+                                aria-label="Increase"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,11 +78,13 @@
                     <span id="stat-month">0</span>
                     <span class="stat-separator">of</span>
                     <div class="stat-target-container">
-                        <button class="stat-arrow up" onclick="adjustStatTarget('month', 1)"
-                            aria-label="Increase"></button>
                         <span id="target-month" class="stat-target-val">140</span>
-                        <button class="stat-arrow down" onclick="adjustStatTarget('month', -1)"
-                            aria-label="Decrease"></button>
+                        <div class="stat-arrows-stack">
+                            <button class="stat-arrow down" onclick="adjustStatTarget('month', -1)"
+                                aria-label="Decrease"></button>
+                            <button class="stat-arrow up" onclick="adjustStatTarget('month', 1)"
+                                aria-label="Increase"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,11 +94,13 @@
                     <span id="stat-year">0</span>
                     <span class="stat-separator">of</span>
                     <div class="stat-target-container">
-                        <button class="stat-arrow up" onclick="adjustStatTarget('year', 1)"
-                            aria-label="Increase"></button>
                         <span id="target-year" class="stat-target-val">1680</span>
-                        <button class="stat-arrow down" onclick="adjustStatTarget('year', -1)"
-                            aria-label="Decrease"></button>
+                        <div class="stat-arrows-stack">
+                            <button class="stat-arrow down" onclick="adjustStatTarget('year', -1)"
+                                aria-label="Decrease"></button>
+                            <button class="stat-arrow up" onclick="adjustStatTarget('year', 1)"
+                                aria-label="Increase"></button>
+                        </div>
                     </div>
                 </div>
             </div>
