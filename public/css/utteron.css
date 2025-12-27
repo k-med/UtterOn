@@ -1760,34 +1760,78 @@ a,
   content: '';
   position: absolute;
   inset: 0;
-  /* Strong dark overlay for readability */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 100%);
+  /* Light mode: fade to white for clean look */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.85) 100%);
   border-radius: var(--radius-card);
   z-index: -1;
 }
 
-/* Force light text in hero for contrast against dark overlay */
+:root[data-theme="light"] .language-header-card::before {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.85) 100%);
+}
+
+/* Light mode: dark text for contrast against white overlay */
 .language-header-card h1,
-.language-header-card .native-name-large,
+.language-header-card .native-name-large {
+  color: var(--text-primary) !important;
+  text-shadow: none;
+}
+
 .language-header-card .stat-value-sm,
 .language-header-card .stat-label-sm,
 .language-header-card .stat-arrow {
+  color: var(--text-primary) !important;
+  text-shadow: none;
+}
+
+.language-header-card .stat-label-sm {
+  color: var(--text-secondary) !important;
+}
+
+.language-header-card .audio-btn {
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+:root[data-theme="light"] .language-header-card h1,
+:root[data-theme="light"] .language-header-card .native-name-large,
+:root[data-theme="light"] .language-header-card .stat-value-sm,
+:root[data-theme="light"] .language-header-card .stat-label-sm,
+:root[data-theme="light"] .language-header-card .stat-arrow {
+  color: var(--text-primary) !important;
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .language-header-card .stat-label-sm {
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="light"] .language-header-card .audio-btn {
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+/* Dark mode: keep original dark overlay and white text */
+:root[data-theme="dark"] .language-header-card::before {
+  background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7) 0%, rgba(26, 26, 46, 0.85) 70%, rgba(15, 15, 26, 1) 100%);
+}
+
+:root[data-theme="dark"] .language-header-card h1,
+:root[data-theme="dark"] .language-header-card .native-name-large,
+:root[data-theme="dark"] .language-header-card .stat-value-sm,
+:root[data-theme="dark"] .language-header-card .stat-label-sm,
+:root[data-theme="dark"] .language-header-card .stat-arrow {
   color: #ffffff !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.language-header-card .stat-label-sm {
+:root[data-theme="dark"] .language-header-card .stat-label-sm {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-.language-header-card .audio-btn {
+:root[data-theme="dark"] .language-header-card .audio-btn {
   color: #ffffff;
   opacity: 0.9;
-}
-
-:root[data-theme="dark"] .language-header-card::before {
-  /* Darker fade at bottom to ground the Foundations panel */
-  background: linear-gradient(to bottom, rgba(26, 26, 46, 0.7) 0%, rgba(26, 26, 46, 0.85) 70%, rgba(15, 15, 26, 1) 100%);
 }
 
 .lang-title-section {
@@ -2039,19 +2083,36 @@ a,
 .fundamentals-section {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Light mode: clean light background */
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-card);
   padding: 0.75rem var(--space-4);
   /* Reduced vertical padding */
   margin-bottom: var(--space-5);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
   /* Remove pointer on container itself to avoid confusion */
+}
+
+/* Dark mode: glassmorphism effect */
+:root[data-theme="dark"] .fundamentals-section {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Light mode: explicit selector for when theme is toggled */
+:root[data-theme="light"] .fundamentals-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Header Styling */
@@ -2184,34 +2245,32 @@ a,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* Light mode: white card style */
   background: var(--bg-primary);
-  /* Use primary bg to contrast against container? Or transparent */
-  /* User said: "remove empty container feel". If container is bg-secondary, tiles should be bg-primary (card-like) or transparent with border? */
-  /* Let's try transparent with border to start, or subtle fill like Modules. 
-     Modules are bg-secondary inside a list? No, modules are cards.
-     Let's make these look like "mini styled cards" */
-  background: rgba(255, 255, 255, 0.03);
-  /* Subtle fill */
-  border: 1px solid transparent;
-  /* Inert placeholder look fix */
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-card);
-  /* Match Modules */
   padding: 1rem;
   text-decoration: none;
   min-height: 90px;
-  /* Sufficient height */
   transition: all 0.2s ease;
   position: relative;
   cursor: pointer;
-  /* Affordance */
   user-select: none;
-  box-shadow: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+/* Dark mode: subtle transparent look */
 :root[data-theme="dark"] .fundamental-btn {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  /* Slight border for definition */
+  box-shadow: none;
+}
+
+/* Light mode: explicit selector for when theme is toggled */
+:root[data-theme="light"] .fundamental-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* Hover State */
