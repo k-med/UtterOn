@@ -446,7 +446,7 @@ a,
 .group-list {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 0.5rem;
 }
 
 .group-card {
@@ -2039,13 +2039,15 @@ a,
 .fundamentals-section {
   display: flex;
   flex-direction: column;
-  background: var(--bg-secondary);
-  border: var(--card-border);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-card);
-  padding: 1.25rem var(--space-4);
+  padding: 0.75rem var(--space-4);
   /* Reduced vertical padding */
   margin-bottom: var(--space-5);
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
@@ -2058,7 +2060,7 @@ a,
   justify-content: space-between;
   align-items: center;
   /* Center vertically */
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   /* Reduced gap */
   cursor: pointer;
   width: 100%;
@@ -2066,7 +2068,7 @@ a,
 }
 
 .fundamentals-section.collapsed {
-  padding-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   /* Match top padding */
 }
 
@@ -2077,16 +2079,17 @@ a,
 .fundamentals-title-group {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0;
+  /* Reduced gap */
 }
 
 .fundamentals-title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   /* Match module header */
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .fundamentals-subtitle {

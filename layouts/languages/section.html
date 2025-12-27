@@ -190,14 +190,14 @@
                 <span>Reset</span>
             </button>
             <span class="ctrl-sep" style="color: var(--border); opacity: 0.5;">|</span>
-            <button type="button" class="btn-header modules-toggle-btn" id="modules-toggle" onclick="toggleAllCards()"
-                aria-label="Toggle View">
+            <button type="button" class="btn-header modules-toggle-btn" id="modules-toggle"
+                onclick="event.stopPropagation(); toggleAllCards()" aria-label="Expand All">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="8 6 2 12 8 18"></polyline>
                     <polyline points="16 6 22 12 16 18"></polyline>
                 </svg>
-                <span>Toggle View</span>
+                <span>Expand All</span>
             </button>
         </div>
     </div>

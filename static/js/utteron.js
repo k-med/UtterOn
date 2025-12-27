@@ -1780,12 +1780,38 @@ window.initFoundationsState = initFoundationsState;
 // Group Card Toggle Functions
 // ============================================
 
-// Toggle individual group card
+// Toggle individual group card (Rolodex mode: only one card expanded at a time)
 function toggleGroupCard(groupId) {
     const card = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
     if (!card) return;
 
     const wasMinimized = card.classList.contains('minimized');
+
+    // Rolodex behavior: If we're about to expand this card, first collapse any other expanded cards
+    if (wasMinimized) {
+        const allCards = document.querySelectorAll('.group-card:not(.minimized)');
+        allCards.forEach(openCard => {
+            if (openCard.dataset.groupId !== groupId) {
+                // Collapse this card immediately (no animation for the closing card)
+                openCard.classList.add('minimized');
+                const content = openCard.querySelector('.group-content-wrapper');
+                const header = openCard.querySelector('.group-card-header-collapsed');
+                if (content) {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                }
+                if (header) {
+                    header.style.maxHeight = '200px';
+                    header.style.opacity = '1';
+                }
+                // Update localStorage for the closed card
+                const minimizedCards = JSON.parse(localStorage.getItem('utteron_minimized_cards') || '{}');
+                minimizedCards[openCard.dataset.groupId] = true;
+                localStorage.setItem('utteron_minimized_cards', JSON.stringify(minimizedCards));
+            }
+        });
+    }
+
     card.classList.toggle('minimized');
     const isNowMinimized = card.classList.contains('minimized');
 
@@ -1840,6 +1866,7 @@ function toggleGroupCard(groupId) {
 }
 
 // Toggle all cards (master toggle)
+// Toggle all cards (master toggle)
 function toggleAllCards() {
     // Use the button or the header itself as trigger
     const headerBtn = document.getElementById('modules-toggle');
@@ -1848,49 +1875,82 @@ function toggleAllCards() {
 
     if (!cards.length) return;
 
-    // Determine state from button text or header class
-    const currentText = headerBtn ? headerBtn.innerText : 'Toggle View';
-    const isCurrentlyCollapsed = currentText === 'Expand All' || allCardsHeader.classList.contains('collapsed');
+    // Determine state from header class (source of truth)
+    const isCurrentlyCollapsed = allCardsHeader.classList.contains('collapsed');
+
+    // Helper function to safely update button text
+    const updateButtonText = (text) => {
+        if (!headerBtn) return;
+        const span = headerBtn.querySelector('span');
+        if (span) {
+            span.textContent = text;
+        } else {
+            // Fallback: append text if span missing
+            // But prefer preserving icon if it exists as a previous sibling
+            // For now, assume span exists as per HTML structure
+        }
+    };
 
     if (isCurrentlyCollapsed) {
         // Expand all
         allCardsHeader.classList.remove('collapsed');
         cards.forEach(card => {
-            card.classList.remove('minimized');
-            // Trigger animation styles for expand
-            const content = card.querySelector('.group-content-wrapper');
-            const header = card.querySelector('.group-card-header-collapsed');
-            if (content) {
-                content.style.maxHeight = 'none'; // Instant expand for batch action? Or animate?
-                content.style.opacity = '1';
-            }
-            if (header) {
-                header.style.maxHeight = '0';
-                header.style.opacity = '0';
+            try {
+                card.classList.remove('minimized');
+                // Trigger animation styles for expand
+                const content = card.querySelector('.group-content-wrapper');
+                const header = card.querySelector('.group-card-header-collapsed');
+                if (content) {
+                    content.style.maxHeight = 'none'; // Instant expand for batch action
+                    content.style.opacity = '1';
+                }
+                if (header) {
+                    header.style.maxHeight = '0';
+                    header.style.opacity = '0';
+                }
+
+                // Ensure stats are up to date in the DOM for expanded view
+                // (e.g. if level was changed in collapsed mode, expanded view needs to match)
+                // Note: toggleGroupCard handles this for single opens. Batch open relies on
+                // updateCardStats having run during init or level switch.
+                const groupId = card.dataset.groupId;
+                // Safety check for active badge
+                const activeBadge = card.querySelector('.difficulty-badge.active');
+                const level = activeBadge ? activeBadge.dataset.level : 'A1';
+
+                if (window.updateCardStats) {
+                    updateCardStats(card, groupId, level);
+                }
+            } catch (e) {
+                console.warn('Error expanding card:', e);
             }
         });
         localStorage.setItem('utteron_all_cards_collapsed', 'false');
         localStorage.setItem('utteron_minimized_cards', '{}');
-        if (headerBtn) headerBtn.innerText = 'Collapse All';
+        updateButtonText('Collapse All');
     } else {
         // Collapse all
         allCardsHeader.classList.add('collapsed');
         cards.forEach(card => {
-            card.classList.add('minimized');
-            // Trigger animation styles for collapse
-            const content = card.querySelector('.group-content-wrapper');
-            const header = card.querySelector('.group-card-header-collapsed');
-            if (content) {
-                content.style.maxHeight = '0';
-                content.style.opacity = '0';
-            }
-            if (header) {
-                header.style.maxHeight = '200px';
-                header.style.opacity = '1';
+            try {
+                card.classList.add('minimized');
+                // Trigger animation styles for collapse
+                const content = card.querySelector('.group-content-wrapper');
+                const header = card.querySelector('.group-card-header-collapsed');
+                if (content) {
+                    content.style.maxHeight = '0';
+                    content.style.opacity = '0';
+                }
+                if (header) {
+                    header.style.maxHeight = '200px';
+                    header.style.opacity = '1';
+                }
+            } catch (e) {
+                console.warn('Error collapsing card:', e);
             }
         });
         localStorage.setItem('utteron_all_cards_collapsed', 'true');
-        if (headerBtn) headerBtn.innerText = 'Expand All';
+        updateButtonText('Expand All');
     }
 }
 
@@ -1898,13 +1958,28 @@ function toggleAllCards() {
 function updateMasterToggleState() {
     const header = document.querySelector('.modules-header');
     const cards = document.querySelectorAll('.group-card');
+    const headerBtn = document.getElementById('modules-toggle');
+
     if (!header || !cards.length) return;
 
-    const allMinimized = Array.from(cards).every(card => card.classList.contains('minimized'));
-    if (allMinimized) {
-        header.classList.add('collapsed');
-    } else {
+    // Check if ANY card is expanded (not minimized)
+    const anyExpanded = Array.from(cards).some(card => !card.classList.contains('minimized'));
+
+    // Helper to sync text
+    const updateText = (text) => {
+        if (!headerBtn) return;
+        const span = headerBtn.querySelector('span');
+        if (span) span.textContent = text;
+    };
+
+    if (anyExpanded) {
+        // At least one card is expanded, so button should say "Collapse All"
         header.classList.remove('collapsed');
+        updateText('Collapse All');
+    } else {
+        // All cards are collapsed, so button should say "Expand All"
+        header.classList.add('collapsed');
+        updateText('Expand All');
     }
 }
 
@@ -1941,6 +2016,10 @@ function initGroupCardState() {
         }
     });
 
+    // Ensure header has collapsed class set when all cards are minimized
+    if (header) {
+        header.classList.add('collapsed');
+    }
     updateMasterToggleState();
 }
 
