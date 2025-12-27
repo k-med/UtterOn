@@ -1985,6 +1985,45 @@ a,
   display: flex;
 }
 
+/* Visibility toggles - hidden by default, shown in edit mode */
+.stat-visibility-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+.stat-visibility-toggle input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.stat-visibility-toggle .toggle-label {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.language-header-card.is-editing .stat-visibility-toggle {
+  display: flex;
+}
+
+/* Hidden stats - not visible unless in edit mode */
+.stat-toggleable.stat-hidden {
+  display: none;
+}
+
+/* Always show toggleable stats in edit mode even if hidden */
+.language-header-card.is-editing .stat-toggleable.stat-hidden {
+  display: flex;
+  opacity: 0.5;
+}
+
 .stat-arrow {
   background: none;
   border: none;

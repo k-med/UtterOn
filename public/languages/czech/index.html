@@ -186,7 +186,7 @@
                     </div>
                 </div>
             </div>
-            <div class="stat-col stat-adjustable" data-stat="month">
+            <div class="stat-col stat-adjustable stat-toggleable" data-stat="month">
                 <span class="stat-label-sm">Modules (30d)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-month">0</span>
@@ -201,8 +201,12 @@
                         </div>
                     </div>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('month', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
-            <div class="stat-col stat-adjustable" data-stat="year">
+            <div class="stat-col stat-adjustable stat-toggleable" data-stat="year">
                 <span class="stat-label-sm">Modules (365d)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-year">0</span>
@@ -217,12 +221,20 @@
                         </div>
                     </div>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('year', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
-            <div class="stat-col">
+            <div class="stat-col stat-toggleable" data-stat="all">
                 <span class="stat-label-sm">Modules (All)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-all">0</span>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('all', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
         </div>
 
@@ -982,18 +994,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
+                                <span class="preview-native">Dobré ráno.</span>
+                                <span class="preview-english">Good morning</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
                                 <span class="preview-native">Není zač.</span>
                                 <span class="preview-english">You&#39;re welcome (.informal)</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Promiňte.</span>
-                                <span class="preview-english">Sorry</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Prosím.</span>
-                                <span class="preview-english">Please</span>
+                                <span class="preview-native">Moc děkuji.</span>
+                                <span class="preview-english">Thank you very much</span>
                             </div>
                             
                         </div>
@@ -1170,18 +1182,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
+                                <span class="preview-native">Moment, prosím.</span>
+                                <span class="preview-english">Just a moment, please</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Můžete mluvit pomaleji?</span>
+                                <span class="preview-english">Can you speak more slowly?</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
                                 <span class="preview-native">Nerozumím.</span>
                                 <span class="preview-english">I don&#39;t understand</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Můžete to zopakovat?</span>
-                                <span class="preview-english">Can you repeat that?</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Co to znamená?</span>
-                                <span class="preview-english">What does that mean?</span>
                             </div>
                             
                         </div>
@@ -1358,17 +1370,17 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kde je toaleta?</span>
-                                <span class="preview-english">Where is the bathroom?</span>
+                                <span class="preview-native">Vodu, prosím.</span>
+                                <span class="preview-english">Water, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Chtěla bych tamto.</span>
-                                <span class="preview-english">I would like that.</span>
+                                <span class="preview-native">Toaletu, prosím.</span>
+                                <span class="preview-english">The bathroom, please.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Chtěl bych tohle.</span>
+                                <span class="preview-native">Chtěla bych tohle.</span>
                                 <span class="preview-english">I would like this.</span>
                             </div>
                             
@@ -1546,18 +1558,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kolik to stojí?</span>
-                                <span class="preview-english">How much is this?</span>
+                                <span class="preview-native">Máte drobné?</span>
+                                <span class="preview-english">Do you have change?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Účtenku, prosím.</span>
-                                <span class="preview-english">The receipt, please.</span>
+                                <span class="preview-native">Jen hotově?</span>
+                                <span class="preview-english">Cash only?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Účet, prosím.</span>
-                                <span class="preview-english">The bill, please.</span>
+                                <span class="preview-native">Ne, děkuji.</span>
+                                <span class="preview-english">No, thank you.</span>
                             </div>
                             
                         </div>
@@ -1734,8 +1746,8 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Jede to do centra?</span>
-                                <span class="preview-english">Does this go to the center?</span>
+                                <span class="preview-native">Zahněte doleva.</span>
+                                <span class="preview-english">Turn Left.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -1744,8 +1756,8 @@
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Zastavte tady, prosím.</span>
-                                <span class="preview-english">Stop here, please.</span>
+                                <span class="preview-native">Zahněte doprava.</span>
+                                <span class="preview-english">Turn Right.</span>
                             </div>
                             
                         </div>
@@ -1922,18 +1934,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">V kolik hodin?</span>
-                                <span class="preview-english">At what time?</span>
+                                <span class="preview-native">Kolik je hodin?</span>
+                                <span class="preview-english">What time is it?</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Stačí to.</span>
-                                <span class="preview-english">That’s enough.</span>
+                                <span class="preview-native">Je to malé.</span>
+                                <span class="preview-english">It is small.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Chci víc.</span>
-                                <span class="preview-english">I want more.</span>
+                                <span class="preview-native">Je to málo.</span>
+                                <span class="preview-english">It’s not enough.</span>
                             </div>
                             
                         </div>
@@ -2115,8 +2127,8 @@
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Je to rozbité.</span>
-                                <span class="preview-english">It is broken.</span>
+                                <span class="preview-native">Je zavřeno.</span>
+                                <span class="preview-english">It is closed.</span>
                             </div>
                             
                             <div class="sentence-preview">
@@ -2298,18 +2310,18 @@
                         <div class="sentence-previews">
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Kde je nemocnice?</span>
-                                <span class="preview-english">Where is the hospital?</span>
-                            </div>
-                            
-                            <div class="sentence-preview">
-                                <span class="preview-native">Ztratil jsem se.</span>
+                                <span class="preview-native">Ztratila jsem se.</span>
                                 <span class="preview-english">I am lost.</span>
                             </div>
                             
                             <div class="sentence-preview">
-                                <span class="preview-native">Mám alergii.</span>
-                                <span class="preview-english">I have an allergy.</span>
+                                <span class="preview-native">Zavolejte policii!</span>
+                                <span class="preview-english">Call the police!</span>
+                            </div>
+                            
+                            <div class="sentence-preview">
+                                <span class="preview-native">Kde je nemocnice?</span>
+                                <span class="preview-english">Where is the hospital?</span>
                             </div>
                             
                         </div>
@@ -2406,6 +2418,9 @@
         }
         if (window.initModuleLevels) {
             initModuleLevels();
+        }
+        if (window.initStatVisibility) {
+            initStatVisibility();
         }
     });
 </script>

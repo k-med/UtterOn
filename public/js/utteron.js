@@ -333,10 +333,53 @@ function toggleStatsEditMode() {
         editIcon.style.display = isEditing ? 'none' : 'block';
         closeIcon.style.display = isEditing ? 'block' : 'none';
     }
+
+    // Sync toggle checkboxes with current visibility state when entering edit mode
+    if (isEditing) {
+        const visibility = JSON.parse(localStorage.getItem('stat_visibility')) || {};
+        document.querySelectorAll('.stat-toggleable').forEach(stat => {
+            const statName = stat.dataset.stat;
+            const checkbox = stat.querySelector('.stat-visibility-toggle input');
+            if (checkbox) {
+                checkbox.checked = visibility[statName] === true;
+            }
+        });
+    }
+}
+
+function toggleStatVisibility(statName, isVisible) {
+    const visibility = JSON.parse(localStorage.getItem('stat_visibility')) || {};
+    visibility[statName] = isVisible;
+    localStorage.setItem('stat_visibility', JSON.stringify(visibility));
+
+    // Update the stat element's visibility class
+    const statEl = document.querySelector(`.stat-toggleable[data-stat="${statName}"]`);
+    if (statEl) {
+        statEl.classList.toggle('stat-hidden', !isVisible);
+    }
+}
+
+function initStatVisibility() {
+    const visibility = JSON.parse(localStorage.getItem('stat_visibility')) || {};
+
+    // Apply saved visibility (default is hidden)
+    document.querySelectorAll('.stat-toggleable').forEach(stat => {
+        const statName = stat.dataset.stat;
+        const isVisible = visibility[statName] === true; // Default false if not set
+        stat.classList.toggle('stat-hidden', !isVisible);
+
+        // Also set checkbox state
+        const checkbox = stat.querySelector('.stat-visibility-toggle input');
+        if (checkbox) {
+            checkbox.checked = isVisible;
+        }
+    });
 }
 
 // Make functions globally accessible
 window.toggleStatsEditMode = toggleStatsEditMode;
+window.toggleStatVisibility = toggleStatVisibility;
+window.initStatVisibility = initStatVisibility;
 window.switchModuleLevel = switchModuleLevel;
 window.initModuleLevels = initModuleLevels;
 

@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="stat-col stat-adjustable" data-stat="month">
+            <div class="stat-col stat-adjustable stat-toggleable" data-stat="month">
                 <span class="stat-label-sm">Modules (30d)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-month">0</span>
@@ -87,8 +87,12 @@
                         </div>
                     </div>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('month', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
-            <div class="stat-col stat-adjustable" data-stat="year">
+            <div class="stat-col stat-adjustable stat-toggleable" data-stat="year">
                 <span class="stat-label-sm">Modules (365d)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-year">0</span>
@@ -103,12 +107,20 @@
                         </div>
                     </div>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('year', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
-            <div class="stat-col">
+            <div class="stat-col stat-toggleable" data-stat="all">
                 <span class="stat-label-sm">Modules (All)</span>
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-all">0</span>
                 </div>
+                <label class="stat-visibility-toggle">
+                    <input type="checkbox" onchange="toggleStatVisibility('all', this.checked)">
+                    <span class="toggle-label">Show</span>
+                </label>
             </div>
         </div>
 
@@ -515,6 +527,9 @@
         }
         if (window.initModuleLevels) {
             initModuleLevels();
+        }
+        if (window.initStatVisibility) {
+            initStatVisibility();
         }
     });
 </script>
