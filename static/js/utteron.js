@@ -1301,17 +1301,14 @@ function setupEventListeners() {
 }
 
 function closeCompletion() {
-    // Navigate back to group list
-    const overlay = document.getElementById('completion-overlay');
-    if (overlay) overlay.style.display = 'none';
-
-    document.getElementById('exercise-card').classList.remove('completed');
-
     // Check if we are in the train.html context (has back-link)
     // or section.html context (modal).
     const trainApp = document.getElementById('train-app');
 
     if (trainApp) {
+        // We are navigating away, so DO NOT hide the overlay or remove the completed class.
+        // This prevents the "flash" of the underlying card content.
+
         // Try to find the back link provided by Hugo
         const backLink = document.querySelector('.back-link');
         if (backLink && backLink.href) {
@@ -1322,7 +1319,13 @@ function closeCompletion() {
             window.location.href = parentUrl;
         }
     } else {
-        // Modal context (section.html)
+        // Modal context (section.html) - We stay on page, so we MUST reset UI
+
+        const overlay = document.getElementById('completion-overlay');
+        if (overlay) overlay.style.display = 'none';
+
+        document.getElementById('exercise-card').classList.remove('completed');
+
         const ui = document.getElementById('training-interface');
         if (ui) ui.style.display = 'none';
 
