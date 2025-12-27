@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="stat-col stat-adjustable" data-stat="year">
-                <span class="stat-label-sm">Modules (365d)</span>
+                <span class="stat-label-sm">Modules (365d)</span> and
                 <div class="stat-value-sm stat-value-wrapper">
                     <span id="stat-year">0</span>
                     <span class="stat-separator">of</span>
@@ -343,11 +343,12 @@
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-label">Sentences</div>
-                            <div class="stat-value">{{ $sentenceCount }}</div>
+                            <div class="stat-value stat-sentences">{{ $sentenceCount }}</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Time</div>
-                            <div class="stat-value">~{{ if gt $minLow 0 }}{{ $minLow }}-{{ $minHigh }}{{ else }}1-2{{
+                            <div class="stat-value stat-time">~{{ if gt $minLow 0 }}{{ $minLow }}-{{ $minHigh }}{{ else
+                                }}1-2{{
                                 end }} min
                             </div>
                         </div>
@@ -357,7 +358,9 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Progress</div>
-                            <div class="stat-value last-score" data-group="{{ .Params.group_id }}">—</div>
+                            {{ $total := mul (len .Params.sentences) 2 }}
+                            <div class="stat-value stat-progress last-score" data-group="{{ .Params.group_id }}">0 / {{
+                                $total }}</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Last practiced</div>

@@ -258,6 +258,9 @@ function updateExpandedCardLevel(groupId, level) {
             const lang = document.getElementById('group-list')?.dataset?.language;
             if (lang) {
                 updateLevelSpecificProgress(card, lang, groupId, level, params.sentences?.length || 0);
+
+                // CRITICAL: Update ALL card stats including Streak, Last Practiced, Resume button
+                updateCardStats(card, groupId, level);
             }
         }
     } catch (e) {
@@ -370,6 +373,7 @@ function markExerciseComplete(lang, groupId, sentenceId, exerciseType, level) {
     // ALWAYS update date AND timestamp when practicing
     completions[lang][storageKey].date = today;
     completions[lang][storageKey].timestamp = timestamp;
+    completions[lang][storageKey].lastPracticed = timestamp; // For relative date display
 
     // Initialize sentence
     if (!completions[lang][storageKey].sentences[sentenceId]) {
@@ -411,7 +415,38 @@ function recordGroupCompletion(lang, groupId, level) {
         completions[lang][storageKey].completionDates.push(today);
     }
 
+    // Update global stats for hero dashboard
+    if (!completions[lang].stats) {
+        completions[lang].stats = { streak: 0, lastStreakDate: null, completedGroups: [] };
+    }
+
+    // Update streak if this is first completion today
+    const stats = completions[lang].stats;
+    if (stats.lastStreakDate !== today) {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+        if (stats.lastStreakDate === yesterdayStr) {
+            stats.streak++;
+        } else if (!stats.lastStreakDate) {
+            stats.streak = 1;
+        } else {
+            stats.streak = 1; // Reset streak if gap
+        }
+        stats.lastStreakDate = today;
+    }
+
     saveCompletions(completions);
+
+    // Update the hero stats display immediately
+    updateLanguageStats(lang);
+
+    // Update the card stats
+    const card = document.querySelector(`.group-card[data-group-id='${groupId}']`);
+    if (card) {
+        updateCardStats(card, groupId, level);
+    }
 }
 
 function calculateGroupStreak(lang, groupId) {
@@ -544,141 +579,156 @@ function updateGroupCards(lang) {
         });
     }
 
-    // Now update each card's display
-    cardsWithDates.forEach(({ card, groupId, storageKey, level }) => {
-        const sentenceCount = parseInt(card.dataset.sentenceCount) || 0;
-        const totalExercises = sentenceCount * 2;
-
-        // Get level-specific completion data
-        const groupData = completions[lang]?.[storageKey];
-
-        // Calculate score and today status
-        let completedToday = 0;  // Only exercises from today
-        let totalCompleted = 0;  // All time (for score display)
-        let lastPracticedDate = null;
-
-        if (groupData && groupData.sentences) {
-            // Track last practiced date from the group data
-            if (groupData.date) {
-                lastPracticedDate = groupData.date;
-            }
-
-            const isToday = groupData.date === today;
-
-            // Count completed exercises - just count what's saved
-            Object.values(groupData.sentences).forEach(s => {
-                // Count all-time completions for score
-                if (s.listen) totalCompleted++;
-                if (s.read) totalCompleted++;
-
-                // Count today's completions separately
-                if (isToday) {
-                    if (s.listen) completedToday++;
-                    if (s.read) completedToday++;
-                }
-            });
-        }
-
-
-        // Update Streak - show consecutive days group was 100% completed (level-specific)
-        const streakEl = card.querySelector('.group-streak');
-        if (streakEl) {
-            const streak = calculateGroupStreak(lang, storageKey);
-            if (streak > 0) {
-                streakEl.textContent = `${streak} day${streak !== 1 ? 's' : ''}`;
-                streakEl.classList.add('has-streak');
-            } else {
-                streakEl.textContent = '—';
-                streakEl.classList.remove('has-streak');
-            }
-        }
-
-        // Update Score - shows session progress (0/total, updates during active session)
-        const scoreEl = card.querySelector('.last-score');
-        if (scoreEl) {
-            // Check if there's an active session for this group/level
-            const stateKey = `utteron_state_${groupId}_${level}`;
-            const savedState = localStorage.getItem(stateKey);
-
-            let sessionCompleted = 0;
-            if (savedState) {
-                try {
-                    const state = JSON.parse(savedState);
-                    // Count completed exercises from saved state
-                    if (state.completedExercises) {
-                        sessionCompleted = state.completedExercises.length;
-                    } else if (state.currentIndex) {
-                        // Fallback: use current index as approximate progress
-                        sessionCompleted = state.currentIndex;
-                    }
-                } catch (e) {
-                    console.warn('Failed to parse saved state:', e);
-                }
-            }
-
-            // Fallback: count from level-specific completions
-            if (sessionCompleted === 0 && groupData?.sentences) {
-                Object.values(groupData.sentences).forEach(s => {
-                    if (s.listen) sessionCompleted++;
-                    if (s.read) sessionCompleted++;
-                });
-            }
-
-            const is100Percent = sessionCompleted === totalExercises && totalExercises > 0;
-            scoreEl.textContent = `${sessionCompleted} / ${totalExercises}`;
-            // Highlight green if 100%
-            scoreEl.classList.toggle('perfect-score', is100Percent);
-        }
-
-        // Update Last Practiced
-        const lastEl = card.querySelector('.last-practiced');
-        if (lastEl) {
-            const formattedDate = formatRelativeDate(lastPracticedDate);
-            lastEl.textContent = formattedDate;
-            // Highlight green if practiced today
-            lastEl.classList.toggle('practiced-today', formattedDate === 'Today');
-        }
-
-        // Update Total - sum of all 100% completions
-        const totalEl = card.querySelector('.group-total');
-        if (totalEl && groupData && groupData.completionHistory) {
-            const totalCompletions = Object.values(groupData.completionHistory).reduce((sum, count) => sum + count, 0);
-            totalEl.textContent = totalCompletions;
-        } else if (totalEl) {
-            totalEl.textContent = '0';
-        }
-
-        // Update Start/Resume button (expanded card) - use level-specific state key
-        const startBtn = card.querySelector('.start-btn');
-        const resumeStateKey = `utteron_state_${groupId}_${level}`;
-        const hasResume = localStorage.getItem(resumeStateKey);
-
-        if (startBtn) {
-            if (hasResume) {
-                startBtn.textContent = 'Resume';
-                startBtn.classList.add('resume-mode');
-            } else {
-                startBtn.textContent = 'Start';
-                startBtn.classList.remove('resume-mode');
-            }
-        }
-
-        // Update collapsed header Start/Resume button
-        const compactBtn = card.querySelector('.start-btn-compact');
-        if (compactBtn) {
-            if (hasResume) {
-                compactBtn.textContent = 'Resume';
-                compactBtn.classList.add('resume-mode');
-            } else {
-                compactBtn.textContent = 'Start';
-                compactBtn.classList.remove('resume-mode');
-            }
-        }
+    // Now update each card's display using the centralized function
+    console.log('[DEBUG] Running initialization loop for', cardsWithDates.length, 'cards');
+    cardsWithDates.forEach(({ card, groupId, level }) => {
+        // Default to A1 on initial load as per logic above
+        // This ensures consistent initial state.
+        updateCardStats(card, groupId, level);
     });
-
     // Update main stats dashboard if present
     updateLanguageStats(lang);
     updateFundamentalsButtons(lang);
+}
+
+/**
+ * Update card stats (Sentences, Time, Progress, Streak, Last Practiced, Resume Button)
+ * This is the SINGLE SOURCE OF TRUTH for card stat updates.
+ * @param {HTMLElement} card - The group-card element
+ * @param {string} groupId - The group identifier
+ * @param {string} level - The CEFR level (A1, A2, etc.)
+ */
+function updateCardStats(card, groupId, level) {
+    const lang = document.getElementById('group-list')?.dataset?.language;
+    if (!lang) return;
+
+    const completions = getCompletions();
+    const storageKey = `${groupId}_${level}`;
+    const data = completions[lang]?.[storageKey];
+
+    // Update Difficulty Badges
+    const visibleBadges = card.querySelectorAll('.difficulty-badge');
+    visibleBadges.forEach(b => {
+        if (b.dataset.level === level) {
+            b.classList.add('active');
+        } else {
+            b.classList.remove('active');
+        }
+    });
+
+    // Update Stats (Sentences/Time) using level data
+    const sentenceCountEl = card.querySelector('.stat-sentences');
+    const timeEl = card.querySelector('.stat-time');
+    const progressEl = card.querySelector('.stat-progress');
+
+    // Parse levels data for sentence count and time estimate
+    if (card.dataset.levelsData) {
+        try {
+            const levelsData = JSON.parse(card.dataset.levelsData);
+            const levelParams = levelsData[level]?.Params;
+
+            if (levelParams) {
+                if (sentenceCountEl) {
+                    sentenceCountEl.textContent = levelParams.sentences ? levelParams.sentences.length : 0;
+                }
+
+                // Recalculate time estimate
+                if (timeEl && levelParams.sentences) {
+                    const count = levelParams.sentences.length;
+                    const base = count * 25;
+                    const multMap = { 'A1': 100, 'A2': 115, 'B1': 135, 'B2': 160, 'C1': 190, 'C2': 220 };
+                    const m = multMap[level] || 100;
+                    const estSeconds = (base * m) / 100;
+                    const mins = estSeconds / 60;
+                    const minLow = Math.floor(mins);
+                    const minHigh = minLow + 2;
+                    timeEl.textContent = `~${minLow > 0 ? minLow : 1}-${minHigh} min`;
+                }
+            }
+        } catch (e) {
+            console.error('Error parsing level data:', e);
+        }
+    }
+
+    // Progress Logic
+    if (progressEl) {
+        const sentences = sentenceCountEl ? parseInt(sentenceCountEl.textContent) || 0 : 0;
+        const total = sentences * 2;
+        let score = 0;
+
+        if (data && data.sentences) {
+            Object.values(data.sentences).forEach(s => {
+                if (s.listen) score++;
+                if (s.read) score++;
+            });
+        }
+        progressEl.textContent = `${score} / ${total}`;
+
+        // Green highlight for 100% completion
+        const is100Percent = total > 0 && score === total;
+        progressEl.classList.toggle('green-text', is100Percent);
+        progressEl.classList.toggle('perfect-score', is100Percent);
+    }
+
+    // Last Practiced - Use formatRelativeDate
+    const lastPracticedEl = card.querySelector('.last-practiced');
+    if (lastPracticedEl) {
+        lastPracticedEl.classList.remove('green-text', 'practiced-today');
+
+        let dateToFormat = null;
+        if (data && data.lastPracticed) {
+            dateToFormat = data.lastPracticed;
+        }
+
+        const formatted = formatRelativeDate(dateToFormat);
+        lastPracticedEl.textContent = formatted;
+
+        if (formatted === 'Today') {
+            lastPracticedEl.classList.add('green-text', 'practiced-today');
+        } else if (formatted === 'Yesterday') {
+            lastPracticedEl.classList.add('green-text');
+        }
+    }
+
+    // Streak - Calculate using completionHistory
+    const cardStreakEl = card.querySelector('.group-streak');
+    if (cardStreakEl) {
+        cardStreakEl.classList.remove('green-text', 'has-streak');
+
+        const streakValue = calculateGroupStreak(lang, storageKey);
+
+        if (streakValue > 0) {
+            cardStreakEl.textContent = `${streakValue} day${streakValue > 1 ? 's' : ''}`;
+            cardStreakEl.classList.add('green-text', 'has-streak');
+        } else {
+            cardStreakEl.textContent = '—';
+        }
+    }
+
+    // Resume Button Logic
+    const btn = card.querySelector('.start-btn');
+    const compactBtn = card.querySelector('.start-btn-compact');
+
+    const stateKey = `utteron_state_${groupId}_${level}`;
+    const activeState = localStorage.getItem(stateKey);
+    let hasActiveSession = false;
+
+    if (activeState) {
+        try {
+            const s = JSON.parse(activeState);
+            if (s && s.exercises && s.exercises.length > 0 && s.currentIndex > 0 && s.currentIndex < s.exercises.length) {
+                hasActiveSession = true;
+            }
+        } catch (e) { /* ignore parse errors */ }
+    }
+
+    if (hasActiveSession) {
+        if (btn) { btn.textContent = 'Resume'; btn.classList.add('resume-mode'); }
+        if (compactBtn) { compactBtn.textContent = 'Resume'; compactBtn.classList.add('resume-mode'); }
+    } else {
+        if (btn) { btn.textContent = 'Start'; btn.classList.remove('resume-mode'); }
+        if (compactBtn) { compactBtn.textContent = 'Start'; compactBtn.classList.remove('resume-mode'); }
+    }
 }
 
 function updateLanguageStats(lang) {
@@ -928,6 +978,57 @@ function updateFundamentalsButtons(lang) {
         if (!completions[lang] || !completions[lang][groupId]) {
             scoreBadgeEl.textContent = `0/${totalScore}`;
             btn.classList.remove('complete-today');
+            // Ensure progress bar defaults to 0%
+            const progressFill = btn.querySelector('.fundamental-progress-fill');
+            if (progressFill) {
+                progressFill.style.width = '0%';
+                progressFill.style.backgroundColor = ''; // Revert to default
+            }
+            // Progress Logic
+            // This block seems to be a duplicate or alternative to the existing progress bar logic.
+            // Assuming it's intended to be part of a different update function or a refactor.
+            // For now, I'll place it here as requested, but it might lead to redundant updates or conflicts.
+            // The original instruction had `progressEl` and `sentenceCountEl` which are not defined here.
+            // I'll adapt it to use `scoreBadgeEl` and `sentenceCount` from the current scope.
+            // If this is meant for `updateGroupCards`, it should be moved there.
+
+            // Last Practiced - Use formatRelativeDate for friendlier output
+            const lastPracticedEl = btn.querySelector('.last-practiced'); // Assuming .last-practiced is inside the button
+            if (lastPracticedEl) {
+                // Force cleanup
+                lastPracticedEl.classList.remove('green-text', 'practiced-today');
+
+                let dateToFormat = null;
+                const groupData = completions[lang] && completions[lang][groupId];
+                if (groupData && groupData.lastPracticed) {
+                    dateToFormat = groupData.lastPracticed;
+                }
+
+                const formatted = formatRelativeDate(dateToFormat); // Returns 'Never' if null
+                lastPracticedEl.textContent = formatted;
+
+                if (formatted === 'Today') {
+                    lastPracticedEl.classList.add('green-text', 'practiced-today');
+                } else if (formatted === 'Yesterday') {
+                    lastPracticedEl.classList.add('green-text');
+                }
+            }
+
+            // Streak - Restore calculation
+            const cardStreakEl = btn.querySelector('.group-streak'); // Assuming .group-streak is inside the button
+            if (cardStreakEl) {
+                cardStreakEl.classList.remove('green-text', 'has-streak');
+
+                // Assuming calculateGroupStreak is defined elsewhere and takes lang and groupId
+                const streakValue = calculateGroupStreak(lang, groupId);
+
+                if (streakValue > 0) {
+                    cardStreakEl.textContent = `${streakValue} day${streakValue > 1 ? 's' : ''}`;
+                    cardStreakEl.classList.add('green-text', 'has-streak');
+                } else {
+                    cardStreakEl.textContent = '—';
+                }
+            }
             return;
         }
 
@@ -1697,8 +1798,19 @@ function toggleGroupCard(groupId) {
 
         // After transition, clear max-height to allow dynamic content (like switching levels)
         setTimeout(() => {
-            if (!card.classList.contains('minimized')) {
-                content.style.maxHeight = 'none';
+            if (!card.classList.contains('minimized')) { // Check if it's still expanded after transition
+                content.style.maxHeight = 'none'; // Clear max-height to allow dynamic content
+
+                // Scroll to card (optional, maybe distracting)
+                // card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Re-initialize state when opening
+                updateGroupCardState(card, groupId);
+
+                // CRITICAL: Update stats for the active level (default A1)
+                const activeBadge = card.querySelector('.difficulty-badge.active');
+                const level = activeBadge ? activeBadge.dataset.level : 'A1';
+                updateCardStats(card, groupId, level);
             }
         }, 350);
     }
