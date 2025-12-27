@@ -7,11 +7,41 @@
    Base & Variables
    ============================================ */
 
+/* Critical Mobile Fixes */
+html {
+  /* Prevent iOS text size inflation */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
+}
+
+body {
+  /* Prevent text inflation on mobile */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Consistent font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* Disable flashing cursor globally */
 *,
 *::before,
 *::after {
   caret-color: transparent;
+  box-sizing: border-box;
 }
 
 /* Restore for actual inputs */
@@ -103,10 +133,11 @@ a,
 
 .utteron-container {
   max-width: var(--max-width);
+  width: 100%;
   margin: 0 auto;
   padding: 0 var(--space-4);
-  /* Consistent horizontal padding */
   padding-bottom: 4rem;
+  overflow-x: hidden;
 }
 
 .utteron-container h1 {
