@@ -1736,34 +1736,97 @@ a,
   opacity: 0.7;
 }
 
-/* Mobile: Stack layout and show description */
+/* Mobile: SCALE layout, don't reflow - preserve horizontal structure */
 @media (max-width: 600px) {
+
+  /* Keep horizontal layout - just reduce sizes */
   .group-content-wrapper {
-    flex-direction: column;
+    flex-direction: row;
+    /* Preserve desktop layout */
+    gap: 0;
+    max-height: 80vh;
+    /* Constrain expansion */
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
-  .group-info-col,
+  .group-info-col {
+    flex: 1 1 45%;
+    width: 45%;
+    min-width: 0;
+    padding: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   .group-desc-col {
-    display: contents;
+    flex: 1 1 55%;
+    width: 55%;
+    min-width: 0;
+    padding: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  .group-header {
-    order: 1;
-    margin-top: 1.5rem;
+  /* Tighter typography */
+  .secondary-title {
+    font-size: 0.9rem;
+    line-height: 1.3;
   }
 
+  .description-text {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    max-height: 3em;
+  }
+
+  .sentence-preview {
+    font-size: 0.75rem;
+  }
+
+  .preview-native {
+    font-size: 0.75rem;
+  }
+
+  .preview-english {
+    font-size: 0.65rem;
+  }
+
+  /* Stats grid - compact */
   .stats-grid {
-    order: 2;
+    gap: 0.4rem;
   }
 
-  .description-content {
-    order: 3;
-    padding-top: 1rem;
+  .stat-card {
+    padding: 0.4rem;
+    min-width: 55px;
   }
 
+  .stat-card .label {
+    font-size: 0.55rem;
+  }
+
+  .stat-card .value {
+    font-size: 0.85rem;
+  }
+
+  /* Start button - smaller */
   .start-btn {
-    order: 4;
-    margin-top: 1.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    margin-top: 0.75rem;
+  }
+
+  /* Group header tighter */
+  .group-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .group-header h3 {
+    font-size: 1rem;
+  }
+
+  .group-header .subtitle {
+    font-size: 0.7rem;
   }
 }
 
@@ -3041,33 +3104,81 @@ a,
 }
 
 /* ============================================
-   Mobile Responsive Fixes
+   Mobile Responsive Fixes - Scaled Desktop Approach
    ============================================ */
 
-@media (max-width: 480px) {
+/* 600px and below - Primary mobile breakpoint */
+@media (max-width: 600px) {
 
-  /* Stats grid - 2 columns on very small screens */
-  .lang-stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+  /* Aggressive padding reduction on container */
+  .utteron-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Group cards - tighter feel */
+  .group-card {
+    padding: 0.5rem;
+    border-radius: 12px;
+  }
+
+  .group-card:not(.minimized) {
     padding: 0.75rem;
   }
 
+  /* Hero stats card - compact */
+  .language-header-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  /* Foundations section - compact */
+  .fundamentals-section {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .fundamentals-grid {
+    gap: 0.5rem;
+  }
+
+  .fundamental-btn {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* 480px and below - Extra small screens */
+@media (max-width: 480px) {
+
+  /* Even tighter container */
+  .utteron-container {
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  /* Stats grid - 2 columns */
+  .lang-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    padding: 0.5rem;
+  }
+
   .stat-col {
-    padding: 0.2rem;
+    padding: 0.15rem;
   }
 
   .stat-label-sm {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
   }
 
   .stat-value-sm {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .stat-value-wrapper {
-    min-width: 50px;
-    gap: 0.2rem;
+    min-width: 45px;
+    gap: 0.15rem;
   }
 
   /* Module header controls */
@@ -3076,50 +3187,59 @@ a,
   }
 
   .btn-header {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.75rem;
-    margin-left: 0.25rem;
-  }
-
-  .btn-header span {
-    display: inline;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.7rem;
+    margin-left: 0.2rem;
   }
 
   /* Group card collapsed header */
   .group-card-header-collapsed {
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
+    gap: 0.4rem;
+    padding: 0.4rem 0.5rem;
   }
 
   .group-card-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     line-height: 1.2;
   }
 
   .group-card-subtitle {
-    font-size: 0.65rem;
-  }
-
-  .group-card-time {
     font-size: 0.6rem;
   }
 
+  .group-card-time {
+    font-size: 0.55rem;
+  }
+
   .start-btn-compact {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.65rem;
   }
 
   .level-badge {
-    font-size: 0.55rem;
-    padding: 0.15rem 0.35rem;
+    font-size: 0.5rem;
+    padding: 0.1rem 0.3rem;
   }
 
   /* Modules title */
   .modules-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .modules-description {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  /* Expanded card - even tighter */
+  .group-content-wrapper {
+    max-height: 75vh;
+  }
+
+  .group-info-col {
+    padding: 0.35rem;
+  }
+
+  .group-desc-col {
+    padding: 0.35rem;
   }
 }
