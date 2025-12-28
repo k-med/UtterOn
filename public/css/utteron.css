@@ -571,10 +571,21 @@ a,
   z-index: 10;
 }
 
-/* Mobile: Hide difficulty badge in collapsed state to free (horizontal) space */
+/* Mobile: Hide difficulty badge ONLY in collapsed/minimized state */
 @media (max-width: 600px) {
-  .group-card:not(.expanded) .difficulty-badge-container {
+  .group-card.minimized .difficulty-badge-container {
     display: none;
+  }
+
+  /* Show badge when expanded (not minimized) - scale down slightly */
+  .group-card:not(.minimized) .difficulty-badge-container {
+    display: flex;
+    transform: translateX(-50%) scale(0.85);
+  }
+
+  .group-card:not(.minimized) .difficulty-badge {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.65rem;
   }
 
   /* Give title more room */
@@ -583,7 +594,7 @@ a,
   }
 
   /* Hide level chevrons in collapsed state */
-  .group-card:not(.expanded) .level-chevron {
+  .group-card.minimized .level-chevron {
     display: none;
   }
 }
@@ -1750,63 +1761,64 @@ a,
     overflow-x: hidden;
   }
 
+  /* TRUE 50/50 column split */
   .group-info-col {
-    flex: 1 1 45%;
-    width: 45%;
+    flex: 1 1 50%;
+    width: 50%;
     min-width: 0;
-    padding: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0.4rem;
   }
 
   .group-desc-col {
-    flex: 1 1 55%;
-    width: 55%;
+    flex: 1 1 50%;
+    width: 50%;
     min-width: 0;
-    padding: 0.5rem;
-    padding-left: 0.5rem;
+    padding: 0.4rem;
     border-left: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /* Tighter typography */
   .secondary-title {
-    font-size: 0.9rem;
-    line-height: 1.3;
+    font-size: 0.85rem;
+    line-height: 1.25;
   }
 
   .description-text {
-    font-size: 0.75rem;
-    line-height: 1.4;
-    max-height: 3em;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    max-height: 2.7em;
   }
 
   .sentence-preview {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .preview-native {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .preview-english {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 
-  /* Stats grid - compact */
+  /* Stats grid - compact, prevent wrapping */
   .stats-grid {
-    gap: 0.4rem;
+    gap: 0.3rem;
+    grid-template-columns: 1fr 1fr;
   }
 
   .stat-card {
-    padding: 0.4rem;
-    min-width: 55px;
+    padding: 0.3rem 0.4rem;
+    min-width: 0;
   }
 
   .stat-card .label {
-    font-size: 0.55rem;
+    font-size: 0.45rem;
+    white-space: nowrap;
   }
 
   .stat-card .value {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   /* Start button - smaller */
@@ -2180,23 +2192,30 @@ a,
 }
 
 @media (max-width: 768px) {
+
+  /* KEEP 3-across layout like desktop - just scale down */
   .lang-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    padding: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.75rem;
   }
 
   .stat-label-sm {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     white-space: nowrap;
   }
 
   .stat-value-sm {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   .stat-value-wrapper {
-    min-width: 60px;
+    min-width: 50px;
+    gap: 0.15rem;
+  }
+
+  .stat-separator {
+    font-size: 0.4em;
   }
 
   .lang-title-section h1 {
@@ -3157,28 +3176,28 @@ a,
     padding-right: 0.35rem;
   }
 
-  /* Stats grid - 2 columns */
+  /* Stats grid - KEEP 3 columns even on small screens */
   .lang-stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.4rem;
-    padding: 0.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.3rem;
+    padding: 0.4rem;
   }
 
   .stat-col {
-    padding: 0.15rem;
+    padding: 0.1rem;
   }
 
   .stat-label-sm {
-    font-size: 0.5rem;
+    font-size: 0.4rem;
   }
 
   .stat-value-sm {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .stat-value-wrapper {
-    min-width: 45px;
-    gap: 0.15rem;
+    min-width: 40px;
+    gap: 0.1rem;
   }
 
   /* Module header controls */
