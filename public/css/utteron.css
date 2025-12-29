@@ -2271,54 +2271,49 @@ a,
 .fundamentals-section {
   display: flex;
   flex-direction: column;
-  /* Light mode: clean light background */
+  align-items: stretch;
+  /* Compact utility strip */
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-card);
-  padding: 0.75rem var(--space-4);
-  /* Reduced vertical padding */
-  margin-bottom: var(--space-5);
-  box-shadow: var(--card-shadow);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 10px;
+  padding: 0.1rem 0.4rem 0.15rem;
+  margin-bottom: 0.5rem;
+  box-shadow: none;
+  transition: all 0.2s ease-out;
   position: relative;
-  overflow: hidden;
-  /* Remove pointer on container itself to avoid confusion */
+  overflow: visible;
 }
 
-/* Dark mode: glassmorphism effect */
+/* Dark mode */
 :root[data-theme="dark"] .fundamentals-section {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: none;
 }
 
-/* Light mode: explicit selector for when theme is toggled */
+/* Light mode */
 :root[data-theme="light"] .fundamentals-section {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
-/* Header Styling */
+/* Header - matching Modules header style */
 .fundamentals-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  /* Center vertically */
-  margin-bottom: 0.5rem;
-  /* Reduced gap */
-  cursor: pointer;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 0.15rem;
+  padding: 0.15rem 0;
+  background: transparent;
   user-select: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .fundamentals-section.collapsed {
-  padding-bottom: 0.75rem;
-  /* Match top padding */
+  padding-bottom: 0.35rem;
 }
 
 .fundamentals-section.collapsed .fundamentals-header {
@@ -2328,123 +2323,136 @@ a,
 .fundamentals-title-group {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  /* Reduced gap */
+  gap: 0.15rem;
+  text-align: left;
+  flex-grow: 1;
 }
 
 .fundamentals-title {
-  margin: 0;
-  font-size: 1.3rem;
-  /* Match module header */
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.2;
+  margin: 0;
+  text-align: left;
 }
 
 .fundamentals-subtitle {
   font-size: 0.85rem;
-  color: var(--text-tertiary);
-  /* Muted */
-  font-weight: 500;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin: 0;
+  text-align: left;
 }
 
 .fundamentals-section.collapsed .fundamentals-subtitle {
-  /* Keep visible or hide? User said "Show... sublabel" */
   display: inline-block;
 }
 
-/* Chevron Button */
-.foundations-chevron {
-  color: var(--text-secondary);
-  background: transparent !important;
-  /* No background circle */
-  border: none;
-  padding: 0.5rem;
-  /* Hit area */
-  transition: transform 0.3s ease, color 0.2s;
-  cursor: pointer;
+/* Controls - matching Modules exactly */
+.fundamentals-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
-.foundations-chevron:hover {
-  color: var(--text-primary) !important;
-  /* Brighter on hover */
-  transform: none;
-  /* Reset distinct lift */
+.fundamentals-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
-.foundations-chevron svg {
+.fundamentals-toggle-btn:hover {
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.fundamentals-toggle-btn svg {
   transition: transform 0.3s ease;
 }
 
-/* Rotation logic: Default (Expanded) = Up, Collapsed = Down ?? 
-   User said: "down when collapsed, up when expanded"
-   SVG used is polyline points="6 9 12 15 18 9" (Down arrow) typically.
-   Wait, if use polyline points="18 15 12 9 6 15" (Up arrow) as in original code?
-   Let's check the SVG I put in HTML.
-   I put: points="6 9 12 15 18 9" (DOWN arrow).
-   So Default (Expanded) should be UP.
-   So I need to rotate it 180deg by default? Or change SVG to UP arrow.
-   Let's assume default state is Expanded -> Arrow should point Up (to collapse).
-   If I stick with the Down Arrow SVG, I must rotate it 180deg to point Up.
-   collapsed -> Point Down (to expand).
-*/
-.foundations-chevron svg {
+/* Collapsed: hide grid with smooth animation */
+.fundamentals-row {
+  transition: opacity 0.15s ease-out, max-height 0.2s ease-out;
+  opacity: 1;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.fundamentals-section.collapsed .fundamentals-row {
+  opacity: 0;
+  max-height: 0;
+  pointer-events: none;
+}
+
+.fundamentals-section.collapsed {
+  padding: 0.35rem 0.6rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.fundamentals-section.collapsed .fundamentals-header {
+  margin-bottom: 0;
+  padding: 0.2rem 0;
+}
+
+/* Chevron rotation */
+.fundamentals-toggle-btn svg {
   transform: rotate(180deg);
-  /* Points Up (Collapse action) */
 }
 
-.fundamentals-section.collapsed .foundations-chevron svg {
+.fundamentals-section.collapsed .fundamentals-toggle-btn svg {
   transform: rotate(0deg);
-  /* Points Down (Expand action) */
 }
 
 
-/* Grid Layout */
+/* Grid Layout - tight gaps */
 .fundamentals-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 columns on desktop (standard) */
-  gap: var(--space-3);
-  /* Consistent gap */
+  gap: 0.3rem;
   width: 100%;
 }
 
 @media (max-width: 900px) {
   .fundamentals-row {
-    /* Keep 3 columns or switch to 2? Desktop is wide. Tablet maybe 2? */
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .fundamentals-row {
-    /* "Switch to a 2-column grid or a horizontal scroll" -> User preferred 2-col */
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.3rem;
   }
 }
 
 
-/* Tile Items (.fundamental-btn) */
+/* Tile Items - compact and clickable */
 .fundamental-btn {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* Light mode: white card style */
+  justify-content: center;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-card);
-  padding: 1rem;
+  border-radius: 6px;
+  padding: 0.18rem 0.4rem;
   text-decoration: none;
-  min-height: 90px;
-  transition: all 0.2s ease;
+  min-height: 28px;
+  transition: all 0.15s ease;
   position: relative;
   cursor: pointer;
   user-select: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 /* Dark mode: subtle transparent look */
@@ -2461,27 +2469,30 @@ a,
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover State */
+/* Hover State - brighten + border lift */
 .fundamental-btn:hover {
   background: var(--bg-primary);
-  /* Lift effect */
-  border-color: var(--border);
-  /* Brighter border */
+  border-color: var(--accent);
   transform: translateY(-1px);
-  /* Subtle lift */
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 3px 8px rgba(99, 102, 241, 0.12);
 }
 
-/* Active State */
+:root[data-theme="dark"] .fundamental-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Active/Press State - inset effect */
 .fundamental-btn:active {
-  transform: translateY(0);
-  background: rgba(0, 0, 0, 0.02);
-  /* Slight darken */
-  box-shadow: none;
+  transform: translateY(0) scale(0.98);
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme="dark"] .fundamental-btn:active {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Focus State */
@@ -2490,82 +2501,146 @@ a,
   outline-offset: 2px;
 }
 
-/* Inner Layout */
+/* Inner Layout - ultra-tight */
 .fundamental-top {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.05rem;
 }
 
 .fundamental-bottom {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  /* allow wrap if tight */
-  gap: 0.4rem;
-  margin-top: auto;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-/* Typography */
+/* Typography - compact */
 .fundamental-label {
-  font-size: 1rem;
-  /* Match module title size approx */
+  font-size: 0.8rem;
   font-weight: 600;
-  /* Match module title weight */
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .fundamental-time {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .fundamental-meta-sep {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: var(--text-tertiary);
-  opacity: 0.5;
-}
-
-.fundamental-score {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
-}
-
-/* Completion State */
-.fundamental-btn.complete-today .fundamental-score {
-  color: var(--success);
-  /* Green text */
-  font-weight: 600;
-}
-
-/* Subtle accent for completed items (border or dot) */
-.fundamental-btn.complete-today::after {
-  content: '';
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 6px;
-  height: 6px;
-  background-color: var(--success);
-  border-radius: 50%;
   opacity: 0.8;
 }
 
-/* Mobile Responsiveness adjustments */
-@media (max-width: 480px) {
+.fundamental-score {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Dark mode: improved meta legibility */
+:root[data-theme="dark"] .fundamental-time,
+:root[data-theme="dark"] .fundamental-meta-sep,
+:root[data-theme="dark"] .fundamental-score {
+  opacity: 0.9;
+}
+
+/* Completion State - green highlight for 100% today */
+.fundamental-btn.complete-today {
+  border-color: var(--success);
+  background: rgba(46, 204, 113, 0.08);
+}
+
+:root[data-theme="dark"] .fundamental-btn.complete-today {
+  border-color: rgba(46, 204, 113, 0.6);
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.fundamental-btn.complete-today .fundamental-score,
+.fundamental-btn.complete-today .fundamental-time,
+.fundamental-btn.complete-today .fundamental-meta-sep {
+  color: var(--success);
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* Partial completion state */
+.fundamental-btn.partial-progress .fundamental-score {
+  color: var(--accent);
+}
+
+/* Progress bar at bottom of mini-card */
+.fundamental-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+}
+
+:root[data-theme="dark"] .fundamental-progress-bar {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.fundamental-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.fundamental-btn.complete-today .fundamental-progress-fill {
+  background: var(--success);
+  width: 100%;
+}
+
+/* Mobile Responsiveness - ultra-compact */
+@media (max-width: 600px) {
+  .fundamentals-section {
+    padding: 0.15rem 0.4rem 0.2rem;
+    border-radius: 8px;
+  }
+
+  .fundamentals-title {
+    font-size: 0.8rem;
+  }
+
+  .fundamentals-subtitle {
+    font-size: 0.6rem;
+  }
+
   .fundamental-btn {
-    min-height: 80px;
-    /* Compact but touchable */
-    padding: 0.85rem;
+    min-height: 28px;
+    padding: 0.18rem 0.35rem;
+    border-radius: 6px;
   }
 
   .fundamental-label {
-    font-size: 0.95rem;
+    font-size: 0.68rem;
+  }
+
+  .fundamental-time,
+  .fundamental-meta-sep,
+  .fundamental-score {
+    font-size: 0.55rem;
+  }
+
+  .fundamental-progress-bar {
+    height: 1.5px;
+    border-radius: 0 0 6px 6px;
   }
 }
 
@@ -2674,123 +2749,6 @@ a,
 }
 
 /* ============================================
-   Foundations Section
-   ============================================ */
-
-.fundamentals-section {
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.78);
-  /* Reduced opacity 5% more */
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 16px;
-  padding: 1.8rem;
-  transition: all 0.3s ease;
-  position: relative;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  /* Slightly stronger top highlight */
-}
-
-.fundamentals-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.8rem;
-  /* More space to cards */
-  cursor: pointer;
-  text-align: center;
-  position: relative;
-  padding: 0.5rem 2rem 0;
-  /* More top padding */
-  user-select: none;
-}
-
-.fundamentals-title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  /* Tighter spacing */
-  align-items: center;
-}
-
-.fundamentals-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.fundamentals-description {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.fundamentals-explainer {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  opacity: 0.7;
-  margin: 0.25rem 0 0;
-  font-style: italic;
-}
-
-.minimize-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  /* Only animate transform */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  /* Let the parent click handle it, or set to auto if nested button */
-}
-
-/* Ensure the button itself doesn't block the header click if we want the whole header to toggle */
-.fundamentals-header:hover .minimize-btn {
-  color: var(--text-primary);
-}
-
-/* Minimized State */
-.fundamentals-section.minimized .fundamentals-row {
-  display: none !important;
-}
-
-.fundamentals-section.minimized .fundamentals-header {
-  margin-bottom: 0;
-}
-
-/* Chevron Rotation Logic */
-.minimize-btn svg {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Default state (Expanded) -> Chevron Up? Or Down? 
-     Usually: Expanded shows "Chevron Up" (to collapse). 
-     User said: Expanded = Chevron Up. Collapsed = Chevron Down. 
-     The HTML SVG is <polyline points="18 15 12 9 6 15"></polyline> which is a Chevron UP (points like ^).
-     So default (Expanded) is Up (0deg).
-     Collapsed (minimized) should be Down (180deg).
-  */
-  transform: rotate(0deg);
-}
-
-.fundamentals-section.minimized .minimize-btn svg {
-  transform: rotate(180deg);
-}
-
-.fundamentals-section.minimized {
-  padding-bottom: 1.5rem;
-}
-
-/* ============================================
    Modules Header (Master Toggle)
    ============================================ */
 
@@ -2865,6 +2823,9 @@ a,
   padding: 0.5rem;
   border-radius: 50%;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .modules-toggle-btn:hover {
@@ -2874,10 +2835,11 @@ a,
 
 .modules-toggle-btn svg {
   transition: transform 0.3s ease;
+  transform: rotate(180deg);
 }
 
 .modules-header.collapsed .modules-toggle-btn svg {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
 
 /* ============================================

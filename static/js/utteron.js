@@ -1034,8 +1034,8 @@ function updateFundamentalsButtons(lang) {
         const totalScore = sentenceCount * 2; // 1 for listen, 1 for read/speak
 
         if (!completions[lang] || !completions[lang][groupId]) {
-            scoreBadgeEl.textContent = `0 of ${totalScore}`;
-            btn.classList.remove('complete-today');
+            scoreBadgeEl.textContent = `0/${totalScore}`;
+            btn.classList.remove('complete-today', 'partial-progress');
             // Ensure progress bar defaults to 0%
             const progressFill = btn.querySelector('.fundamental-progress-fill');
             if (progressFill) {
@@ -1101,16 +1101,18 @@ function updateFundamentalsButtons(lang) {
             });
         }
 
-        scoreBadgeEl.textContent = `${currentScore} of ${totalScore}`;
+        scoreBadgeEl.textContent = `${currentScore}/${totalScore}`;
 
-        // Only highlight green if 100% complete (no orange for partial progress)
+        // Apply completion states
         const is100Percent = currentScore === totalScore && totalScore > 0;
         const practicedToday = group.date === today;
+        const isPartial = currentScore > 0 && currentScore < totalScore;
 
+        btn.classList.remove('complete-today', 'partial-progress');
         if (is100Percent && practicedToday) {
             btn.classList.add('complete-today');
-        } else {
-            btn.classList.remove('complete-today');
+        } else if (isPartial) {
+            btn.classList.add('partial-progress');
         }
 
         // Update progress bar
@@ -1797,10 +1799,16 @@ function toggleFoundations() {
         return;
     }
 
-    section.classList.toggle('minimized');
-    const minimized = section.classList.contains('minimized');
-    console.log('Toggled minimized:', minimized);
-    localStorage.setItem('utteron_foundations_minimized', minimized);
+    section.classList.toggle('collapsed');
+    const isCollapsed = section.classList.contains('collapsed');
+    console.log('Toggled collapsed:', isCollapsed);
+    localStorage.setItem('utteron_foundations_collapsed', isCollapsed);
+
+    // Update toggle button text
+    const toggleText = section.querySelector('.toggle-text');
+    if (toggleText) {
+        toggleText.textContent = isCollapsed ? 'Expand' : 'Collapse';
+    }
 }
 
 // Initialize state on load
@@ -1809,9 +1817,13 @@ function initFoundationsState() {
     const section = document.getElementById('foundations-section');
     if (!section) return;
 
-    const isMinimized = localStorage.getItem('utteron_foundations_minimized') === 'true';
-    if (isMinimized) {
-        section.classList.add('minimized');
+    const isCollapsed = localStorage.getItem('utteron_foundations_collapsed') === 'true';
+    if (isCollapsed) {
+        section.classList.add('collapsed');
+        const toggleText = section.querySelector('.toggle-text');
+        if (toggleText) {
+            toggleText.textContent = 'Expand';
+        }
     }
 }
 
@@ -1970,7 +1982,7 @@ function toggleAllCards() {
         });
         localStorage.setItem('utteron_all_cards_collapsed', 'false');
         localStorage.setItem('utteron_minimized_cards', '{}');
-        updateButtonText('Collapse All');
+        updateButtonText('Collapse');
     } else {
         // Collapse all
         allCardsHeader.classList.add('collapsed');
@@ -1993,7 +2005,7 @@ function toggleAllCards() {
             }
         });
         localStorage.setItem('utteron_all_cards_collapsed', 'true');
-        updateButtonText('Expand All');
+        updateButtonText('Expand');
     }
 }
 
@@ -2018,11 +2030,11 @@ function updateMasterToggleState() {
     if (anyExpanded) {
         // At least one card is expanded, so button should say "Collapse All"
         header.classList.remove('collapsed');
-        updateText('Collapse All');
+        updateText('Collapse');
     } else {
         // All cards are collapsed, so button should say "Expand All"
         header.classList.add('collapsed');
-        updateText('Expand All');
+        updateText('Expand');
     }
 }
 

@@ -127,21 +127,21 @@
 
     </div>
 
-    <!-- Fundamentals Buttons Row -->
-    <div class="fundamentals-section" id="foundations-section"
-        onclick="if(event.target.closest('a, button')) return; toggleFoundations()">
-        <div class="fundamentals-header">
+    <!-- Foundations Utility Bar -->
+    <div class="fundamentals-section" id="foundations-section">
+        <div class="fundamentals-header" onclick="toggleFoundations()">
             <div class="fundamentals-title-group">
-                <h2 class="fundamentals-title">Foundations</h2>
-                <span class="fundamentals-subtitle">Quick fundamentals (1–2 min each)</span>
+                <span class="fundamentals-title">Foundations</span>
+                <span class="fundamentals-subtitle">Quick drills (~1–2 min each)</span>
             </div>
             <div class="fundamentals-controls">
-                <button type="button" class="btn-header icon-only foundations-chevron" id="foundations-toggle"
-                    aria-label="Toggle Foundations">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                <button type="button" class="btn-header fundamentals-toggle-btn" id="foundations-toggle"
+                    onclick="event.stopPropagation(); toggleFoundations()" aria-label="Expand/Collapse">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
+                    <span class="toggle-text">Collapse</span>
                 </button>
             </div>
         </div>
@@ -172,10 +172,12 @@
                 </div>
                 <div class="fundamental-bottom">
                     <span class="fundamental-time">{{ $timeDisplay }}</span>
-                    <span class="fundamental-meta-sep">•</span>
-                    <span class="fundamental-score">0 of {{ mul $sentenceCount 2 }}</span>
+                    <span class="fundamental-meta-sep">·</span>
+                    <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
                 </div>
-                <!-- Hidden progress bar for structure if needed, but UI calls for clean look -->
+                <div class="fundamental-progress-bar">
+                    <div class="fundamental-progress-fill"></div>
+                </div>
             </a>
             {{ end }}
             {{ end }}
@@ -203,13 +205,12 @@
             </button>
             <span class="ctrl-sep" style="color: var(--border); opacity: 0.5;">|</span>
             <button type="button" class="btn-header modules-toggle-btn" id="modules-toggle"
-                onclick="event.stopPropagation(); toggleAllCards()" aria-label="Expand All">
+                onclick="event.stopPropagation(); toggleAllCards()" aria-label="Expand/Collapse All">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="8 6 2 12 8 18"></polyline>
-                    <polyline points="16 6 22 12 16 18"></polyline>
+                    <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-                <span>Expand All</span>
+                <span class="modules-toggle-text">Expand</span>
             </button>
         </div>
     </div>
