@@ -1129,6 +1129,27 @@ function updateFundamentalsButtons(lang) {
             }
         }
     });
+
+    // Update status hint
+    updateFoundationsStatus();
+}
+
+// Update the "X/6 today" status hint
+function updateFoundationsStatus() {
+    const statusEl = document.getElementById('foundations-status');
+    if (!statusEl) return;
+
+    const fundamentalBtns = document.querySelectorAll('.fundamental-btn');
+    const total = fundamentalBtns.length;
+    let completed = 0;
+
+    fundamentalBtns.forEach(btn => {
+        if (btn.classList.contains('complete-today')) {
+            completed++;
+        }
+    });
+
+    statusEl.textContent = `${completed}/${total} today`;
 }
 
 function checkAndUpdateStats(lang, groupId) {

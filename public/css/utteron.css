@@ -2267,16 +2267,16 @@ a,
 }
 
 /* Foundations Grid - Refined */
-/* Foundations Grid - Refined */
+/* Foundations Grid - Boundless (no card) */
 .fundamentals-section {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  /* Compact utility strip */
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 0.1rem 0.4rem 0.15rem;
+  /* No card styling - tiles appear unbound */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   margin-bottom: 0.5rem;
   box-shadow: none;
   transition: all 0.2s ease-out;
@@ -2284,36 +2284,41 @@ a,
   overflow: visible;
 }
 
-/* Dark mode */
+/* Dark mode - keep transparent */
 :root[data-theme="dark"] .fundamentals-section {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: none;
   box-shadow: none;
 }
 
-/* Light mode */
+/* Light mode - keep transparent */
 :root[data-theme="light"] .fundamentals-section {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: transparent;
+  border: none;
   box-shadow: none;
 }
 
-/* Header - matching Modules header style */
+/* Header - 1:1 match with Modules header */
 .fundamentals-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin-bottom: 0.15rem;
-  padding: 0.15rem 0;
-  background: transparent;
-  user-select: none;
-  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
   cursor: pointer;
+  background: transparent;
+  border-radius: 0;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.fundamentals-header:hover {
+  background: rgba(var(--bg-secondary-rgb, 30, 30, 46), 0.7);
 }
 
 .fundamentals-section.collapsed {
-  padding-bottom: 0.35rem;
+  padding-bottom: 0;
 }
 
 .fundamentals-section.collapsed .fundamentals-header {
@@ -2324,8 +2329,6 @@ a,
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  text-align: left;
-  flex-grow: 1;
 }
 
 .fundamentals-title {
@@ -2333,7 +2336,6 @@ a,
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
-  text-align: left;
 }
 
 .fundamentals-subtitle {
@@ -2341,7 +2343,6 @@ a,
   color: var(--text-secondary);
   opacity: 0.7;
   margin: 0;
-  text-align: left;
 }
 
 .fundamentals-section.collapsed .fundamentals-subtitle {
@@ -2353,6 +2354,20 @@ a,
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* Status hint - muted when expanded, visible when collapsed */
+.fundamentals-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.fundamentals-section.collapsed .fundamentals-status {
+  opacity: 1;
+  color: var(--text-secondary);
 }
 
 .fundamentals-toggle-btn {
@@ -2394,15 +2409,12 @@ a,
 }
 
 .fundamentals-section.collapsed {
-  padding: 0.35rem 0.6rem;
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  padding: 0;
 }
 
 .fundamentals-section.collapsed .fundamentals-header {
   margin-bottom: 0;
-  padding: 0.2rem 0;
+  padding: 0.5rem 0;
 }
 
 /* Chevron rotation */
@@ -2455,10 +2467,10 @@ a,
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-/* Dark mode: subtle transparent look */
+/* Dark mode: improved tile depth */
 :root[data-theme="dark"] .fundamental-btn {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: none;
 }
 
@@ -2469,18 +2481,16 @@ a,
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover State - brighten + border lift */
+/* Hover State - subtle inset glow */
 .fundamental-btn:hover {
-  background: var(--bg-primary);
-  border-color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.18) inset;
 }
 
 :root[data-theme="dark"] .fundamental-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(99, 102, 241, 0.5);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.18) inset;
 }
 
 /* Active/Press State - inset effect */
@@ -2555,28 +2565,32 @@ a,
   opacity: 0.9;
 }
 
-/* Completion State - green highlight for 100% today */
+/* Completion State - subtle, premium */
 .fundamental-btn.complete-today {
-  border-color: var(--success);
-  background: rgba(46, 204, 113, 0.08);
+  border-color: rgba(46, 204, 113, 0.55);
+  background: rgba(46, 204, 113, 0.06);
+  box-shadow: 0 0 0 1px rgba(46, 204, 113, 0.18) inset;
 }
 
 :root[data-theme="dark"] .fundamental-btn.complete-today {
-  border-color: rgba(46, 204, 113, 0.6);
-  background: rgba(46, 204, 113, 0.1);
+  border-color: rgba(46, 204, 113, 0.5);
+  background: rgba(46, 204, 113, 0.08);
+  box-shadow: 0 0 0 1px rgba(46, 204, 113, 0.15) inset;
 }
 
+/* Keep meta text neutral on completion */
 .fundamental-btn.complete-today .fundamental-score,
 .fundamental-btn.complete-today .fundamental-time,
 .fundamental-btn.complete-today .fundamental-meta-sep {
-  color: var(--success);
+  color: var(--text-secondary);
   font-weight: 600;
   opacity: 1;
 }
 
-/* Partial completion state */
+/* Partial completion state - neutral text, let bar show progress */
 .fundamental-btn.partial-progress .fundamental-score {
-  color: var(--accent);
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 /* Progress bar at bottom of mini-card */
@@ -2600,6 +2614,7 @@ a,
   width: 0%;
   background: var(--accent);
   transition: width 0.3s ease;
+  opacity: 0.85;
 }
 
 .fundamental-btn.complete-today .fundamental-progress-fill {
