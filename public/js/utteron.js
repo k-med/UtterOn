@@ -996,7 +996,10 @@ window.adjustStatTarget = function (statType, delta) {
 // Play native name audio
 function playNativeName(langCode) {
     if (!langCode) return;
-    const audioFiles = { 'czech': '/assets/audio/czech/cz_001.mp3' };
+    const audioFiles = {
+        'czech': '/assets/audio/czech/cz_001.mp3',
+        'vietnamese': '/assets/audio/vietnamese/vi_name.mp3'
+    };
     const audioPath = audioFiles[langCode];
 
     if (audioPath) {

@@ -3,4 +3,5 @@ title: Czech
 language_code: czech
 native_name: Čeština
 flag: 🇨🇿
+background_image: /images/czech-background.jpg
 ---

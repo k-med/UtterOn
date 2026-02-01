@@ -320,7 +320,6 @@ a,
 
 .card-flag {
   font-size: 4rem;
-  background-image: url('/images/town-7133891_1920.jpg');
   background-size: cover;
   background-position: center;
   padding: 2rem;
@@ -1886,7 +1885,6 @@ a,
 .language-header-card {
   background: var(--bg-secondary);
   /* Fallback */
-  background-image: url('/images/town-7133891_1920.jpg');
   background-size: cover;
   background-position: center;
   border: none;

@@ -8,7 +8,8 @@
     <div class="language-grid">
         {{ range .Sections }}
         <a href="{{ .Permalink }}" class="language-card">
-            <div class="card-flag">{{ .Params.flag }}</div>
+            <div class="card-flag" {{ with .Params.background_image }}style="background-image: url('{{ . }}');" {{ end
+                }}>{{ .Params.flag }}</div>
             <div class="card-content">
                 <h2>{{ .Title }}</h2>
                 {{ with .Params.native_name }}

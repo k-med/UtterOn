@@ -7,5 +7,12 @@
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/languages/vietnamese/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Train</title>
+      <link>http://localhost:1313/languages/vietnamese/train/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/train/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

@@ -5,7 +5,8 @@
 {{ $groupsData = $groupsData | append .Params }}
 {{ end }}
 <div class="utteron-container" id="app-container" data-groups="{{ $groupsData | jsonify }}">
-    <div class="language-header-card">
+    <div class="language-header-card" {{ with .Params.background_image }}style="background-image: url('{{ . }}');" {{
+        end }}>
         <div class="lang-title-section">
             <h1>{{ .Title }}</h1>
             <div class="native-name-row">
