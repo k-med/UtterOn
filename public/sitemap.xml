@@ -6,6 +6,8 @@
   </url><url>
     <loc>http://localhost:1313/languages/czech/groups/social-lubricant/</loc>
   </url><url>
+    <loc>http://localhost:1313/languages/vietnamese/groups/social-lubricant/</loc>
+  </url><url>
     <loc>http://localhost:1313/languages/czech/groups/repair-kit/</loc>
   </url><url>
     <loc>http://localhost:1313/languages/czech/groups/master-keys/</loc>
@@ -48,6 +50,8 @@
     <loc>http://localhost:1313/languages/czech/groups/time/</loc>
   </url><url>
     <loc>http://localhost:1313/languages/czech/train/</loc>
+  </url><url>
+    <loc>http://localhost:1313/languages/vietnamese/</loc>
   </url><url>
     <loc>http://localhost:1313/languages/czech/groups/weekdays/</loc>
   </url>

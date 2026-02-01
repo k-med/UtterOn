@@ -427,7 +427,7 @@
                         {{ $sentences := .Params.sentences }}
                         {{ if $sentences }}
                         <div class="sentence-previews">
-                            {{ range first 3 (shuffle $sentences) }}
+                            {{ range $sentences }}
                             <div class="sentence-preview">
                                 <span class="preview-native">{{ .native }}</span>
                                 <span class="preview-english">{{ .english }}</span>

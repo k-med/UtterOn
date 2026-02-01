@@ -1686,6 +1686,35 @@ a,
   gap: 0.75rem;
   padding-top: 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Scrollable vocabulary list */
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  /* Transparent background with subtle scrollbar */
+  background: transparent;
+
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.sentence-previews::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sentence-previews::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sentence-previews::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.sentence-previews::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .sentence-preview {
@@ -1799,6 +1828,11 @@ a,
 
   .preview-english {
     font-size: 0.6rem;
+  }
+
+  /* Scrollable vocabulary list on mobile - shorter height */
+  .sentence-previews {
+    max-height: 120px;
   }
 
   /* Stats grid - compact, PREVENT ALL WRAPPING */
