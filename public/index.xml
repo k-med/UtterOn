@@ -156,6 +156,34 @@ Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost
 </description>
     </item>
     <item>
+      <title>Consonants</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/consonants/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/consonants/</guid>
+      <description>Core Vietnamese consonant sounds.</description>
+    </item>
+    <item>
+      <title>Vowels</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/vowels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/vowels/</guid>
+      <description>Pure Vietnamese vowel sounds.</description>
+    </item>
+    <item>
+      <title>Digraphs &amp; Trigraphs</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/digraphs&#43;trigraphs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/digraphs&#43;trigraphs/</guid>
+      <description>Multi-letter sound units in Vietnamese.</description>
+    </item>
+    <item>
+      <title>Tones</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/tones/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/tones/</guid>
+      <description>The six tones of Vietnamese.</description>
+    </item>
+    <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Mon, 23 Dec 2024 04:00:00 +1100</pubDate>

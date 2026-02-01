@@ -242,6 +242,165 @@
     </div>
 
     
+    <div class="fundamentals-section phonetics-section" id="phonetics-section">
+        <div class="fundamentals-header" onclick="togglePhonetics()">
+            <div class="fundamentals-title-group">
+                <span class="fundamentals-title">Phonetics</span>
+                <span class="fundamentals-subtitle">Master Vietnamese sounds & tones</span>
+            </div>
+            <div class="fundamentals-controls">
+                <span class="fundamentals-status" id="phonetics-status">0/4 today</span>
+                <button type="button" class="btn-header fundamentals-toggle-btn" id="phonetics-toggle"
+                    onclick="event.stopPropagation(); togglePhonetics()" aria-label="Expand/Collapse">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <span class="toggle-text">Collapse</span>
+                </button>
+            </div>
+        </div>
+        <div class="fundamentals-row">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+    </div>
+
+    
     <div class="fundamentals-section" id="foundations-section">
         <div class="fundamentals-header" onclick="toggleFoundations()">
             <div class="fundamentals-title-group">
@@ -2709,6 +2868,9 @@
         initStatArrows();
         if (window.initFoundationsState) {
             initFoundationsState();
+        }
+        if (window.initPhoneticsState) {
+            initPhoneticsState();
         }
         if (window.initGroupCardState) {
             initGroupCardState();

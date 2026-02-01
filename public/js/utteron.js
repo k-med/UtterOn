@@ -1856,6 +1856,41 @@ window.toggleFoundations = toggleFoundations;
 window.initFoundationsState = initFoundationsState;
 
 // ============================================
+// Phonetics Section Toggle
+// ============================================
+
+function togglePhonetics() {
+    const section = document.getElementById('phonetics-section');
+    if (!section) return;
+
+    section.classList.toggle('collapsed');
+    const isCollapsed = section.classList.contains('collapsed');
+    localStorage.setItem('utteron_phonetics_collapsed', isCollapsed);
+
+    const toggleText = section.querySelector('.toggle-text');
+    if (toggleText) {
+        toggleText.textContent = isCollapsed ? 'Expand' : 'Collapse';
+    }
+}
+
+function initPhoneticsState() {
+    const section = document.getElementById('phonetics-section');
+    if (!section) return;
+
+    const isCollapsed = localStorage.getItem('utteron_phonetics_collapsed') === 'true';
+    if (isCollapsed) {
+        section.classList.add('collapsed');
+        const toggleText = section.querySelector('.toggle-text');
+        if (toggleText) {
+            toggleText.textContent = 'Expand';
+        }
+    }
+}
+
+window.togglePhonetics = togglePhonetics;
+window.initPhoneticsState = initPhoneticsState;
+
+// ============================================
 // Group Card Toggle Functions
 // ============================================
 

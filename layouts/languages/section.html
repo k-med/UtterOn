@@ -128,6 +128,65 @@
 
     </div>
 
+    <!-- Phonetics Section -->
+    <div class="fundamentals-section phonetics-section" id="phonetics-section">
+        <div class="fundamentals-header" onclick="togglePhonetics()">
+            <div class="fundamentals-title-group">
+                <span class="fundamentals-title">Phonetics</span>
+                <span class="fundamentals-subtitle">Master Vietnamese sounds & tones</span>
+            </div>
+            <div class="fundamentals-controls">
+                <span class="fundamentals-status" id="phonetics-status">0/4 today</span>
+                <button type="button" class="btn-header fundamentals-toggle-btn" id="phonetics-toggle"
+                    onclick="event.stopPropagation(); togglePhonetics()" aria-label="Expand/Collapse">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <span class="toggle-text">Collapse</span>
+                </button>
+            </div>
+        </div>
+        <div class="fundamentals-row">
+            {{ $lang := .Params.language_code | default .File.ContentBaseName }}
+            {{ $groups := .GetPage "groups" }}
+            {{ $phoneticIds := slice "consonants" "vowels" "digraphs" "tones" }}
+            {{ range $phoneticIds }}
+            {{ $groupId := . }}
+            {{ range $groups.Pages }}
+            {{ if eq .Params.group_id $groupId }}
+            {{ $sentenceCount := len .Params.sentences }}
+            {{ $estSeconds := mul $sentenceCount 16 }}
+            {{ $timeDisplay := "" }}
+            {{ if lt $estSeconds 90 }}
+            {{ $timeDisplay = "~1 min" }}
+            {{ else if lt $estSeconds 150 }}
+            {{ $timeDisplay = "~1-2 min" }}
+            {{ else }}
+            {{ $estMinutes := div $estSeconds 60 }}
+            {{ $timeDisplay = printf "~%d min" $estMinutes }}
+            {{ end }}
+            <a href="{{ $.Permalink }}train/?group={{ $groupId }}" class="fundamental-btn phonetic-btn"
+                data-group-id="{{ $groupId }}" data-sentence-count="{{ $sentenceCount }}"
+                data-time-display="{{ $timeDisplay }}">
+                <div class="fundamental-top">
+                    <span class="fundamental-label">{{ .Params.group_title }}</span>
+                </div>
+                <div class="fundamental-bottom">
+                    <span class="fundamental-time">{{ $timeDisplay }}</span>
+                    <span class="fundamental-meta-sep">·</span>
+                    <span class="fundamental-score">0/{{ mul $sentenceCount 2 }}</span>
+                </div>
+                <div class="fundamental-progress-bar">
+                    <div class="fundamental-progress-fill"></div>
+                </div>
+            </a>
+            {{ end }}
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+
     <!-- Foundations Utility Bar -->
     <div class="fundamentals-section" id="foundations-section">
         <div class="fundamentals-header" onclick="toggleFoundations()">
@@ -225,7 +284,7 @@
         {{/* Build a map of group_id -> list of levels with their params */}}
         {{ $groupMap := dict }}
         {{ range $groups.Pages.ByWeight }}
-        {{ if not .Params.fundamental }}
+        {{ if and (not .Params.fundamental) (not .Params.phonetic) }}
         {{ $gid := .Params.group_id }}
         {{ $lvl := .Params.level | default "A1" }}
         {{/* Store params explicitly so they JSONify correctly */}}
@@ -248,7 +307,7 @@
         {{/* Build sorted list of group IDs by weight */}}
         {{ $sortedGroupIds := slice }}
         {{ range $groups.Pages.ByWeight }}
-        {{ if not .Params.fundamental }}
+        {{ if and (not .Params.fundamental) (not .Params.phonetic) }}
         {{ $gid := .Params.group_id }}
         {{/* Only add if not already in list (handles multiple levels per group) */}}
         {{ if not (in $sortedGroupIds $gid) }}
@@ -524,6 +583,9 @@
         initStatArrows();
         if (window.initFoundationsState) {
             initFoundationsState();
+        }
+        if (window.initPhoneticsState) {
+            initPhoneticsState();
         }
         if (window.initGroupCardState) {
             initGroupCardState();
