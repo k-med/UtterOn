@@ -38,6 +38,13 @@ Hello, How are you, Names, Origin, Age, Phone number, Goodbye.
 </description>
     </item>
     <item>
+      <title>Numbers</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/numbers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/numbers/</guid>
+      <description>Counting, 1–10, plus essential large numbers.</description>
+    </item>
+    <item>
       <title>The Repair Kit</title>
       <link>http://localhost:1313/languages/czech/groups/repair-kit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -64,6 +71,20 @@ Please bring me [x].
 </description>
     </item>
     <item>
+      <title>Weekdays</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/weekdays/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/weekdays/</guid>
+      <description>The days of the week.</description>
+    </item>
+    <item>
+      <title>Months</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/months/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/months/</guid>
+      <description>The calendar year.</description>
+    </item>
+    <item>
       <title>The Transaction</title>
       <link>http://localhost:1313/languages/czech/groups/the-transaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -84,6 +105,20 @@ Where is the station? Where is the hotel? Does this go to [Place]? Please take m
 </description>
     </item>
     <item>
+      <title>Time</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/time/</guid>
+      <description>Basic units of time.</description>
+    </item>
+    <item>
+      <title>Places</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/places/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/places/</guid>
+      <description>Vietnam and major cities.</description>
+    </item>
+    <item>
       <title>The Quantifier</title>
       <link>http://localhost:1313/languages/czech/groups/the-quantifier/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -92,6 +127,13 @@ Where is the station? Where is the hotel? Does this go to [Place]? Please take m
 Express time, quantity, and size: more, enough, big, small, and numbers.
 What time is it? At what time? Now, please. Later, Today, Tomorrow, It is big, small, I want more, That&amp;#39;s enough, It&amp;#39;s not enough, There are three.
 </description>
+    </item>
+    <item>
+      <title>Manners</title>
+      <link>http://localhost:1313/languages/vietnamese/groups/manners/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/groups/manners/</guid>
+      <description>Polite and culturally essential phrases for everyday interaction in Vietnam.</description>
     </item>
     <item>
       <title>The Troubleshooter</title>
@@ -193,6 +235,13 @@ Help! Call the police! I need a doctor. Where is the hospital? I am lost. I lost
       <link>http://localhost:1313/languages/czech/train/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/languages/czech/train/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Train</title>
+      <link>http://localhost:1313/languages/vietnamese/train/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/languages/vietnamese/train/</guid>
       <description></description>
     </item>
     <item>
