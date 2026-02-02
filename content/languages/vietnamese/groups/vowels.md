@@ -11,49 +11,49 @@ sentences:
   - id: vi_v001
     audio: /assets/audio/vietnamese/vi_v001.mp3
     native: "a"
-    english: "ah (father)."
+    english: "A (aah)"
   - id: vi_v002
     audio: /assets/audio/vietnamese/vi_v002.mp3
     native: "ă"
-    english: "short ah."
+    english: "Ă (short ah)"
   - id: vi_v003
     audio: /assets/audio/vietnamese/vi_v003.mp3
     native: "â"
-    english: "muted uh."
+    english: "Â (euh)"
   - id: vi_v004
     audio: /assets/audio/vietnamese/vi_v004.mp3
     native: "e"
-    english: "eh."
+    english: "E (ehh)"
   - id: vi_v005
     audio: /assets/audio/vietnamese/vi_v005.mp3
     native: "ê"
-    english: "ay (no glide)."
+    english: "Ê (ayyy)"
   - id: vi_v006
     audio: /assets/audio/vietnamese/vi_v006.mp3
     native: "i"
-    english: "ee."
+    english: "I (ee)"
   - id: vi_v007
     audio: /assets/audio/vietnamese/vi_v007.mp3
     native: "o"
-    english: "oh."
+    english: "O (aww)"
   - id: vi_v008
     audio: /assets/audio/vietnamese/vi_v008.mp3
     native: "ô"
-    english: "tight oh."
+    english: "Ô (owe)"
   - id: vi_v009
     audio: /assets/audio/vietnamese/vi_v009.mp3
     native: "ơ"
-    english: "neutral uh."
+    english: "Ơ (eugh)"
   - id: vi_v010
     audio: /assets/audio/vietnamese/vi_v010.mp3
     native: "u"
-    english: "oo."
+    english: "U (oo)"
   - id: vi_v011
     audio: /assets/audio/vietnamese/vi_v011.mp3
     native: "ư"
-    english: "deep uh (relaxed mouth)."
+    english: "Ư (uhw)"
   - id: vi_v012
     audio: /assets/audio/vietnamese/vi_v012.mp3
     native: "y"
-    english: "same sound as i."
+    english: "Y (ee)"
 ---

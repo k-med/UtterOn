@@ -150,7 +150,7 @@
         <div class="fundamentals-row">
             {{ $lang := .Params.language_code | default .File.ContentBaseName }}
             {{ $groups := .GetPage "groups" }}
-            {{ $phoneticIds := slice "consonants" "vowels" "digraphs" "tones" }}
+            {{ $phoneticIds := slice "full-alphabet" "consonants" "vowels" "digraphs" "tones" }}
             {{ range $phoneticIds }}
             {{ $groupId := . }}
             {{ range $groups.Pages }}

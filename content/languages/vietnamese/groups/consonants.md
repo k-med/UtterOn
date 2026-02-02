@@ -11,61 +11,61 @@ sentences:
   - id: vi_c001
     audio: /assets/audio/vietnamese/vi_c001.mp3
     native: "b"
-    english: "Soft b (no strong puff of air)."
+    english: "B (buh)"
   - id: vi_c002
     audio: /assets/audio/vietnamese/vi_c002.mp3
     native: "đ"
-    english: "Hard d (like English d in 'dog')."
+    english: "Đ (duh - hard d)"
   - id: vi_c003
     audio: /assets/audio/vietnamese/vi_c003.mp3
     native: "d"
-    english: "Sounds like y (southern/central)."
+    english: "D (yerh)"
   - id: vi_c004
     audio: /assets/audio/vietnamese/vi_c004.mp3
     native: "g"
-    english: "Hard g (go)."
+    english: "G (guh)"
   - id: vi_c005
     audio: /assets/audio/vietnamese/vi_c005.mp3
     native: "h"
-    english: "h."
+    english: "H (huh)"
   - id: vi_c006
     audio: /assets/audio/vietnamese/vi_c006.mp3
     native: "k"
-    english: "k."
+    english: "K (kah)"
   - id: vi_c007
     audio: /assets/audio/vietnamese/vi_c007.mp3
     native: "l"
-    english: "l."
+    english: "L (leh)"
   - id: vi_c008
     audio: /assets/audio/vietnamese/vi_c008.mp3
     native: "m"
-    english: "m."
+    english: "M (meh)"
   - id: vi_c009
     audio: /assets/audio/vietnamese/vi_c009.mp3
     native: "n"
-    english: "n."
+    english: "N (neh)"
   - id: vi_c010
     audio: /assets/audio/vietnamese/vi_c010.mp3
     native: "p"
-    english: "Soft p (no puff)."
+    english: "P (puh)"
   - id: vi_c011
     audio: /assets/audio/vietnamese/vi_c011.mp3
     native: "r"
-    english: "Light r (soft, not rolled)."
+    english: "R (ruh)"
   - id: vi_c012
     audio: /assets/audio/vietnamese/vi_c012.mp3
     native: "s"
-    english: "Sharp s."
+    english: "S (shuh)"
   - id: vi_c013
     audio: /assets/audio/vietnamese/vi_c013.mp3
     native: "t"
-    english: "Soft t (no puff)."
+    english: "T (thuh)"
   - id: vi_c014
     audio: /assets/audio/vietnamese/vi_c014.mp3
     native: "v"
-    english: "v (sometimes soft y sound)."
+    english: "V (vuh)"
   - id: vi_c015
     audio: /assets/audio/vietnamese/vi_c015.mp3
     native: "x"
-    english: "s sound (not ks)."
+    english: "X (seh)"
 ---
