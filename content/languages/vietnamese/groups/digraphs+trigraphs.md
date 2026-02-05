@@ -11,45 +11,45 @@ sentences:
   - id: vi_dg001
     audio: /assets/audio/vietnamese/vi_dg001.mp3
     native: "ch"
-    english: "soft ch."
+    english: "North: (chuh) 'ch' as in church | South: (juh) softer 'ch'"
   - id: vi_dg002
     audio: /assets/audio/vietnamese/vi_dg002.mp3
     native: "gh"
-    english: "hard g before e/i."
+    english: "(guh) - 'g' as in good"
   - id: vi_dg003
     audio: /assets/audio/vietnamese/vi_dg003.mp3
     native: "gi"
-    english: "y sound."
+    english: "North: (zuh) 'z' as in zoo | South: (yuh) 'y' as in yes"
   - id: vi_dg004
     audio: /assets/audio/vietnamese/vi_dg004.mp3
     native: "kh"
-    english: "breathy k."
+    english: "(khuh) - 'ch' as in German Bach"
   - id: vi_dg005
     audio: /assets/audio/vietnamese/vi_dg005.mp3
     native: "ng"
-    english: "ng (sing)."
+    english: "(nguh) - 'ng' as in singer"
   - id: vi_dg006
     audio: /assets/audio/vietnamese/vi_dg006.mp3
     native: "ngh"
-    english: "ng before e/i."
+    english: "(nguh) - 'ng' as in singer"
   - id: vi_dg007
     audio: /assets/audio/vietnamese/vi_dg007.mp3
     native: "nh"
-    english: "ny (canyon)."
+    english: "(nyuh) - 'ny' as in canyon"
   - id: vi_dg008
     audio: /assets/audio/vietnamese/vi_dg008.mp3
     native: "ph"
-    english: "f."
+    english: "(fuh) - 'f' as in find"
   - id: vi_dg009
     audio: /assets/audio/vietnamese/vi_dg009.mp3
     native: "qu"
-    english: "kw."
+    english: "(kwuh) - 'qu' as in queue"
   - id: vi_dg010
     audio: /assets/audio/vietnamese/vi_dg010.mp3
     native: "th"
-    english: "soft t (not English th)."
+    english: "(tuh) - 't' as in top (aspirated)"
   - id: vi_dg011
     audio: /assets/audio/vietnamese/vi_dg011.mp3
     native: "tr"
-    english: "between ch and t."
+    english: "North: (chuh) 'ch' as in church | South: (truh) 'tr' as in tree"
 ---
